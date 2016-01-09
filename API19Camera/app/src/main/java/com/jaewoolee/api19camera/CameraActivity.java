@@ -39,11 +39,6 @@ public class CameraActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.screenBrightness = -1;
-        getWindow().setAttributes(params); params.screenBrightness = -1;
-        getWindow().setAttributes(params);
-
         // Create an instance of Camera
         mCamera = getCameraInstance();
         Log.d(TAG, "##### mCamera = " + mCamera);
