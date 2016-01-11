@@ -10,9 +10,11 @@ import android.os.Environment;
 import android.os.PowerManager;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class CameraActivity extends Activity {
 
@@ -32,10 +35,15 @@ public class CameraActivity extends Activity {
     private Camera mCamera;
     private MediaRecorder mMediaRecorder;
     private com.jaewoolee.api19camera.CameraPreview mPreview;
-    private PowerManager.WakeLock mWakeLock;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
@@ -97,6 +105,13 @@ public class CameraActivity extends Activity {
                     }
                 }
         );
+        //set camera to continually auto-focus
+        Camera.Parameters params = mCamera.getParameters();
+        //*EDIT*//params.setFocusMode("continuous-picture");
+        //It is better to use defined constraints as opposed to String, thanks to AbdelHady
+        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        params.setPictureSize(4032, 3024);
+        mCamera.setParameters(params);
     }
 
     private boolean prepareVideoRecorder(){
@@ -113,7 +128,7 @@ public class CameraActivity extends Activity {
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
-        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P));
 
         // Step 4: Set output file
         mMediaRecorder.setOutputFile(getOutputMediaFile(MEDIA_TYPE_VIDEO).toString());

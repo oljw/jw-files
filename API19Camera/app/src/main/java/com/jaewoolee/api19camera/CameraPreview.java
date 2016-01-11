@@ -1,7 +1,7 @@
 package com.jaewoolee.api19camera;
 
 /**
- * Created by TecAce_Administrator on 1/8/2016.
+ * Created by Jaewoo on 1/8/2016.
  */
 
 import android.content.Context;
@@ -41,7 +41,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             Log.d(TAG, "##### surfaceCreated : mHolder = " + mHolder);
             Log.d(TAG, "##### surfaceCreated : holder = " + holder);
 
-            mCamera.setPreviewDisplay(mHolder);
+            mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
         } catch (IOException e) {
             Log.d(TAG, "##### Error setting camera preview: " + e.getMessage());
