@@ -2,22 +2,19 @@ package com.jaewoolee.api19camera;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
-import android.media.Image;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.Surface;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -90,10 +87,6 @@ public class CameraActivity extends Activity{
                     }
                 });
 
-        //add menu button
-        ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
-        modeButton.isShown();
-
         // Add a listener to the Photo Capture button
         ImageButton captureButton = (ImageButton) findViewById(R.id.button_capture);
         captureButton.setOnClickListener(
@@ -115,6 +108,9 @@ public class CameraActivity extends Activity{
                     @Override
                     public void onClick(View v) {
                         Log.d(TAG, "onClick captureButtonVideo called");
+                        //setContentView(R.layout.video_layout);
+                        Intent intent = new Intent(CameraActivity.this, CameraVideoActivity.class);
+                        startActivity(intent);
 
                         if (isRecording) {
                             // stop recording and release camera
@@ -162,6 +158,7 @@ public class CameraActivity extends Activity{
             }
         });
         setParams();
+        addButton();
     }
 
     private void focusOnTouch(MotionEvent event) {
@@ -355,6 +352,7 @@ public class CameraActivity extends Activity{
         }
         return c; // returns null if camera is unavailable
     }
+
     private Camera.PictureCallback getPictureCallback() {
         Log.d(TAG, "getPictureCallBack called");
 
@@ -501,6 +499,41 @@ public class CameraActivity extends Activity{
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
+    }
+
+    private void addButton() {
+        //add menu button
+        ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
+        modeButton.isShown();
+
+        //add menu button
+        ImageButton setting_button = (ImageButton) findViewById(R.id.setting_button);
+        setting_button.isShown();
+
+        //add menu button
+        ImageButton ratio_button = (ImageButton) findViewById(R.id.ratio_button);
+        ratio_button.isShown();
+
+        //add menu button
+        ImageButton flash_button = (ImageButton) findViewById(R.id.flash_button);
+        flash_button.isShown();
+
+        //add menu button
+        ImageButton timer_button = (ImageButton) findViewById(R.id.timer_button);
+        timer_button.isShown();
+
+        //add menu button
+        ImageButton hdr_button = (ImageButton) findViewById(R.id.hdr_button);
+        hdr_button.isShown();
+
+        //add menu button
+        ImageButton effect_button = (ImageButton) findViewById(R.id.effect_button);
+        effect_button.isShown();
+
+        //add menu button
+        ImageButton arrow_button = (ImageButton) findViewById(R.id.arrow_button);
+        arrow_button.isShown();
+
     }
 
     @Override
