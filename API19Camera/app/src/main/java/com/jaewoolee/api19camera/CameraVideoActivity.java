@@ -3,6 +3,7 @@ package com.jaewoolee.api19camera;
 import android.app.Activity;
 import android.content.Intent;
 import android.hardware.Camera;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Jaewoo on 2016-01-12.
@@ -23,15 +25,10 @@ public class CameraVideoActivity extends Activity implements SurfaceHolder.Callb
 
     private com.jaewoolee.api19camera.CameraPreview mPreview;
     private Camera mCamera;
-    private SurfaceView preview=null;
-    private SurfaceHolder previewHolder=null;
-    private Camera camera=null;
     private SurfaceView cameraSurfaceView = null;
-    private SurfaceHolder cameraSurfaceHolder = null;
     private SurfaceHolder mHolder;
 
-    RelativeLayout relativeLayout;
-
+    private MediaRecorder mMediaRecorder;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -71,9 +68,7 @@ public class CameraVideoActivity extends Activity implements SurfaceHolder.Callb
                     }
                 }
         );
-//        // Create our Preview view and set it as the content of our activity.
-//        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera);
-//        preview.addView(mPreview);
+
     }
 
     /** A safe way to get an instance of the Camera object. */
@@ -130,8 +125,9 @@ public class CameraVideoActivity extends Activity implements SurfaceHolder.Callb
 
         mCamera.setDisplayOrientation(90);
 
-        Camera.Size size = getBestPreviewSize(w, h);
+        Camera.Size size = getBestPreviewSize(w, h, parameters);
         parameters.setPreviewSize(size.width, size.height);
+
         mCamera.setParameters(parameters);
 
 
@@ -144,26 +140,21 @@ public class CameraVideoActivity extends Activity implements SurfaceHolder.Callb
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
     }
-    private Camera.Size getBestPreviewSize(int width, int height) {
-        Log.d(TAG, "getBestPreviewSize called");
 
-        Camera.Size result=null;
-        Camera.Parameters p = mCamera.getParameters();
-        for (Camera.Size size : p.getSupportedPreviewSizes()) {
-            if (size.width<=width && size.height<=height) {
-                if (result==null) {
-                    result=size;
-                } else {
-                    int resultArea=result.width*result.height;
-                    int newArea=size.width*size.height;
+    private Camera.Size getBestPreviewSize(int width, int height, Camera.Parameters parameters){
+        Camera.Size bestSize = null;
+        List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
 
-                    if (newArea>resultArea) {
-                        result=size;
-                    }
-                }
+        bestSize = sizeList.get(0);
+
+        for(int i = 1; i < sizeList.size(); i++){
+            if((sizeList.get(i).width * sizeList.get(i).height) >
+                    (bestSize.width * bestSize.height)){
+                bestSize = sizeList.get(i);
             }
         }
-        return result;
+
+        return bestSize;
     }
 
 
