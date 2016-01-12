@@ -48,6 +48,8 @@ public class CameraActivity extends Activity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate called");
+
         super.onCreate(savedInstanceState);
 
         //remove notification bar
@@ -97,6 +99,8 @@ public class CameraActivity extends Activity{
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Log.d(TAG, "onClick captureButton called called");
+
                         // get an image from the camera
                         mCamera.takePicture(null, null, mPicture);
                     }
@@ -104,11 +108,13 @@ public class CameraActivity extends Activity{
         );
 
         // Add a listener to the Video Capture button
-        ImageButton captureButtonVideo = (ImageButton) findViewById(R.id.button_capture_video);
+        final ImageButton captureButtonVideo = (ImageButton) findViewById(R.id.button_capture_video);
         captureButtonVideo.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Log.d(TAG, "onClick captureButtonVideo called");
+
                         if (isRecording) {
                             // stop recording and release camera
                             mMediaRecorder.stop();  // stop the recording
@@ -116,8 +122,9 @@ public class CameraActivity extends Activity{
                             mCamera.lock();         // take camera access back from MediaRecorder
 
                             // inform the user that recording has stopped
-                            //setCaptureButtonText("Capture");
-                            //captureButtonVideo.setText("Capture");
+//                            setCaptureButtonText("Capture");
+//                            captureButtonVideo.setText("Capture");
+
 
                             isRecording = false;
                         } else {
@@ -129,7 +136,8 @@ public class CameraActivity extends Activity{
 
                                 // inform the user that recording has started
                                 //setCaptureButtonText("Stop");
-                                //captureButtonVideo.setText("Stop");
+                                //captureButtonVideo.setImageDrawable(getResources().getDrawable(R.drawable.stop_button));
+
                                 isRecording = true;
                             } else {
                                 // prepare didn't work, release the camera
@@ -144,6 +152,8 @@ public class CameraActivity extends Activity{
         mPreview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                Log.d(TAG, "onTouch called");
+
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     focusOnTouch(event);
                 }
@@ -154,6 +164,8 @@ public class CameraActivity extends Activity{
     }
 
     private void focusOnTouch(MotionEvent event) {
+        Log.d(TAG, "focusOnTouch called");
+
         if (mCamera != null ) {
 
             Camera.Parameters parameters = mCamera.getParameters();
@@ -177,6 +189,8 @@ public class CameraActivity extends Activity{
     private Camera.AutoFocusCallback mAutoFocusTakePictureCallback = new Camera.AutoFocusCallback() {
         @Override
         public void onAutoFocus(boolean success, Camera camera) {
+            Log.d(TAG, "onAutoFocus in AutoFocusCallBack called");
+
             if (success) {
                 // do something...
                 Log.i("tap_to_focus","success!");
@@ -188,6 +202,8 @@ public class CameraActivity extends Activity{
     };
 
     private int clamp(int touchCoordinateInCameraReper, int focusAreaSize) {
+        Log.d(TAG, "clamp called");
+
         int result;
         if (Math.abs(touchCoordinateInCameraReper)+focusAreaSize/2>1000){
             if (touchCoordinateInCameraReper>0){
@@ -202,16 +218,17 @@ public class CameraActivity extends Activity{
     }
 
     private Rect calculateFocusArea(float x, float y) {
+        Log.d(TAG, "calculateFocusArea called");
+
         int left = clamp(Float.valueOf((x / mPreview.getWidth()) * 2000 - 1000).intValue(), FOCUS_AREA_SIZE);
         int top = clamp(Float.valueOf((y / mPreview.getHeight()) * 2000 - 1000).intValue(), FOCUS_AREA_SIZE);
 
         return new Rect(left, top, left + FOCUS_AREA_SIZE, top + FOCUS_AREA_SIZE);
     }
 
-
-
-
     private int findFrontFacingCamera() {
+        Log.d(TAG, "findFrontFacingCamera called");
+
         int cameraId = -1;
         // Search for the front facing camera
         int numberOfCameras = Camera.getNumberOfCameras();
@@ -228,6 +245,8 @@ public class CameraActivity extends Activity{
     }
 
     private int findBackFacingCamera() {
+        Log.d(TAG, "findBackFacingCamera called");
+
         int cameraId = -1;
         //Search for the back facing camera
         //get the number of cameras
@@ -249,15 +268,19 @@ public class CameraActivity extends Activity{
     //front camera max size 2560 x 1440 rear 3840 x 2160 비디오 해상도 말하는것 같음음
    //보류
     public void onResume() {
+        Log.d(TAG, "onResume called");
+
         super.onResume();
         mCamera = Camera.open(findBackFacingCamera());
         mPicture = getPictureCallback();
         mPreview.refreshCamera(mCamera);
     }
 
-    private boolean prepareVideoRecorder(){
+    private boolean prepareVideoRecorder() {
+        Log.d(TAG, "prepareVideoRecorder called");
 
         mCamera = getCameraInstance();
+        mCamera.setDisplayOrientation(90);
         mMediaRecorder = new MediaRecorder();
 
         // Step 1: Unlock and set camera to MediaRecorder
@@ -294,6 +317,8 @@ public class CameraActivity extends Activity{
 
     /** A safe way to get an instance of the Camera object. */
     public static Camera getCameraInstance(){
+        Log.d(TAG, "getCameraInstance called");
+
         Camera c = null;
         try {
             c = Camera.open(); // attempt to get a Camera instance
@@ -305,6 +330,7 @@ public class CameraActivity extends Activity{
         return c; // returns null if camera is unavailable
     }
     private Camera.PictureCallback getPictureCallback() {
+        Log.d(TAG, "getPictureCallBack called");
 
         Camera.PictureCallback mPicture = new Camera.PictureCallback() {
 
@@ -337,12 +363,16 @@ public class CameraActivity extends Activity{
 
     @Override
     protected void onPause() {
+        Log.d(TAG, "onPause called");
+
         super.onPause();
         releaseMediaRecorder();       // if you are using MediaRecorder, release it first
         releaseCamera();              // release the camera immediately on pause event
     }
 
     private void releaseMediaRecorder(){
+        Log.d(TAG, "releaseMediaRecorder called");
+
         if (mMediaRecorder != null) {
             mMediaRecorder.reset();   // clear recorder configuration
             mMediaRecorder.release(); // release the recorder object
@@ -354,6 +384,8 @@ public class CameraActivity extends Activity{
 
 
     private void setParams(){
+        Log.d(TAG, "setParams called");
+
         //set camera to continually auto-focus
         Camera.Parameters params = mCamera.getParameters();
         params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
@@ -371,6 +403,8 @@ public class CameraActivity extends Activity{
 
     /** Create a File for saving an image or video */
     private static File getOutputMediaFile(int type){
+        Log.d(TAG, "getOutputMediaFile called");
+
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
@@ -404,22 +438,9 @@ public class CameraActivity extends Activity{
      return mediaFile;
     }
 
-
-
-
-
-//    public void initialize() {
-//
-//        capture = (Button) findViewById(R.id.button_capture);
-//        capture.setOnClickListener(captrureListener);
-//
-//        switchCamera = (Button) findViewById(R.id.button_ChangeCamera);
-//        switchCamera.setOnClickListener(switchCameraListener);
-//    }
-
-
-
     public void chooseCamera() {
+        Log.d(TAG, "chooseCamera called");
+
         //if the camera preview is the front
         if (cameraFront) {
             int cameraId = findBackFacingCamera();
@@ -447,6 +468,8 @@ public class CameraActivity extends Activity{
     }
 
     private void releaseCamera(){
+        Log.d(TAG, "releaseCamera called");
+
         if (mCamera != null){
             mCamera.release();        // release the camera for other applications
             mCamera = null;

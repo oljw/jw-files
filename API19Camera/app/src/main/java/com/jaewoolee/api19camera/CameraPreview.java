@@ -7,14 +7,11 @@ package com.jaewoolee.api19camera;
 import android.content.Context;
 import android.hardware.Camera;
 import android.util.Log;
-import android.view.Display;
-import android.view.Surface;
+
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.WindowManager;
 
 import java.io.IOException;
-import java.util.List;
 
 /** A basic Camera preview class */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
@@ -38,6 +35,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
+        Log.d(TAG, "surfaceCreated called");
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
 //            mCamera.setPreviewDisplay(holder);
@@ -53,11 +51,15 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void surfaceDestroyed(SurfaceHolder holder) {
+        Log.d(TAG, "surfaceDestroyed called");
+
         // empty. Take care of releasing the Camera preview in your activity.
     }
 
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+        Log.d(TAG, "surfaceChanged called");
+
         // If your preview can change or rotate, take care of those events here.
         // Make sure to stop the preview before resizing or reformatting it.
 
@@ -94,8 +96,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
-    private Camera.Size getBestPreviewSize(int width, int height)
-    {
+    private Camera.Size getBestPreviewSize(int width, int height) {
+        Log.d(TAG, "getBestPreviewSize called");
+
         Camera.Size result=null;
         Camera.Parameters p = mCamera.getParameters();
         for (Camera.Size size : p.getSupportedPreviewSizes()) {
@@ -113,10 +116,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             }
         }
         return result;
-
     }
 
     public void refreshCamera(Camera camera) {
+        Log.d(TAG, "refreshCamera called");
+
         if (mHolder.getSurface() == null) {
             // preview surface does not exist
             return;
@@ -130,6 +134,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // set preview size and make any resize, rotate or
         // reformatting changes here
 
+        camera.setDisplayOrientation(90);
+
+
         // start preview with new settings
         setCamera(camera);
         try {
@@ -141,8 +148,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void setCamera(Camera camera) {
+        Log.d(TAG, "setCamera called");
+
         //method to set a camera instance
         mCamera = camera;
+
     }
 
 
