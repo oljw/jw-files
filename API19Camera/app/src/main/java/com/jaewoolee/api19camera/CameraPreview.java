@@ -133,9 +133,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
         // set preview size and make any resize, rotate or
         // reformatting changes here
-
         camera.setDisplayOrientation(90);
-
 
         // start preview with new settings
         setCamera(camera);
@@ -146,6 +144,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
         }
     }
+
 
     public void setCamera(Camera camera) {
         Log.d(TAG, "setCamera called");

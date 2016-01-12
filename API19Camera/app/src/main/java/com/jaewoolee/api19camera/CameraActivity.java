@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.WindowManager;
@@ -35,7 +36,7 @@ public class CameraActivity extends Activity{
     private static final String TAG = "CameraActivity";
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
-    private static  final int FOCUS_AREA_SIZE= 300;
+    private static  final int FOCUS_AREA_SIZE = 300;
 
     private boolean isRecording = false;
     private boolean cameraFront = false;
@@ -242,6 +243,31 @@ public class CameraActivity extends Activity{
             }
         }
         return cameraId;
+    }
+
+    public static void setCameraDisplayOrientation(Activity activity,
+                                                   int cameraId, android.hardware.Camera camera) {
+        android.hardware.Camera.CameraInfo info =
+                new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.getCameraInfo(cameraId, info);
+        int rotation = activity.getWindowManager().getDefaultDisplay()
+                .getRotation();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0: degrees = 0; break;
+            case Surface.ROTATION_90: degrees = 90; break;
+            case Surface.ROTATION_180: degrees = 180; break;
+            case Surface.ROTATION_270: degrees = 270; break;
+        }
+
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;  // compensate the mirror
+        } else {  // back-facing
+            result = (info.orientation - degrees + 360) % 360;
+        }
+        camera.setDisplayOrientation(result);
     }
 
     private int findBackFacingCamera() {
@@ -452,6 +478,7 @@ public class CameraActivity extends Activity{
                 mCamera = Camera.open(cameraId);
                 mPicture = getPictureCallback();
                 mPreview.refreshCamera(mCamera);
+
             }
         } else {
             int cameraId = findFrontFacingCamera();
@@ -476,7 +503,33 @@ public class CameraActivity extends Activity{
         }
     }
 
+    @Override
+    public void onStart() {
+        Log.d(TAG, "onStart called");
 
+        super.onStart();
+    }
+
+    @Override
+    public void onRestart() {
+        Log.d(TAG, "onRestart called");
+
+        super.onRestart();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "onStop called");
+
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy called");
+
+        super.onDestroy();
+    }
 
 }
 
