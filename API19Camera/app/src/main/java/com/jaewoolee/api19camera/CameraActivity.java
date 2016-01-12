@@ -5,16 +5,20 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
+import android.media.Image;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -26,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CameraActivity extends Activity {
+public class CameraActivity extends Activity{
 
     private static final String TAG = "CameraActivity";
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -38,7 +42,6 @@ public class CameraActivity extends Activity {
 
     private Camera.PictureCallback mPicture;
     private Context mContext;
-    private Button capture, switchCamera;
     private Camera mCamera;
     private MediaRecorder mMediaRecorder;
     private com.jaewoolee.api19camera.CameraPreview mPreview;
@@ -64,7 +67,7 @@ public class CameraActivity extends Activity {
 
 
         //switch button
-        Button switchCamera = (Button) findViewById(R.id.button_change);
+        ImageButton switchCamera = (ImageButton) findViewById(R.id.button_change);
         switchCamera.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -84,8 +87,8 @@ public class CameraActivity extends Activity {
                 }
         });
 
-        // Add a listener to the Capture button
-        Button captureButton = (Button) findViewById(R.id.button_capture);
+        // Add a listener to the Photo Capture button
+        ImageButton captureButton = (ImageButton) findViewById(R.id.button_capture);
         captureButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -96,8 +99,8 @@ public class CameraActivity extends Activity {
                 }
         );
 
-        // Add a listener to the Capture button
-        final Button captureButtonVideo = (Button) findViewById(R.id.button_capture_video);
+        // Add a listener to the Video Capture button
+        ImageButton captureButtonVideo = (ImageButton) findViewById(R.id.button_capture_video);
         captureButtonVideo.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -110,7 +113,7 @@ public class CameraActivity extends Activity {
 
                             // inform the user that recording has stopped
                             //setCaptureButtonText("Capture");
-                            captureButtonVideo.setText("Capture");
+                            //captureButtonVideo.setText("Capture");
 
                             isRecording = false;
                         } else {
@@ -122,7 +125,7 @@ public class CameraActivity extends Activity {
 
                                 // inform the user that recording has started
                                 //setCaptureButtonText("Stop");
-                                captureButtonVideo.setText("Stop");
+                                //captureButtonVideo.setText("Stop");
                                 isRecording = true;
                             } else {
                                 // prepare didn't work, release the camera
@@ -445,6 +448,8 @@ public class CameraActivity extends Activity {
             mCamera = null;
         }
     }
+
+
 
 }
 

@@ -1,59 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:keepScreenOn="true">
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignWithParentIfMissing="false"
+        android:background="#000000">
 
         <Button
-            android:layout_width="61dp"
-            android:layout_height="381dp"
-            android:id="@+id/nothing_yet"
-            android:text="Nothing Yet" />
+            android:id="@+id/button_random"
+            android:text="random"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
 
-    </LinearLayout>
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal"/>
+        android:layout_weight="8"
+        android:orientation="horizontal">
+
+    </FrameLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:background="#000000"
+        android:weightSum="5">>
 
         <Button
+            android:id="@+id/mode_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="MODE"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/mode_button"/>
+
+        <ImageButton
             android:id="@+id/button_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Switch" />
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/switch_button"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_capture"
-            android:text="Capture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_weight="1"/>
+            android:scaleType="fitCenter"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:src="@drawable/camera_button"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center_vertical" />
+
+        <ImageButton
+            android:id="@+id/button_capture_video"
+            android:scaleType="fitCenter"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/record_button"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical" />
 
         <Button
-            android:id="@+id/button_capture_video"
-            android:text="Capture"
+            android:id="@+id/thumb_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"/>
+            android:text="tn"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical" />
 
     </LinearLayout>
 

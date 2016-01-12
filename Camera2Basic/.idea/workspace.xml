@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddf9fd6e-3a96-4ae7-8d90-3db4a5400069" name="Default" comment="" />
+    <list default="true" id="5652c43d-efc7-45c4-a506-403080637410" name="Default" comment="" />
     <ignored path="Camera2Basic.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,21 +33,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Camera2BasicFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/Camera2BasicFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-34.0">
-              <caret line="553" column="75" selection-start-line="553" selection-start-column="71" selection-end-line="553" selection-end-column="75" />
+      <file leaf-file-name="activity_camera.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_camera.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CameraActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/CameraActivity.java">
+      <file leaf-file-name="Camera2BasicFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/Camera2BasicFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6793541">
-              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="814" column="35" selection-start-line="814" selection-start-column="27" selection-end-line="814" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -52,7 +60,22 @@
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/AutoFitTextureView.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_camera2_basic.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/fragment_camera2_basic.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33383685">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -1203,7 +1226,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="C:\Users\Jaewoo\Desktop\All\Coding\Android_Projects\Camera2Basic" value="4356712546140" />
+        <entry key="C:\Users\JW\Desktop\JAEWOO\JAEWOOO\Camera2Basic" value="4356915725977" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1225,11 +1248,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/support-v4/23.1.0/support-v4-23.1.0.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/support-v13/23.1.0/support-v13-23.1.0.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/cardview-v7/23.1.0/cardview-v7-23.1.0.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/appcompat-v7/23.0.0/appcompat-v7-23.0.0.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar" />
+                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.1.0/support-v4-23.1.0.aar" />
+                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v13/23.1.0/support-v13-23.1.0.aar" />
+                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/cardview-v7/23.1.0/cardview-v7-23.1.0.aar" />
+                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.0.0/appcompat-v7-23.0.0.aar" />
+                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/1.2.3/72de4290adf91c42923ec097b2d580d6f2776ae6/gradle-1.2.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/1.2.3/2fc5a2f1ac2e86c5c4bb57241330198b2355e621/gradle-1.2.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-core/1.2.3/3e702e30815cc67650ed7641c7ff13725dc56f5d/gradle-core-1.2.3-sources.jar" />
@@ -1438,7 +1461,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/CameraActivity.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/Camera2BasicFragment.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/res/layout/fragment_camera2_basic.xml" />
       </list>
     </option>
   </component>
@@ -1447,9 +1471,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="2" />
-    <option name="width" value="1936" />
-    <option name="height" value="1054" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -1474,7 +1498,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1491,6 +1517,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Application" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Camera2Basic" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1525,18 +1573,24 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Camera2Basic" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="android.project.structure.last.selected" value="SDK Location" />
-    <property name="android.project.structure.proportion" value="0.15" />
     <property name="recentsLimit" value="5" />
   </component>
   <component name="RunManager" selected="Android Application.Application">
@@ -1559,6 +1613,26 @@
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1599,6 +1673,11 @@
         <option name="Make" enabled="false" />
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -1676,15 +1755,15 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ddf9fd6e-3a96-4ae7-8d90-3db4a5400069" name="Default" comment="" />
-      <created>1452237515955</created>
+      <changelist id="5652c43d-efc7-45c4-a506-403080637410" name="Default" comment="" />
+      <created>1452552129706</created>
       <option name="number" value="Default" />
-      <updated>1452237515955</updated>
+      <updated>1452552129706</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="2" width="1936" height="1054" extended-state="0" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1696,26 +1775,27 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962447" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -1726,10 +1806,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/Camera2BasicFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-34.0">
-          <caret line="553" column="75" selection-start-line="553" selection-start-column="71" selection-end-line="553" selection-end-column="75" />
+    <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_camera.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1737,15 +1820,28 @@
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/AutoFitTextureView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/Camera2BasicFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="814" column="35" selection-start-line="814" selection-start-column="27" selection-end-line="814" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/camera2basic/CameraActivity.java">
+    <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/fragment_camera2_basic.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6793541">
-          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.33383685">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="55" />
           <folding />
         </state>
       </provider>
