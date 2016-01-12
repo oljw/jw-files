@@ -84,8 +84,12 @@ public class CameraActivity extends Activity{
                             Toast toast = Toast.makeText(mContext, "Sorry, your phone has only one camera!", Toast.LENGTH_LONG);
                             toast.show();
                         }
-                }
-        });
+                    }
+                });
+
+        //add menu button
+        ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
+        modeButton.isShown();
 
         // Add a listener to the Photo Capture button
         ImageButton captureButton = (ImageButton) findViewById(R.id.button_capture);

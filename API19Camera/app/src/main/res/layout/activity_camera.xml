@@ -49,32 +49,31 @@
         android:background="#000000"
         android:weightSum="5">>
 
-        <Button
+        <ImageButton
             android:id="@+id/mode_button"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="MODE"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:scaleType="fitCenter"
+            android:scaleType="fitEnd"
             android:background="@android:color/transparent"
             android:src="@drawable/mode_button"/>
 
         <ImageButton
             android:id="@+id/button_change"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:scaleType="fitCenter"
+            android:scaleType="fitEnd"
             android:background="@android:color/transparent"
             android:src="@drawable/switch_button"/>
 
         <ImageButton
             android:id="@+id/button_capture"
             android:scaleType="fitCenter"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1"
             android:src="@drawable/camera_button"
             android:background="@android:color/transparent"
@@ -82,9 +81,9 @@
 
         <ImageButton
             android:id="@+id/button_capture_video"
-            android:scaleType="fitCenter"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:scaleType="fitStart"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:src="@drawable/record_button"
             android:background="@android:color/transparent"
             android:layout_weight="1"
