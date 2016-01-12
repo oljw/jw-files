@@ -139,7 +139,8 @@
             android:layout_weight="1"
             android:src="@drawable/camera_button"
             android:background="@android:color/transparent"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="35dp" />
 
         <ImageButton
             android:id="@+id/button_capture_video"
@@ -155,8 +156,8 @@
 
         <Button
             android:id="@+id/thumb_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
             android:text="tn"
             android:layout_weight="1"
             android:layout_gravity="center_vertical" />

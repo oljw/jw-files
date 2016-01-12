@@ -23,9 +23,21 @@
         android:src="@drawable/stop_button"
         android:background="@null"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/pause_button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/pause_button"
+        android:background="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="45dp"
+        android:layout_marginRight="90dp"/>
 
 
 </RelativeLayout>
