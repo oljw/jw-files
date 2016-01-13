@@ -25,7 +25,8 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:alpha="0.6" />
 
     <ImageButton
         android:id="@+id/pause_button"
@@ -37,7 +38,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="45dp"
-        android:layout_marginRight="90dp"/>
+        android:layout_marginRight="90dp"
+        android:alpha="0.40"/>
 
 
 </RelativeLayout>

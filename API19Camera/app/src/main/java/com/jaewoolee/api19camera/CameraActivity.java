@@ -391,6 +391,7 @@ public class CameraActivity extends Activity{
 
         //set output picture size
         params.setPictureSize(4032, 3024);
+        params.setRotation(90);
 
         mCamera.setParameters(params);
     }
@@ -432,8 +433,6 @@ public class CameraActivity extends Activity{
         } else {
             return null;
         }
-
-
      return mediaFile;
     }
 
@@ -449,19 +448,19 @@ public class CameraActivity extends Activity{
                 //refresh the preview
 
                 mCamera = Camera.open(cameraId);
-                mPicture = getPictureCallback();
+                //mPicture = getPictureCallback();
                 mPreview.refreshCamera(mCamera);
 
             }
-        } else {
-            int cameraId = findFrontFacingCamera();
-            if (cameraId >= 0) {
-                //open the backFacingCamera
-                //set a picture callback
-                //refresh the preview
+            } else {
+                int cameraId = findFrontFacingCamera();
+                if (cameraId >= 0) {
+                    //open the backFacingCamera
+                    //set a picture callback
+                    //refresh the preview
 
                 mCamera = Camera.open(cameraId);
-                mPicture = getPictureCallback();
+                //mPicture = getPictureCallback();
                 mPreview.refreshCamera(mCamera);
             }
         }
@@ -477,35 +476,35 @@ public class CameraActivity extends Activity{
     }
 
     private void addButton() {
-        //add menu button
+        //add mode button
         ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
         modeButton.isShown();
 
-        //add menu button
+        //add setting button
         ImageButton setting_button = (ImageButton) findViewById(R.id.setting_button);
         setting_button.isShown();
 
-        //add menu button
+        //add ratio button
         ImageButton ratio_button = (ImageButton) findViewById(R.id.ratio_button);
         ratio_button.isShown();
 
-        //add menu button
+        //add flash button
         ImageButton flash_button = (ImageButton) findViewById(R.id.flash_button);
         flash_button.isShown();
 
-        //add menu button
+        //add timer button
         ImageButton timer_button = (ImageButton) findViewById(R.id.timer_button);
         timer_button.isShown();
 
-        //add menu button
+        //add hdr button
         ImageButton hdr_button = (ImageButton) findViewById(R.id.hdr_button);
         hdr_button.isShown();
 
-        //add menu button
+        //add effect button
         ImageButton effect_button = (ImageButton) findViewById(R.id.effect_button);
         effect_button.isShown();
 
-        //add menu button
+        //add arrow button
         ImageButton arrow_button = (ImageButton) findViewById(R.id.arrow_button);
         arrow_button.isShown();
 

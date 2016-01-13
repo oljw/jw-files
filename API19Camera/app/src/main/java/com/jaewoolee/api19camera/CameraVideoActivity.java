@@ -65,10 +65,14 @@ public class CameraVideoActivity extends Activity implements SurfaceHolder.Callb
                         //setContentView(R.layout.activity_camera);
                         Intent intent = new Intent(CameraVideoActivity.this, CameraActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
         );
 
+        Camera.Parameters params = mCamera.getParameters();
+        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+        mCamera.setParameters(params);
     }
 
     /** A safe way to get an instance of the Camera object. */
