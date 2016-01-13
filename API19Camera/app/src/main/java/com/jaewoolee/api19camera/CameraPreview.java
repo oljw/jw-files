@@ -12,6 +12,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.io.IOException;
+import java.util.List;
 
 /** A basic Camera preview class */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
@@ -20,6 +21,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     private SurfaceHolder mHolder;
     private Camera mCamera;
+    private CameraPreviewListener mListener = null;
 
     public CameraPreview(Context context, Camera camera) {
         super(context);
@@ -32,6 +34,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         mHolder.addCallback(this);
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+    }
+
+    public CameraPreview(Context context, Camera camera, CameraPreviewListener listener) {
+        this(context, camera);
+        mListener = listener;
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
@@ -68,6 +75,44 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             return;
         }
 
+//        // stop preview before making changes
+//        try {
+//            mCamera.stopPreview();
+//        } catch (Exception e){
+//            // ignore: tried to stop a non-existent preview
+//        }
+
+//        // set preview size and make any resize, rotate or
+//        // reformatting changes here
+//        Camera.Parameters parameters = mCamera.getParameters();
+//
+//        mCamera.setDisplayOrientation(90);
+//
+////        Camera.Size size = getBestPreviewSize(w, h);
+//        Camera.Size size = getBestPreviewSizeForFull(w, h, parameters);
+//
+//        Log.d(TAG, "w = " + w + ", h = " + h);
+//        Log.d(TAG, "Preview : width = " + size.width + ", height = " + size.height);
+//
+//        parameters.setPreviewSize(size.width, size.height);
+//        mCamera.setParameters(parameters);
+        changeCameraMode(true, w, h);
+        if (mListener != null)
+            mListener.setSurfaceViewSize(w, h);
+
+
+
+//        // start preview with new settings
+//        try {
+//            mCamera.setPreviewDisplay(mHolder);
+//            mCamera.startPreview();
+//
+//        } catch (Exception e){
+//            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+//        }
+    }
+
+    public void changeCameraMode(boolean bCamera, int w, int h) {
         // stop preview before making changes
         try {
             mCamera.stopPreview();
@@ -81,10 +126,17 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         mCamera.setDisplayOrientation(90);
 
-        Camera.Size size = getBestPreviewSize(w, h);
+        Camera.Size size;
+        if (bCamera)
+            size = getBestPreviewSize(w, h);
+        else
+            size = getBestPreviewSizeForFull(w, h, parameters);
+
+        Log.d(TAG, "w = " + w + ", h = " + h);
+        Log.d(TAG, "Preview : width = " + size.width + ", height = " + size.height);
+
         parameters.setPreviewSize(size.width, size.height);
         mCamera.setParameters(parameters);
-
 
         // start preview with new settings
         try {
@@ -96,12 +148,16 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+
+
     private Camera.Size getBestPreviewSize(int width, int height) {
         Log.d(TAG, "getBestPreviewSize called");
 
         Camera.Size result=null;
         Camera.Parameters p = mCamera.getParameters();
         for (Camera.Size size : p.getSupportedPreviewSizes()) {
+            Log.d(TAG, "##### getBestPreviewSize : width = " + size.width + ", height = " + size.height);
+
             if (size.width<=width && size.height<=height) {
                 if (result==null) {
                     result=size;
@@ -116,6 +172,23 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             }
         }
         return result;
+    }
+
+    private Camera.Size getBestPreviewSizeForFull(int width, int height, Camera.Parameters parameters){
+        Camera.Size bestSize = null;
+        List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
+
+        bestSize = sizeList.get(0);
+
+        for(int i = 1; i < sizeList.size(); i++){
+            Log.d(TAG, "##### getBestPreviewSizeForFull : width = " + sizeList.get(i).width + ", height = " + sizeList.get(i).height);
+            if((sizeList.get(i).width * sizeList.get(i).height) >
+                    (bestSize.width * bestSize.height)){
+                bestSize = sizeList.get(i);
+            }
+        }
+
+        return bestSize;
     }
 
     public void refreshCamera(Camera camera) {

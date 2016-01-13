@@ -14,9 +14,12 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -28,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CameraActivity extends Activity{
+public class CameraActivity extends Activity {
 
     private static final String TAG = "CameraActivity";
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -44,6 +47,18 @@ public class CameraActivity extends Activity{
     private MediaRecorder mMediaRecorder;
     private com.jaewoolee.api19camera.CameraPreview mPreview;
 
+    private CameraPreviewListener cameraPreviewListener = new CameraPreviewListener() {
+        @Override
+        public void setSurfaceViewSize(int w, int h) {
+            Log.d(TAG, "##### CURRENT SURFACE VIEW SIZE : " + w + " x " + h);
+            mPreviewW = w;
+            mPreviewH = h;
+        }
+    };
+
+    private int mPreviewW;
+    private int mPreviewH;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate called");
@@ -54,17 +69,40 @@ public class CameraActivity extends Activity{
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_camera);
+//        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.activity_camera_test);
 
         // Create an instance of Camera
         mCamera = getCameraInstance();
         Log.d(TAG, "##### mCamera = " + mCamera);
 
         // Create our Preview view and set it as the content of our activity.
-        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera);
+//        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera);
+        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera, cameraPreviewListener);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+        params.height = 1920;
+        preview.setLayoutParams(params);
+
+
+
+        ((ImageButton) findViewById(R.id.camcorder_start_btn)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "##### CHANGE CAMERA TO CAMCORDER !!!");
+                ((LinearLayout) findViewById(R.id.top_menu)).setVisibility(View.INVISIBLE);
+                ((LinearLayout) findViewById(R.id.bottom_menu)).setVisibility(View.INVISIBLE);
+
+                FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+                params.height = 2560;
+                preview.setLayoutParams(params);
+
+                mPreview.changeCameraMode(false, mPreviewW, mPreviewH);
+            }
+        });
 
         //switch button
         ImageButton switchCamera = (ImageButton) findViewById(R.id.button_change);

@@ -130,6 +130,10 @@ public class CameraVideoActivity extends Activity implements SurfaceHolder.Callb
         mCamera.setDisplayOrientation(90);
 
         Camera.Size size = getBestPreviewSize(w, h, parameters);
+
+        Log.d(TAG, "w = " + w + ", h = " + h);
+        Log.d(TAG, "Preview : width = " + size.width + ", height = " + size.height);
+
         parameters.setPreviewSize(size.width, size.height);
 
         mCamera.setParameters(parameters);
@@ -152,6 +156,7 @@ public class CameraVideoActivity extends Activity implements SurfaceHolder.Callb
         bestSize = sizeList.get(0);
 
         for(int i = 1; i < sizeList.size(); i++){
+            Log.d(TAG, "##### getBestPreviewSize : width = " + sizeList.get(i).width + ", height = " + sizeList.get(i).height);
             if((sizeList.get(i).width * sizeList.get(i).height) >
                     (bestSize.width * bestSize.height)){
                 bestSize = sizeList.get(i);
