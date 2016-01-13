@@ -2,7 +2,6 @@ package com.jaewoolee.api19camera;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
@@ -12,9 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -83,7 +80,6 @@ public class CameraActivity extends Activity {
         preview.addView(mPreview);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
-        params.height = 1920;
         preview.setLayoutParams(params);
 
 
@@ -146,9 +142,6 @@ public class CameraActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         Log.d(TAG, "onClick captureButtonVideo called");
-                        //setContentView(R.layout.video_layout);
-                        Intent intent = new Intent(CameraActivity.this, CameraVideoActivity.class);
-                        startActivity(intent);
 
                         if (isRecording) {
                             // stop recording and release camera
@@ -196,7 +189,7 @@ public class CameraActivity extends Activity {
             }
         });
         setParams();
-        addButton();
+        addDummyButtons();
     }
 
     private void focusOnTouch(MotionEvent event) {
@@ -513,7 +506,7 @@ public class CameraActivity extends Activity {
         }
     }
 
-    private void addButton() {
+    private void addDummyButtons() {
         //add mode button
         ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
         modeButton.isShown();
