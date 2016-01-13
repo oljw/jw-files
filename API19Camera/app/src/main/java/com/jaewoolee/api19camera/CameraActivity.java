@@ -2,24 +2,24 @@ package com.jaewoolee.api19camera;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
-import android.media.Image;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.Surface;
-import android.view.SurfaceHolder;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CameraActivity extends Activity{
+public class CameraActivity extends Activity {
 
     private static final String TAG = "CameraActivity";
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -47,6 +47,18 @@ public class CameraActivity extends Activity{
     private MediaRecorder mMediaRecorder;
     private com.jaewoolee.api19camera.CameraPreview mPreview;
 
+    private CameraPreviewListener cameraPreviewListener = new CameraPreviewListener() {
+        @Override
+        public void setSurfaceViewSize(int w, int h) {
+            Log.d(TAG, "##### CURRENT SURFACE VIEW SIZE : " + w + " x " + h);
+            mPreviewW = w;
+            mPreviewH = h;
+        }
+    };
+
+    private int mPreviewW;
+    private int mPreviewH;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate called");
@@ -57,17 +69,40 @@ public class CameraActivity extends Activity{
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_camera);
+//        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.activity_camera_test);
 
         // Create an instance of Camera
         mCamera = getCameraInstance();
         Log.d(TAG, "##### mCamera = " + mCamera);
 
         // Create our Preview view and set it as the content of our activity.
-        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera);
+//        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera);
+        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera, cameraPreviewListener);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+        params.height = 1920;
+        preview.setLayoutParams(params);
+
+
+
+        ((ImageButton) findViewById(R.id.camcorder_start_btn)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "##### CHANGE CAMERA TO CAMCORDER !!!");
+                ((LinearLayout) findViewById(R.id.top_menu)).setVisibility(View.INVISIBLE);
+                ((LinearLayout) findViewById(R.id.bottom_menu)).setVisibility(View.INVISIBLE);
+
+                FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+                params.height = 2560;
+                preview.setLayoutParams(params);
+
+                mPreview.changeCameraMode(false, mPreviewW, mPreviewH);
+            }
+        });
 
         //switch button
         ImageButton switchCamera = (ImageButton) findViewById(R.id.button_change);
@@ -90,10 +125,6 @@ public class CameraActivity extends Activity{
                     }
                 });
 
-        //add menu button
-        ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
-        modeButton.isShown();
-
         // Add a listener to the Photo Capture button
         ImageButton captureButton = (ImageButton) findViewById(R.id.button_capture);
         captureButton.setOnClickListener(
@@ -115,6 +146,9 @@ public class CameraActivity extends Activity{
                     @Override
                     public void onClick(View v) {
                         Log.d(TAG, "onClick captureButtonVideo called");
+                        //setContentView(R.layout.video_layout);
+                        Intent intent = new Intent(CameraActivity.this, CameraVideoActivity.class);
+                        startActivity(intent);
 
                         if (isRecording) {
                             // stop recording and release camera
@@ -162,6 +196,7 @@ public class CameraActivity extends Activity{
             }
         });
         setParams();
+        addButton();
     }
 
     private void focusOnTouch(MotionEvent event) {
@@ -243,31 +278,6 @@ public class CameraActivity extends Activity{
             }
         }
         return cameraId;
-    }
-
-    public static void setCameraDisplayOrientation(Activity activity,
-                                                   int cameraId, android.hardware.Camera camera) {
-        android.hardware.Camera.CameraInfo info =
-                new android.hardware.Camera.CameraInfo();
-        android.hardware.Camera.getCameraInfo(cameraId, info);
-        int rotation = activity.getWindowManager().getDefaultDisplay()
-                .getRotation();
-        int degrees = 0;
-        switch (rotation) {
-            case Surface.ROTATION_0: degrees = 0; break;
-            case Surface.ROTATION_90: degrees = 90; break;
-            case Surface.ROTATION_180: degrees = 180; break;
-            case Surface.ROTATION_270: degrees = 270; break;
-        }
-
-        int result;
-        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-            result = (info.orientation + degrees) % 360;
-            result = (360 - result) % 360;  // compensate the mirror
-        } else {  // back-facing
-            result = (info.orientation - degrees + 360) % 360;
-        }
-        camera.setDisplayOrientation(result);
     }
 
     private int findBackFacingCamera() {
@@ -355,6 +365,7 @@ public class CameraActivity extends Activity{
         }
         return c; // returns null if camera is unavailable
     }
+
     private Camera.PictureCallback getPictureCallback() {
         Log.d(TAG, "getPictureCallBack called");
 
@@ -418,6 +429,7 @@ public class CameraActivity extends Activity{
 
         //set output picture size
         params.setPictureSize(4032, 3024);
+        params.setRotation(90);
 
         mCamera.setParameters(params);
     }
@@ -459,8 +471,6 @@ public class CameraActivity extends Activity{
         } else {
             return null;
         }
-
-
      return mediaFile;
     }
 
@@ -476,19 +486,19 @@ public class CameraActivity extends Activity{
                 //refresh the preview
 
                 mCamera = Camera.open(cameraId);
-                mPicture = getPictureCallback();
+                //mPicture = getPictureCallback();
                 mPreview.refreshCamera(mCamera);
 
             }
-        } else {
-            int cameraId = findFrontFacingCamera();
-            if (cameraId >= 0) {
-                //open the backFacingCamera
-                //set a picture callback
-                //refresh the preview
+            } else {
+                int cameraId = findFrontFacingCamera();
+                if (cameraId >= 0) {
+                    //open the backFacingCamera
+                    //set a picture callback
+                    //refresh the preview
 
                 mCamera = Camera.open(cameraId);
-                mPicture = getPictureCallback();
+                //mPicture = getPictureCallback();
                 mPreview.refreshCamera(mCamera);
             }
         }
@@ -501,6 +511,41 @@ public class CameraActivity extends Activity{
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
+    }
+
+    private void addButton() {
+        //add mode button
+        ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
+        modeButton.isShown();
+
+        //add setting button
+        ImageButton setting_button = (ImageButton) findViewById(R.id.setting_button);
+        setting_button.isShown();
+
+        //add ratio button
+        ImageButton ratio_button = (ImageButton) findViewById(R.id.ratio_button);
+        ratio_button.isShown();
+
+        //add flash button
+        ImageButton flash_button = (ImageButton) findViewById(R.id.flash_button);
+        flash_button.isShown();
+
+        //add timer button
+        ImageButton timer_button = (ImageButton) findViewById(R.id.timer_button);
+        timer_button.isShown();
+
+        //add hdr button
+        ImageButton hdr_button = (ImageButton) findViewById(R.id.hdr_button);
+        hdr_button.isShown();
+
+        //add effect button
+        ImageButton effect_button = (ImageButton) findViewById(R.id.effect_button);
+        effect_button.isShown();
+
+        //add arrow button
+        ImageButton arrow_button = (ImageButton) findViewById(R.id.arrow_button);
+        arrow_button.isShown();
+
     }
 
     @Override

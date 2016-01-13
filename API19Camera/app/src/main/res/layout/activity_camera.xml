@@ -6,7 +6,7 @@
      android:layout_height="match_parent"
      android:keepScreenOn="true">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_alignParentBottom="false"
@@ -15,18 +15,80 @@
         android:layout_alignParentRight="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="false"
-        android:layout_alignWithParentIfMissing="false"
+        android:weightSum="7"
         android:background="#000000">
 
-        <Button
-            android:id="@+id/button_random"
-            android:text="random"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
+        <ImageButton
+            android:id="@+id/setting_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/setting_button"/>
 
-    </FrameLayout>
+        <ImageButton
+            android:id="@+id/ratio_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ratio_button"/>
+
+        <ImageButton
+            android:id="@+id/flash_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/flash_button"/>
+
+        <ImageButton
+            android:id="@+id/timer_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/timer_button"/>
+
+        <ImageButton
+            android:id="@+id/hdr_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/hdr_button"/>
+
+        <ImageButton
+            android:id="@+id/effect_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/effect_button"/>
+
+        <ImageButton
+            android:id="@+id/arrow_button"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/arrow_button"/>
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/camera_preview"
@@ -77,7 +139,8 @@
             android:layout_weight="1"
             android:src="@drawable/camera_button"
             android:background="@android:color/transparent"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="35dp" />
 
         <ImageButton
             android:id="@+id/button_capture_video"
@@ -87,13 +150,14 @@
             android:src="@drawable/record_button"
             android:background="@android:color/transparent"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:onClick="changeLayout">
         </ImageButton>
 
         <Button
             android:id="@+id/thumb_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
             android:text="tn"
             android:layout_weight="1"
             android:layout_gravity="center_vertical" />
