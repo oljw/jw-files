@@ -83,7 +83,31 @@ public class CameraActivity extends Activity {
 //        params.height = 2160;
         preview.setLayoutParams(params);
 
+        //STOP BUTTON LISTENER
+        final ImageButton camcorder_stop_button = (ImageButton) findViewById(R.id.camcorder_stop_btn);
+        camcorder_stop_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "##### go back to capture photo screen");
 
+                FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+
+
+                ((LinearLayout) findViewById(R.id.top_menu)).setVisibility(View.VISIBLE);
+                ((LinearLayout) findViewById(R.id.bottom_menu)).setVisibility(View.VISIBLE);
+                mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
+
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                params.addRule(RelativeLayout.BELOW, R.id.top_menu);
+                params.addRule(RelativeLayout.ABOVE, R.id.bottom_menu);
+
+
+                preview.setLayoutParams(params);
+
+            }
+        });
+
+        //CAMCORDER START BUTTON LISTENER
         final ImageButton camcorder_start_button = (ImageButton) findViewById(R.id.camcorder_start_btn);
         camcorder_start_button.setOnClickListener(new View.OnClickListener() {
             @Override

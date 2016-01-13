@@ -16,6 +16,17 @@
     </FrameLayout>
 
     <ImageButton
+        android:id="@+id/camcorder_stop_btn"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/pause_button"
+        android:background="@null"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:alpha="0.6" />
+
+    <ImageButton
         android:id="@+id/camcorder_start_btn"
         android:layout_width="65dp"
         android:layout_height="65dp"

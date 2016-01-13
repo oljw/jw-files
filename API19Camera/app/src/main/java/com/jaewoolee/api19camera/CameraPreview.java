@@ -103,7 +103,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 //        parameters.setPreviewSize(size.width, size.height);
 //        mCamera.setParameters(parameters);
 
-        changeCameraMode(true, w, h);
+        changeCameraMode(mCameraMode, w, h);
         if (mListener != null)
             mListener.setSurfaceViewSize(w, h);
 
@@ -117,7 +117,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 //        }
     }
 
+    boolean mCameraMode = true;
     public void changeCameraMode(boolean bCamera, int w, int h) {
+        mCameraMode = bCamera;
+
         // stop preview before making changes
         try {
             mCamera.stopPreview();
@@ -144,6 +147,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         parameters.setPreviewSize(size.width, size.height);
         mCamera.setParameters(parameters);
 
+
         // start preview with new settings
         try {
             mCamera.setPreviewDisplay(mHolder);
@@ -152,7 +156,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         } catch (Exception e){
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
-
     }
 
     private Camera.Size getBestPreviewSize(int width, int height) {
