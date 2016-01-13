@@ -102,11 +102,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 //
 //        parameters.setPreviewSize(size.width, size.height);
 //        mCamera.setParameters(parameters);
+
         changeCameraMode(true, w, h);
         if (mListener != null)
             mListener.setSurfaceViewSize(w, h);
-
-
 
 //        // start preview with new settings
 //        try {
@@ -133,10 +132,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         mCamera.setDisplayOrientation(90);
 
         Camera.Size size;
-        if (bCamera)
-            size = getOptimalPreviewSize(mSupportedPreviewSizes, w, h);
-        else
+        if (bCamera) {
+            size = getBestPreviewSize(w, h);
+        } else {
             size = getBestPreviewSizeForFull(w, h, parameters);
+        }
 
         Log.d(TAG, "w = " + w + ", h = " + h);
         Log.d(TAG, "Preview : width = " + size.width + ", height = " + size.height);
@@ -152,68 +152,32 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         } catch (Exception e){
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
+
     }
 
-    private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
-        final double ASPECT_TOLERANCE = 0.1;
-        double targetRatio = (double) h / w;
+    private Camera.Size getBestPreviewSize(int width, int height) {
+        Log.d(TAG, "getBestPreviewSize called");
 
-        if (sizes == null)
-            return null;
+        Camera.Size result=null;
+        Camera.Parameters p = mCamera.getParameters();
+        for (Camera.Size size : p.getSupportedPreviewSizes()) {
+            Log.d(TAG, "##### getBestPreviewSize : width = " + size.width + ", height = " + size.height);
 
-        Camera.Size optimalSize = null;
-        double minDiff = Double.MAX_VALUE;
+            if (size.width<=width && size.height<=height) {
+                if (result==null) {
+                    result=size;
+                } else {
+                    int resultArea=result.width*result.height;
+                    int newArea=size.width*size.height;
 
-        int targetHeight = h;
-
-        for (Camera.Size size : sizes) {
-            double ratio = (double) size.height / size.width;
-            if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE)
-                continue;
-
-            if (Math.abs(size.height - targetHeight) < minDiff) {
-                optimalSize = size;
-                minDiff = Math.abs(size.height - targetHeight);
-            }
-        }
-
-        if (optimalSize == null) {
-            minDiff = Double.MAX_VALUE;
-            for (Camera.Size size : sizes) {
-                if (Math.abs(size.height - targetHeight) < minDiff) {
-                    optimalSize = size;
-                    minDiff = Math.abs(size.height - targetHeight);
+                    if (newArea>resultArea) {
+                        result=size;
+                    }
                 }
             }
         }
-
-        return optimalSize;
+        return result;
     }
-
-
-//    private Camera.Size getBestPreviewSize(int width, int height) {
-//        Log.d(TAG, "getBestPreviewSize called");
-//
-//        Camera.Size result=null;
-//        Camera.Parameters p = mCamera.getParameters();
-//        for (Camera.Size size : p.getSupportedPreviewSizes()) {
-//            Log.d(TAG, "##### getBestPreviewSize : width = " + size.width + ", height = " + size.height);
-//
-//            if (size.width<=width && size.height<=height) {
-//                if (result==null) {
-//                    result=size;
-//                } else {
-//                    int resultArea=result.width*result.height;
-//                    int newArea=size.width*size.height;
-//
-//                    if (newArea>resultArea) {
-//                        result=size;
-//                    }
-//                }
-//            }
-//        }
-//        return result;
-//    }
 
     private Camera.Size getBestPreviewSizeForFull(int width, int height, Camera.Parameters parameters){
         Camera.Size bestSize = null;

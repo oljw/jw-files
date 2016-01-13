@@ -79,24 +79,37 @@ public class CameraActivity extends Activity {
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+        final RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+//        params.height = 2160;
         preview.setLayoutParams(params);
 
 
-
-        ((ImageButton) findViewById(R.id.camcorder_start_btn)).setOnClickListener(new View.OnClickListener() {
+        final ImageButton camcorder_start_button = (ImageButton) findViewById(R.id.camcorder_start_btn);
+        camcorder_start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "##### CHANGE CAMERA TO CAMCORDER !!!");
                 ((LinearLayout) findViewById(R.id.top_menu)).setVisibility(View.INVISIBLE);
                 ((LinearLayout) findViewById(R.id.bottom_menu)).setVisibility(View.INVISIBLE);
+                mPreview.changeCameraMode(false, mPreviewW, mPreviewH);
 
                 FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
-                params.height = 2560;
+
+//                preview.getLayoutParams().height = 2560;
+//                preview.getLayoutParams().width = 1440;
+//                preview.requestLayout();
+
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
+
+//                RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+                // params.height = 2560;
                 preview.setLayoutParams(params);
 
-                mPreview.changeCameraMode(false, mPreviewW, mPreviewH);
+//                preview.setLayoutParams(params1);
+
             }
         });
 
@@ -481,6 +494,8 @@ public class CameraActivity extends Activity {
                 mCamera = Camera.open(cameraId);
                 //mPicture = getPictureCallback();
                 mPreview.refreshCamera(mCamera);
+                mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
+
 
             }
             } else {
@@ -490,10 +505,13 @@ public class CameraActivity extends Activity {
                     //set a picture callback
                     //refresh the preview
 
-                mCamera = Camera.open(cameraId);
+
+                    mCamera = Camera.open(cameraId);
                 //mPicture = getPictureCallback();
                 mPreview.refreshCamera(mCamera);
-            }
+                    mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
+
+                }
         }
     }
 
