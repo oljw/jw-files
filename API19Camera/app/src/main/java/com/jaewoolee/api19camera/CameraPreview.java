@@ -4,12 +4,15 @@ package com.jaewoolee.api19camera;
  * Created by Jaewoo on 1/8/2016.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.Camera;
 import android.util.Log;
 
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -103,7 +106,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         parameters.setPictureSize(4032, 3024);
         parameters.setRotation(90);
         parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+        readRotation();
 
         Camera.Size size = null;
         if (mCameraMode)
@@ -126,6 +129,17 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
 
         Log.d(TAG, "##### surfaceChanged)- ");
+    }
+
+    public void readRotation() {
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        int rotation = ((Activity) getContext()).getWindowManager().getDefaultDisplay().getRotation();
+        Camera.Parameters parameters = mCamera.getParameters();
+
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            parameters.setRotation(90);
+        }
+        mCamera.setParameters(parameters);
     }
 
     public void stopCameraPreview() {
@@ -157,6 +171,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         Camera.Parameters parameters = mCamera.getParameters();
         mCamera.setDisplayOrientation(90);
+        parameters.setRotation(270);
+        parameters.setPictureSize(2592, 1944);
+
 
         Camera.Size size;
         if (bCamera) {

@@ -61,11 +61,9 @@ public class CameraActivity extends Activity {
         Log.d(TAG, "onCreate called");
 
         super.onCreate(savedInstanceState);
-
         //remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_camera_test);
 
         // Create an instance of Camera
@@ -108,7 +106,6 @@ public class CameraActivity extends Activity {
                 preview.setLayoutParams(params);
             }
         });
-
         //CAMCORDER START BUTTON LISTENER
         final ImageButton camcorder_start_button = (ImageButton) findViewById(R.id.camcorder_start_btn);
         camcorder_start_button.setOnClickListener(new View.OnClickListener() {
@@ -249,6 +246,7 @@ public class CameraActivity extends Activity {
         }
     };
 
+    //Find Front Facing Camera
     private int findFrontFacingCamera() {
         Log.d(TAG, "findFrontFacingCamera called");
 
@@ -266,7 +264,7 @@ public class CameraActivity extends Activity {
         }
         return cameraId;
     }
-
+    //Find Back Facing Camera
     private int findBackFacingCamera() {
         Log.d(TAG, "findBackFacingCamera called");
 
@@ -384,15 +382,6 @@ public class CameraActivity extends Activity {
         return mPicture;
     }
 
-    @Override
-    protected void onPause() {
-        Log.d(TAG, "onPause called");
-
-        super.onPause();
-        releaseMediaRecorder();       // if you are using MediaRecorder, release it first
-        releaseCamera();              // release the camera immediately on pause event
-    }
-
     private void releaseMediaRecorder(){
         Log.d(TAG, "releaseMediaRecorder called");
 
@@ -450,6 +439,8 @@ public class CameraActivity extends Activity {
                 mCamera = Camera.open(cameraId);
                 mPreview.refreshCamera(mCamera);
                 mPreview.stopCameraPreview();
+//                Camera.Parameters parameters = mCamera.getParameters();
+//                parameters.setRotation(90);
                 mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
                 mPreview.startCameraPreview();
             }
@@ -458,9 +449,12 @@ public class CameraActivity extends Activity {
 
                 mCamera = Camera.open(cameraId);
                 mPreview.refreshCamera(mCamera);
-                mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
-
-                }
+            mPreview.stopCameraPreview();
+//            Camera.Parameters parameters = mCamera.getParameters();
+//            parameters.setRotation(90);
+            mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
+            mPreview.startCameraPreview();
+        }
     }
 
     private void releaseCamera(){
@@ -472,6 +466,7 @@ public class CameraActivity extends Activity {
         }
     }
 
+    //Add Dummy Buttons
     private void addDummyButtons() {
         //add mode button
         ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
@@ -505,6 +500,15 @@ public class CameraActivity extends Activity {
         ImageButton arrow_button = (ImageButton) findViewById(R.id.arrow_button);
         arrow_button.isShown();
 
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "onPause called");
+
+        super.onPause();
+        releaseMediaRecorder();       // if you are using MediaRecorder, release it first
+        releaseCamera();              // release the camera immediately on pause event
     }
 
     @Override
