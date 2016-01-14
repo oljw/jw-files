@@ -66,15 +66,12 @@ public class CameraActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-//        setContentView(R.layout.activity_camera);
         setContentView(R.layout.activity_camera_test);
 
         // Create an instance of Camera
         mCamera = getCameraInstance();
         Log.d(TAG, "##### mCamera = " + mCamera);
 
-        // Create our Preview view and set it as the content of our activity.
-//        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera);
         mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera, cameraPreviewListener);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
@@ -96,17 +93,11 @@ public class CameraActivity extends Activity {
                     isRecording = false;
                 }
 
-//                mCamera = getCameraInstance();
-//                mPreview.refreshCamera(mCamera);
-
                 mPreview.stopCameraPreview();
                 mCamera = getCameraInstance();
                 mPreview.setCamera(mCamera);
                 mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
                 mPreview.startCameraPreview();
-
-
-
 
                 FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
                 ((LinearLayout) findViewById(R.id.top_menu)).setVisibility(View.VISIBLE);
@@ -115,11 +106,6 @@ public class CameraActivity extends Activity {
                 params.addRule(RelativeLayout.BELOW, R.id.top_menu);
                 params.addRule(RelativeLayout.ABOVE, R.id.bottom_menu);
                 preview.setLayoutParams(params);
-
-
-
-
-
             }
         });
 
@@ -183,47 +169,15 @@ public class CameraActivity extends Activity {
                 }
         );
 
-        // Add a listener to the Video Capture button
-        final ImageButton captureButtonVideo = (ImageButton) findViewById(R.id.button_capture_video);
-        captureButtonVideo.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.d(TAG, "onClick captureButtonVideo called");
-
-                        if (isRecording) {
-                            // stop recording and release camera
-                            mMediaRecorder.stop();  // stop the recording
-                            releaseMediaRecorder(); // release the MediaRecorder object
-                            mCamera.lock();         // take camera access back from MediaRecorder
-
-                            // inform the user that recording has stopped
-//                            setCaptureButtonText("Capture");
-//                            captureButtonVideo.setText("Capture");
-
-
-                            isRecording = false;
-                        } else {
-                            // initialize video camera
-                            if (prepareVideoRecorder()) {
-                                // Camera is available and unlocked, MediaRecorder is prepared,
-                                // now you can start recording
-                                mMediaRecorder.start();
-
-                                // inform the user that recording has started
-                                //setCaptureButtonText("Stop");
-                                //captureButtonVideo.setImageDrawable(getResources().getDrawable(R.drawable.stop_button));
-
-                                isRecording = true;
-                            } else {
-                                // prepare didn't work, release the camera
-                                releaseMediaRecorder();
-                                // inform user
-                            }
-                        }
-                    }
+        mPreview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    focusOnTouch(event);
                 }
-        );
+                return true;
+            }
+        });
         addDummyButtons();
     }
 
@@ -231,23 +185,69 @@ public class CameraActivity extends Activity {
     private void initializeCamera() {
         Log.d(TAG, "##### initializeCamera)+ ");
         if (prepareVideoRecorder()) {
-            // Camera is available and unlocked, MediaRecorder is prepared,
-            // now you can start recording
             mMediaRecorder.start();
-
-            // inform the user that recording has started
-            //setCaptureButtonText("Stop");
-            //captureButtonVideo.setImageDrawable(getResources().getDrawable(R.drawable.stop_button));
 
             isRecording = true;
         } else {
-            // prepare didn't work, release the camera
             releaseMediaRecorder();
-            // inform user
         }
-
         Log.d(TAG, "##### initializeCamera)- ");
     }
+
+    private void focusOnTouch(MotionEvent event) {
+        if (mCamera != null ) {
+
+            Camera.Parameters parameters = mCamera.getParameters();
+            if (parameters.getMaxNumMeteringAreas() > 0){
+                Log.i(TAG,"fancy !");
+                Rect rect = calculateFocusArea(event.getX(), event.getY());
+
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                List<Camera.Area> meteringAreas = new ArrayList<Camera.Area>();
+                meteringAreas.add(new Camera.Area(rect, 800));
+                parameters.setFocusAreas(meteringAreas);
+
+                mCamera.setParameters(parameters);
+                mCamera.autoFocus(mAutoFocusTakePictureCallback);
+            }else {
+                mCamera.autoFocus(mAutoFocusTakePictureCallback);
+            }
+        }
+    }
+
+    private Rect calculateFocusArea(float x, float y) {
+        int left = clamp(Float.valueOf((x / mPreview.getWidth()) * 2000 - 1000).intValue(), FOCUS_AREA_SIZE);
+        int top = clamp(Float.valueOf((y / mPreview.getHeight()) * 2000 - 1000).intValue(), FOCUS_AREA_SIZE);
+
+        return new Rect(left, top, left + FOCUS_AREA_SIZE, top + FOCUS_AREA_SIZE);
+    }
+
+    private int clamp(int touchCoordinateInCameraReper, int focusAreaSize) {
+        int result;
+        if (Math.abs(touchCoordinateInCameraReper)+focusAreaSize/2>1000){
+            if (touchCoordinateInCameraReper>0){
+                result = 1000 - focusAreaSize/2;
+            } else {
+                result = -1000 + focusAreaSize/2;
+            }
+        } else{
+            result = touchCoordinateInCameraReper - focusAreaSize/2;
+        }
+        return result;
+    }
+
+    private Camera.AutoFocusCallback mAutoFocusTakePictureCallback = new Camera.AutoFocusCallback() {
+        @Override
+        public void onAutoFocus(boolean success, Camera camera) {
+            if (success) {
+                // do something...
+                Log.i("tap_to_focus","success!");
+            } else {
+                // do something...
+                Log.i("tap_to_focus","fail!");
+            }
+        }
+    };
 
     private int findFrontFacingCamera() {
         Log.d(TAG, "findFrontFacingCamera called");
@@ -287,9 +287,6 @@ public class CameraActivity extends Activity {
         return cameraId;
     }
 
-
-    //front camera max size 2560 x 1440 rear 3840 x 2160 비디오 해상도 말하는것 같음음
-   //보류
     public void onResume() {
         Log.d(TAG, "onResume called");
 
@@ -305,6 +302,10 @@ public class CameraActivity extends Activity {
         mCamera = getCameraInstance();
         mCamera.setDisplayOrientation(90);
         mMediaRecorder = new MediaRecorder();
+        mMediaRecorder.setOrientationHint(90);
+        Camera.Parameters params = mCamera.getParameters();
+        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+        mCamera.setParameters(params);
 
         // Step 1: Unlock and set camera to MediaRecorder
         mCamera.unlock();
@@ -340,7 +341,6 @@ public class CameraActivity extends Activity {
         return true;
     }
 
-    /** A safe way to get an instance of the Camera object. */
     public static Camera getCameraInstance(){
         Log.d(TAG, "getCameraInstance called");
 
@@ -382,7 +382,6 @@ public class CameraActivity extends Activity {
             }
         };
         return mPicture;
-
     }
 
     @Override
@@ -405,22 +404,6 @@ public class CameraActivity extends Activity {
         }
     }
 
-
-//
-//    private void setParams(){
-//        Log.d(TAG, "setParams called");
-//
-//        //set camera to continually auto-focus
-//        Camera.Parameters params = mCamera.getParameters();
-////        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-//
-//        //set output picture size
-//        params.setPictureSize(4032, 3024);
-//        params.setRotation(90);
-//
-//        mCamera.setParameters(params);
-//    }
-
     /** Create a file Uri for saving an image or video */
     private static Uri getOutputMediaFileUri(int type){
         return Uri.fromFile(getOutputMediaFile(type));
@@ -430,13 +413,8 @@ public class CameraActivity extends Activity {
     private static File getOutputMediaFile(int type){
         Log.d(TAG, "getOutputMediaFile called");
 
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "MyCameraApp");
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
 
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
@@ -468,33 +446,21 @@ public class CameraActivity extends Activity {
         if (cameraFront) {
             int cameraId = findBackFacingCamera();
             if (cameraId >= 0) {
-                //open the backFacingCamera
-                //set a picture callback
-                //refresh the preview
 
                 mCamera = Camera.open(cameraId);
-                //mPicture = getPictureCallback();
                 mPreview.refreshCamera(mCamera);
-
                 mPreview.stopCameraPreview();
                 mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
                 mPreview.startCameraPreview();
             }
         } else {
                 int cameraId = findFrontFacingCamera();
-                if (cameraId >= 0) {
-                    //open the backFacingCamera
-                    //set a picture callback
-                    //refresh the preview
 
-
-                    mCamera = Camera.open(cameraId);
-                //mPicture = getPictureCallback();
+                mCamera = Camera.open(cameraId);
                 mPreview.refreshCamera(mCamera);
-                    mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
+                mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
 
                 }
-        }
     }
 
     private void releaseCamera(){
