@@ -1,0 +1,9 @@
+{
+  "layout":"@layout/fragment_camera",
+  "background":"",
+  "actionBackKey":"UI_STATE_NONE",
+  "fragment": {
+    "stillFolder":"/mnt/sdcard/0/CameraHero/picture",
+    "videoFolder":"/mnt/sdcard/0/CameraHero/video"
+  }
+}

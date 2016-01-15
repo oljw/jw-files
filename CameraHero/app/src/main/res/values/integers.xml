@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="animTime">700</integer>
+    <integer name="animStartOffset">0</integer>
+    <integer name="animXOffset">1440</integer>
+    <integer name="animXOffsetMinus">-1440</integer>
+    <integer name="animYOffset">2560</integer>
+    <integer name="animYOffsetMinus">-2560</integer>
+</resources>

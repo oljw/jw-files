@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+    </FrameLayout>
+
+    <fragment
+        android:id="@+id/top_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/camera_top_menubar_height"
+        android:layout_alignParentTop="true"
+        android:name="com.samsung.retailexperience.camerahero.fragment.TopMenuBarFragment" />
+
+    <fragment
+        android:id="@+id/bottom_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/camera_bottom_menubar_height"
+        android:layout_alignParentBottom="true"
+        android:name="com.samsung.retailexperience.camerahero.fragment.BottomMenuBarFragment" />
+
+</RelativeLayout>

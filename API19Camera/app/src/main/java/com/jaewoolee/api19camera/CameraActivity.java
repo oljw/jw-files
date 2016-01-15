@@ -171,68 +171,13 @@ public class CameraActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    focusOnTouch(event);
+//                    onTouchEvent(event);
                 }
                 return true;
             }
         });
         addDummyButtons();
     }
-
-    private void focusOnTouch(MotionEvent event) {
-        if (mCamera != null ) {
-
-            Camera.Parameters parameters = mCamera.getParameters();
-            if (parameters.getMaxNumMeteringAreas() > 0){
-                Log.i(TAG,"fancy !");
-                Rect rect = calculateFocusArea(event.getX(), event.getY());
-
-                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-                List<Camera.Area> meteringAreas = new ArrayList<Camera.Area>();
-                meteringAreas.add(new Camera.Area(rect, 800));
-                parameters.setFocusAreas(meteringAreas);
-
-                mCamera.setParameters(parameters);
-                mCamera.autoFocus(mAutoFocusTakePictureCallback);
-            }else {
-                mCamera.autoFocus(mAutoFocusTakePictureCallback);
-            }
-        }
-    }
-
-    private Rect calculateFocusArea(float x, float y) {
-        int left = clamp(Float.valueOf((x / mPreview.getWidth()) * 2000 - 1000).intValue(), FOCUS_AREA_SIZE);
-        int top = clamp(Float.valueOf((y / mPreview.getHeight()) * 2000 - 1000).intValue(), FOCUS_AREA_SIZE);
-
-        return new Rect(left, top, left + FOCUS_AREA_SIZE, top + FOCUS_AREA_SIZE);
-    }
-
-    private int clamp(int touchCoordinateInCameraReper, int focusAreaSize) {
-        int result;
-        if (Math.abs(touchCoordinateInCameraReper)+focusAreaSize/2>1000){
-            if (touchCoordinateInCameraReper>0){
-                result = 1000 - focusAreaSize/2;
-            } else {
-                result = -1000 + focusAreaSize/2;
-            }
-        } else{
-            result = touchCoordinateInCameraReper - focusAreaSize/2;
-        }
-        return result;
-    }
-
-    private Camera.AutoFocusCallback mAutoFocusTakePictureCallback = new Camera.AutoFocusCallback() {
-        @Override
-        public void onAutoFocus(boolean success, Camera camera) {
-            if (success) {
-                // do something...
-                Log.i("tap_to_focus","success!");
-            } else {
-                // do something...
-                Log.i("tap_to_focus","fail!");
-            }
-        }
-    };
 
     //Find Front Facing Camera
     private int findFrontFacingCamera() {
@@ -273,7 +218,6 @@ public class CameraActivity extends Activity {
         }
         return cameraId;
     }
-
 
     public boolean prepareVideoRecorder() {
         Log.d(TAG, "##### prepareVideoRecorder)+ ");
