@@ -61,9 +61,11 @@ public class CameraActivity extends Activity {
         Log.d(TAG, "onCreate called");
 
         super.onCreate(savedInstanceState);
+
         //remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_camera_test);
 
         // Create an instance of Camera
@@ -106,6 +108,7 @@ public class CameraActivity extends Activity {
                 preview.setLayoutParams(params);
             }
         });
+
         //CAMCORDER START BUTTON LISTENER
         final ImageButton camcorder_start_button = (ImageButton) findViewById(R.id.camcorder_start_btn);
         camcorder_start_button.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +125,6 @@ public class CameraActivity extends Activity {
                 FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
                 preview.setLayoutParams(params);
 
-
-
                 mPreview.stopCameraPreview();
                 mPreview.changeCameraMode(false, mPreviewW, mPreviewH);
                 initializeCamera();
@@ -131,7 +132,7 @@ public class CameraActivity extends Activity {
             }
         });
 
-        //switch button
+        //SWITCH BUTTON
         ImageButton switchCamera = (ImageButton) findViewById(R.id.button_change);
         switchCamera.setOnClickListener(
                 new View.OnClickListener() {
@@ -176,19 +177,6 @@ public class CameraActivity extends Activity {
             }
         });
         addDummyButtons();
-    }
-
-    // initialize video camera
-    private void initializeCamera() {
-        Log.d(TAG, "##### initializeCamera)+ ");
-        if (prepareVideoRecorder()) {
-            mMediaRecorder.start();
-
-            isRecording = true;
-        } else {
-            releaseMediaRecorder();
-        }
-        Log.d(TAG, "##### initializeCamera)- ");
     }
 
     private void focusOnTouch(MotionEvent event) {
@@ -264,6 +252,7 @@ public class CameraActivity extends Activity {
         }
         return cameraId;
     }
+
     //Find Back Facing Camera
     private int findBackFacingCamera() {
         Log.d(TAG, "findBackFacingCamera called");
@@ -285,14 +274,6 @@ public class CameraActivity extends Activity {
         return cameraId;
     }
 
-    public void onResume() {
-        Log.d(TAG, "onResume called");
-
-        super.onResume();
-        mCamera = Camera.open(findBackFacingCamera());
-        mPicture = getPictureCallback();
-        mPreview.refreshCamera(mCamera);
-    }
 
     public boolean prepareVideoRecorder() {
         Log.d(TAG, "##### prepareVideoRecorder)+ ");
@@ -339,6 +320,20 @@ public class CameraActivity extends Activity {
         return true;
     }
 
+    //Initialize video camera
+    private void initializeCamera() {
+        Log.d(TAG, "##### initializeCamera)+ ");
+        if (prepareVideoRecorder()) {
+            mMediaRecorder.start();
+
+            isRecording = true;
+        } else {
+            releaseMediaRecorder();
+        }
+        Log.d(TAG, "##### initializeCamera)- ");
+    }
+
+    //Get Camera Instance
     public static Camera getCameraInstance(){
         Log.d(TAG, "getCameraInstance called");
 
@@ -353,6 +348,7 @@ public class CameraActivity extends Activity {
         return c; // returns null if camera is unavailable
     }
 
+    //Picture CallBack Method
     private Camera.PictureCallback getPictureCallback() {
         Log.d(TAG, "getPictureCallBack called");
 
@@ -382,6 +378,7 @@ public class CameraActivity extends Activity {
         return mPicture;
     }
 
+    //Release Media Recorder
     private void releaseMediaRecorder(){
         Log.d(TAG, "releaseMediaRecorder called");
 
@@ -428,6 +425,7 @@ public class CameraActivity extends Activity {
      return mediaFile;
     }
 
+    //Choose Camera Method
     public void chooseCamera() {
         Log.d(TAG, "chooseCamera called");
 
@@ -439,8 +437,10 @@ public class CameraActivity extends Activity {
                 mCamera = Camera.open(cameraId);
                 mPreview.refreshCamera(mCamera);
                 mPreview.stopCameraPreview();
-//                Camera.Parameters parameters = mCamera.getParameters();
-//                parameters.setRotation(90);
+                Camera.Parameters parameters = mCamera.getParameters();
+                parameters.setRotation(270);
+                parameters.setPictureSize(2592, 1944);
+                mCamera.setParameters(parameters);
                 mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
                 mPreview.startCameraPreview();
             }
@@ -449,14 +449,19 @@ public class CameraActivity extends Activity {
 
                 mCamera = Camera.open(cameraId);
                 mPreview.refreshCamera(mCamera);
-            mPreview.stopCameraPreview();
-//            Camera.Parameters parameters = mCamera.getParameters();
-//            parameters.setRotation(90);
-            mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
-            mPreview.startCameraPreview();
-        }
+                mPreview.stopCameraPreview();
+                Camera.Parameters parameters = mCamera.getParameters();
+                parameters.setRotation(270);
+                parameters.setPictureSize(2592, 1944);
+
+                mCamera.setParameters(parameters);
+                mPreview.changeCameraMode(true, mPreviewW, mPreviewH);
+                mPreview.startCameraPreview();
+
+                }
     }
 
+    //Release Camera Method
     private void releaseCamera(){
         Log.d(TAG, "releaseCamera called");
 
@@ -466,7 +471,7 @@ public class CameraActivity extends Activity {
         }
     }
 
-    //Add Dummy Buttons
+    //Add Dummy Button
     private void addDummyButtons() {
         //add mode button
         ImageButton modeButton = (ImageButton) findViewById(R.id.mode_button);
@@ -499,7 +504,6 @@ public class CameraActivity extends Activity {
         //add arrow button
         ImageButton arrow_button = (ImageButton) findViewById(R.id.arrow_button);
         arrow_button.isShown();
-
     }
 
     @Override
@@ -511,6 +515,16 @@ public class CameraActivity extends Activity {
         releaseCamera();              // release the camera immediately on pause event
     }
 
+    public void onResume() {
+        Log.d(TAG, "onResume called");
+
+        super.onResume();
+        mCamera = Camera.open(findBackFacingCamera());
+        mPicture = getPictureCallback();
+        mPreview.refreshCamera(mCamera);
+    }
+
+    //Active
     @Override
     public void onStart() {
         Log.d(TAG, "onStart called");
