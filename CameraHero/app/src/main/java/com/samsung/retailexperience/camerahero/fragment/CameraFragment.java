@@ -41,7 +41,7 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onViewCreated(View view) {
         Log.d(TAG, "##### CameraFragment onViewCreated Called");
-
+//
 //        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
 //        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
 //        mBottomMenuBar.setListener(this);
@@ -112,6 +112,22 @@ public class CameraFragment extends BaseCameraFragment
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        releaseMediaRecorder();       // if you are using MediaRecorder, release it first
+        releaseCamera();              // release the camera immediately on pause event
+    }
+
+    public void onResume() {
+        Log.d(TAG, "onResume called");
+
+        super.onResume();
+//        mCamera = Camera.open(findBackFacingCamera());
+//        mPicture = getPictureCallback();
+//        mCameraSurface.refreshCamera(mCamera);
     }
 
 //    private void setMenuBar() {

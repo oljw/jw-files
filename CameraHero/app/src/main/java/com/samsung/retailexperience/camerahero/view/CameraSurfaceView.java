@@ -88,7 +88,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         Camera.Parameters parameters = mCamera.getParameters();
         Log.d(TAG, "##### parameters = " + parameters);
 
-//        mCamera.setDisplayOrientation(90);
+        mCamera.setDisplayOrientation(90);
 
         Camera.Size size = null;
         size = getBestPreviewSize(w, h);
@@ -127,6 +127,43 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
             }
         }
         return result;
+    }
+
+//    public void refreshCamera(Camera camera) {
+//        Log.d(TAG, "##### refreshCamera)+ ");
+//
+//        if (mHolder.getSurface() == null) {
+//            // preview surface does not exist
+//            return;
+//        }
+//        // stop preview before making changes
+//        try {
+//            mCamera.stopPreview();
+//        } catch (Exception e) {
+//            // ignore: tried to stop a non-existent preview
+//        }
+//        // set preview size and make any resize, rotate or
+//        // reformatting changes here
+////        camera.setDisplayOrientation(90);
+//
+//        // start preview with new settings
+//        setCamera(camera);
+//        try {
+//            mCamera.setPreviewDisplay(mHolder);
+//            mCamera.startPreview();
+//        } catch (Exception e) {
+//            Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
+//        }
+//
+//        Log.d(TAG, "##### refreshCamera)- ");
+//    }
+
+    public void setCamera(Camera camera) {
+        Log.d(TAG, "setCamera called");
+
+        //method to set a camera instance
+        mCamera = camera;
+
     }
 }
 
