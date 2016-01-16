@@ -1,7 +1,10 @@
 package com.samsung.retailexperience.camerahero.activity;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.samsung.retailexperience.camerahero.R;
@@ -10,32 +13,41 @@ import com.samsung.retailexperience.camerahero.util.AppConsts;
 
 public class MainActivity extends BaseActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     private Context mContext;
+    private Camera mCamera;
     private AppConsts.UIState mUIState = AppConsts.UIState.UI_STATE_NONE;
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "##### MainActivity onCreate called");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_NONE);
-
-
     }
 
     @Override
     public void onDestroy() {
+        Log.d(TAG, "##### MainActivity onDestroy called");
+
         super.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
+        Log.d(TAG, "##### MainActivity onBackPressed called");
+
         super.onBackPressed();
     }
 
     public void changeFragment(AppConsts.UIState newState, AppConsts.TransactionDir dir) {
+        Log.d(TAG, "##### MainActivity changeFragment called");
+
         if (mUIState == newState) return;
 
         getResources().getString(R.string.app_name);

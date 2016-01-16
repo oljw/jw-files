@@ -22,6 +22,8 @@ public class CameraFragment extends BaseCameraFragment
     private static final String TAG = CameraFragment.class.getSimpleName();
 
     public static CameraFragment newInstance(String fragmentModel) {
+        Log.d(TAG, "##### CameraFragment newInstance Called");
+
         CameraFragment fragment = new CameraFragment();
 
         Bundle args = new Bundle();
@@ -38,16 +40,22 @@ public class CameraFragment extends BaseCameraFragment
 
     @Override
     public void onViewCreated(View view) {
-        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
-        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
-        mBottomMenuBar.setListener(this);
+        Log.d(TAG, "##### CameraFragment onViewCreated Called");
+
+//        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
+//        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
+//        mBottomMenuBar.setListener(this);
+
+        Log.d(TAG, "GetCameraInstance ##############");
+        mCamera = getCameraInstance();
+        Log.d(TAG, "GotCameraInstance #########");
 
         mPreview = (FrameLayout) view.findViewById(R.id.camera_preview);
-        mPreview.setOnTouchListener(mPreveiwTouchListener);
+//        mPreview.setOnTouchListener(mPreveiwTouchListener);
 
-        mCamera = getCameraInstance();
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
+        mPreview.addView(mCameraSurface);
 
     }
 
@@ -57,6 +65,7 @@ public class CameraFragment extends BaseCameraFragment
         Camera c = null;
         try {
             c = Camera.open(); // attempt to get a Camera instance
+            Log.d(TAG, "##### Camera Opened");
         }
         catch (Exception e) {
             // Camera is not available (in use or does not exist)
@@ -64,7 +73,6 @@ public class CameraFragment extends BaseCameraFragment
         }
         return c; // returns null if camera is unavailable
     }
-
 
     @Override
     public void onBackPressed() {
@@ -99,20 +107,27 @@ public class CameraFragment extends BaseCameraFragment
 
     }
 
-    private void setMenuBar() {
-        if (mTopMenuBar.isHidden()) {
-            getFragmentManager().beginTransaction().setCustomAnimations(
-                    R.animator.left_out, R.animator.left_in
-            ).show( mTopMenuBar ).setCustomAnimations(
-                    R.animator.right_out, R.animator.right_in
-            ).show( mBottomMenuBar ).commit();
-        }
-        else {
-            getFragmentManager().beginTransaction().setCustomAnimations(
-                    R.animator.left_in, R.animator.left_out
-            ).hide( mTopMenuBar ).setCustomAnimations(
-                    R.animator.right_in, R.animator.right_out
-            ).hide( mBottomMenuBar ).commit();
+    private void releaseCamera(){
+        if (mCamera != null){
+            mCamera.release();        // release the camera for other applications
+            mCamera = null;
         }
     }
+
+//    private void setMenuBar() {
+//        if (mTopMenuBar.isHidden()) {
+//            getFragmentManager().beginTransaction().setCustomAnimations(
+//                    R.animator.left_out, R.animator.left_in
+//            ).show( mTopMenuBar ).setCustomAnimations(
+//                    R.animator.right_out, R.animator.right_in
+//            ).show( mBottomMenuBar ).commit();
+//        }
+//        else {
+//            getFragmentManager().beginTransaction().setCustomAnimations(
+//                    R.animator.left_in, R.animator.left_out
+//            ).hide( mTopMenuBar ).setCustomAnimations(
+//                    R.animator.right_in, R.animator.right_out
+//            ).hide( mBottomMenuBar ).commit();
+//        }
+//    }
 }

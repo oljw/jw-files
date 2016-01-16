@@ -3,6 +3,7 @@ package com.samsung.retailexperience.camerahero.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public abstract class BaseCameraFragment extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "##### BaseCameraFragment onCreate Called");
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mJsonModel = getArguments().getString(AppConsts.ARG_JSON_MODEL);
@@ -42,6 +45,8 @@ public abstract class BaseCameraFragment extends BaseFragment {
             LayoutInflater inflater,
             ViewGroup container,
             Bundle savedInstanceState) {
+        Log.d(TAG, "##### BaseCameraFragment onCreateView Called");
+
         mFragmentModel = loadFragmentModel();
         mView = inflater.inflate(mFragmentModel.getLayoutResId(), container, false);
 

@@ -8,7 +8,8 @@
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal" >
+        android:layout_below="@+id/top_fragment"
+        android:layout_above="@+id/bottom_fragment">
     </FrameLayout>
 
     <fragment

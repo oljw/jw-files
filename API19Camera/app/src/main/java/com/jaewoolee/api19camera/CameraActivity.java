@@ -72,12 +72,12 @@ public class CameraActivity extends Activity {
         mCamera = getCameraInstance();
         Log.d(TAG, "##### mCamera = " + mCamera);
 
-        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera, cameraPreviewListener);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
+//        mPreview = new com.jaewoolee.api19camera.CameraPreview(this, mCamera, cameraPreviewListener);
+//        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+//        preview.addView(mPreview);
 
-        final RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
-        preview.setLayoutParams(params);
+//        final RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+//        preview.setLayoutParams(params);
 
         //STOP BUTTON LISTENER
         final ImageButton camcorder_stop_button = (ImageButton) findViewById(R.id.camcorder_stop_btn);

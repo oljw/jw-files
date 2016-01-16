@@ -51,7 +51,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         Log.d(TAG, "##### surfaceCreated)+ ");
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
-            mCamera.setPreviewDisplay(mHolder);
+            mCamera.setPreviewDisplay(holder);
 
             Log.d(TAG, "##### surfaceCreated : mHolder = " + mHolder);
             Log.d(TAG, "##### surfaceCreated : holder = " + holder);
