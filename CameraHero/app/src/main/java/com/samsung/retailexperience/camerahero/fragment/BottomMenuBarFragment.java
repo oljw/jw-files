@@ -25,7 +25,7 @@ public class BottomMenuBarFragment extends Fragment {
         void onStillClicked();
         void onSwitchClicked();
         void onVideoClicked();
-    };
+    }
 
     public void setListener(BottomMenuBarListener listener) {
         mListener = listener;

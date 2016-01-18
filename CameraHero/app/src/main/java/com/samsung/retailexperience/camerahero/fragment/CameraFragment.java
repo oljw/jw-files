@@ -38,20 +38,23 @@ public class CameraFragment extends BaseCameraFragment
     private Camera mCamera = null;
     private CameraSurfaceView mCameraSurface = null;
 
+
+
     @Override
     public void onViewCreated(View view) {
         Log.d(TAG, "##### CameraFragment onViewCreated Called");
-//
-//        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
-//        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
-//        mBottomMenuBar.setListener(this);
+
+        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
+        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
+
+        mBottomMenuBar.setListener(this);
 
         Log.d(TAG, "GetCameraInstance ##############");
         mCamera = getCameraInstance();
         Log.d(TAG, "GotCameraInstance #########");
 
         mPreview = (FrameLayout) view.findViewById(R.id.camera_preview);
-//        mPreview.setOnTouchListener(mPreveiwTouchListener);
+        mPreview.setOnTouchListener(mPreveiwTouchListener);
 
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
