@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 21
     buildToolsVersion "19.1.0"
 
     defaultConfig {
-        applicationId "com.jaewoolee.api19camera"
-        minSdkVersion 17
-        targetSdkVersion 19
+        applicationId "com.samsung.retailexperience.camerahero"
+        minSdkVersion 21
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:support-v13:19.1.+'
+//    compile 'com.android.support:support-v13:19.1.+'
 
     compile 'com.google.code.gson:gson:2.3.1'
 //    compile 'com.android.support:design:23.1.1'

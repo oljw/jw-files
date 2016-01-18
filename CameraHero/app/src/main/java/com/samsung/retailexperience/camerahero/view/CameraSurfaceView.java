@@ -66,7 +66,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-        Log.d(TAG, "##### surfaceChanged +");
+        Log.d(TAG, "####################### surfaceChanged +");
 
         // If your preview can change or rotate, take care of those events here.
         // Make sure to stop the preview before resizing or reformatting it.
@@ -77,11 +77,19 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         }
 
         // stop preview before making changes
+        Log.d(TAG, "##### stop preview");
+
         try {
             mCamera.stopPreview();
+            Log.d(TAG, "##### preview stopped ###");
+
         } catch (Exception e){
             // ignore: tried to stop a non-existent preview
+            Log.e(TAG, "##### couldn't stop the preview ###");
+
         }
+
+        Log.d(TAG, "##### get parameters");
 
         // set preview size and make any resize, rotate or
         // reformatting changes here
@@ -89,10 +97,13 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         Log.d(TAG, "##### parameters = " + parameters);
 
         mCamera.setDisplayOrientation(90);
+        Log.d(TAG, "##### set display orientation");
 
         Camera.Size size = null;
         size = getBestPreviewSize(w, h);
         parameters.setPreviewSize(size.width, size.height);
+        Log.d(TAG, "##### set parameters");
+
         mCamera.setParameters(parameters);
 
         // start preview with new settings
@@ -103,7 +114,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         } catch (Exception e){
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
-        Log.d(TAG, "##### surfaceChanged -");
+        Log.d(TAG, "######################## surfaceChanged -");
     }
 
     private Camera.Size getBestPreviewSize(int width, int height) {
@@ -129,34 +140,34 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         return result;
     }
 
-//    public void refreshCamera(Camera camera) {
-//        Log.d(TAG, "##### refreshCamera)+ ");
-//
-//        if (mHolder.getSurface() == null) {
-//            // preview surface does not exist
-//            return;
-//        }
-//        // stop preview before making changes
-//        try {
-//            mCamera.stopPreview();
-//        } catch (Exception e) {
-//            // ignore: tried to stop a non-existent preview
-//        }
-//        // set preview size and make any resize, rotate or
-//        // reformatting changes here
-////        camera.setDisplayOrientation(90);
-//
-//        // start preview with new settings
-//        setCamera(camera);
-//        try {
-//            mCamera.setPreviewDisplay(mHolder);
-//            mCamera.startPreview();
-//        } catch (Exception e) {
-//            Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
-//        }
-//
-//        Log.d(TAG, "##### refreshCamera)- ");
-//    }
+    public void refreshCamera(Camera camera) {
+        Log.d(TAG, "##### refreshCamera)+ ");
+
+        if (mHolder.getSurface() == null) {
+            // preview surface does not exist
+            return;
+        }
+        // stop preview before making changes
+        try {
+            mCamera.stopPreview();
+        } catch (Exception e) {
+            // ignore: tried to stop a non-existent preview
+        }
+        // set preview size and make any resize, rotate or
+        // reformatting changes here
+//        camera.setDisplayOrientation(90);
+
+        // start preview with new settings
+        setCamera(camera);
+        try {
+            mCamera.setPreviewDisplay(mHolder);
+            mCamera.startPreview();
+        } catch (Exception e) {
+            Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
+        }
+
+        Log.d(TAG, "##### refreshCamera)- ");
+    }
 
     public void setCamera(Camera camera) {
         Log.d(TAG, "setCamera called");
@@ -164,6 +175,23 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         //method to set a camera instance
         mCamera = camera;
 
+    }
+
+    public void stopCameraPreview() {
+        // stop preview before making changes
+        try {
+            mCamera.stopPreview();
+        } catch (Exception e) {
+            // ignore: tried to stop a non-existent preview
+        }
+    }
+    public void startCameraPreview() {
+        try {
+            mCamera.setPreviewDisplay(mHolder);
+            mCamera.startPreview();
+        } catch (Exception e) {
+            Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
+        }
     }
 }
 

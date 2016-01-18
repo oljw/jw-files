@@ -122,6 +122,7 @@ public class CameraActivity extends Activity {
                         LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
                 params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
                 params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
                 FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
                 preview.setLayoutParams(params);
 
@@ -167,15 +168,15 @@ public class CameraActivity extends Activity {
                 }
         );
 
-        mPreview.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    onTouchEvent(event);
-                }
-                return true;
-            }
-        });
+//        mPreview.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+////                    onTouchEvent(event);
+//                }
+//                return true;
+//            }
+//        });
         addDummyButtons();
     }
 
