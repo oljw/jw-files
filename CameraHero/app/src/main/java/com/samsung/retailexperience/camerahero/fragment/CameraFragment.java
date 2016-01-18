@@ -68,7 +68,6 @@ public class CameraFragment extends BaseCameraFragment
 
         mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
         mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
-
         mBottomMenuBar.setListener(this);
 
         Log.d(TAG, "GetCameraInstance ##############");
@@ -126,13 +125,6 @@ public class CameraFragment extends BaseCameraFragment
 //        ft1.hide(mTopMenuBar);
 //        ft1.commit();
 
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.
-                LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        mPreview.setLayoutParams(params);
-
-        mCameraSurface.stopCameraPreview();
         if (isRecording) {
             // stop recording and release camera
             mMediaRecorder.stop();  // stop the recording
@@ -149,7 +141,6 @@ public class CameraFragment extends BaseCameraFragment
                 releaseMediaRecorder();
             }
         }
-        mCameraSurface.startCameraPreview();
     }
 
     View.OnTouchListener mPreviewTouchListener = new View.OnTouchListener() {
@@ -174,7 +165,7 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onPause() {
         super.onPause();
-//        releaseMediaRecorder();       // if you are using MediaRecorder, release it first
+        releaseMediaRecorder();       // if you are using MediaRecorder, release it first
         releaseCamera();              // release the camera immediately on pause event
     }
 
