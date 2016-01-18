@@ -1,6 +1,5 @@
 package com.samsung.retailexperience.camerahero.fragment;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
@@ -12,9 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.samsung.retailexperience.camerahero.R;
 import com.samsung.retailexperience.camerahero.activity.MainActivity;
@@ -57,8 +54,19 @@ public class CameraFragment extends BaseCameraFragment
     private CameraSurfaceView mCameraSurface = null;
     private Camera.PictureCallback mPicture;
     private MediaRecorder mMediaRecorder;
-    private FragmentManager fm = getFragmentManager();
+    private int mPreviewW;
+    private int mPreviewH;
+
+    private boolean cameraFront = false;
     private boolean isRecording = false;
+
+    private CameraSurfaceView.CameraSurfaceListener cameraSurfaceListener = new CameraSurfaceView.CameraSurfaceListener() {
+        @Override
+        public void setSurfaceViewSize(int w, int h) {
+            mPreviewW = w;
+            mPreviewH = h;
+        }
+    };
 
 
 
@@ -91,7 +99,7 @@ public class CameraFragment extends BaseCameraFragment
 
     @Override
     public void onStillClicked() {
-        Toast.makeText((MainActivity)getActivity(), "Still Clicked !!!", Toast.LENGTH_LONG).show();
+//        Toast.makeText((MainActivity)getActivity(), "Still Clicked !!!", Toast.LENGTH_LONG).show();
         Log.d(TAG, "onClick captureButton called called");
 
         // get an image from the camera
@@ -100,47 +108,65 @@ public class CameraFragment extends BaseCameraFragment
 
     @Override
     public void onSwitchClicked() {
+        //get the number of cameras
+        int camerasNumber = Camera.getNumberOfCameras();
+        if (camerasNumber > 1) {
+            //release the old camera instance
+            //switch camera, from the front and the back and vice versa
 
+            releaseCamera();
+            chooseCamera();
+        } else {
+            //dude
+        }
     }
 
     @Override
     public void onVideoClicked() {
         Log.d(TAG, "##### CHANGE CAMERA TO CAMCORDER !!!");
+        mCameraSurface.videoMode(false);
 
-//
-//        ((BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment)).setMenuVisibility(false);
-//        ((TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment)).setMenuVisibility(false);
-//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.
-//                LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-//        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in,
-//                android.R.animator.fade_out).show(mBottomMenuBar).commit();
+        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
 
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.hide(mBottomMenuBar);
-//        ft.commit();
-//
-//        FragmentTransaction ft1 = getFragmentManager().beginTransaction();
-//        ft1.hide(mTopMenuBar);
-//        ft1.commit();
-
-        if (isRecording) {
-            // stop recording and release camera
-            mMediaRecorder.stop();  // stop the recording
-            releaseMediaRecorder(); // release the MediaRecorder object
-            mCamera.lock();         // take camera access back from MediaRecorder
-            isRecording = false;
+        if (prepareVideoRecorder()) {
+            mMediaRecorder.start();
+            isRecording = true;
         } else {
-            // initialize video camera
-            if (prepareVideoRecorder()) {
-                mMediaRecorder.start();
-                isRecording = true;
-            } else {
-                // prepare didn't work, release the camera
-                releaseMediaRecorder();
-            }
+            releaseMediaRecorder();
         }
+
+        ImageButton mStopbtn = (ImageButton) mView.findViewById(R.id.stop_button);
+        mStopbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mTopMenuBar.isHidden()) {
+                    getFragmentManager().beginTransaction().show(mTopMenuBar).commit();
+                    getFragmentManager().beginTransaction().show(mBottomMenuBar).commit();
+                }
+                if (isRecording) {
+                    // stop recording and release camera
+                    mMediaRecorder.stop();  // stop the recording
+                    releaseMediaRecorder(); // release the MediaRecorder object
+                    mCamera.lock();         // take camera access back from MediaRecorder
+                    isRecording = false;
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onGalleryClicked() {
+        Log.d(TAG, "##### Gallery Clicked!");
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Log.d(TAG, "##### Transaction begun");
+
+        ft.replace(R.layout.fragment_gallery, new GalleryFragment(), "GalleryFragment");
+        Log.d(TAG, "##### Replace fragment!");
+
+        ft.commit();
+        Log.d(TAG, "##### committed");
+
     }
 
     View.OnTouchListener mPreviewTouchListener = new View.OnTouchListener() {
@@ -150,13 +176,12 @@ public class CameraFragment extends BaseCameraFragment
         }
     };
 
-    @Override
-    public void onDummy() {
-
-    }
-
     private void releaseCamera(){
+        Log.d(TAG, "##### releaseCamera called");
+
         if (mCamera != null){
+//            mCamera.stopPreview();
+//            mCamera.setPreviewCallback(null);
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
@@ -164,6 +189,8 @@ public class CameraFragment extends BaseCameraFragment
 
     @Override
     public void onPause() {
+        Log.d(TAG, "##### onPause called");
+
         super.onPause();
         releaseMediaRecorder();       // if you are using MediaRecorder, release it first
         releaseCamera();              // release the camera immediately on pause event
@@ -173,7 +200,7 @@ public class CameraFragment extends BaseCameraFragment
         Log.d(TAG, "onResume called");
 
         super.onResume();
-        mCamera = Camera.open();
+        mCamera = Camera.open(findBackFacingCamera());
         mPicture = getPictureCallback();
         mCameraSurface.refreshCamera(mCamera);
     }
@@ -259,6 +286,75 @@ public class CameraFragment extends BaseCameraFragment
         return mediaFile;
     }
 
+    private int findFrontFacingCamera() {
+        Log.d(TAG, "findFrontFacingCamera called");
+
+        int cameraId = -1;
+        // Search for the front facing camera
+        int numberOfCameras = Camera.getNumberOfCameras();
+        for (int i = 0; i < numberOfCameras; i++) {
+            Camera.CameraInfo info = new Camera.CameraInfo();
+            Camera.getCameraInfo(i, info);
+            if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                cameraId = i;
+                cameraFront = true;
+                break;
+            }
+        }
+        return cameraId;
+    }
+
+    //Find Back Facing Camera
+    private int findBackFacingCamera() {
+        Log.d(TAG, "findBackFacingCamera called");
+
+        int cameraId = -1;
+        //Search for the back facing camera
+        //get the number of cameras
+        int numberOfCameras = Camera.getNumberOfCameras();
+        //for every camera check
+        for (int i = 0; i < numberOfCameras; i++) {
+            Camera.CameraInfo info = new Camera.CameraInfo();
+            Camera.getCameraInfo(i, info);
+            if (info.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                cameraId = i;
+                cameraFront = false;
+                break;
+            }
+        }
+        return cameraId;
+    }
+
+    //Choose Camera Method
+    public void chooseCamera() {
+        Log.d(TAG, "chooseCamera called");
+
+        //if the camera preview is the front
+        if (cameraFront) {
+            int cameraId = findBackFacingCamera();
+            if (cameraId >= 0) {
+
+                mCamera = Camera.open(cameraId);
+                mCameraSurface.refreshCamera(mCamera);
+
+            }
+        } else {
+            int cameraId = findFrontFacingCamera();
+
+            if (cameraId >= 0) {
+                // open the backFacingCamera
+                // set a picture callback
+                // refresh the preview
+
+                mCamera = Camera.open(cameraId);
+                // mPicture = getPictureCallback();
+                mCameraSurface.refreshCamera(mCamera);
+
+            }
+
+        }
+    }
+
     public boolean prepareVideoRecorder() {
         Log.d(TAG, "##### prepareVideoRecorder)+ ");
 
@@ -314,6 +410,11 @@ public class CameraFragment extends BaseCameraFragment
             mMediaRecorder = null;
             mCamera.lock();           // lock camera for later use
         }
+    }
+
+    @Override
+    public void setSurfaceViewSize(int w, int h) {
+
     }
 
 

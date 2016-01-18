@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Jaewoo\\Desktop\\All\\Coding\\Android_Projects\\AndroidVideoCaptureExample\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Jaewoo\\Desktop\\All\\Coding\\Android_Projects\\AndroidVideoCaptureExample\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\AndroidVideoCaptureExample\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\AndroidVideoCaptureExample\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     }

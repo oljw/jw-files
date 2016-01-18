@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.samsung.retailexperience.camerahero.R;
 
@@ -19,12 +20,14 @@ public class BottomMenuBarFragment extends Fragment {
     private ImageButton mStillBtn = null;
     private ImageButton mSwitchBtn = null;
     private ImageButton mVideoBtn = null;
+    private ImageView mGalleryBtn = null;
     private BottomMenuBarListener mListener = null;
 
     public interface BottomMenuBarListener {
         void onStillClicked();
         void onSwitchClicked();
         void onVideoClicked();
+        void onGalleryClicked();
     }
 
     public void setListener(BottomMenuBarListener listener) {
@@ -50,6 +53,9 @@ public class BottomMenuBarFragment extends Fragment {
         mVideoBtn = (ImageButton) mView.findViewById(R.id.video_button);
         mVideoBtn.setOnClickListener(mVideoBtnClickListener);
 
+        mGalleryBtn = (ImageView) mView.findViewById(R.id.gallery_button);
+        mGalleryBtn.setOnClickListener(mGalleryBtnClickListener);
+
         return mView;
     }
 
@@ -71,6 +77,13 @@ public class BottomMenuBarFragment extends Fragment {
         @Override
         public void onClick(View view) {
             getListener().onVideoClicked();
+        }
+    };
+
+    View.OnClickListener mGalleryBtnClickListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            getListener().onGalleryClicked();
         }
     };
 }

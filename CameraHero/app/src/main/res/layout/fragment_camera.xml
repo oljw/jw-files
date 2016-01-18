@@ -12,6 +12,18 @@
         android:layout_above="@+id/bottom_fragment">
     </FrameLayout>
 
+    <ImageButton
+        android:id="@+id/stop_button"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/stop_button"
+        android:background="@null"
+        android:alpha="0.6"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp" />
+
     <fragment
         android:id="@+id/top_fragment"
         android:layout_width="match_parent"
