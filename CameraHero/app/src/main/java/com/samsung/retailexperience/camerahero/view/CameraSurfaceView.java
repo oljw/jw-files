@@ -112,32 +112,25 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         mHeight = h;
 
         stopCameraPreview();
-        refreshCamera(mCamera, true);
+        refreshCamera(mCamera, mCameraBack);
         startCameraPreview();
     }
     boolean mVideoMode = true;
-
+    boolean mCameraBack = true;
     public void refreshCamera(Camera camera, boolean cameraBack) {
-        Log.d(TAG, "###################### refreshCamera)+ ");
+        Log.d(TAG, "###################### refreshCamera)+ cameraBack = " + cameraBack);
         mVideoMode = true;
+        mCameraBack = cameraBack;
 
         if(mHolder.getSurface() ==null) return;
         setCamera(camera);
 
-        Log.d(TAG, "##### refreshCamera : " + mWidth + " x " + mHeight);
-
-
         Camera.Parameters parameters = mCamera.getParameters();
-//        if (cameraBack)
-            mCamera.setDisplayOrientation(90);
-//        else
-//            mCamera.setDisplayOrientation(90);
-
+        mCamera.setDisplayOrientation(90);
         Camera.Size size = getBestPreviewSize(mWidth, mHeight);
         parameters.setPreviewSize(size.width, size.height);
         if (cameraBack)
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-
         mCamera.setParameters(parameters);
 
         Log.d(TAG, "###################### refreshCamera)- ");
@@ -146,20 +139,17 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void refreshCamcorder(Camera camera, boolean cameraBack) {
         Log.d(TAG, "###################### refreshCamcorder)+ ");
         mVideoMode = false;
+        mCameraBack = cameraBack;
 
         if(mHolder.getSurface() ==null) return;
         setCamera(camera);
 
-//        if (cameraBack)
-            mCamera.setDisplayOrientation(90);
-//        else
-//            mCamera.setDisplayOrientation(90);
+        mCamera.setDisplayOrientation(90);
 
         Camera.Parameters parameters = mCamera.getParameters();
-
-//        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+        if (cameraBack)
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
         Camera.Size size = getBestPreviewSizeForFull(mWidth, mHeight, parameters);
-        Log.d(TAG, "refreshCamcorder : " + size.width + " x " + size.height);
         parameters.setPreviewSize(size.width, size.height);
         mCamera.setParameters(parameters);
 
@@ -171,13 +161,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 
         Camera.Size result = null;
         Camera.Parameters p = mCamera.getParameters();
-        Log.d(TAG, "###getBestPreviewSize : mCamera.getParameters()");
-
         for (Camera.Size size : p.getSupportedPreviewSizes()) {
-            Log.d(TAG, "###getBestPreviewSize : " + size.width + " x " + size.height);
             if (size.width<=width && size.height<=height) {
                 if (result==null) {
-                    Log.d(TAG, "###getBestPreviewSize : result==null : " + size.width + " x " + size.height);
                     result=size;
                 } else {
                     int resultArea=result.width*result.height;
@@ -189,8 +175,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                 }
             }
         }
-
-        Log.d(TAG, "###getBestPreviewSize : result : " + result.width + " x " + result.height);
         return result;
     }
 
@@ -211,7 +195,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 
     public void setStillShotParam(boolean cameraBack) {
         Camera.Parameters parameters = mCamera.getParameters();
-
         if (cameraBack) {
             parameters.setRotation(90);
             parameters.setPictureSize(4032, 3024);

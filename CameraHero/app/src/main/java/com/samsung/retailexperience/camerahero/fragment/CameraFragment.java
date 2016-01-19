@@ -156,6 +156,8 @@ public class CameraFragment extends BaseCameraFragment
                     releaseMediaRecorder(); // release the MediaRecorder object
                     isRecording = false;
 
+                    Log.d(TAG, "##### mStopbtn : mCameraBack = " + mCameraBack);
+
                     chooseCamera(mCameraBack);
                 }
             }
@@ -333,7 +335,7 @@ public class CameraFragment extends BaseCameraFragment
 
     //Choose Camera Method
     public void chooseCamera(boolean cameraBack) {
-        Log.d(TAG, "chooseCamera called");
+        Log.d(TAG, "chooseCamera called : cameraBack = " + cameraBack);
 
         mCameraSurface.stopCameraPreview();
 
@@ -358,6 +360,7 @@ public class CameraFragment extends BaseCameraFragment
         }
         mCameraSurface.startCameraPreview();
         mCameraBack = cameraBack;
+        Log.d(TAG, "##### CHOOSECAMERA : mCameraBack = " + mCameraBack);
         mCameraId = cameraId;
     }
 
@@ -374,6 +377,8 @@ public class CameraFragment extends BaseCameraFragment
             mMediaRecorder.setOrientationHint(90);
         else
             mMediaRecorder.setOrientationHint(270);
+
+        Log.d(TAG, "##### prepareVideoRecorder : mCameraBack = " + mCameraBack);
 
         // Step 1: Unlock and set camera to MediaRecorder
         mCamera.unlock();
