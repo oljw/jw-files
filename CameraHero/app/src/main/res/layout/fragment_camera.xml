@@ -4,13 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/top_fragment"
         android:layout_above="@+id/bottom_fragment">
-    </FrameLayout>
+
+        <ImageView
+            android:id="@+id/focus_icon"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/camera_button"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
 
     <ImageButton
         android:id="@+id/stop_button"

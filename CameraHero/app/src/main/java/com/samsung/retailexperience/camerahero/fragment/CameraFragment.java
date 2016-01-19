@@ -1,22 +1,29 @@
 package com.samsung.retailexperience.camerahero.fragment;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.samsung.retailexperience.camerahero.CameraHeroApplication;
 import com.samsung.retailexperience.camerahero.R;
 import com.samsung.retailexperience.camerahero.activity.MainActivity;
 import com.samsung.retailexperience.camerahero.util.AppConsts;
@@ -55,25 +62,19 @@ public class CameraFragment extends BaseCameraFragment
 
     private TopMenuBarFragment mTopMenuBar = null;
     private BottomMenuBarFragment mBottomMenuBar = null;
-    private FrameLayout mPreview = null;
+//    private FrameLayout mPreview = null;
+    private RelativeLayout mPreview = null;
     private Camera mCamera = null;
     private CameraSurfaceView mCameraSurface = null;
-    private Camera.PictureCallback mPicture;
+    private ImageView mFocusIcon = null;
     private MediaRecorder mMediaRecorder;
-    private int mPreviewW;
-    private int mPreviewH;
 
     private int mCameraId = 0;
     private boolean mCameraBack = true;
+    private int mScreenOrientation = 90;
     private boolean isRecording = false;
 
-    private CameraSurfaceView.CameraSurfaceListener cameraSurfaceListener = new CameraSurfaceView.CameraSurfaceListener() {
-        @Override
-        public void setSurfaceViewSize(int w, int h) {
-            mPreviewW = w;
-            mPreviewH = h;
-        }
-    };
+    private MediaPlayer mMediaPlayer = null;
 
     @Override
     public void onViewCreated(View view) {
@@ -87,12 +88,28 @@ public class CameraFragment extends BaseCameraFragment
         mCamera = getCameraInstance(-1);
         Log.d(TAG, "GotCameraInstance #########");
 
-        mPreview = (FrameLayout) view.findViewById(R.id.camera_preview);
-        mPreview.setOnTouchListener(mPreviewTouchListener);
+//        mPreview = (FrameLayout) view.findViewById(R.id.camera_preview);
+        mPreview = (RelativeLayout) view.findViewById(R.id.camera_preview);
 
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
         mPreview.addView(mCameraSurface);
+
+        mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon);
+        mFocusIcon.bringToFront();
+
+        mMediaPlayer = MediaPlayer.create(CameraHeroApplication.getContext(), R.raw.camera_shutter_1);
+    }
+
+    @Override
+    public void onDestroyView () {
+        mMediaPlayer.release();
+        mMediaPlayer = null;
+
+        releaseMediaRecorder();
+        releaseCamera();
+
+        super.onDestroyView();
     }
 
     @Override
@@ -109,7 +126,7 @@ public class CameraFragment extends BaseCameraFragment
         mCameraSurface.setStillShotParam(mCameraBack);
 
         // get an image from the camera
-        mCamera.takePicture(null, null, mPicture);
+        mCamera.takePicture(shutter, null, preview);
     }
 
     @Override
@@ -184,7 +201,6 @@ public class CameraFragment extends BaseCameraFragment
                     .commit();
     }
 
-
     private void releaseCamera(){
         Log.d(TAG, "##### releaseCamera called");
 
@@ -209,9 +225,7 @@ public class CameraFragment extends BaseCameraFragment
         super.onResume();
         if (mCamera == null)
             chooseCamera(true);
-        mPicture = getPictureCallback();
     }
-
 
     public static Camera getCameraInstance(int cameraId){
         Log.d(TAG, "getCameraInstance called");
@@ -231,35 +245,37 @@ public class CameraFragment extends BaseCameraFragment
         return c; // returns null if camera is unavailable
     }
 
-    //Picture CallBack Method
-    private Camera.PictureCallback getPictureCallback() {
-        Log.d(TAG, "getPictureCallBack called");
+    private Camera.ShutterCallback shutter = new Camera.ShutterCallback(){
+        public void onShutter() {
+            // TODO Auto-generated method stub
+            // No action to be perfomed on the Shutter callback.
+            Log.d(TAG, "shutter !!");
+            mMediaPlayer.start();
+        }
+    };
 
-        Camera.PictureCallback mPicture = new Camera.PictureCallback() {
+    private Camera.PictureCallback preview = new Camera.PictureCallback() {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            Log.d(TAG, "getPictureCallBack called");
+            File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+            if (pictureFile == null) {
+                Log.d(TAG, "Error creating media file, check storage permissions: ");      //+ e.getMessage());
 
-            @Override
-            public void onPictureTaken(byte[] data, Camera camera) {
-
-                File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-                if (pictureFile == null) {
-                    Log.d(TAG, "Error creating media file, check storage permissions: ");      //+ e.getMessage());
-
-                    return;
-                }
-                try {
-                    FileOutputStream fos = new FileOutputStream(pictureFile);
-                    fos.write(data);
-                    fos.close();
-                } catch (FileNotFoundException e) {
-                    Log.d(TAG, "File not found: " + e.getMessage());
-                } catch (IOException e) {
-                    Log.d(TAG, "Error accessing file: " + e.getMessage());
-                }
-                chooseCamera(mCameraBack);
+                return;
             }
-        };
-        return mPicture;
-    }
+            try {
+                FileOutputStream fos = new FileOutputStream(pictureFile);
+                fos.write(data);
+                fos.close();
+            } catch (FileNotFoundException e) {
+                Log.d(TAG, "File not found: " + e.getMessage());
+            } catch (IOException e) {
+                Log.d(TAG, "Error accessing file: " + e.getMessage());
+            }
+            chooseCamera(mCameraBack);
+        }
+    };
 
     /** Create a file Uri for saving an image or video */
     private static Uri getOutputMediaFileUri(int type){
@@ -374,9 +390,13 @@ public class CameraFragment extends BaseCameraFragment
 
         mMediaRecorder = new MediaRecorder();
         if (mCameraBack)
-            mMediaRecorder.setOrientationHint(90);
-        else
-            mMediaRecorder.setOrientationHint(270);
+            mMediaRecorder.setOrientationHint(mScreenOrientation);
+        else {
+            if (mScreenOrientation == 90)
+                mMediaRecorder.setOrientationHint(270);
+            else
+                mMediaRecorder.setOrientationHint(mScreenOrientation);
+        }
 
         Log.d(TAG, "##### prepareVideoRecorder : mCameraBack = " + mCameraBack);
 
@@ -423,85 +443,71 @@ public class CameraFragment extends BaseCameraFragment
             mMediaRecorder.reset();   // clear recorder configuration
             mMediaRecorder.release(); // release the recorder object
             mMediaRecorder = null;
-//            mCameraSurface.refreshCamera(mCamera);
 
             mCamera.lock();           // lock camera for later use
         }
     }
 
+
     @Override
-    public void setSurfaceViewSize(int w, int h) {
+    public void changeScreenOrientation(int screenOrientation) {
+        mScreenOrientation = screenOrientation;
+    }
 
+    ObjectAnimator rotateIconAnimator = null;
+    @Override
+    public void drawFocusIcon(final float x, final float y) {
+        if (rotateIconAnimator != null && rotateIconAnimator.isRunning())
+            rotateIconAnimator.cancel();
+
+        rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 360f);
+        rotateIconAnimator.setDuration(1000);
+        rotateIconAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mFocusIcon.setVisibility(View.VISIBLE);
+
+                ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams)mFocusIcon.getLayoutParams();
+                marginLayoutParams.setMargins((int)(x - 100/2),
+                        (int)(y - 100/2),
+                        (int)(x + 100/2),
+                        (int)(y + 100/2));
+                mFocusIcon.setLayoutParams(marginLayoutParams);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mFocusIcon.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                mFocusIcon.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        rotateIconAnimator.start();
     }
 
 
-    private void setMenuBar() {
-        if (mTopMenuBar.isHidden()) {
-            getFragmentManager().beginTransaction().setCustomAnimations(
-                    R.animator.left_out, R.animator.left_in
-            ).show( mTopMenuBar ).setCustomAnimations(
-                    R.animator.right_out, R.animator.right_in
-            ).show( mBottomMenuBar ).commit();
-        }
-        else {
-            getFragmentManager().beginTransaction().setCustomAnimations(
-                    R.animator.left_in, R.animator.left_out
-            ).hide( mTopMenuBar ).setCustomAnimations(
-                    R.animator.right_in, R.animator.right_out
-            ).hide( mBottomMenuBar ).commit();
-        }
-    }
-
-    View.OnTouchListener mPreviewTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            return false;
-        }
-    };
-
-//tap to focus example
-//    View.OnTouchListener mPreviewTouchListener = (new View.OnTouchListener() {
-//        @Override
-//        public boolean onTouch(View v, MotionEvent event) {
-//
-//            if (mCamera != null) {
-//                Camera camera = mCamera.getCamera();
-//                camera.cancelAutoFocus();
-//                Rect focusRect = calculateTapArea(event.getX(), event.getY(), 1f);
-//
-//                Camera.Parameters parameters = camera.getParameters();
-//                if (parameters.getFocusMode() != Camera.Parameters.FOCUS_MODE_AUTO) {
-//                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-//                }
-//                if (parameters.getMaxNumFocusAreas() > 0) {
-//                    List<Camera.Area> mylist = new ArrayList<Camera.Area>();
-//                    mylist.add(new Camera.Area(focusRect, 1000));
-//                    parameters.setFocusAreas(mylist);
-//                }
-//
-//                try {
-//                    camera.cancelAutoFocus();
-//                    camera.setParameters(parameters);
-//                    camera.startPreview();
-//                    camera.autoFocus(new Camera.AutoFocusCallback() {
-//                        @Override
-//                        public void onAutoFocus(boolean success, Camera camera) {
-//                            if (camera.getParameters().getFocusMode() != Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE) {
-//                                Camera.Parameters parameters = camera.getParameters();
-//                                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-//                                if (parameters.getMaxNumFocusAreas() > 0) {
-//                                    parameters.setFocusAreas(null);
-//                                }
-//                                camera.setParameters(parameters);
-//                                camera.startPreview();
-//                            }
-//                        }
-//                    });
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return true;
+//    private void setMenuBar() {
+//        if (mTopMenuBar.isHidden()) {
+//            getFragmentManager().beginTransaction().setCustomAnimations(
+//                    R.animator.left_out, R.animator.left_in
+//            ).show( mTopMenuBar ).setCustomAnimations(
+//                    R.animator.right_out, R.animator.right_in
+//            ).show( mBottomMenuBar ).commit();
 //        }
-//    });
+//        else {
+//            getFragmentManager().beginTransaction().setCustomAnimations(
+//                    R.animator.left_in, R.animator.left_out
+//            ).hide( mTopMenuBar ).setCustomAnimations(
+//                    R.animator.right_in, R.animator.right_out
+//            ).hide( mBottomMenuBar ).commit();
+//        }
+//    }
 }
