@@ -17,6 +17,8 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 
     private SurfaceHolder mHolder;
     private Camera mCamera;
+    private int mWidth = 0;
+    private int mHeight = 0;
 
     public CameraSurfaceView(Context context, Camera camera) {
         super(context);
@@ -53,9 +55,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
             mCamera.setPreviewDisplay(mHolder);
             Log.d(TAG, "##### surfaceCreated : holder = " + holder);
 
-            Log.d(TAG, "##### Start the goddamn preview");
+            Log.d(TAG, "##### surfaceCreated Start preview");
             mCamera.startPreview();
-            Log.d(TAG, "##### Goddamn preview started");
+            Log.d(TAG, "#####  surfaceCreated preview started");
         } catch (IOException e) {
             Log.e(TAG, "Error setting camera preview: " + e.getMessage());
         }
@@ -67,119 +69,108 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         // empty. Take care of releasing the Camera preview in your activity.
     }
 
-    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-        Log.d(TAG, "####################### surfaceChanged +");
-        if(mVideoMode == false) return;
-
-//        // If your preview can change or rotate, take care of those events here.
-//        // Make sure to stop the preview before resizing or reformatting it.
-//
-//        if (mHolder.getSurface() == null){
-//            // preview surface does not exist
-//            return;
-//        }
-//
-//        // stop preview before making changes
-//        Log.d(TAG, "##### stop preview");
+//    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+//        Log.d(TAG, "############################################# surfaceChanged +");
+////        if(mVideoMode == false) return;
 //
 //        try {
 //            mCamera.stopPreview();
-//            Log.d(TAG, "##### preview stopped ###");
-//
-//        } catch (Exception e){
+//        } catch (Exception e) {
 //            // ignore: tried to stop a non-existent preview
-//            Log.e(TAG, "##### couldn't stop the preview ###");
-//
 //        }
 //
-//        Log.d(TAG, "##### get parameters");
-//
-//        // set preview size and make any resize, rotate or
-//        // reformatting changes here
-        Camera.Parameters parameters = mCamera.getParameters();
-//        Log.d(TAG, "##### parameters = " + parameters);
-//
 //        mCamera.setDisplayOrientation(90);
-//        Log.d(TAG, "##### set display orientation");
 //
-        Camera.Size size = null;
-        size = getBestPreviewSize(w, h);
-        parameters.setPreviewSize(size.width, size.height);
-        Log.d(TAG, "##### set parameters");
-
-        mCamera.setParameters(parameters);
+//        Camera.Parameters parameters = mCamera.getParameters();
+//        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 //
-//        // start preview with new settings
+//        Camera.Size size = null;
+//        size = getBestPreviewSize(w, h);
+//        parameters.setPreviewSize(size.width, size.height);
+//
+//        mCamera.setParameters(parameters);
+//
+////        refreshCamera(mCamera);
+//
 //        try {
 //            mCamera.setPreviewDisplay(mHolder);
+//            Log.d(TAG, "##### surfaceChanged start preview");
+//
 //            mCamera.startPreview();
+//            Log.d(TAG, "##### surfaceChanged preview started");
 //
 //        } catch (Exception e){
 //            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
 //        }
-//        Log.d(TAG, "######################## surfaceChanged -");
-//
+//        Log.d(TAG, "############################################# surfaceChanged -");
 //    }
 
-//    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-//        // If your preview can change or rotate, take care of those events here.
-//        // Make sure to stop the preview before resizing or reformatting it.
-        refreshCamera(mCamera);
-    }
+    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+        if (!mVideoMode) return;
 
+        mWidth = w;
+        mHeight = h;
+
+        stopCameraPreview();
+        refreshCamera(mCamera, true);
+        startCameraPreview();
+    }
     boolean mVideoMode = true;
-    public void videoMode(boolean vMode){
-        mVideoMode = vMode;
-    }
 
-    public void refreshCamera(Camera camera) {
-        Log.d(TAG, "##### refreshCamera)+ ");
+    public void refreshCamera(Camera camera, boolean cameraBack) {
+        Log.d(TAG, "###################### refreshCamera)+ ");
+        mVideoMode = true;
 
         if(mHolder.getSurface() ==null) return;
-
-        Log.d(TAG, "##### refreshCamera Stop preview");
-        try {
-            mCamera.stopPreview();
-        } catch (Exception e) {
-            // ignore: tried to stop a non-existent preview
-        }
-        Log.d(TAG, "##### refreshCamera preview stopped");
-
-        Log.d(TAG, "##### get parameters");
-
-        camera.setDisplayOrientation(90);
-        Log.d(TAG, "##### set display orientation");
-
-        Log.d(TAG, "##### set parameters");
-
-
-        Log.d(TAG, "##### refreshCamera set camera");
-
         setCamera(camera);
-        try {
-            mCamera.setPreviewDisplay(mHolder);
-            Log.d(TAG, "##### refreshCamera start preview");
 
-            mCamera.startPreview();
-            Log.d(TAG, "##### refreshCamera preview started");
+        Log.d(TAG, "##### refreshCamera : " + mWidth + " x " + mHeight);
+        if (cameraBack)
+            mCamera.setDisplayOrientation(90);
+        else
+        
+        Camera.Parameters parameters = mCamera.getParameters();
+        Camera.Size size = getBestPreviewSize(mWidth, mHeight);
+        parameters.setPreviewSize(size.width, size.height);
+        if (cameraBack)
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 
-        } catch (Exception e){
-            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-        }
+        mCamera.setParameters(parameters);
 
-        Log.d(TAG, "##### refreshCamera)- ");
+        Log.d(TAG, "###################### refreshCamera)- ");
+    }
 
+    public void refreshCamcorder(Camera camera, boolean cameraBack) {
+        Log.d(TAG, "###################### refreshCamcorder)+ ");
+        mVideoMode = false;
+
+        if(mHolder.getSurface() ==null) return;
+        setCamera(camera);
+
+        if (cameraBack)
+            mCamera.setDisplayOrientation(90);
+        Camera.Parameters parameters = mCamera.getParameters();
+//        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+        Camera.Size size = getBestPreviewSizeForFull(mWidth, mHeight, parameters);
+        Log.d(TAG, "refreshCamcorder : " + size.width + " x " + size.height);
+        parameters.setPreviewSize(size.width, size.height);
+        mCamera.setParameters(parameters);
+
+        Log.d(TAG, "###################### refreshCamcorder)- ");
     }
 
     private Camera.Size getBestPreviewSize(int width, int height) {
-        Log.d(TAG, "getBestPreviewSize called");
+        Log.d(TAG, "###getBestPreviewSize called");
 
         Camera.Size result = null;
         Camera.Parameters p = mCamera.getParameters();
-        for (Camera.Size size : p.getSupportedPreviewSizes()) {
+        Log.d(TAG, "###getBestPreviewSize : mCamera.getParameters()");
 
+        for (Camera.Size size : p.getSupportedPreviewSizes()) {
+            Log.d(TAG, "###getBestPreviewSize : " + size.width + " x " + size.height);
             if (size.width<=width && size.height<=height) {
                 if (result==null) {
+                    Log.d(TAG, "###getBestPreviewSize : result==null : " + size.width + " x " + size.height);
                     result=size;
                 } else {
                     int resultArea=result.width*result.height;
@@ -191,8 +182,11 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                 }
             }
         }
+
+        Log.d(TAG, "###getBestPreviewSize : result : " + result.width + " x " + result.height);
         return result;
     }
+
 
     private Camera.Size getBestPreviewSizeForFull(int width, int height, Camera.Parameters parameters){
         List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
@@ -208,29 +202,50 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         return bestSize;
     }
 
+    public void setStillShotParam(boolean cameraBack) {
+        Camera.Parameters parameters = mCamera.getParameters();
+
+        if (cameraBack) {
+            parameters.setRotation(90);
+            parameters.setPictureSize(4032, 3024);
+        }
+        else {
+            parameters.setRotation(270);
+            parameters.setPictureSize(2592, 1944);
+        }
+        mCamera.setParameters(parameters);
+    }
+
 
     public void setCamera(Camera camera) {
-        Log.d(TAG, "setCamera called");
+        Log.d(TAG, "####setCamera called");
 
         //method to set a camera instance
         mCamera = camera;
     }
 
     public void stopCameraPreview() {
+        Log.d(TAG, "###################### stopCameraPreview)+ ");
         // stop preview before making changes
         try {
-            mCamera.stopPreview();
+            if (mCamera != null)
+                mCamera.stopPreview();
         } catch (Exception e) {
             // ignore: tried to stop a non-existent preview
         }
+        Log.d(TAG, "###################### stopCameraPreview)- ");
     }
     public void startCameraPreview() {
+        Log.d(TAG, "###################### startCameraPreview)+ ");
         try {
-            mCamera.setPreviewDisplay(mHolder);
-            mCamera.startPreview();
+            if (mCamera != null) {
+                mCamera.setPreviewDisplay(mHolder);
+                mCamera.startPreview();
+            }
         } catch (Exception e) {
             Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
         }
+        Log.d(TAG, "###################### startCameraPreview)- ");
     }
 }
 

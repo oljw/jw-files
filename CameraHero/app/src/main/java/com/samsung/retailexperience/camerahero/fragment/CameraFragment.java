@@ -1,6 +1,9 @@
 package com.samsung.retailexperience.camerahero.fragment;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Rect;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -10,6 +13,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
@@ -23,7 +27,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by icanmobile on 1/14/16.
@@ -57,7 +63,8 @@ public class CameraFragment extends BaseCameraFragment
     private int mPreviewW;
     private int mPreviewH;
 
-    private boolean cameraFront = false;
+    private int mCameraId = 0;
+    private boolean mCameraBack = true;
     private boolean isRecording = false;
 
     private CameraSurfaceView.CameraSurfaceListener cameraSurfaceListener = new CameraSurfaceView.CameraSurfaceListener() {
@@ -68,8 +75,6 @@ public class CameraFragment extends BaseCameraFragment
         }
     };
 
-
-
     @Override
     public void onViewCreated(View view) {
         Log.d(TAG, "##### CameraFragment onViewCreated Called");
@@ -79,7 +84,7 @@ public class CameraFragment extends BaseCameraFragment
         mBottomMenuBar.setListener(this);
 
         Log.d(TAG, "GetCameraInstance ##############");
-        mCamera = getCameraInstance();
+        mCamera = getCameraInstance(-1);
         Log.d(TAG, "GotCameraInstance #########");
 
         mPreview = (FrameLayout) view.findViewById(R.id.camera_preview);
@@ -88,7 +93,6 @@ public class CameraFragment extends BaseCameraFragment
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
         mPreview.addView(mCameraSurface);
-
     }
 
     @Override
@@ -102,6 +106,8 @@ public class CameraFragment extends BaseCameraFragment
 //        Toast.makeText((MainActivity)getActivity(), "Still Clicked !!!", Toast.LENGTH_LONG).show();
         Log.d(TAG, "onClick captureButton called called");
 
+        mCameraSurface.setStillShotParam(mCameraBack);
+
         // get an image from the camera
         mCamera.takePicture(null, null, mPicture);
     }
@@ -114,8 +120,7 @@ public class CameraFragment extends BaseCameraFragment
             //release the old camera instance
             //switch camera, from the front and the back and vice versa
 
-            releaseCamera();
-            chooseCamera();
+            chooseCamera(!mCameraBack);
         } else {
             //dude
         }
@@ -124,7 +129,7 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onVideoClicked() {
         Log.d(TAG, "##### CHANGE CAMERA TO CAMCORDER !!!");
-        mCameraSurface.videoMode(false);
+//        mCameraSurface.videoMode(false);
 
         getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
 
@@ -135,6 +140,7 @@ public class CameraFragment extends BaseCameraFragment
             releaseMediaRecorder();
         }
 
+
         ImageButton mStopbtn = (ImageButton) mView.findViewById(R.id.stop_button);
         mStopbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,12 +150,13 @@ public class CameraFragment extends BaseCameraFragment
                     getFragmentManager().beginTransaction().show(mBottomMenuBar).commit();
                 }
                 if (isRecording) {
-                    // stop recording and release camera
+//                    mCameraSurface.videoMode(true);
+
                     mMediaRecorder.stop();  // stop the recording
                     releaseMediaRecorder(); // release the MediaRecorder object
-                    mCamera.lock();         // take camera access back from MediaRecorder
                     isRecording = false;
 
+                    chooseCamera(mCameraBack);
                 }
             }
         });
@@ -157,31 +164,29 @@ public class CameraFragment extends BaseCameraFragment
 
     @Override
     public void onGalleryClicked() {
-        Log.d(TAG, "##### Gallery Clicked!");
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Log.d(TAG, "##### Transaction begun");
+//        Log.d(TAG, "##### Gallery Clicked!");
+//        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        Log.d(TAG, "##### Transaction begun");
+//
+//        ft.replace(R.layout.fragment_gallery, new GalleryFragment(), "GalleryFragment");
+//        Log.d(TAG, "##### Replace fragment!");
+//
+//        ft.commit();
+//        Log.d(TAG, "##### committed");
 
-        ft.replace(R.layout.fragment_gallery, new GalleryFragment(), "GalleryFragment");
-        Log.d(TAG, "##### Replace fragment!");
-
-        ft.commit();
-        Log.d(TAG, "##### committed");
-
+        Fragment fragment = new Fragment();
+// Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                    .replace(R.id.gallery_fragment, fragment)
+                    .commit();
     }
 
-    View.OnTouchListener mPreviewTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            return false;
-        }
-    };
 
     private void releaseCamera(){
         Log.d(TAG, "##### releaseCamera called");
 
         if (mCamera != null){
-//            mCamera.stopPreview();
-//            mCamera.setPreviewCallback(null);
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
@@ -200,18 +205,21 @@ public class CameraFragment extends BaseCameraFragment
         Log.d(TAG, "onResume called");
 
         super.onResume();
-        mCamera = Camera.open(findBackFacingCamera());
+        if (mCamera == null)
+            chooseCamera(true);
         mPicture = getPictureCallback();
-        mCameraSurface.refreshCamera(mCamera);
     }
 
 
-    public static Camera getCameraInstance(){
+    public static Camera getCameraInstance(int cameraId){
         Log.d(TAG, "getCameraInstance called");
 
         Camera c = null;
         try {
-            c = Camera.open(); // attempt to get a Camera instance
+            if (cameraId == -1)
+                c = Camera.open();
+            else
+                c = Camera.open(cameraId); // attempt to get a Camera instance
             Log.d(TAG, "##### Camera Opened");
         }
         catch (Exception e) {
@@ -245,7 +253,7 @@ public class CameraFragment extends BaseCameraFragment
                 } catch (IOException e) {
                     Log.d(TAG, "Error accessing file: " + e.getMessage());
                 }
-                mCameraSurface.refreshCamera(mCamera);
+                chooseCamera(mCameraBack);
             }
         };
         return mPicture;
@@ -297,7 +305,6 @@ public class CameraFragment extends BaseCameraFragment
             Camera.getCameraInfo(i, info);
             if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                 cameraId = i;
-                cameraFront = true;
                 break;
             }
         }
@@ -318,7 +325,6 @@ public class CameraFragment extends BaseCameraFragment
             Camera.getCameraInfo(i, info);
             if (info.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
                 cameraId = i;
-                cameraFront = false;
                 break;
             }
         }
@@ -326,45 +332,48 @@ public class CameraFragment extends BaseCameraFragment
     }
 
     //Choose Camera Method
-    public void chooseCamera() {
+    public void chooseCamera(boolean cameraBack) {
         Log.d(TAG, "chooseCamera called");
 
+        mCameraSurface.stopCameraPreview();
+
+        releaseCamera();
+        int cameraId = 0;
+
         //if the camera preview is the front
-        if (cameraFront) {
-            int cameraId = findBackFacingCamera();
+        if (cameraBack) {
+            cameraId = findBackFacingCamera();
             if (cameraId >= 0) {
-
-                mCamera = Camera.open(cameraId);
-                mCameraSurface.refreshCamera(mCamera);
-
+                Log.d(TAG, "##### chooseCamera : cameraId = " + cameraId);
+                mCamera = getCameraInstance(cameraId);
+                mCameraSurface.refreshCamera(mCamera, cameraBack);
             }
         } else {
-            int cameraId = findFrontFacingCamera();
-
+            cameraId = findFrontFacingCamera();
             if (cameraId >= 0) {
-                // open the backFacingCamera
-                // set a picture callback
-                // refresh the preview
-
-                mCamera = Camera.open(cameraId);
-                // mPicture = getPictureCallback();
-                mCameraSurface.refreshCamera(mCamera);
-
+                Log.d(TAG, "##### chooseCamera : cameraId = " + cameraId);
+                mCamera = getCameraInstance(cameraId);
+                mCameraSurface.refreshCamera(mCamera, cameraBack);
             }
-
         }
+        mCameraSurface.startCameraPreview();
+        mCameraBack = cameraBack;
+        mCameraId = cameraId;
     }
 
     public boolean prepareVideoRecorder() {
         Log.d(TAG, "##### prepareVideoRecorder)+ ");
 
-        mCamera = getCameraInstance();
-        mCamera.setDisplayOrientation(90);
+        mCameraSurface.stopCameraPreview();
+
+        mCamera = getCameraInstance(mCameraId);
+        mCameraSurface.refreshCamcorder(mCamera, mCameraBack);
+
         mMediaRecorder = new MediaRecorder();
-        mMediaRecorder.setOrientationHint(90);
-        Camera.Parameters params = mCamera.getParameters();
-        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-        mCamera.setParameters(params);
+        if (mCameraBack)
+            mMediaRecorder.setOrientationHint(90);
+        else
+            mMediaRecorder.setOrientationHint(270);
 
         // Step 1: Unlock and set camera to MediaRecorder
         mCamera.unlock();
@@ -397,6 +406,7 @@ public class CameraFragment extends BaseCameraFragment
         }
 
         Log.d(TAG, "##### prepareVideoRecorder)- ");
+        mCameraSurface.startCameraPreview();
         return true;
     }
 
@@ -408,6 +418,8 @@ public class CameraFragment extends BaseCameraFragment
             mMediaRecorder.reset();   // clear recorder configuration
             mMediaRecorder.release(); // release the recorder object
             mMediaRecorder = null;
+//            mCameraSurface.refreshCamera(mCamera);
+
             mCamera.lock();           // lock camera for later use
         }
     }
@@ -418,20 +430,73 @@ public class CameraFragment extends BaseCameraFragment
     }
 
 
-//    private void setMenuBar() {
-//        if (mTopMenuBar.isHidden()) {
-//            getFragmentManager().beginTransaction().setCustomAnimations(
-//                    R.animator.left_out, R.animator.left_in
-//            ).show( mTopMenuBar ).setCustomAnimations(
-//                    R.animator.right_out, R.animator.right_in
-//            ).show( mBottomMenuBar ).commit();
+    private void setMenuBar() {
+        if (mTopMenuBar.isHidden()) {
+            getFragmentManager().beginTransaction().setCustomAnimations(
+                    R.animator.left_out, R.animator.left_in
+            ).show( mTopMenuBar ).setCustomAnimations(
+                    R.animator.right_out, R.animator.right_in
+            ).show( mBottomMenuBar ).commit();
+        }
+        else {
+            getFragmentManager().beginTransaction().setCustomAnimations(
+                    R.animator.left_in, R.animator.left_out
+            ).hide( mTopMenuBar ).setCustomAnimations(
+                    R.animator.right_in, R.animator.right_out
+            ).hide( mBottomMenuBar ).commit();
+        }
+    }
+
+    View.OnTouchListener mPreviewTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            return false;
+        }
+    };
+
+//tap to focus example
+//    View.OnTouchListener mPreviewTouchListener = (new View.OnTouchListener() {
+//        @Override
+//        public boolean onTouch(View v, MotionEvent event) {
+//
+//            if (mCamera != null) {
+//                Camera camera = mCamera.getCamera();
+//                camera.cancelAutoFocus();
+//                Rect focusRect = calculateTapArea(event.getX(), event.getY(), 1f);
+//
+//                Camera.Parameters parameters = camera.getParameters();
+//                if (parameters.getFocusMode() != Camera.Parameters.FOCUS_MODE_AUTO) {
+//                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+//                }
+//                if (parameters.getMaxNumFocusAreas() > 0) {
+//                    List<Camera.Area> mylist = new ArrayList<Camera.Area>();
+//                    mylist.add(new Camera.Area(focusRect, 1000));
+//                    parameters.setFocusAreas(mylist);
+//                }
+//
+//                try {
+//                    camera.cancelAutoFocus();
+//                    camera.setParameters(parameters);
+//                    camera.startPreview();
+//                    camera.autoFocus(new Camera.AutoFocusCallback() {
+//                        @Override
+//                        public void onAutoFocus(boolean success, Camera camera) {
+//                            if (camera.getParameters().getFocusMode() != Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE) {
+//                                Camera.Parameters parameters = camera.getParameters();
+//                                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+//                                if (parameters.getMaxNumFocusAreas() > 0) {
+//                                    parameters.setFocusAreas(null);
+//                                }
+//                                camera.setParameters(parameters);
+//                                camera.startPreview();
+//                            }
+//                        }
+//                    });
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            return true;
 //        }
-//        else {
-//            getFragmentManager().beginTransaction().setCustomAnimations(
-//                    R.animator.left_in, R.animator.left_out
-//            ).hide( mTopMenuBar ).setCustomAnimations(
-//                    R.animator.right_in, R.animator.right_out
-//            ).hide( mBottomMenuBar ).commit();
-//        }
-//    }
+//    });
 }

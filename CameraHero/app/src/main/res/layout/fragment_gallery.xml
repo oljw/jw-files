@@ -4,10 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/gallery_view"
+    <LinearLayout
+        android:id="@+id/gallery_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Yo this is button"/>
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/gallery_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Yo this is a button"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
