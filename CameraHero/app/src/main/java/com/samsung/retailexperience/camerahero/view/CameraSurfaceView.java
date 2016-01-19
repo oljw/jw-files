@@ -125,11 +125,14 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         setCamera(camera);
 
         Log.d(TAG, "##### refreshCamera : " + mWidth + " x " + mHeight);
-        if (cameraBack)
-            mCamera.setDisplayOrientation(90);
-        else
-        
+
+
         Camera.Parameters parameters = mCamera.getParameters();
+//        if (cameraBack)
+            mCamera.setDisplayOrientation(90);
+//        else
+//            mCamera.setDisplayOrientation(90);
+
         Camera.Size size = getBestPreviewSize(mWidth, mHeight);
         parameters.setPreviewSize(size.width, size.height);
         if (cameraBack)
@@ -147,9 +150,13 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         if(mHolder.getSurface() ==null) return;
         setCamera(camera);
 
-        if (cameraBack)
+//        if (cameraBack)
             mCamera.setDisplayOrientation(90);
+//        else
+//            mCamera.setDisplayOrientation(90);
+
         Camera.Parameters parameters = mCamera.getParameters();
+
 //        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
         Camera.Size size = getBestPreviewSizeForFull(mWidth, mHeight, parameters);
         Log.d(TAG, "refreshCamcorder : " + size.width + " x " + size.height);
