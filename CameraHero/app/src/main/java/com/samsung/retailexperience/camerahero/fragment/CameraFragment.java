@@ -26,6 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.samsung.retailexperience.camerahero.CameraHeroApplication;
 import com.samsung.retailexperience.camerahero.R;
@@ -74,6 +75,7 @@ public class CameraFragment extends BaseCameraFragment
     private CameraSurfaceView mCameraSurface = null;
     private ImageView mFocusIcon = null;
     private MediaRecorder mMediaRecorder;
+    private ImageView mGallerybtn = null;
     private String path = "/sdcard/Pictures/MyCameraApp";
 
     private int mCameraId = 0;
@@ -91,7 +93,7 @@ public class CameraFragment extends BaseCameraFragment
         mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
         mBottomMenuBar.setListener(this);
 
-        image = (ImageView) view.findViewById(R.id.imageView_photo);
+//        image = (ImageView) view.findViewById(R.id.imageView_photo);
 
 
         mCamera = getCameraInstance(-1);
@@ -104,8 +106,17 @@ public class CameraFragment extends BaseCameraFragment
         mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon);
         mFocusIcon.bringToFront();
 
+        mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
+        mGallerybtn.setRotation(90);
+
         mMediaPlayer = MediaPlayer.create(CameraHeroApplication.getContext(), R.raw.camera_shutter_1);
     }
+
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putInt("curChoice", mCurCheckPosition);
+//    }
 
     @Override
     public void onDestroyView () {
@@ -121,7 +132,7 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onBackPressed() {
         changeFragment(AppConsts.UIState.valueOf(getFragmentModel().getActionBackKey()),
-                AppConsts.TransactionDir.TRANSACTION_DIR_NONE);
+                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
     }
 
     @Override
@@ -282,7 +293,6 @@ public class CameraFragment extends BaseCameraFragment
                 outStream.write(data);
                 outStream.close();
 
-
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -291,7 +301,6 @@ public class CameraFragment extends BaseCameraFragment
 
             }
 
-
             Bitmap realImage;
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 5;
@@ -299,7 +308,6 @@ public class CameraFragment extends BaseCameraFragment
             options.inPurgeable=true;                   //Tell to gc that whether it needs free memory, the Bitmap can be cleared
 
             options.inInputShareable=true;              //Which kind of reference will be used to recover the Bitmap data after being clear, when it will be used in the future
-
 
             realImage = BitmapFactory.decodeByteArray(data,0,data.length,options);
             ExifInterface exif = null;
@@ -311,31 +319,28 @@ public class CameraFragment extends BaseCameraFragment
                 e.printStackTrace();
             }
 
-//            try {
-//                Log.d("EXIF value",
-//                        exif.getAttribute(ExifInterface.TAG_ORIENTATION));
-//                if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-//                        .equalsIgnoreCase("1")) {
-//                    realImage = rotate(realImage, 90);
-//                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-//                        .equalsIgnoreCase("8")) {
-//                    realImage = rotate(realImage, 90);
-//                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-//                        .equalsIgnoreCase("3")) {
-//                    realImage = rotate(realImage, 90);
-//                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-//                        .equalsIgnoreCase("0")) {
-//                    realImage = rotate(realImage, 90);
-//                }
-//            } catch (Exception e) {
-//
-//            }
+            try {
+                Log.d("EXIF value",
+                        exif.getAttribute(ExifInterface.TAG_ORIENTATION));
+                if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+                        .equalsIgnoreCase("1")) {
+                    realImage = rotate(realImage, 90);
+                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+                        .equalsIgnoreCase("8")) {
+                    realImage = rotate(realImage, 90);
+                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+                        .equalsIgnoreCase("3")) {
+                    realImage = rotate(realImage, 90);
+                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+                        .equalsIgnoreCase("0")) {
+                    realImage = rotate(realImage, 90);
+                }
+            } catch (Exception e) {
 
-            image.setImageBitmap(realImage);
-                        chooseCamera(mCameraBack);
+            }
+            mGallerybtn.setImageBitmap(realImage);
+            chooseCamera(mCameraBack);
         }
-
-
     };
 
     public static Bitmap rotate(Bitmap source, float angle) {
@@ -528,9 +533,10 @@ public class CameraFragment extends BaseCameraFragment
         if (rotateIconAnimator != null && rotateIconAnimator.isRunning())
             rotateIconAnimator.cancel();
 
-        rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 180f);
-        rotateIconAnimator.setDuration(150);
-        rotateIconAnimator.addListener(new Animator.AnimatorListener() {
+            rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 180f);
+            rotateIconAnimator.setDuration(150);
+            rotateIconAnimator.addListener(new Animator.AnimatorListener() {
+
             @Override
             public void onAnimationStart(Animator animation) {
                 mFocusIcon.setVisibility(View.VISIBLE);

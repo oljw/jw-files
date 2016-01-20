@@ -53,7 +53,7 @@ public class GalleryFragment extends BaseGalleryFragment{
         @Override
         public void onClick(View v) {
             Log.d(TAG, "##### mGalleryPreviewListener onClick");
-            Toast.makeText(getActivity(),"why not touching this", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"터치", Toast.LENGTH_SHORT).show();
             setMenuBar();
         }
     };
@@ -61,7 +61,7 @@ public class GalleryFragment extends BaseGalleryFragment{
         @Override
     public void onBackPressed() {
         Log.d(TAG, "##### GalleryFragment onBackPressed called");
-//        changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
+        changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
 
     }
 

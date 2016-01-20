@@ -49,20 +49,15 @@
         android:onClick="changeLayout">
     </ImageButton>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gallery_button"
-        android:layout_width="31dp"
-        android:layout_height="31dp"
-        android:text="tn"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical">
-
-        <!--<fragment-->
-            <!--android:id="@+id/fragment_gallery"-->
-            <!--android:name="com.samsung.retailexperience.camerahero.fragment.GalleryFragment"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"/>-->
-
-    </ImageButton>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gallery_icon"
+        android:layout_gravity="center_vertical" />
 
 </LinearLayout>
