@@ -5,9 +5,13 @@ import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
+import android.media.ExifInterface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -35,6 +39,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +65,8 @@ public class CameraFragment extends BaseCameraFragment
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
 
+    private ImageView image;
+
     private TopMenuBarFragment mTopMenuBar = null;
     private BottomMenuBarFragment mBottomMenuBar = null;
     private RelativeLayout mPreview = null;
@@ -67,6 +74,7 @@ public class CameraFragment extends BaseCameraFragment
     private CameraSurfaceView mCameraSurface = null;
     private ImageView mFocusIcon = null;
     private MediaRecorder mMediaRecorder;
+    private String path = "/sdcard/Pictures/MyCameraApp";
 
     private int mCameraId = 0;
     private boolean mCameraBack = true;
@@ -82,6 +90,9 @@ public class CameraFragment extends BaseCameraFragment
         mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
         mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
         mBottomMenuBar.setListener(this);
+
+        image = (ImageView) view.findViewById(R.id.imageView_photo);
+
 
         mCamera = getCameraInstance(-1);
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_preview);
@@ -230,28 +241,109 @@ public class CameraFragment extends BaseCameraFragment
         }
     };
 
+//    private Camera.PictureCallback preview = new Camera.PictureCallback() {
+//        @Override
+//        public void onPictureTaken(byte[] data, Camera camera) {
+//            Log.d(TAG, "getPictureCallBack called");
+//            File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+//            if (pictureFile == null) {
+//                Log.d(TAG, "Error creating media file, check storage permissions: ");      //+ e.getMessage());
+//
+//                return;
+//            }
+//            try {
+//                FileOutputStream fos = new FileOutputStream(pictureFile);
+//                fos.write(data);
+//                fos.close();
+//            } catch (FileNotFoundException e) {
+//                Log.d(TAG, "File not found: " + e.getMessage());
+//            } catch (IOException e) {
+//                Log.d(TAG, "Error accessing file: " + e.getMessage());
+//            }
+//            chooseCamera(mCameraBack);
+//        }
+//    };
+
     private Camera.PictureCallback preview = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            Log.d(TAG, "getPictureCallBack called");
-            File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-            if (pictureFile == null) {
-                Log.d(TAG, "Error creating media file, check storage permissions: ");      //+ e.getMessage());
 
-                return;
+            FileOutputStream outStream = null;
+            Calendar c = Calendar.getInstance();
+            File videoDirectory = new File(path);
+
+            if (!videoDirectory.exists()) {
+                videoDirectory.mkdirs();
             }
+
             try {
-                FileOutputStream fos = new FileOutputStream(pictureFile);
-                fos.write(data);
-                fos.close();
+                // Write to SD Card
+                outStream = new FileOutputStream(path + c.getTime().getSeconds() + ".jpg");
+                outStream.write(data);
+                outStream.close();
+
+
             } catch (FileNotFoundException e) {
-                Log.d(TAG, "File not found: " + e.getMessage());
+                e.printStackTrace();
             } catch (IOException e) {
-                Log.d(TAG, "Error accessing file: " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+
             }
-            chooseCamera(mCameraBack);
+
+
+            Bitmap realImage;
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 5;
+
+            options.inPurgeable=true;                   //Tell to gc that whether it needs free memory, the Bitmap can be cleared
+
+            options.inInputShareable=true;              //Which kind of reference will be used to recover the Bitmap data after being clear, when it will be used in the future
+
+
+            realImage = BitmapFactory.decodeByteArray(data,0,data.length,options);
+            ExifInterface exif = null;
+            try {
+                exif = new ExifInterface(path + c.getTime().getSeconds()
+                        + ".jpg");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+//            try {
+//                Log.d("EXIF value",
+//                        exif.getAttribute(ExifInterface.TAG_ORIENTATION));
+//                if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+//                        .equalsIgnoreCase("1")) {
+//                    realImage = rotate(realImage, 90);
+//                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+//                        .equalsIgnoreCase("8")) {
+//                    realImage = rotate(realImage, 90);
+//                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+//                        .equalsIgnoreCase("3")) {
+//                    realImage = rotate(realImage, 90);
+//                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+//                        .equalsIgnoreCase("0")) {
+//                    realImage = rotate(realImage, 90);
+//                }
+//            } catch (Exception e) {
+//
+//            }
+
+            image.setImageBitmap(realImage);
+                        chooseCamera(mCameraBack);
         }
+
+
     };
+
+    public static Bitmap rotate(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
+                source.getHeight(), matrix, false);
+    }
 
     /** Create a file Uri for saving an image or video */
     private static Uri getOutputMediaFileUri(int type){
