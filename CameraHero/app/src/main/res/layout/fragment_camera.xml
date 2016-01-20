@@ -13,12 +13,14 @@
 
         <ImageView
             android:id="@+id/focus_icon"
-            android:layout_width="100px"
-            android:layout_height="100px"
-            android:src="@drawable/camera_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/tap_focus_icon"
             android:scaleType="fitCenter"
             android:background="@android:color/transparent"
-            android:visibility="invisible"/>
+            android:alpha="0.4"
+            android:visibility="invisible"
+            android:adjustViewBounds="true" />
 
     </RelativeLayout>
 

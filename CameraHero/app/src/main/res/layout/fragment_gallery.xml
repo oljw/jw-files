@@ -2,18 +2,28 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <LinearLayout
-        android:id="@+id/gallery_fragment"
+    <ImageView
+        android:id="@+id/gallery_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:id="@+id/gallery_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Yo this is a button"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:src="@drawable/pause_button"/>
 
-    </LinearLayout>
+    <fragment
+        android:id="@+id/top_gallery_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:name="com.samsung.retailexperience.camerahero.fragment.TopGalleryBarFragment" />
+
+    <fragment
+        android:id="@+id/bottom_gallery_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_alignParentBottom="true"
+        android:name="com.samsung.retailexperience.camerahero.fragment.BottomGalleryBarFragment" />
 
 </RelativeLayout>

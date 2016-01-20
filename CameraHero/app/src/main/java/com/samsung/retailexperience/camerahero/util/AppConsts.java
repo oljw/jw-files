@@ -4,7 +4,7 @@ package com.samsung.retailexperience.camerahero.util;
  * Created by icanmobile on 1/14/16.
  */
 public class AppConsts {
-    public static final String ARG_JSON_MODEL   = "ARG_JSON_MODEL";
+    public static final String  ARG_JSON_MODEL   = "ARG_JSON_MODEL";
 
     public enum TransactionDir {
         TRANSACTION_DIR_NONE,

@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 
 import com.samsung.retailexperience.camerahero.R;
 import com.samsung.retailexperience.camerahero.fragment.CameraFragment;
+import com.samsung.retailexperience.camerahero.fragment.GalleryFragment;
 import com.samsung.retailexperience.camerahero.util.AppConsts;
 
 public class MainActivity extends BaseActivity {
@@ -58,6 +59,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case UI_STATE_GALLERY:
+                mGFragment = GalleryFragment.newInstance("models/gallery.json");
                 break;
         }
 
@@ -71,7 +73,7 @@ public class MainActivity extends BaseActivity {
                 case TRANSACTION_DIR_FORWARD:
                     getFragmentManager().beginTransaction()
                             .setCustomAnimations(R.animator.right_in_with_alpha, R.animator.left_out_with_alpha)
-                            .replace(R.id.fragmentContainer, mFragment)
+                            .replace(R.id.fragmentContainer, mGFragment)
                             .commit();
                     break;
                 case TRANSACTION_DIR_BACKWARD:
@@ -82,9 +84,6 @@ public class MainActivity extends BaseActivity {
                     break;
             }
         }
-
-
-
         mUIState = newState;
     }
 

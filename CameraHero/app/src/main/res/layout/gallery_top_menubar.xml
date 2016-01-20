@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="7"
+    android:alpha="0.5"
+    android:background="@drawable/top_gradient">
+
+    <ImageButton
+        android:id="@+id/gallery_arrow_button"
+        android:layout_width="15dp"
+        android:layout_height="13dp"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitStart"
+        android:background="@android:color/transparent"
+        android:src="@drawable/gallery_arrow_icon"
+        android:paddingStart="20dp" />
+
+    <ImageButton
+        android:id="@+id/star_button"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitEnd"
+        android:background="@android:color/transparent"
+        android:src="@drawable/star_icon"/>
+
+    <ImageButton
+        android:id="@+id/album_button"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        android:src="@drawable/album_icon"/>
+
+
+    <ImageButton
+        android:id="@+id/more_button"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitStart"
+        android:background="@android:color/transparent"
+        android:src="@drawable/more_icon"/>
+
+</LinearLayout>

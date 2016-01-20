@@ -62,7 +62,6 @@ public class CameraFragment extends BaseCameraFragment
 
     private TopMenuBarFragment mTopMenuBar = null;
     private BottomMenuBarFragment mBottomMenuBar = null;
-//    private FrameLayout mPreview = null;
     private RelativeLayout mPreview = null;
     private Camera mCamera = null;
     private CameraSurfaceView mCameraSurface = null;
@@ -84,11 +83,7 @@ public class CameraFragment extends BaseCameraFragment
         mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
         mBottomMenuBar.setListener(this);
 
-        Log.d(TAG, "GetCameraInstance ##############");
         mCamera = getCameraInstance(-1);
-        Log.d(TAG, "GotCameraInstance #########");
-
-//        mPreview = (FrameLayout) view.findViewById(R.id.camera_preview);
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_preview);
 
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
@@ -115,12 +110,11 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onBackPressed() {
         changeFragment(AppConsts.UIState.valueOf(getFragmentModel().getActionBackKey()),
-                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
+                AppConsts.TransactionDir.TRANSACTION_DIR_NONE);
     }
 
     @Override
     public void onStillClicked() {
-//        Toast.makeText((MainActivity)getActivity(), "Still Clicked !!!", Toast.LENGTH_LONG).show();
         Log.d(TAG, "onClick captureButton called called");
 
         mCameraSurface.setStillShotParam(mCameraBack);
@@ -146,7 +140,6 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onVideoClicked() {
         Log.d(TAG, "##### CHANGE CAMERA TO CAMCORDER !!!");
-//        mCameraSurface.videoMode(false);
 
         getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
 
@@ -167,8 +160,6 @@ public class CameraFragment extends BaseCameraFragment
                     getFragmentManager().beginTransaction().show(mBottomMenuBar).commit();
                 }
                 if (isRecording) {
-//                    mCameraSurface.videoMode(true);
-
                     mMediaRecorder.stop();  // stop the recording
                     releaseMediaRecorder(); // release the MediaRecorder object
                     isRecording = false;
@@ -183,22 +174,8 @@ public class CameraFragment extends BaseCameraFragment
 
     @Override
     public void onGalleryClicked() {
-//        Log.d(TAG, "##### Gallery Clicked!");
-//        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        Log.d(TAG, "##### Transaction begun");
-//
-//        ft.replace(R.layout.fragment_gallery, new GalleryFragment(), "GalleryFragment");
-//        Log.d(TAG, "##### Replace fragment!");
-//
-//        ft.commit();
-//        Log.d(TAG, "##### committed");
+        changeFragment(AppConsts.UIState.UI_STATE_GALLERY, AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
 
-        Fragment fragment = new Fragment();
-// Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                    .replace(R.id.gallery_fragment, fragment)
-                    .commit();
     }
 
     private void releaseCamera(){
@@ -247,7 +224,6 @@ public class CameraFragment extends BaseCameraFragment
 
     private Camera.ShutterCallback shutter = new Camera.ShutterCallback(){
         public void onShutter() {
-            // TODO Auto-generated method stub
             // No action to be perfomed on the Shutter callback.
             Log.d(TAG, "shutter !!");
             mMediaPlayer.start();
@@ -460,18 +436,20 @@ public class CameraFragment extends BaseCameraFragment
         if (rotateIconAnimator != null && rotateIconAnimator.isRunning())
             rotateIconAnimator.cancel();
 
-        rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 360f);
-        rotateIconAnimator.setDuration(1000);
+        rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 180f);
+        rotateIconAnimator.setDuration(150);
         rotateIconAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
                 mFocusIcon.setVisibility(View.VISIBLE);
 
-                ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams)mFocusIcon.getLayoutParams();
-                marginLayoutParams.setMargins((int)(x - 100/2),
-                        (int)(y - 100/2),
-                        (int)(x + 100/2),
-                        (int)(y + 100/2));
+                ViewGroup.MarginLayoutParams marginLayoutParams =
+                        (ViewGroup.MarginLayoutParams)mFocusIcon.getLayoutParams();
+                marginLayoutParams.setMargins
+                        ((int)(x - 300/2),
+                        (int)(y - 300/2),
+                        (int)(-x + 300/2),
+                        (int)(-y + 300 / 2));
                 mFocusIcon.setLayoutParams(marginLayoutParams);
             }
 
@@ -492,22 +470,4 @@ public class CameraFragment extends BaseCameraFragment
         });
         rotateIconAnimator.start();
     }
-
-
-//    private void setMenuBar() {
-//        if (mTopMenuBar.isHidden()) {
-//            getFragmentManager().beginTransaction().setCustomAnimations(
-//                    R.animator.left_out, R.animator.left_in
-//            ).show( mTopMenuBar ).setCustomAnimations(
-//                    R.animator.right_out, R.animator.right_in
-//            ).show( mBottomMenuBar ).commit();
-//        }
-//        else {
-//            getFragmentManager().beginTransaction().setCustomAnimations(
-//                    R.animator.left_in, R.animator.left_out
-//            ).hide( mTopMenuBar ).setCustomAnimations(
-//                    R.animator.right_in, R.animator.right_out
-//            ).hide( mBottomMenuBar ).commit();
-//        }
-//    }
 }

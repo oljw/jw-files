@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.samsung.retailexperience.camerahero.fragment.BaseFragment;
+import com.samsung.retailexperience.camerahero.fragment.GalleryFragment;
 
 /**
  * Created by icanmobile on 1/14/16.
@@ -19,6 +20,7 @@ public class BaseActivity extends Activity {
     private static final String TAG = BaseActivity.class.getSimpleName();
 
     protected BaseFragment mFragment = null;
+    protected GalleryFragment mGFragment = null;
     public int mDisplayW;
     public int mDisplayH;
 
