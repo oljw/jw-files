@@ -3,13 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="#000000">
 
-    <ImageView
-        android:id="@+id/gallery_view"
+    <com.samsung.retailexperience.camerahero.view.GalleryZoomView
+        android:id="@+id/IMAGEID"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white" />
+        android:src="@drawable/star_icon"/>
+
+    <!--<com.samsung.retailexperience.camerahero.view.GalleryZoomView-->
+        <!--android:id="@+id/gallery_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@drawable/pause_button"/>-->
 
     <fragment
         android:id="@+id/top_gallery_fragment"

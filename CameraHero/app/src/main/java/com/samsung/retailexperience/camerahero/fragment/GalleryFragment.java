@@ -1,5 +1,7 @@
 package com.samsung.retailexperience.camerahero.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.samsung.retailexperience.camerahero.R;
 import com.samsung.retailexperience.camerahero.util.AppConsts;
+import com.samsung.retailexperience.camerahero.view.GalleryZoomView;
 
 /**
  * Created by Jaewoo on 2016-01-18.
@@ -22,7 +25,7 @@ public class GalleryFragment extends BaseGalleryFragment{
 
     private TopGalleryBarFragment mTopGalleryBar = null;
     private BottomGalleryBarFragment mBottomGalleryBar = null;
-    private ImageView mGView = null;
+    private GalleryZoomView mGView = null;
 
     public static GalleryFragment newInstance(String fragmentModel) {
 
@@ -45,7 +48,10 @@ public class GalleryFragment extends BaseGalleryFragment{
         mBottomGalleryBar = (BottomGalleryBarFragment)
                 getChildFragmentManager().findFragmentById(R.id.bottom_gallery_fragment);
 
-        mGView = (ImageView) view.findViewById(R.id.gallery_view);
+        mGView = (GalleryZoomView) view.findViewById(R.id.IMAGEID);
+//        mGView.setImageBitmap(BitmapFactory.decodeResource(this.getResources(),R.drawable.star_icon));
+//        mGView.setImageBitmap(BitmapFactory.decodeResource(this.getResources(),R.drawable.test_picture));
+
         mGView.setOnClickListener(mGalleryPreviewListener);
     }
 
@@ -61,7 +67,7 @@ public class GalleryFragment extends BaseGalleryFragment{
         @Override
     public void onBackPressed() {
         Log.d(TAG, "##### GalleryFragment onBackPressed called");
-        changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
+//            changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
 
     }
 

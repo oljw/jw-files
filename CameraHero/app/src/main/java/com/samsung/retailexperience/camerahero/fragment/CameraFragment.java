@@ -112,12 +112,6 @@ public class CameraFragment extends BaseCameraFragment
         mMediaPlayer = MediaPlayer.create(CameraHeroApplication.getContext(), R.raw.camera_shutter_1);
     }
 
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putInt("curChoice", mCurCheckPosition);
-//    }
-
     @Override
     public void onDestroyView () {
         mMediaPlayer.release();
@@ -131,8 +125,10 @@ public class CameraFragment extends BaseCameraFragment
 
     @Override
     public void onBackPressed() {
+        Log.d("TAG", "##################CameraFragment onBackPressed called");
         changeFragment(AppConsts.UIState.valueOf(getFragmentModel().getActionBackKey()),
                 AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
+        Log.d("TAG", "onBackpressed passed");
     }
 
     @Override
@@ -521,7 +517,6 @@ public class CameraFragment extends BaseCameraFragment
         }
     }
 
-
     @Override
     public void changeScreenOrientation(int screenOrientation) {
         mScreenOrientation = screenOrientation;
@@ -534,7 +529,7 @@ public class CameraFragment extends BaseCameraFragment
             rotateIconAnimator.cancel();
 
             rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 180f);
-            rotateIconAnimator.setDuration(150);
+            rotateIconAnimator.setDuration(200);
             rotateIconAnimator.addListener(new Animator.AnimatorListener() {
 
             @Override

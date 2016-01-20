@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="3"
-    android:alpha="0.5"
     android:background="@drawable/bottom_gradient">
 
     <ImageButton
