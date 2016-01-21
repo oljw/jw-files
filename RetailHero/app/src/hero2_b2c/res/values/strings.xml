@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="model_name">Galaxy-S7 Edge+\n B2C</string>
+
+    <!-- Hambuger Menu title -->
+    <string name="menu_header_title">Select a category</string>
+    <string name="menu_whats_new">WHAT\'S NEW</string>
+    <string name="menu_design">DESIGN</string>
+    <string name="menu_camera">CAMERA</string>
+    <string name="menu_ss_exclusives">SAMSUNG EXCLUSIVES</string>
+    <string name="menu_new_to_android">NEW TO ANDROID</string>
+    <string name="menu_exit_demo">EXIT DEMO</string>
+
+    <!-- what's new demo -->
+    <string name="whats_new_demo">What\'s New</string>
+    <string name="whats_new_demo_1">Design</string>
+    <string name="whats_new_demo_2">Camera</string>
+    <string name="whats_new_demo_3">Samsung Exclusives</string>
+    <string name="whats_new_demo_4">New To Android</string>
+
+    <!-- Design demo -->
+    <string name="design_demo">Design</string>
+    <string name="design_demo_1">Video Demo</string>
+    <string name="design_demo_2">Amazing Display</string>
+    <string name="design_demo_3">Head-Turning Design</string>
+    <string name="design_demo_4">Edge Shortcuts</string>
+    <string name="design_demo_5">Always On Touch Display</string>
+
+    <string name="camera_demo">Camera</string>
+    <string name="camera_demo_1">Video Demo</string>
+    <string name="camera_demo_2">Auto-Focus</string>
+    <string name="camera_demo_3">Photo Quality</string>
+    <string name="camera_demo_4">Selfies</string>
+
+    <string name="ss_exclusives_demo">Samsung Exclusives</string>
+    <string name="ss_exclusives_demo_1">Video Demo</string>
+    <string name="ss_exclusives_demo_2">All-Day Battery</string>
+    <string name="ss_exclusives_demo_3">More Storage</string>
+    <string name="ss_exclusives_demo_4">Samsung Pay</string>
+    <string name="ss_exclusives_demo_5">Samsung+</string>
+    <string name="ss_exclusives_demo_6">Gear VR</string>
+
+    <string name="new_to_android_demo">New To Android</string>
+    <string name="new_to_android_demo_1">Demo Video</string>
+    <string name="new_to_android_demo_2">Smart Switch</string>
+</resources>

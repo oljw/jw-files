@@ -126,9 +126,10 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onBackPressed() {
         Log.d("TAG", "##################CameraFragment onBackPressed called");
-        changeFragment(AppConsts.UIState.valueOf(getFragmentModel().getActionBackKey()),
-                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
-        Log.d("TAG", "onBackpressed passed");
+        changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
+
+
+        Log.d("TAG", "onBackPressed passed");
     }
 
     @Override
@@ -167,7 +168,6 @@ public class CameraFragment extends BaseCameraFragment
         } else {
             releaseMediaRecorder();
         }
-
 
         ImageButton mStopbtn = (ImageButton) mView.findViewById(R.id.stop_button);
         mStopbtn.setOnClickListener(new View.OnClickListener() {

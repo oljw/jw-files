@@ -1,0 +1,22 @@
+{
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item_center_align",
+        "title": "@string/whats_new",
+        "tag": "decision_whats_new",
+        "action": "UI_STATE_WHATS_NEW_MAIN"
+      },
+      {
+        "layout": "@layout/menu_item_center_align",
+        "title": "@string/compare_devices",
+        "tag": "decision_compare_devices",
+        "action": "UI_STATE_COMPARE_DEVICE"
+      },
+      {
+        "layout": "@layout/menu_item_center_align",
+        "title": "@string/explore",
+        "tag": "decision_explore",
+        "action": "UI_STATE_NONE"
+      }
+    ]
+}

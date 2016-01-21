@@ -2,14 +2,16 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000000">
 
     <RelativeLayout
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/top_fragment"
-        android:layout_above="@+id/bottom_fragment">
+        android:layout_above="@+id/bottom_fragment"
+        android:background="#000000">
 
         <ImageView
             android:id="@+id/focus_icon"
@@ -23,17 +25,6 @@
             android:adjustViewBounds="true" />
 
     </RelativeLayout>
-
-    <!--<ImageView-->
-        <!--android:id="@+id/imageView_photo"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="5dp"-->
-        <!--android:padding="5dp"-->
-        <!--android:scaleType="fitCenter"-->
-        <!--android:src="@drawable/pause_button" />-->
 
     <ImageButton
         android:id="@+id/stop_button"

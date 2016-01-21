@@ -1,0 +1,18 @@
+{
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/new_to_android_demo_1",
+        "icon": "@drawable/ic_action_play",
+        "tag": "new_to_android_demo_1",
+        "action": "UI_STATE_NEW_TO_ANDROID_DEMO_VIDEO"
+      },
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/new_to_android_demo_2",
+        "icon": "@drawable/ic_action_play",
+        "tag": "new_to_android_demo_2",
+        "action": "UI_STATE_NEW_TO_ANDROID_DEMO_SMART_SWITCH"
+      }
+    ]
+}

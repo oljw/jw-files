@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="model_name">Galaxy-S7 Edge+\n B2B</string>
+
+    <!-- Hambuger Menu title -->
+    <string name="menu_header_title">Select a category</string>
+    <string name="menu_whats_new">WHAT\'S NEW</string>
+    <string name="menu_productivity">PRODUCTIVITY</string>
+    <string name="menu_ss_exclusives">SAMSUNG EXCLUSIVES</string>
+    <string name="menu_design_for_business">DESIGNED FOR BUSINESS</string>
+    <string name="menu_exit_demo">EXIT DEMO</string>
+
+    <!-- what's new demo -->
+    <string name="whats_new_demo">What\'s New</string>
+    <string name="whats_new_demo_1">Productivity</string>
+    <string name="whats_new_demo_2">Samsung Exclusives</string>
+    <string name="whats_new_demo_3">Designed For Business</string>
+
+    <!-- Productivity demo -->
+    <string name="productivity_demo">Productivity</string>
+    <string name="productivity_demo_1">Video Demo</string>
+    <string name="productivity_demo_2">All Day Battery</string>
+    <string name="productivity_demo_3">Expandable SD</string>
+
+    <!-- samsung exclusives demo -->
+    <string name="ss_exclusives_demo">Samsung Exclusives</string>
+    <string name="ss_exclusives_demo_1">Video Demo</string>
+    <string name="ss_exclusives_demo_2">Samsung KNOX</string>
+    <string name="ss_exclusives_demo_3">Samsung Pay</string>
+    <string name="ss_exclusives_demo_4">Samsung+</string>
+
+    <!-- Designed for business demo -->
+    <string name="designed_demo">Designed For Business</string>
+    <string name="designed_demo_1">Video Demo</string>
+    <string name="designed_demo_2">Super AMOLED Display</string>
+    <string name="designed_demo_3">Edge Functionality</string>
+    <string name="designed_demo_4">Camera</string>
+
+</resources>

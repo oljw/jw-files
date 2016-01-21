@@ -68,18 +68,21 @@ public class MainActivity extends BaseActivity {
                 case TRANSACTION_DIR_NONE:
                     getFragmentManager().beginTransaction()
                             .add(R.id.fragmentContainer, mFragment)
+                            .addToBackStack(null)
                             .commit();
                     break;
                 case TRANSACTION_DIR_FORWARD:
                     getFragmentManager().beginTransaction()
                             .setCustomAnimations(R.animator.right_in_with_alpha, R.animator.left_out_with_alpha)
                             .replace(R.id.fragmentContainer, mGFragment)
+                            .addToBackStack(null)
                             .commit();
                     break;
                 case TRANSACTION_DIR_BACKWARD:
                     getFragmentManager().beginTransaction()
                             .setCustomAnimations(R.animator.left_in_with_alpha, R.animator.right_out_with_alpha)
                             .replace(R.id.fragmentContainer, mFragment)
+                            .addToBackStack(null)
                             .commit();
                     break;
             }

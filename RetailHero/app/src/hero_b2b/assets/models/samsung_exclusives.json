@@ -1,0 +1,32 @@
+{
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/ss_exclusives_demo_1",
+        "icon": "@drawable/ic_action_play",
+        "tag": "ss_exclusives_demo_1",
+        "action": "UI_STATE_EXCLUSIVES_DEMO_VIDEO"
+      },
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/ss_exclusives_demo_2",
+        "icon": "@drawable/ic_action_play",
+        "tag": "ss_exclusives_demo_2",
+        "action": "UI_STATE_EXCLUSIVES_DEMO_SS_KNOX"
+      },
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/ss_exclusives_demo_3",
+        "icon": "@drawable/ic_action_play",
+        "tag": "ss_exclusives_demo_3",
+        "action": "UI_STATE_EXCLUSIVES_DEMO_SS_PAY"
+      },
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/ss_exclusives_demo_4",
+        "icon": "@drawable/ic_action_play",
+        "tag": "ss_exclusives_demo_4",
+        "action": "UI_STATE_EXCLUSIVES_DEMO_SS_PLUS"
+      }
+    ]
+}

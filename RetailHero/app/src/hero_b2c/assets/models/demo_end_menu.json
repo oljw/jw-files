@@ -1,0 +1,15 @@
+{
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item_center_align",
+        "title": "@string/explore_more_demos",
+        "tag": "explore_more_demos"
+      },
+      {
+        "layout": "@layout/menu_item_center_align",
+        "title": "@string/free_explore",
+        "tag": "free_explore",
+        "action": "UI_STATE_NONE"
+      }
+    ]
+}

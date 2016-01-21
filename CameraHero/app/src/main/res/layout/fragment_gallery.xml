@@ -5,17 +5,17 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
+    <!--<ImageView-->
+        <!--android:id="@+id/IMAGEID"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@drawable/test_picture"/>-->
+
     <com.samsung.retailexperience.camerahero.view.GalleryZoomView
         android:id="@+id/IMAGEID"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/star_icon"/>
-
-    <!--<com.samsung.retailexperience.camerahero.view.GalleryZoomView-->
-        <!--android:id="@+id/gallery_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:src="@drawable/pause_button"/>-->
+        android:src="@drawable/test_picture"/>
 
     <fragment
         android:id="@+id/top_gallery_fragment"
