@@ -44,7 +44,7 @@ public class GalleryFragment extends BaseGalleryFragment{
 //        mGView = (ImageView) view.findViewById(R.id.IMAGEID);
         mGView = (GalleryZoomView) view.findViewById(R.id.IMAGEID);
 
-        mGView.setImageBitmap(BitmapFactory.decodeResource(this.getResources(),R.drawable.test_picture1));
+//        mGView.setImageBitmap(BitmapFactory.decodeResource(this.getResources(),R.drawable.test_picture1));
 
         mGView.setOnClickListener(mGalleryPreviewListener);
     }

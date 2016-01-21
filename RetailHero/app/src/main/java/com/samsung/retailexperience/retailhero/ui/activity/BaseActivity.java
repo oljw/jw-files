@@ -2,6 +2,7 @@ package com.samsung.retailexperience.retailhero.ui.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.provider.Settings;
@@ -33,6 +35,8 @@ import com.samsung.retailexperience.retailhero.util.AppConsts;
 import com.samsung.retailexperience.retailhero.util.ResourceUtil;
 import com.samsung.retailexperience.retailhero.util.TopExceptionHandler;
 
+import java.util.ArrayList;
+
 /**
  * Created by icanmobile on 1/12/16.
  */
@@ -44,6 +48,10 @@ public abstract class BaseActivity extends Activity implements ResourceUtil.Miss
     protected ResourceUtil gResMgr;
 
     protected BaseFragment mFragment = null;
+    protected ArrayList<BaseFragment> mFragments = new ArrayList<BaseFragment>();
+    protected Handler mFragmentsHandler = null;
+    protected Runnable mFragmentsRunnable = null;
+
     public int mDisplayW;
     public int mDisplayH;
 
@@ -59,6 +67,15 @@ public abstract class BaseActivity extends Activity implements ResourceUtil.Miss
         screenStayOn(true);
         setMissingContentListener();
 
+
+        mFragmentsHandler = new Handler();
+        mFragmentsRunnable = new Runnable() {
+            @Override
+            public void run() {
+                removeFragments();
+            }
+        };
+
         if (isOverlayGranted()) {
             startHeroService();
             bindHeroService();
@@ -66,6 +83,19 @@ public abstract class BaseActivity extends Activity implements ResourceUtil.Miss
         else {
             requestOverlayPermission();
         }
+    }
+
+    public void removeFragments() {
+        Log.d(TAG, "##### removeFragments)+ mFragments = " + mFragments.size());
+        for (int i=0; i<mFragments.size(); i++) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.remove(mFragments.get(i));
+            ft.commit();
+
+            Log.d(TAG, "##### removeFragments : removed fragment = " + mFragments.get(i));
+        }
+        mFragments.clear();
+        mFragments.add(mFragment);
     }
 
     @Override

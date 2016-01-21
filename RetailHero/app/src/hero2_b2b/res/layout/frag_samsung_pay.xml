@@ -13,4 +13,7 @@
         app:autoPlay="false"
         app:isShowVideoFrame="true"
         app:scaleToVideoSize="true"/>
+
+    <include layout="@layout/pay_root" />
+
 </FrameLayout>

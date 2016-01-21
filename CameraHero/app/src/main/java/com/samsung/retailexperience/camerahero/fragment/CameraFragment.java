@@ -137,7 +137,6 @@ public class CameraFragment extends BaseCameraFragment
     public void onSwitchClicked() {
         //get the number of cameras
         int camerasNumber = Camera.getNumberOfCameras();
-
         if (camerasNumber > 1) {
             chooseCamera(!mCameraBack);
         } else {

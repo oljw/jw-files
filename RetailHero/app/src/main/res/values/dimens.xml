@@ -30,4 +30,12 @@
     <dimen name="demo_play_pause_button_layout">60dp</dimen>
     <dimen name="demo_seek_button_layout">53dp</dimen>
 
+    <!-- Samsung pay dimentions.  TODO verify pay_card_space_between_cards -->
+    <dimen name="pay_selection_dot_width">37px</dimen>
+    <dimen name="pay_selection_dot_height">37px</dimen>
+    <dimen name="pay_selection_dot_horizontal_margin">48px</dimen>
+    <dimen name="pay_card_width">936px</dimen>
+    <dimen name="pay_card_height">1486px</dimen>
+    <dimen name="pay_card_space_between_cards">150px</dimen>
+
 </resources>

@@ -48,6 +48,9 @@ public class AttractorFragment extends BaseFragment {
             }
         }
 
+        //for scale up and down transition
+        view.setPivotX(getResources().getInteger(R.integer.animStartOffset));
+        view.setPivotY(getResources().getInteger(R.integer.animYOffset));
         return view;
     }
 

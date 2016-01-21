@@ -30,12 +30,13 @@ public class WidgetProviderConstants {
         featureExplorers.add(BaseActivity.class);
     }
 
+    // TODO Make seperate
     static List<String> featureExplorerFragments = new ArrayList<>(FEATURE_COUNT);
     static {
         featureExplorerFragments.add(AppConst.UIState.UI_STATE_WHATS_NEW_MAIN.name());
-        featureExplorerFragments.add(AppConst.UIState.UI_STATE_PRODUCTIVITY_MAIN.name());
+        featureExplorerFragments.add(AppConst.UIState.UI_STATE_WHATS_NEW_MAIN.name());
         featureExplorerFragments.add(AppConst.UIState.UI_STATE_EXCLUSIVES_MAIN.name());
-        featureExplorerFragments.add(AppConst.UIState.UI_STATE_DESIGNED_MAIN.name());
+        featureExplorerFragments.add(AppConst.UIState.UI_STATE_WHATS_NEW_MAIN.name());
         featureExplorerFragments.add(AppConst.UIState.UI_STATE_WHATS_NEW_MAIN.name());
     }
 }

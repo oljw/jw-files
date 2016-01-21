@@ -49,8 +49,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        if( getServiceInstance() != null )
-            getServiceInstance().setAppFinished(mUIState);
 
         super.onDestroy();
     }
@@ -370,23 +368,56 @@ public class MainActivity extends BaseActivity {
         if (mFragment != null) {
             switch (dir) {
                 case TRANSACTION_DIR_NONE:
-                    getFragmentManager().beginTransaction()
-                            .add(R.id.fragmentContainer, mFragment)
-                            .commit();
+                    switch (mUIState) {
+                        case UI_STATE_ATTRACT_LOOP:
+                            getFragmentManager().beginTransaction()
+                                    .setCustomAnimations(FragmentTransaction.TRANSIT_NONE, R.animator.scale_down)
+                                    .add(R.id.fragmentContainer, mFragment)
+                                    .commit();
+                            break;
+                        default:
+                            getFragmentManager().beginTransaction()
+                                    .setCustomAnimations(FragmentTransaction.TRANSIT_NONE, R.animator.left_out)
+                                    .add(R.id.fragmentContainer, mFragment)
+                                    .commit();
+                            break;
+                    }
                     break;
                 case TRANSACTION_DIR_FORWARD:
-                    getFragmentManager().beginTransaction()
-                            .setCustomAnimations(FragmentTransaction.TRANSIT_NONE, R.animator.left_out)
-                            .replace(R.id.fragmentContainer, mFragment)
-                            .commit();
+                    switch (mUIState) {
+                        case UI_STATE_ATTRACT_LOOP:
+                            getFragmentManager().beginTransaction()
+                                    .setCustomAnimations(FragmentTransaction.TRANSIT_NONE, R.animator.scale_down)
+                                    .replace(R.id.fragmentContainer, mFragment)
+                                    .commit();
+                            break;
+                        default:
+                            getFragmentManager().beginTransaction()
+                                    .setCustomAnimations(FragmentTransaction.TRANSIT_NONE, R.animator.left_out)
+                                    .replace(R.id.fragmentContainer, mFragment)
+                                    .commit();
+                            break;
+                    }
                     break;
                 case TRANSACTION_DIR_BACKWARD:
-                    getFragmentManager().beginTransaction()
-                            .setCustomAnimations(R.animator.left_in, FragmentTransaction.TRANSIT_NONE)
-                            .replace(R.id.fragmentContainer, mFragment)
-                            .commit();
+                    switch (newState) {
+                        case UI_STATE_ATTRACT_LOOP:
+                            getFragmentManager().beginTransaction()
+                                    .setCustomAnimations(R.animator.scale_up, FragmentTransaction.TRANSIT_NONE)
+                                    .add(R.id.fragmentContainer, mFragment)
+                                    .commit();
+                            break;
+                        default:
+                            getFragmentManager().beginTransaction()
+                                    .setCustomAnimations(R.animator.left_in, FragmentTransaction.TRANSIT_NONE)
+                                    .add(R.id.fragmentContainer, mFragment)
+                                    .commit();
+                            break;
+                    }
                     break;
             }
+
+            mFragmentsHandler.postDelayed(mFragmentsRunnable, getResources().getInteger(R.integer.animTime));
         }
 
         mUIState = newState;
