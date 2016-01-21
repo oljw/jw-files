@@ -39,10 +39,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by icanmobile on 1/14/16.
@@ -65,8 +63,6 @@ public class CameraFragment extends BaseCameraFragment
 
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
-
-    private ImageView image;
 
     private TopMenuBarFragment mTopMenuBar = null;
     private BottomMenuBarFragment mBottomMenuBar = null;
@@ -93,9 +89,6 @@ public class CameraFragment extends BaseCameraFragment
         mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
         mBottomMenuBar.setListener(this);
 
-//        image = (ImageView) view.findViewById(R.id.imageView_photo);
-
-
         mCamera = getCameraInstance(-1);
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_preview);
 
@@ -109,7 +102,8 @@ public class CameraFragment extends BaseCameraFragment
         mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
         mGallerybtn.setRotation(90);
 
-        mMediaPlayer = MediaPlayer.create(CameraHeroApplication.getContext(), R.raw.camera_shutter_1);
+        mMediaPlayer = MediaPlayer.create(CameraHeroApplication.getContext(),
+                R.raw.camera_shutter_1);
     }
 
     @Override
@@ -126,16 +120,13 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onBackPressed() {
         Log.d("TAG", "##################CameraFragment onBackPressed called");
-        changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
-
-
-        Log.d("TAG", "onBackPressed passed");
+        changeFragment(AppConsts.UIState.UI_STATE_CAMERA,
+                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
     }
 
     @Override
     public void onStillClicked() {
-        Log.d(TAG, "onClick captureButton called called");
-
+        Log.d(TAG, "onClick captureButton called");
         mCameraSurface.setStillShotParam(mCameraBack);
 
         // get an image from the camera
@@ -146,10 +137,8 @@ public class CameraFragment extends BaseCameraFragment
     public void onSwitchClicked() {
         //get the number of cameras
         int camerasNumber = Camera.getNumberOfCameras();
-        if (camerasNumber > 1) {
-            //release the old camera instance
-            //switch camera, from the front and the back and vice versa
 
+        if (camerasNumber > 1) {
             chooseCamera(!mCameraBack);
         } else {
             //dude
@@ -193,7 +182,6 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onGalleryClicked() {
         changeFragment(AppConsts.UIState.UI_STATE_GALLERY, AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
-
     }
 
     private void releaseCamera(){

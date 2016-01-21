@@ -19,6 +19,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import android.graphics.Matrix;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
+import com.samsung.retailexperience.camerahero.R;
 
 /**
  * Created by JW on 1/14/16.
@@ -31,6 +35,8 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private Camera mCamera;
     private int mWidth = 0;
     private int mHeight = 0;
+//    private ImageButton mStillBtn;
+
 
     public CameraSurfaceView(Context context, Camera camera) {
         super(context);
@@ -67,6 +73,8 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void surfaceCreated(SurfaceHolder holder) {
         Log.d(TAG, "##### surfaceCreated +");
 
+//        mStillBtn =(ImageButton) findViewById(R.id.still_button);
+
         mOrientationListener = new OrientationEventListener(mContext, SensorManager.SENSOR_DELAY_UI) {
             public void onOrientationChanged (int orientation) {
                 //Log.d (TAG, "onOrientationChanged : " + orientation);
@@ -80,8 +88,11 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                 //icon change when orientation is changed.
                 if( prevScreenOrientation != mScreenOrientation) {
                     Log.d(TAG, "####### PLEASE ROTATE ICON : " + mScreenOrientation);
-                    if (mListener != null)
+                    if (mListener != null) {
                         mListener.changeScreenOrientation(mScreenOrientation);
+
+//                        mStillBtn.setRotation(90);
+                    }
                 }
             }
         };
@@ -318,8 +329,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
             input_y = (width - x);
         }
         Log.d(TAG, "##### width = " + width + ", height = " + height);
-
-
 
         float focus_x = 0.0f;
         float focus_y = 0.0f;

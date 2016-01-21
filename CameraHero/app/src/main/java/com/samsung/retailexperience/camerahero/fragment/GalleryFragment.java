@@ -61,8 +61,7 @@ public class GalleryFragment extends BaseGalleryFragment{
         @Override
     public void onBackPressed() {
         Log.d(TAG, "##### GalleryFragment onBackPressed called");
-            changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_NONE);
-
+//            changeFragment(AppConsts.UIState.UI_STATE_CAMERA, AppConsts.TransactionDir.TRANSACTION_DIR_NONE);
     }
 
     private void setMenuBar() {
