@@ -38,22 +38,7 @@ public class SelfiesFragment extends BaseCameraFragment {
 
     @Override
     public void onViewCreated(View view) {
-        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
-        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment);
-//        mBottomMenuBar.setListener(this);
 
-        mCamera = getCameraInstance(-1);
-        mPreview = (RelativeLayout) view.findViewById(R.id.camera_view);
-
-        mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
-        mCameraSurface.setListener(this);
-        mPreview.addView(mCameraSurface);
-
-        mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon);
-//        mFocusIcon.bringToFront();
-
-        mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
-//        mGallerybtn.setRotation(90);
     }
 
     @Override

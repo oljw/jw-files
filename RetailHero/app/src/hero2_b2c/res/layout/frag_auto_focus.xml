@@ -13,4 +13,34 @@
         app:autoPlay="false"
         app:isShowVideoFrame="true"
         app:scaleToVideoSize="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/camera_view_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/top_fragment_test"
+            android:layout_above="@+id/bottom_fragment_test"
+            android:background="#000000"/>
+
+        <fragment
+            android:id="@+id/top_fragment_test"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/camera_top_menubar_height"
+            android:layout_alignParentTop="true"
+            android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment" />
+
+        <fragment
+            android:id="@+id/bottom_fragment_test"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/camera_bottom_menubar_height"
+            android:layout_alignParentBottom="true"
+            android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment" />
+
+        </RelativeLayout>
+
 </FrameLayout>
