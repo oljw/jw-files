@@ -364,11 +364,15 @@ public abstract class BaseVideoFragment extends BaseFragment implements
         Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
         // Show Title
+        String strModelName = null;
+        if (mEnvMgr != null) {
+            strModelName = mEnvMgr.getStringValue(Environments.FLAVOR);
+        }
         TextView titleTv = new TextView(mAppContext);
         if (mFragmentModel.getFragment().getTitleResId() != 0) {
-            titleTv.setText(getString(mFragmentModel.getFragment().getTitleResId()));
+            titleTv.setText(strModelName.toUpperCase() + "\n" + getString(mFragmentModel.getFragment().getTitleResId()));
         } else {
-            titleTv.setText(mFragmentModel.getFragment().getTitle());
+            titleTv.setText(strModelName.toUpperCase() + "\n" + mFragmentModel.getFragment().getTitle());
         }
         titleTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30.f);
         titleTv.setTextColor(Color.parseColor("#FFFF0000"));

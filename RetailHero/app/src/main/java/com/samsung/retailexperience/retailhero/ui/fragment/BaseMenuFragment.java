@@ -33,7 +33,7 @@ public abstract class BaseMenuFragment extends BaseFragment
     protected View mView = null;
     protected String mJsonModel = null;
     protected FragmentModel<MenuModel> mFragmentModel = null;
-    protected ImageView mDrawer = null;
+    protected View mMenuButton = null;
     protected ListView mListView = null;
     protected ArrayList<MenuItemModel> mMenuItems = null;
 
@@ -59,14 +59,14 @@ public abstract class BaseMenuFragment extends BaseFragment
         if (mFragmentModel.getBackgroundResId() > 0)
             mView.setBackgroundResource(mFragmentModel.getBackgroundResId());
 
-        // drawer icon
-        mDrawer = (ImageView) mView.findViewById(R.id.drawer);
-        if (mDrawer != null) {
+        // Hamburger menu button
+        mMenuButton = mView.findViewById(R.id.hamburger_menu_container);
+        if (mMenuButton != null) {
             if (mFragmentModel.getDrawerResId() == 0) {
-                mDrawer.setVisibility(View.INVISIBLE);
+                mMenuButton.setVisibility(View.INVISIBLE);
             }
             else {
-                mDrawer.setOnClickListener(new View.OnClickListener() {
+                mMenuButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         clickDrawerBtn();
@@ -76,8 +76,20 @@ public abstract class BaseMenuFragment extends BaseFragment
         }
 
         // set title
-        if (mFragmentModel.getFragment().getTitleResId() > 0 &&  mView.findViewById(R.id.title) != null)
-            ((TextView) mView.findViewById(R.id.title)).setText(getString(mFragmentModel.getFragment().getTitleResId()));
+        View titleView = mView.findViewById(R.id.title);
+        //if (mFragmentModel.getFragment().getTitleResId() > 0 &&  mView.findViewById(R.id.title) != null) {
+        if (mFragmentModel.getFragment().getTitleResId() > 0 && titleView != null) {
+            if (titleView instanceof ImageView) {
+                ((ImageView) titleView).setImageResource(mFragmentModel.getFragment().getTitleResId());
+            } else if (titleView instanceof TextView) {
+                ((TextView) mView.findViewById(R.id.title)).setText(getString(mFragmentModel.getFragment().getTitleResId()));
+            }
+        }
+
+        // set sub title
+        if (mFragmentModel.getFragment().getSubTitleResId() > 0 && mView.findViewById(R.id.subtitle) != null) {
+            ((TextView) mView.findViewById(R.id.subtitle)).setText(getString(mFragmentModel.getFragment().getSubTitleResId()));
+        }
 
         // set listview
         mListView = (ListView) mView.findViewById(R.id.list);
@@ -170,14 +182,16 @@ public abstract class BaseMenuFragment extends BaseFragment
             if ((TextView) menuItemView.findViewById(R.id.menuItemTitle) != null) {
                 if (item.getTitleResId() > 0) {
                     ((TextView) menuItemView.findViewById(R.id.menuItemTitle)).setText(item.getTitleResId());
-                    if (item.getIconResId() > 0) {
-                        ViewGroup.MarginLayoutParams p =
-                                (ViewGroup.MarginLayoutParams) ((TextView) menuItemView.findViewById(R.id.menuItemTitle)).getLayoutParams();
-                        p.leftMargin = (int) getResources().getDimension(R.dimen.menu_item_component_spacing);
-                        ((TextView) menuItemView.findViewById(R.id.menuItemTitle)).requestLayout();
-                    }
                 } else
                     menuItemView.findViewById(R.id.menuItemTitle).setVisibility(View.GONE);
+            }
+
+            // Sub-Title
+            if ((TextView) menuItemView.findViewById(R.id.menuItemSubTitle) != null) {
+                if (item.getSubTitleResId() > 0) {
+                    ((TextView) menuItemView.findViewById(R.id.menuItemSubTitle)).setText(item.getSubTitleResId());
+                } else
+                    menuItemView.findViewById(R.id.menuItemSubTitle).setVisibility(View.GONE);
             }
 
             if (item.getAction() != null)

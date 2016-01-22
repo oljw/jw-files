@@ -5,10 +5,13 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#FFFFFFFF</color>
-    <color name="text_color">#555555</color>
+
+    <!-- font colors -->
+    <color name="text_color_white">#FFFFFF</color>
+    <color name="text_color_black">#FF000000</color>
+    <color name="menu_header_color">#00B3E3</color>
 
     <!-- CoreSuperTextView -->
     <color name="subtitle_background">#BFFFFFFF</color>
     <color name="feature_background">#BF000000</color>
-
 </resources>

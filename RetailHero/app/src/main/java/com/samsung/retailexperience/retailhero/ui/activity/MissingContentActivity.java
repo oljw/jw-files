@@ -3,6 +3,7 @@ package com.samsung.retailexperience.retailhero.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.samsung.retailexperience.retailhero.R;
@@ -99,11 +100,14 @@ public class MissingContentActivity extends BaseActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // go to the attractor activity
+            goToMainActivity(0, R.anim.identity_animation, true);
+            return true;
+        }
 
-        // go to the attractor activity
-        goToMainActivity(0, R.anim.identity_animation, true);
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -123,12 +127,12 @@ public class MissingContentActivity extends BaseActivity {
         }
     }
 
-    private void goToMainActivity(int enterAnim, int exitAnim, boolean finsh) {
-        Intent intent = new Intent(this,  MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    private void goToMainActivity(int enterAnim, int exitAnim, boolean finish) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         overridePendingTransition(enterAnim, exitAnim);
-        if (finsh) {
+        if (finish) {
             finish();
         }
     }

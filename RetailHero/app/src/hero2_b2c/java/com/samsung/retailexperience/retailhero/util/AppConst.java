@@ -11,8 +11,6 @@ public class AppConst {
 
         UI_STATE_DECISION,
 
-        UI_STATE_DEMO_END,
-
         // what's new : 4 demos
         UI_STATE_WHATS_NEW_MAIN,
         UI_STATE_WHATS_DEMO_DESIGN,
@@ -50,7 +48,9 @@ public class AppConst {
         UI_STATE_NEW_TO_ANDROID_DEMO_SMART_SWITCH,
 
         // compare device - ref decision
-        UI_STATE_COMPARE_DEVICE,
+        UI_STATE_DEVICE_SPECS,
+
+        UI_STATE_DEMO_END,
 
         UI_STATE_UNDER_CONSTRUCTION
     }

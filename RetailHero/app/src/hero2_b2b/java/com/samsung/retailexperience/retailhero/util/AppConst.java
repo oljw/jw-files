@@ -33,14 +33,14 @@ public class AppConst {
         UI_STATE_EXCLUSIVES_DEMO_SS_PLUS,
 
         // designed for business : 4 demos
-        UI_STATE_DESIGNED_MAIN,
-        UI_STATE_DESIGNED_DEMO_VIDEO,
-        UI_STATE_DESIGNED_DEMO_AMOLED,
-        UI_STATE_DESIGNED_DEMO_EDGE_FUNC,
-        UI_STATE_DESIGNED_DEMO_CAMERA,
+        UI_STATE_DESIGN_MAIN,
+        UI_STATE_DESIGN_DEMO_VIDEO,
+        UI_STATE_DESIGN_DEMO_AMOLED,
+        UI_STATE_DESIGN_DEMO_EDGE_FUNC,
+        UI_STATE_DESIGN_DEMO_CAMERA,
 
         // compare device - ref decision
-        UI_STATE_COMPARE_DEVICE,
+        UI_STATE_DEVICE_SPECS,
 
         UI_STATE_UNDER_CONSTRUCTION
     }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/camera_view"
+    android:background="#000000">
+
+    <RelativeLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_fragment"
+        android:layout_above="@+id/bottom_fragment"
+        android:background="#000000">
+
+        <ImageView
+            android:id="@+id/focus_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/tap_focus_icon"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:alpha="0.4"
+            android:visibility="invisible"
+            android:adjustViewBounds="true" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/stop_button"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/stop_button"
+        android:background="@null"
+        android:alpha="0.6"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp" />
+
+    <fragment
+        android:id="@+id/top_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/camera_top_menubar_height"
+        android:layout_alignParentTop="true"
+        android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment" />
+
+    <fragment
+        android:id="@+id/bottom_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/camera_bottom_menubar_height"
+        android:layout_alignParentBottom="true"
+        android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment" />
+
+</RelativeLayout>

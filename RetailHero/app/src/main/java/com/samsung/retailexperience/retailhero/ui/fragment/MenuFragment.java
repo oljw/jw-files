@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
+import com.samsung.retailexperience.retailhero.R;
 import com.samsung.retailexperience.retailhero.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailhero.gson.models.MenuItemModel;
 import com.samsung.retailexperience.retailhero.gson.models.MenuModel;
@@ -30,6 +32,31 @@ public class MenuFragment extends BaseMenuFragment {
 
     @Override
     public void onViewCreated(View view) {
+        if (view != null) {
+            View videoButton = view.findViewById(R.id.menu_video_button);
+            if (videoButton != null) {
+                videoButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String strVideoAction = mFragmentModel.getFragment().getVideoAction();
+                        if (strVideoAction == null) {
+                            return;
+                        }
+                        changeFragment(AppConst.UIState.valueOf(strVideoAction), AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
+                    }
+                });
+
+                TextView videoTitle = (TextView) view.findViewById(R.id.videoMenuTitle);
+                if (videoTitle != null && mFragmentModel.getFragment().getVideoTitleResId() > 0) {
+                    videoTitle.setText(mFragmentModel.getFragment().getVideoTitleResId());
+                }
+
+                TextView videoSubTitle = (TextView) view.findViewById(R.id.videoMenuSubTitle);
+                if (videoSubTitle != null && mFragmentModel.getFragment().getVideoSubTitleResId() > 0) {
+                    videoSubTitle.setText(mFragmentModel.getFragment().getVideoSubTitleResId());
+                }
+            }
+        }
     }
 
     @Override

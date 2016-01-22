@@ -20,7 +20,6 @@ public class BaseActivity extends Activity {
     private static final String TAG = BaseActivity.class.getSimpleName();
 
     protected BaseFragment mFragment = null;
-    protected GalleryFragment mGFragment = null;
     public int mDisplayW;
     public int mDisplayH;
 

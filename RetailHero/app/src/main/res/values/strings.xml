@@ -1,36 +1,12 @@
 <resources>
-    <string name="app_name">RetailHero</string>
+    <!--string name="app_name">Galaxy S7 retail experience</string-->
 
-    <string name="attract_loop">Attract Loop</string>
-    <string name="welcome_to_the_hero">WELCOME TO THE HERO</string>
-    <string name="decision">Decision</string>
-    <string name="whats_new">What\'s New</string>
-    <string name="whats_new_demo_1">What\'s New Demo 1</string>
-    <string name="whats_new_demo_2">What\'s New Demo 2</string>
-    <string name="design_and_display">Design and Display</string>
-    <string name="design_and_display_demo_1">Design and Display Demo 1</string>
-    <string name="camera">Camera</string>
-    <string name="camera_demo_1">Camera Demo 1</string>
-    <string name="battery">Battery</string>
-    <string name="battery_demo_1">Battery Demo 1</string>
-    <string name="exit_demo">Exit Demo</string>
-    <string name="compare_devices">Compare Devices</string>
-    <string name="explore">Explore</string>
-
-    <string name="demo_1">Demo 1</string>
-    <string name="demo_2">Demo 2</string>
-    <string name="demo_3">Demo 3</string>
-    <string name="demo_4">Demo 4</string>
-    <string name="demo_5">Demo 5</string>
-
-    <string name="demo_end">Demo End</string>
-    <string name="explore_more_demos">Explore More Demos</string>
-    <string name="free_explore">Free Explore</string>
-
-    <string name="select_a_category">Select a category</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Demo End page -->
+    <string name="demo_end_subtitle">Lorem ipsum dolor sit amet, consectetur elit sed do\n eiusmod tem</string>
+    <string name="back_to_menu_title">Back to Menu</string>
+    <string name="back_to_menu_subtitle">Lorem ipsum dolor sit amet</string>
+    <string name="free_explore_title">Play With Device</string>
+    <string name="free_explore_subtitle">Lorem ipsum dolor sit amet</string>
 
     <!--ForegroundDetectingService message-->
     <string name="foregrounddetectingservice_message">Do you want to allow RetailHero app for detecting the foreground app pacakge name?</string>

@@ -2,30 +2,26 @@
     "menuItems": [
       {
         "layout": "@layout/menu_item",
-        "title": "@string/camera_demo_1",
-        "icon": "@drawable/ic_action_play",
+        "title": "@string/camera_demo_1_title",
+        "subTitle": "@string/camera_demo_1_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "camera_demo_1",
-        "action": "UI_STATE_CAMERA_DEMO_VIDEO"
+        "action": "UI_STATE_CAMERA_DEMO_PHOTO_QUALITY"
       },
       {
         "layout": "@layout/menu_item",
-        "title": "@string/camera_demo_2",
-        "icon": "@drawable/ic_action_play",
+        "title": "@string/camera_demo_2_title",
+        "subTitle": "@string/camera_demo_2_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "camera_demo_2",
         "action": "UI_STATE_CAMERA_DEMO_AUTO_FOCUS"
       },
       {
         "layout": "@layout/menu_item",
-        "title": "@string/camera_demo_3",
-        "icon": "@drawable/ic_action_play",
+        "title": "@string/camera_demo_3_title",
+        "subTitle": "@string/camera_demo_3_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "camera_demo_3",
-        "action": "UI_STATE_CAMERA_DEMO_PHOTO_QUALITY"
-      },
-      {
-        "layout": "@layout/menu_item",
-        "title": "@string/camera_demo_4",
-        "icon": "@drawable/ic_action_play",
-        "tag": "camera_demo_4",
         "action": "UI_STATE_CAMERA_DEMO_SELFIES"
       }
     ]

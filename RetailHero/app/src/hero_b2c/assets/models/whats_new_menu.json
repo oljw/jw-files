@@ -2,29 +2,33 @@
     "menuItems": [
       {
         "layout": "@layout/menu_item",
-        "title": "@string/whats_new_demo_1",
-        "icon": "@drawable/ic_action_play",
+        "title": "@string/whats_new_demo_1_title",
+        "subTitle": "@string/whats_new_demo_1_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "whats_new_demo_1",
         "action": "UI_STATE_WHATS_DEMO_DESIGN"
       },
       {
         "layout": "@layout/menu_item",
-        "title": "@string/whats_new_demo_2",
-        "icon": "@drawable/ic_action_play",
+        "title": "@string/whats_new_demo_2_title",
+        "subTitle": "@string/whats_new_demo_2_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "whats_new_demo_2",
         "action": "UI_STATE_WHATS_DEMO_CAMERA"
       },
       {
         "layout": "@layout/menu_item",
-        "title": "@string/whats_new_demo_3",
-        "icon": "@drawable/ic_action_play",
+        "title": "@string/whats_new_demo_3_title",
+        "subTitle": "@string/whats_new_demo_3_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "whats_new_demo_3",
         "action": "UI_STATE_WHATS_DEMO_EXCLUSIVES"
       },
       {
         "layout": "@layout/menu_item",
-        "title": "@string/whats_new_demo_4",
-        "icon": "@drawable/ic_action_play",
+        "title": "@string/whats_new_demo_4_title",
+        "subTitle": "@string/whats_new_demo_4_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "whats_new_demo_4",
         "action": "UI_STATE_WHATS_DEMO_NEW_TO_ANDROID"
       }

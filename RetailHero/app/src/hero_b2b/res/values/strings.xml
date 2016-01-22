@@ -1,38 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="model_name">Galaxy-S7 B2B</string>
+    <string name="app_name">Galaxy S7 Edge+ retail experience</string>
+
+    <string name="model_name">Galaxy-S7 Edge+\n B2B</string>
 
     <!-- Hambuger Menu title -->
     <string name="menu_header_title">Select a category</string>
-    <string name="menu_whats_new">WHAT\'S NEW</string>
-    <string name="menu_productivity">PRODUCTIVITY</string>
-    <string name="menu_ss_exclusives">SAMSUNG EXCLUSIVES</string>
-    <string name="menu_design_for_business">DESIGNED FOR BUSINESS</string>
-    <string name="menu_exit_demo">EXIT DEMO</string>
+    <string name="menu_whats_new">New Feature</string>
+    <string name="menu_productivity">Productivity</string>
+    <string name="menu_ss_exclusives">Samsung Exclusives</string>
+    <string name="menu_design_for_business">Designed For Business</string>
+    <string name="menu_device_spec">Device Specs</string>
+    <string name="menu_exit_app">Exit App</string>
 
-    <!-- what's new demo -->
-    <string name="whats_new_demo">What\'s New</string>
-    <string name="whats_new_demo_1">Productivity</string>
-    <string name="whats_new_demo_2">Samsung Exclusives</string>
-    <string name="whats_new_demo_3">Designed For Business</string>
+    <!-- Decision page-->
+    <string name="decision_subtitle">Welcome! Dive in and explore a galaxy of goodness.\nSelect an item to get started.</string>
+    <string name="whats_new_title">New Features</string>
+    <string name="whats_new_subtitle">Take a tour to see what\'s new</string>
+    <string name="device_specs_title">Device Specs</string>
+    <string name="device_specs_subtitle">Compare this phone with others</string>
+    <string name="explore_title">Play with the Phone</string>
+    <string name="explore_subtitle">Explore the Hero 2 on your own</string>
+
+    <!-- what's new (New Features) demo -->
+    <string name="whats_new_demo_title">New Features</string>
+    <string name="whats_new_demo_subtitle">asldjflskjf lajsdlfjl alsdjflk.</string>
+    <string name="whats_new_demo_1_title">Productivity</string>
+    <string name="whats_new_demo_1_subtitle">abcdefghijk</string>
+    <string name="whats_new_demo_2_title">Samsung Exclusives</string>
+    <string name="whats_new_demo_2_subtitle">abcdefghijk</string>
+    <string name="whats_new_demo_3_title">Designed For Business</string>
+    <string name="whats_new_demo_3_subtitle">abcdefghijk</string>
 
     <!-- Productivity demo -->
-    <string name="productivity_demo">Productivity</string>
-    <string name="productivity_demo_1">Video Demo</string>
-    <string name="productivity_demo_2">All Day Battery</string>
-    <string name="productivity_demo_3">Expandable SD</string>
+    <string name="productivity_demo_title">Productivity</string>
+    <string name="productivity_demo_subtitle">asldjflskjf lajsdlfjl alsdjflk.</string>
+    <string name="productivity_demo_1_title">All Day Battery</string>
+    <string name="productivity_demo_1_subtitle">abcdefghijk</string>
+    <string name="productivity_demo_2_title">Expandable SD</string>
+    <string name="productivity_demo_2_subtitle">abcdefghijk</string>
+    <string name="productivity_demo_video_title">ABC Story</string>
+    <string name="productivity_demo_video_subtitle">adfslksjfsldfj asdkfj\nsdflkjlsf</string>
 
     <!-- samsung exclusives demo -->
-    <string name="ss_exclusives_demo">Samsung Exclusives</string>
-    <string name="ss_exclusives_demo_1">Video Demo</string>
-    <string name="ss_exclusives_demo_2">Samsung KNOX</string>
-    <string name="ss_exclusives_demo_3">Samsung Pay</string>
-    <string name="ss_exclusives_demo_4">Samsung+</string>
+    <string name="ss_exclusives_demo_title">Samsung Exclusives</string>
+    <string name="ss_exclusives_demo_subtitle">asldjflskjf lajsdlfjl alsdjflk.</string>
+    <string name="ss_exclusives_demo_1_title">Samsung KNOX</string>
+    <string name="ss_exclusives_demo_1_subtitle">abcdefghijk</string>
+    <string name="ss_exclusives_demo_2_title">Samsung Pay</string>
+    <string name="ss_exclusives_demo_2_subtitle">abcdefghijk</string>
+    <string name="ss_exclusives_demo_3_title">Samsung+</string>
+    <string name="ss_exclusives_demo_3_subtitle">abcdefghijk</string>
+    <string name="ss_exclusives_demo_video_title">ABC Story</string>
+    <string name="ss_exclusives_demo_video_subtitle">abcdefghijk</string>
 
     <!-- Designed for business demo -->
-    <string name="designed_demo">Designed For Business</string>
-    <string name="designed_demo_1">Video Demo</string>
-    <string name="designed_demo_2">Super AMOLED Display</string>
-    <string name="designed_demo_3">Camera</string>
+    <string name="design_demo_title">Designed For Business</string>
+    <string name="design_demo_subtitle">asldjflskjf lajsdlfjl alsdjflk.</string>
+    <string name="design_demo_1_title">Super AMOLED Display</string>
+    <string name="design_demo_1_subtitle">abcdefghijk</string>
+    <string name="design_demo_2_title">Camera</string>
+    <string name="design_demo_2_subtitle">abcdefghijk</string>
+    <string name="design_demo_video_title">ABC Story</string>
+    <string name="design_demo_video_subtitle">abcdefghijk</string>
 
 </resources>

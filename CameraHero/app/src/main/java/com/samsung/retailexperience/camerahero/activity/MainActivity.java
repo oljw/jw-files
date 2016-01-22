@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case UI_STATE_GALLERY:
-                mGFragment = GalleryFragment.newInstance("models/gallery.json");
+                mFragment = GalleryFragment.newInstance("models/gallery.json");
                 break;
         }
 
@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
                 case TRANSACTION_DIR_FORWARD:
                     getFragmentManager().beginTransaction()
                             .setCustomAnimations(R.animator.right_in_with_alpha, R.animator.left_out_with_alpha)
-                            .replace(R.id.fragmentContainer, mGFragment)
+                            .replace(R.id.fragmentContainer, mFragment)
                             .addToBackStack(null)
                             .commit();
                     break;

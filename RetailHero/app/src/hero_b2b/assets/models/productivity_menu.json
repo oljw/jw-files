@@ -2,23 +2,18 @@
     "menuItems": [
       {
         "layout": "@layout/menu_item",
-        "title": "@string/productivity_demo_1",
-        "icon": "@drawable/ic_action_play",
+        "title": "@string/productivity_demo_1_title",
+        "subTitle": "@string/productivity_demo_1_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "productivity_demo_1",
-        "action": "UI_STATE_PRODUCTIVITY_DEMO_VIDEO"
-      },
-      {
-        "layout": "@layout/menu_item",
-        "title": "@string/productivity_demo_2",
-        "icon": "@drawable/ic_action_play",
-        "tag": "productivity_demo_2",
         "action": "UI_STATE_PRODUCTIVITY_DEMO_BATTERY"
       },
       {
         "layout": "@layout/menu_item",
-        "title": "@string/productivity_demo_3",
-        "icon": "@drawable/ic_action_play",
-        "tag": "productivity_demo_3",
+        "title": "@string/productivity_demo_2_title",
+        "subTitle": "@string/productivity_demo_2_subtitle",
+        "icon": "@drawable/chevron",
+        "tag": "productivity_demo_2",
         "action": "UI_STATE_PRODUCTIVITY_DEMO_SD"
       }
     ]

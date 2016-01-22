@@ -7,6 +7,7 @@ import android.view.View;
 import com.samsung.retailexperience.retailhero.annotation.OnChapter;
 import com.samsung.retailexperience.retailhero.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailhero.gson.models.VideoModel;
+import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFragment;
 import com.samsung.retailexperience.retailhero.ui.fragment.BaseVideoFragment;
 import com.samsung.retailexperience.retailhero.util.AppConst;
 import com.samsung.retailexperience.retailhero.util.AppConsts;
@@ -14,7 +15,7 @@ import com.samsung.retailexperience.retailhero.util.AppConsts;
 /**
  * Created by smheo on 1/15/2016.
  */
-public class AutoFocusFragment extends BaseVideoFragment{
+public class AutoFocusFragment extends BaseCameraFragment{
 
     private static final String TAG = AutoFocusFragment.class.getSimpleName();
 
@@ -29,6 +30,7 @@ public class AutoFocusFragment extends BaseVideoFragment{
 
     @Override
     public void onViewCreated(View view) {
+
     }
 
     @Override

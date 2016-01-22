@@ -4,10 +4,19 @@ package com.samsung.retailexperience.retailhero.util;
  * Created by icanmobile on 1/12/16.
  */
 public class AppConsts {
+
+    // model name
+    public static final String HERO_B2B = "hero_b2b";
+    public static final String HERO_B2C = "hero_b2c";
+    public static final String HERO2_B2B = "hero2_b2b";
+    public static final String HERO2_B2C = "hero2_b2c";
+
+    // bundle key for fragment args
     public static final String ARG_FRAGMENT_MODEL   = "ARG_FRAGMENT_MODEL";
     public static final String ARG_JSON_MODEL       = "ARG_JSON_MODEL";
     public static final String ARG_LAST_UISTATE     = "ARG_LAST_UISTATE";
 
+    // fragment transactions
     public enum TransactionDir {
         TRANSACTION_DIR_NONE,
         TRANSACTION_DIR_FORWARD,

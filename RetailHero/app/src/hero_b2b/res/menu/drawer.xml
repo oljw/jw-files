@@ -6,29 +6,33 @@
 
         <item
             android:id="@+id/drawer_whats_new"
-            android:checked="true"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/chevron"
             android:title="@string/menu_whats_new"/>
 
         <item
             android:id="@+id/drawer_productivity"
-            android:icon="@drawable/ic_favorite_black_24dp"
+            android:icon="@drawable/chevron"
             android:title="@string/menu_productivity"/>
 
         <item
             android:id="@+id/drawer_ss_exclusives"
-            android:icon="@drawable/ic_more_horiz_black_24dp"
+            android:icon="@drawable/chevron"
             android:title="@string/menu_ss_exclusives"/>
 
         <item
             android:id="@+id/drawer_design_for_business"
-            android:icon="@drawable/ic_more_horiz_black_24dp"
+            android:icon="@drawable/chevron"
             android:title="@string/menu_design_for_business"/>
 
         <item
+            android:id="@+id/drawer_device_specs"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_device_spec"/>
+
+        <item
             android:id="@+id/drawer_exit_demo"
-            android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/menu_exit_demo"/>
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_exit_app"/>
 
     </group>
 </menu>

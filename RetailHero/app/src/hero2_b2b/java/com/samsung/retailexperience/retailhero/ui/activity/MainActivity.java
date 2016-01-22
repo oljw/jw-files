@@ -104,12 +104,15 @@ public class MainActivity extends BaseActivity {
                 {
                     FragmentModel<MenuModel> fragmentModel = new FragmentModel<MenuModel>();
                     fragmentModel.setActionBackKey("UI_STATE_ATTRACT_LOOP");
-                    fragmentModel.setBackground("@color/white");
+                    fragmentModel.setBackground("@drawable/decision_bg");
+                    fragmentModel.setDrawerId("@id/drawer_whats_new");
                     fragmentModel.setFragment(ModelUtil.getMenuModel(
-                            "@string/decision_title",           //title
-                            "models/decision_menu.json"));      //menu for ListView
+                            "@drawable/hero2_logo",           //title
+                            "@string/decision_subtitle",        //subtitle
+                            "models/decision_menu.json",    //menu for ListView
+                            null, null, null));             // video
 
-                    fragmentModel.setLayout("@layout/fragment_menu_center_align");
+                    fragmentModel.setLayout("@layout/fragment_start_end");
                     mFragment = MenuFragment.newInstance(fragmentModel);
                 }
                 break;
@@ -129,13 +132,17 @@ public class MainActivity extends BaseActivity {
                 {
                     FragmentModel<MenuModel> fragmentModel = new FragmentModel<MenuModel>();
                     fragmentModel.setActionBackKey("UI_STATE_DECISION");
-                    fragmentModel.setBackground("@color/white");
+                    fragmentModel.setBackground("@drawable/whats_new_bg");
                     fragmentModel.setDrawerId("@id/drawer_whats_new");
                     fragmentModel.setFragment(ModelUtil.getMenuModel(
-                            "@string/whats_new_demo",                //title
-                            "models/whats_new_menu.json"));     //menu for ListView
+                            "@string/whats_new_demo_title",                //title
+                            "@string/whats_new_demo_subtitle",
+                            "models/whats_new_menu.json", //menu for ListView
+                            null,
+                            null,
+                            null));
 
-                    fragmentModel.setLayout("@layout/fragment_menu");
+                    fragmentModel.setLayout("@layout/fragment_no_video_menu");
                     mFragment = MenuFragment.newInstance(fragmentModel);
                 }
                 break;
@@ -182,15 +189,18 @@ public class MainActivity extends BaseActivity {
             case UI_STATE_PRODUCTIVITY_MAIN:
                 {
                     FragmentModel<MenuModel> fragmentModel = new FragmentModel<MenuModel>();
-
                     fragmentModel.setActionBackKey("UI_STATE_DECISION");
-                    fragmentModel.setBackground("@color/white");
+                    fragmentModel.setBackground("@drawable/productivity_bg");
                     fragmentModel.setDrawerId("@id/drawer_productivity");
                     fragmentModel.setFragment(ModelUtil.getMenuModel(
-                            "@string/productivity_demo",                //title
-                            "models/productivity_menu.json"));     //menu for ListView
+                            "@string/productivity_demo_title",                //title
+                            "@string/productivity_demo_subtitle",
+                            "models/productivity_menu.json",                  //menu for ListView
+                            "@string/productivity_demo_video_title",
+                            "@string/productivity_demo_video_subtitle",
+                            "UI_STATE_PRODUCTIVITY_DEMO_VIDEO"));
 
-                    fragmentModel.setLayout("@layout/fragment_menu");
+                    fragmentModel.setLayout("@layout/fragment_video_menu");
                     mFragment = MenuFragment.newInstance(fragmentModel);
                 }
                 break;
@@ -238,13 +248,17 @@ public class MainActivity extends BaseActivity {
                 {
                     FragmentModel<MenuModel> fragmentModel = new FragmentModel<MenuModel>();
                     fragmentModel.setActionBackKey("UI_STATE_DECISION");
-                    fragmentModel.setBackground("@color/white");
+                    fragmentModel.setBackground("@drawable/ss_exclusives_bg");
                     fragmentModel.setDrawerId("@id/drawer_ss_exclusives");
                     fragmentModel.setFragment(ModelUtil.getMenuModel(
-                            "@string/ss_exclusives_demo",                //title
-                            "models/samsung_exclusives.json"));     //menu for ListView
+                            "@string/ss_exclusives_demo_title",                //title
+                            "@string/ss_exclusives_demo_subtitle",
+                            "models/samsung_exclusives.json",                  //menu for ListView
+                            "@string/ss_exclusives_demo_video_title",
+                            "@string/ss_exclusives_demo_video_subtitle",
+                            "UI_STATE_EXCLUSIVES_DEMO_VIDEO"));
 
-                    fragmentModel.setLayout("@layout/fragment_menu");
+                    fragmentModel.setLayout("@layout/fragment_video_menu");
                     mFragment = MenuFragment.newInstance(fragmentModel);
                 }
                 break;
@@ -301,24 +315,28 @@ public class MainActivity extends BaseActivity {
             /**
              * MAIN - Designed for Business : 4 demos
              */
-            case UI_STATE_DESIGNED_MAIN:
+            case UI_STATE_DESIGN_MAIN:
                 {
                     FragmentModel<MenuModel> fragmentModel = new FragmentModel<MenuModel>();
                     fragmentModel.setActionBackKey("UI_STATE_DECISION");
-                    fragmentModel.setBackground("@color/white");
+                    fragmentModel.setBackground("@drawable/design_bg");
                     fragmentModel.setDrawerId("@id/drawer_design_for_business");
                     fragmentModel.setFragment(ModelUtil.getMenuModel(
-                            "@string/designed_demo",                //title
-                            "models/designed_menu.json"));     //menu for ListView
+                            "@string/design_demo_title",                //title
+                            "@string/design_demo_subtitle",
+                            "models/design_menu.json",                  //menu for ListView
+                            "@string/design_demo_video_title",
+                            "@string/design_demo_video_subtitle",
+                            "UI_STATE_DESIGN_DEMO_VIDEO"));
 
-                    fragmentModel.setLayout("@layout/fragment_menu");
+                    fragmentModel.setLayout("@layout/fragment_video_menu");
                     mFragment = MenuFragment.newInstance(fragmentModel);
                 }
                 break;
-            case UI_STATE_DESIGNED_DEMO_VIDEO:
+            case UI_STATE_DESIGN_DEMO_VIDEO:
                 {
                     FragmentModel<VideoModel> fragmentModel = new FragmentModel<VideoModel>();
-                    fragmentModel.setActionBackKey("UI_STATE_DESIGNED_MAIN");
+                    fragmentModel.setActionBackKey("UI_STATE_DESIGN_MAIN");
                     fragmentModel.setFragment(new VideoModel( "Designed : Video",             //title
                             "video/designed_base.mp4", "frame/designed_base_frame.jpg", null, null, null));
 
@@ -327,10 +345,10 @@ public class MainActivity extends BaseActivity {
                     mFragment = DefaultVideoFragment.newInstance(fragmentModel);
                 }
                 break;
-            case UI_STATE_DESIGNED_DEMO_AMOLED:
+            case UI_STATE_DESIGN_DEMO_AMOLED:
                 {
                     FragmentModel<VideoModel> fragmentModel = new FragmentModel<VideoModel>();
-                    fragmentModel.setActionBackKey("UI_STATE_DESIGNED_MAIN");
+                    fragmentModel.setActionBackKey("UI_STATE_DESIGN_MAIN");
                     fragmentModel.setFragment(new VideoModel("Designed : Super AMOLED Display",             //title
                             "video/designed_amoled.mp4", "frame/designed_amoled_frame.jpg",
                             "chapter/designed_amoled_chap.json", null, null));
@@ -339,10 +357,10 @@ public class MainActivity extends BaseActivity {
                     mFragment = B2B_AmoledDisplayFragment.newInstance(fragmentModel);
                 }
                 break;
-            case UI_STATE_DESIGNED_DEMO_EDGE_FUNC:
+            case UI_STATE_DESIGN_DEMO_EDGE_FUNC:
                 {
                     FragmentModel<VideoModel> fragmentModel = new FragmentModel<VideoModel>();
-                    fragmentModel.setActionBackKey("UI_STATE_DESIGNED_MAIN");
+                    fragmentModel.setActionBackKey("UI_STATE_DESIGN_MAIN");
                     fragmentModel.setFragment(new VideoModel("Designed : Edge Functionality",             //title
                             "video/designed_edge.mp4", "frame/designed_edge_frame.jpg", null, null, null));
 
@@ -351,10 +369,10 @@ public class MainActivity extends BaseActivity {
                     mFragment = DefaultVideoFragment.newInstance(fragmentModel);
                 }
                 break;
-            case UI_STATE_DESIGNED_DEMO_CAMERA:
+            case UI_STATE_DESIGN_DEMO_CAMERA:
                 {
                     FragmentModel<VideoModel> fragmentModel = new FragmentModel<VideoModel>();
-                    fragmentModel.setActionBackKey("UI_STATE_DESIGNED_MAIN");
+                    fragmentModel.setActionBackKey("UI_STATE_DESIGN_MAIN");
                     fragmentModel.setFragment(new VideoModel("Designed : Camera",             //title
                             "video/designed_camera.mp4", "frame/designed_camera_frame.jpg",
                             "chapter/designed_camera_chap.json", null, null));
@@ -367,7 +385,7 @@ public class MainActivity extends BaseActivity {
             /**
              * Compare device page
              */
-            case UI_STATE_COMPARE_DEVICE:
+            case UI_STATE_DEVICE_SPECS:
                 {
                     mFragment = new CompareDeviceFragment();
                 }
@@ -438,15 +456,16 @@ public class MainActivity extends BaseActivity {
     }
 
     public void changeEndDemoFragment(AppConst.UIState backFragment, AppConsts.TransactionDir dir) {
-        MenuModel menuModel = ModelUtil.getMenuModel("@string/demo_end_title", "models/demo_end_menu.json");
+        MenuModel menuModel = ModelUtil.getMenuModel("@drawable/hero2_logo",
+                "@string/demo_end_subtitle", "models/demo_end_menu.json", null, null, null);
         menuModel.getMenuItems().get(0).setAction(backFragment.name());    //change action for first menu item
 
         FragmentModel<MenuModel> fragmentModel = new FragmentModel<MenuModel>();
         fragmentModel.setActionBackKey(backFragment.name());
-        fragmentModel.setBackground("@color/white");
+        fragmentModel.setBackground("@drawable/end_page_bg");
         fragmentModel.setFragment(menuModel);     //menu for ListView
 
-        fragmentModel.setLayout("@layout/fragment_menu");
+        fragmentModel.setLayout("@layout/fragment_start_end");
         mFragment = MenuFragment.newInstance(fragmentModel);
         changeFragment(AppConst.UIState.UI_STATE_DEMO_END, dir);
     }
@@ -487,7 +506,9 @@ public class MainActivity extends BaseActivity {
                 else if (menuItem.getItemId() == R.id.drawer_ss_exclusives)
                     newState = AppConst.UIState.UI_STATE_EXCLUSIVES_MAIN;
                 else if (menuItem.getItemId() == R.id.drawer_design_for_business)
-                    newState = AppConst.UIState.UI_STATE_DESIGNED_MAIN;
+                    newState = AppConst.UIState.UI_STATE_DESIGN_MAIN;
+                else if (menuItem.getItemId() == R.id.drawer_device_specs)
+                    newState = AppConst.UIState.UI_STATE_DEVICE_SPECS;
 
                 changeFragment(newState, AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
                 return true;

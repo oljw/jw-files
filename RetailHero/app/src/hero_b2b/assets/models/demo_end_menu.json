@@ -1,13 +1,17 @@
 {
     "menuItems": [
       {
-        "layout": "@layout/menu_item_center_align",
-        "title": "@string/explore_more_demos",
+        "layout": "@layout/menu_item",
+        "title": "@string/back_to_menu_title",
+        "subTitle": "@string/back_to_menu_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "explore_more_demos"
       },
       {
-        "layout": "@layout/menu_item_center_align",
-        "title": "@string/free_explore",
+        "layout": "@layout/menu_item",
+        "title": "@string/free_explore_title",
+        "subTitle": "@string/free_explore_subtitle",
+        "icon": "@drawable/chevron",
         "tag": "free_explore",
         "action": "UI_STATE_NONE"
       }

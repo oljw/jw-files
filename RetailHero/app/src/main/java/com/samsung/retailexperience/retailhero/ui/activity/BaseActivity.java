@@ -63,7 +63,6 @@ public abstract class BaseActivity extends Activity implements ResourceUtil.Miss
         getGlobalVariables();
         setWindowFeatures();
         getDisplaySize();
-        //keepScreenOn();
         screenStayOn(true);
         setMissingContentListener();
 

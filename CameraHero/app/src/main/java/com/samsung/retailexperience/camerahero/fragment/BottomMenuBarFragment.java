@@ -26,7 +26,6 @@ public class BottomMenuBarFragment extends Fragment {
     public interface BottomMenuBarListener {
         void onStillClicked();
         void onSwitchClicked();
-        void onVideoClicked();
         void onGalleryClicked();
     }
 
@@ -51,7 +50,6 @@ public class BottomMenuBarFragment extends Fragment {
         mSwitchBtn.setOnClickListener(mSwitchBtnClickListener);
 
         mVideoBtn = (ImageButton) mView.findViewById(R.id.video_button);
-        mVideoBtn.setOnClickListener(mVideoBtnClickListener);
 
         mGalleryBtn = (ImageView) mView.findViewById(R.id.gallery_button);
         mGalleryBtn.setOnClickListener(mGalleryBtnClickListener);
@@ -70,13 +68,6 @@ public class BottomMenuBarFragment extends Fragment {
         @Override
         public void onClick(View view) {
             getListener().onSwitchClicked();
-        }
-    };
-
-    View.OnClickListener mVideoBtnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            getListener().onVideoClicked();
         }
     };
 

@@ -8,34 +8,39 @@ import android.util.Log;
 public class MenuItemModel extends ResourceModel {
     public String layout;
     public String title;
+    public String subTitle;
     public String icon;
     public String tag;
     public String action;
 
     public MenuItemModel() {
-        this(null, null, null, null, null);
+        this(null, null, null, null, null, null);
     }
     public MenuItemModel(String layout) {
-        this(layout, null, null, null, null);
+        this(layout, null, null, null, null, null);
     }
     public MenuItemModel(String layout,
                          String title,
+                         String subTitle,
                          String tag) {
-        this(layout, title, tag, null, null);
+        this(layout, title, subTitle, tag, null, null);
     }
     public MenuItemModel(String layout,
                          String title,
+                         String subTitle,
                          String tag,
                          String action) {
-        this(layout, title, tag, action, null);
+        this(layout, title, subTitle, tag, action, null);
     }
     public MenuItemModel(String layout,
                          String title,
+                         String subTitle,
                          String tag,
                          String action,
                          String icon) {
         this.layout = layout;
         this.title  = title;
+        this.subTitle = subTitle;
         this.icon   = icon;
         this.tag    = tag;
         this.action = action;
@@ -53,6 +58,18 @@ public class MenuItemModel extends ResourceModel {
     }
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSubTitle() {
+        return this.subTitle;
+    }
+    public int getSubTitleResId() {
+        if (this.subTitle != null)
+            return getResId(this.subTitle);
+        return 0;
+    }
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
 
@@ -111,6 +128,8 @@ public class MenuItemModel extends ResourceModel {
         StringBuilder builder = new StringBuilder();
         if (this.title != null)
             appendString(builder, "title = " + this.title);
+        if (this.subTitle != null)
+            appendString(builder, "subTitle = " + this.subTitle);
         if (this.layout != null)
             appendString(builder, "layout = " + this.layout);
         if (this.tag != null)
