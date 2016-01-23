@@ -309,7 +309,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     /**
      * Convert touch position x:y to {@link Camera.Area} position -1000:-1000 to 1000:1000.
      */
-    private int focusAreaSize = 300;
+    private int focusAreaSize = 100;
     private Rect calculateTapArea(float x, float y, float coefficient) {
         int width = 0;
         int height = 0;

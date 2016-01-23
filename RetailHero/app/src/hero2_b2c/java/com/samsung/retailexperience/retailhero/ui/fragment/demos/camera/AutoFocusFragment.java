@@ -11,6 +11,7 @@ import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samsung.retailexperience.retailhero.R;
@@ -43,6 +44,8 @@ public class AutoFocusFragment extends BaseCameraFragment
     private GalleryZoomView mGalleryPreview;
     private ImageButton mCaptureBtn;
     private MediaPlayer mediaPlayer;
+    private TextView mTapSuper;
+    private ImageView mCaptureSuper;
 
 
     public static AutoFocusFragment newInstance(FragmentModel<VideoModel> fragmentModel) {
@@ -59,18 +62,17 @@ public class AutoFocusFragment extends BaseCameraFragment
 
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
 
-        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment_test);
-        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment_test);
-
+        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().
+                findFragmentById(R.id.top_fragment_test);
+        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().
+                findFragmentById(R.id.bottom_fragment_test);
         mTopGalleryBar = (TopGalleryBarFragment) getChildFragmentManager().
                 findFragmentById(R.id.top_gallery_fragment_test);
         mBottomGalleryBar = (BottomGalleryBarFragment) getChildFragmentManager().
                 findFragmentById(R.id.bottom_gallery_fragment_test);
+//        mBottomMenuBar.setListener(this);
 
-        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).
-                hide(mTopGalleryBar).hide(mBottomGalleryBar).commit();
-
-        mCaptureBtn = (ImageButton) mView.findViewById(R.id.capture_button);
+        mCaptureBtn = (ImageButton) view.findViewById(R.id.capture_button);
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,16 +80,18 @@ public class AutoFocusFragment extends BaseCameraFragment
             }
         });
         mCaptureBtn.setVisibility(View.GONE);
-        mCaptureBtn.bringToFront();
 
-        mBottomMenuBar.setListener(this);
+        mCaptureSuper = (ImageView) view.findViewById(R.id.capture_super);
+        mCaptureSuper.setVisibility(view.GONE);
+
+        mTapSuper = (TextView) view.findViewById(R.id.tap_super);
+        mTapSuper.setVisibility(view.GONE);
 
         mCamera = getCameraInstance(-1);
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
 
         mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon_test);
-        mFocusIcon.bringToFront();
 
         mGalleryPreview = (GalleryZoomView) view.findViewById(R.id.gallery_view_test);
         mGalleryPreview.setVisibility(View.GONE);
@@ -95,6 +99,8 @@ public class AutoFocusFragment extends BaseCameraFragment
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
         mPreview.setVisibility(View.GONE);
 
+        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).
+                hide(mTopGalleryBar).hide(mBottomGalleryBar).commit();
     }
 
     @Override
@@ -128,10 +134,24 @@ public class AutoFocusFragment extends BaseCameraFragment
 
         mCaptureBtn.setVisibility(View.VISIBLE);
         mCaptureBtn.bringToFront();
+
+        mTapSuper.setVisibility(View.VISIBLE);
+        mTapSuper.bringToFront();
+        mTapSuper.setClickable(false);
+
+        mCaptureSuper.setVisibility(View.VISIBLE);
+        mCaptureSuper.bringToFront();
+
     }
 
     @OnChapter(chapterIndex = 1)
     public void onChaper_1() {
+        Log.i(TAG, "onChaper_0");
+
+    }
+
+    @OnChapter(chapterIndex = 2)
+    public void onChaper_2() {
         Log.i(TAG, "onChaper_1");
 
         getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
@@ -143,15 +163,15 @@ public class AutoFocusFragment extends BaseCameraFragment
 
     }
 
-    @OnChapter(chapterIndex = 2)
-    public void onChaper_2() {
-        Log.i(TAG, "onChaper_1");
-
-    }
-
     @OnChapter(chapterIndex = 3)
     public void onChaper_3() {
         Log.i(TAG, "onChaper_1");
 
     }
+//
+//    @OnChapter(chapterIndex = 3)
+//    public void onChaper_3() {
+//        Log.i(TAG, "onChaper_1");
+//
+//    }
 }

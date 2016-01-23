@@ -82,8 +82,8 @@ public class BaseCameraFragment extends BaseVideoFragment
         mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon);
         mFocusIcon.bringToFront();
 
-        mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
-        mGallerybtn.setRotation(90);
+//        mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
+//        mGallerybtn.setRotation(90);
     }
 
     @Override

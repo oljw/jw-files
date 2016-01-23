@@ -38,12 +38,26 @@
                 android:id="@+id/focus_icon_test"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/star_icon"
+                android:src="@drawable/tap_focus_icon"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent"
                 android:alpha="0.4"
                 android:visibility="invisible"
                 android:adjustViewBounds="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tap anywhere to auto-focus"
+                android:id="@+id/tap_super"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/focus_icon_test" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/capture_super"
+                android:src="@drawable/capture_super"/>
 
         </RelativeLayout>
 
@@ -72,7 +86,6 @@
             android:layout_alignParentStart="true" />
 
     </RelativeLayout>
-
 
     <com.samsung.retailexperience.retailhero.view.GalleryZoomView
         android:id="@+id/gallery_view_test"

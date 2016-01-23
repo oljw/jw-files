@@ -6,57 +6,57 @@
     android:weightSum="5"
     android:background="#000000">
 
-    <ImageButton
-        android:id="@+id/mode_button"
-        android:layout_width="31dp"
-        android:layout_height="31dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-        android:scaleType="fitEnd"
-        android:background="@android:color/transparent"
-        android:src="@drawable/mode_button"/>
+    <!--<ImageButton-->
+        <!--android:id="@+id/mode_button"-->
+        <!--android:layout_width="31dp"-->
+        <!--android:layout_height="31dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:scaleType="fitEnd"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:src="@drawable/mode_button"/>-->
 
-    <ImageButton
-        android:id="@+id/switch_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-        android:scaleType="fitEnd"
-        android:background="@android:color/transparent"
-        android:src="@drawable/switch_button"/>
+    <!--<ImageButton-->
+        <!--android:id="@+id/switch_button"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:scaleType="fitEnd"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:src="@drawable/switch_button"/>-->
 
-    <ImageButton
-        android:id="@+id/still_button"
-        android:scaleType="fitCenter"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_weight="1"
-        android:src="@drawable/camera_button"
-        android:background="@android:color/transparent"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="35dp" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/still_button"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_width="65dp"-->
+        <!--android:layout_height="65dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:src="@drawable/camera_button"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:layout_marginBottom="35dp" />-->
 
-    <ImageButton
-        android:id="@+id/video_button"
-        android:scaleType="fitStart"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:src="@drawable/record_button"
-        android:background="@android:color/transparent"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical">
-    </ImageButton>
+    <!--<ImageButton-->
+        <!--android:id="@+id/video_button"-->
+        <!--android:scaleType="fitStart"-->
+        <!--android:layout_width="55dp"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:src="@drawable/record_button"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_gravity="center_vertical">-->
+    <!--</ImageButton>-->
 
-    <ImageView
-        android:id="@+id/gallery_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:padding="5dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/gallery_icon"
-        android:layout_gravity="center_vertical" />
+    <!--<ImageView-->
+        <!--android:id="@+id/gallery_button"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:padding="5dp"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:src="@drawable/gallery_icon"-->
+        <!--android:layout_gravity="center_vertical" />-->
 
 </LinearLayout>
