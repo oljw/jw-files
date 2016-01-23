@@ -8,12 +8,14 @@ import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.media.ExifInterface;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.samsung.retailexperience.retailhero.R;
 import com.samsung.retailexperience.retailhero.ui.activity.MainActivity;
@@ -59,6 +61,7 @@ public class BaseCameraFragment extends BaseVideoFragment
     protected int mCameraId = 0;
     protected boolean mCameraBack = true;
     protected int mScreenOrientation = 90;
+    protected MediaPlayer mediaPlayer;
 
     public void onViewCreated(View view) {
         Log.d(TAG, "##### CameraFragment onViewCreated Called");
@@ -69,6 +72,8 @@ public class BaseCameraFragment extends BaseVideoFragment
 
         mCamera = getCameraInstance(-1);
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_preview);
+
+        mediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
 
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
@@ -98,10 +103,12 @@ public class BaseCameraFragment extends BaseVideoFragment
     @Override
     public void onStillClicked() {
         Log.d(TAG, "onClick captureButton called");
-        mCameraSurface.setStillShotParam(mCameraBack);
+//        mCameraSurface.setStillShotParam(mCameraBack);
 
         // get an image from the camera
-        mCamera.takePicture(shutter, null, preview);
+//        mCamera.takePicture(shutter, null, preview);
+//        mediaPlayer.start();
+        Toast.makeText(getActivity(), "스틸샷찍힘", Toast.LENGTH_LONG).show();
     }
 
     @Override

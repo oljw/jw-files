@@ -18,6 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/capture_button"
+            android:src="@drawable/star_icon"
+            android:layout_below="@+id/camera_view_test"
+            android:layout_centerHorizontal="true" />
+
         <RelativeLayout
             android:id="@+id/camera_view_test"
             android:layout_width="match_parent"
@@ -36,6 +44,7 @@
                 android:alpha="0.4"
                 android:visibility="invisible"
                 android:adjustViewBounds="true" />
+
         </RelativeLayout>
 
         <fragment
@@ -50,7 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/camera_bottom_menubar_height"
             android:layout_alignParentBottom="true"
-            android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment" />
+            android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment" >
+
+        </fragment>
 
         <fragment
             android:id="@+id/bottom_gallery_fragment_test"

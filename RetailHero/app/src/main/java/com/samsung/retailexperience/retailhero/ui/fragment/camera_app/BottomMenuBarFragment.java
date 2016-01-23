@@ -18,7 +18,7 @@ public class BottomMenuBarFragment extends Fragment {
     private static final String TAG = TopMenuBarFragment.class.getSimpleName();
 
     protected View mView = null;
-    private ImageButton mStillBtn = null;
+    public ImageButton mStillBtn = null;
     private ImageButton mSwitchBtn = null;
     private ImageButton mVideoBtn = null;
     private ImageView mGalleryBtn = null;

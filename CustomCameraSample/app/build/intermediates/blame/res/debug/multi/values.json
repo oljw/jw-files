@@ -1,0 +1,150 @@
+[
+    {
+        "outputFile": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\CustomCameraSample\\app\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 5,
+                    "endColumn": 19,
+                    "endOffset": 185
+                },
+                "from": {
+                    "file": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\CustomCameraSample\\app\\src\\main\\res\\values\\arrays.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 231,
+                        "endLine": 10,
+                        "endColumn": 19,
+                        "endOffset": 364
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 190,
+                    "endLine": 10,
+                    "endColumn": 19,
+                    "endOffset": 353
+                },
+                "from": {
+                    "file": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\CustomCameraSample\\app\\src\\main\\res\\values\\arrays.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 57,
+                        "endLine": 6,
+                        "endColumn": 19,
+                        "endOffset": 224
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 358,
+                    "endLine": 15,
+                    "endColumn": 19,
+                    "endOffset": 519
+                },
+                "from": {
+                    "file": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\CustomCameraSample\\app\\src\\main\\res\\values\\arrays.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 371,
+                        "endLine": 15,
+                        "endColumn": 19,
+                        "endOffset": 536
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 524,
+                    "endColumn": 49,
+                    "endOffset": 569
+                },
+                "from": {
+                    "file": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\CustomCameraSample\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 111,
+                        "endColumn": 49,
+                        "endOffset": 156
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 574,
+                    "endColumn": 52,
+                    "endOffset": 622
+                },
+                "from": {
+                    "file": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\CustomCameraSample\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 57,
+                        "endColumn": 52,
+                        "endOffset": 105
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 627,
+                    "endLine": 24,
+                    "endColumn": 13,
+                    "endOffset": 946
+                },
+                "from": {
+                    "file": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\CustomCameraSample\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 5,
+                        "startOffset": 104,
+                        "endLine": 9,
+                        "endColumn": 13,
+                        "endOffset": 429
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 951,
+                    "endLine": 29,
+                    "endColumn": 13,
+                    "endOffset": 1160
+                },
+                "from": {
+                    "file": "C:\\Users\\JW\\Desktop\\JAEWOO\\JAEWOOO\\CustomCameraSample\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 5,
+                        "startOffset": 436,
+                        "endLine": 14,
+                        "endColumn": 13,
+                        "endOffset": 649
+                    }
+                }
+            }
+        ]
+    }
+]

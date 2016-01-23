@@ -2,13 +2,16 @@ package com.samsung.retailexperience.retailhero.ui.fragment.demos.camera;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Gallery;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.samsung.retailexperience.retailhero.R;
 import com.samsung.retailexperience.retailhero.annotation.OnChapter;
@@ -37,8 +40,10 @@ public class AutoFocusFragment extends BaseCameraFragment
 
     private TopGalleryBarFragment mTopGalleryBar = null;
     private BottomGalleryBarFragment mBottomGalleryBar = null;
-//    private GalleryZoomView mGView = null;
     private GalleryZoomView mGalleryPreview;
+    private ImageButton mCaptureBtn;
+    private MediaPlayer mediaPlayer;
+
 
     public static AutoFocusFragment newInstance(FragmentModel<VideoModel> fragmentModel) {
         AutoFocusFragment fragment = new AutoFocusFragment();
@@ -51,6 +56,9 @@ public class AutoFocusFragment extends BaseCameraFragment
 
     @Override
     public void onViewCreated(View view) {
+
+        final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
+
         mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment_test);
         mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.bottom_fragment_test);
 
@@ -61,6 +69,16 @@ public class AutoFocusFragment extends BaseCameraFragment
 
         getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).
                 hide(mTopGalleryBar).hide(mBottomGalleryBar).commit();
+
+        mCaptureBtn = (ImageButton) mView.findViewById(R.id.capture_button);
+        mCaptureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.start();
+            }
+        });
+        mCaptureBtn.setVisibility(View.GONE);
+        mCaptureBtn.bringToFront();
 
         mBottomMenuBar.setListener(this);
 
@@ -95,51 +113,6 @@ public class AutoFocusFragment extends BaseCameraFragment
                 AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
     }
 
-
-
-//    @Override
-//    public void drawFocusIcon(final float x, final float y) {
-//        Log.d(TAG, "########## BaseCameraFragment drawFocusIcon");
-//
-//        if (rotateIconAnimator != null && rotateIconAnimator.isRunning())
-//            rotateIconAnimator.cancel();
-//
-//        rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 180f);
-//        rotateIconAnimator.setDuration(200);
-//        rotateIconAnimator.addListener(new Animator.AnimatorListener() {
-//
-//            @Override
-//            public void onAnimationStart(Animator animation) {
-//                mFocusIcon.setVisibility(View.VISIBLE);
-//
-//                ViewGroup.MarginLayoutParams marginLayoutParams =
-//                        (ViewGroup.MarginLayoutParams)mFocusIcon.getLayoutParams();
-//                marginLayoutParams.setMargins
-//                        ((int)(x - 300/2),
-//                                (int)(y - 300/2),
-//                                (int)(-x + 300/2),
-//                                (int)(-y + 300 / 2));
-//                mFocusIcon.setLayoutParams(marginLayoutParams);
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                mFocusIcon.setVisibility(View.INVISIBLE);
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator animation) {
-//                mFocusIcon.setVisibility(View.INVISIBLE);
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animator animation) {
-//
-//            }
-//        });
-//        rotateIconAnimator.start();
-//    }
-
     /**
      * Chapter callback methods
      */
@@ -152,12 +125,21 @@ public class AutoFocusFragment extends BaseCameraFragment
         mPreview.addView(mCameraSurface);
         mPreview.setVisibility(View.VISIBLE);
         mFocusIcon.bringToFront();
+
+        mCaptureBtn.setVisibility(View.VISIBLE);
+        mCaptureBtn.bringToFront();
     }
 
     @OnChapter(chapterIndex = 1)
     public void onChaper_1() {
         Log.i(TAG, "onChaper_1");
 
+        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
+        getFragmentManager().beginTransaction().show(mTopGalleryBar).show(mBottomGalleryBar).commit();
+
+        mPreview.setVisibility(View.GONE);
+        mCaptureBtn.setVisibility(View.GONE);
+        mGalleryPreview.setVisibility(View.VISIBLE);
 
     }
 
@@ -165,11 +147,6 @@ public class AutoFocusFragment extends BaseCameraFragment
     public void onChaper_2() {
         Log.i(TAG, "onChaper_1");
 
-        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
-        getFragmentManager().beginTransaction().show(mTopGalleryBar).show(mBottomGalleryBar).commit();
-
-        mPreview.setVisibility(View.GONE);
-        mGalleryPreview.setVisibility(View.VISIBLE);
     }
 
     @OnChapter(chapterIndex = 3)
