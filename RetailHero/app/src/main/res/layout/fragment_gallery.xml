@@ -5,13 +5,7 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/IMAGEID"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:src="@drawable/test_picture"/>-->
-
-    <com.samsung.retailexperience.camerahero.view.GalleryZoomView
+    <com.samsung.retailexperience.retailhero.view.GalleryZoomView
         android:id="@+id/IMAGEID"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,13 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignParentTop="true"
-        android:name="com.samsung.retailexperience.camerahero.fragment.TopGalleryBarFragment" />
+        android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopGalleryBarFragment" />
 
     <fragment
         android:id="@+id/bottom_gallery_fragment"
         android:layout_width="match_parent"
         android:layout_height="74dp"
         android:layout_alignParentBottom="true"
-        android:name="com.samsung.retailexperience.camerahero.fragment.BottomGalleryBarFragment" />
+        android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomGalleryBarFragment" />
 
 </RelativeLayout>

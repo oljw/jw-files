@@ -120,7 +120,7 @@ public class BaseCameraFragment extends BaseVideoFragment
 //        changeFragment(AppConsts.UIState.UI_STATE_GALLERY, AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
     }
 
-    private void releaseCamera(){
+    protected void releaseCamera(){
         Log.d(TAG, "##### releaseCamera called");
 
         if (mCamera != null){
@@ -168,13 +168,13 @@ public class BaseCameraFragment extends BaseVideoFragment
         return c; // returns null if camera is unavailable
     }
 
-    private Camera.ShutterCallback shutter = new Camera.ShutterCallback(){
+    protected Camera.ShutterCallback shutter = new Camera.ShutterCallback(){
         public void onShutter() {
             Log.d(TAG, "shutter !!");
         }
     };
 
-    private Camera.PictureCallback preview = new Camera.PictureCallback() {
+    protected Camera.PictureCallback preview = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
 
@@ -249,7 +249,7 @@ public class BaseCameraFragment extends BaseVideoFragment
                 source.getHeight(), matrix, false);
     }
 
-    private int findFrontFacingCamera() {
+    protected int findFrontFacingCamera() {
         Log.d(TAG, "findFrontFacingCamera called");
 
         int cameraId = -1;
@@ -267,7 +267,7 @@ public class BaseCameraFragment extends BaseVideoFragment
     }
 
     //Find Back Facing Camera
-    private int findBackFacingCamera() {
+    protected int findBackFacingCamera() {
         Log.d(TAG, "findBackFacingCamera called");
 
         int cameraId = -1;
@@ -322,9 +322,11 @@ public class BaseCameraFragment extends BaseVideoFragment
         mScreenOrientation = screenOrientation;
     }
 
-    ObjectAnimator rotateIconAnimator = null;
+    protected ObjectAnimator rotateIconAnimator = null;
     @Override
     public void drawFocusIcon(final float x, final float y) {
+        Log.d(TAG, "########## BaseCameraFragment drawFocusIcon");
+
         if (rotateIconAnimator != null && rotateIconAnimator.isRunning())
             rotateIconAnimator.cancel();
 

@@ -16,8 +16,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/camera_view_test"
@@ -25,7 +24,19 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/top_fragment_test"
             android:layout_above="@+id/bottom_fragment_test"
-            android:background="#000000"/>
+            android:background="#000000">
+
+            <ImageView
+                android:id="@+id/focus_icon_test"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/star_icon"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:alpha="0.4"
+                android:visibility="invisible"
+                android:adjustViewBounds="true" />
+        </RelativeLayout>
 
         <fragment
             android:id="@+id/top_fragment_test"
@@ -41,6 +52,31 @@
             android:layout_alignParentBottom="true"
             android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment" />
 
-        </RelativeLayout>
+        <fragment
+            android:id="@+id/bottom_gallery_fragment_test"
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomGalleryBarFragment"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+
+    <com.samsung.retailexperience.retailhero.view.GalleryZoomView
+        android:id="@+id/gallery_view_test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/test_picture3"
+        android:longClickable="true"
+        android:clickable="true" />
+
+    <fragment
+        android:id="@+id/top_gallery_fragment_test"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopGalleryBarFragment" />
+
 
 </FrameLayout>
