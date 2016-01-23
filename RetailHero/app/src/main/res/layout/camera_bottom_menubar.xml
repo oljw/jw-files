@@ -8,8 +8,8 @@
 
     <ImageButton
         android:id="@+id/mode_button"
-        android:layout_width="31dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:scaleType="fitEnd"
@@ -18,8 +18,8 @@
 
     <ImageButton
         android:id="@+id/switch_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:scaleType="fitEnd"
@@ -29,8 +29,8 @@
     <ImageButton
         android:id="@+id/still_button"
         android:scaleType="fitCenter"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:src="@drawable/camera_button"
         android:background="@android:color/transparent"
@@ -40,8 +40,8 @@
     <ImageButton
         android:id="@+id/video_button"
         android:scaleType="fitStart"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/record_button"
         android:background="@android:color/transparent"
         android:layout_weight="1"
@@ -50,8 +50,8 @@
 
     <ImageView
         android:id="@+id/gallery_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:padding="5dp"

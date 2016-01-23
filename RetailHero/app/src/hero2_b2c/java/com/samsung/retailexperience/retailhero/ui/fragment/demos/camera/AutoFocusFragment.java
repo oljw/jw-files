@@ -46,6 +46,8 @@ public class AutoFocusFragment extends BaseCameraFragment
     private MediaPlayer mediaPlayer;
     private TextView mTapSuper;
     private ImageView mCaptureSuper;
+    private RelativeLayout mCameraLayout;
+    private RelativeLayout mGalleryLayout;
 
 
     public static AutoFocusFragment newInstance(FragmentModel<VideoModel> fragmentModel) {
@@ -62,6 +64,10 @@ public class AutoFocusFragment extends BaseCameraFragment
 
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
 
+
+        mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
+        mGalleryLayout = (RelativeLayout) view.findViewById(R.id.gallery_layout);
+
         mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().
                 findFragmentById(R.id.top_fragment_test);
         mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().
@@ -70,7 +76,19 @@ public class AutoFocusFragment extends BaseCameraFragment
                 findFragmentById(R.id.top_gallery_fragment_test);
         mBottomGalleryBar = (BottomGalleryBarFragment) getChildFragmentManager().
                 findFragmentById(R.id.bottom_gallery_fragment_test);
-//        mBottomMenuBar.setListener(this);
+
+        mGalleryPreview = (GalleryZoomView) view.findViewById(R.id.gallery_view_test);
+
+        mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
+
+        mCaptureSuper = (ImageView) view.findViewById(R.id.capture_super);
+        mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon_test);
+
+        mTapSuper = (TextView) view.findViewById(R.id.tap_super);
+
+        mCamera = getCameraInstance(-1);
+        mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
+        mCameraSurface.setListener(this);
 
         mCaptureBtn = (ImageButton) view.findViewById(R.id.capture_button);
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,27 +97,6 @@ public class AutoFocusFragment extends BaseCameraFragment
                 mp.start();
             }
         });
-        mCaptureBtn.setVisibility(View.GONE);
-
-        mCaptureSuper = (ImageView) view.findViewById(R.id.capture_super);
-        mCaptureSuper.setVisibility(view.GONE);
-
-        mTapSuper = (TextView) view.findViewById(R.id.tap_super);
-        mTapSuper.setVisibility(view.GONE);
-
-        mCamera = getCameraInstance(-1);
-        mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
-        mCameraSurface.setListener(this);
-
-        mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon_test);
-
-        mGalleryPreview = (GalleryZoomView) view.findViewById(R.id.gallery_view_test);
-
-        mPreview = (RelativeLayout) view.findViewById(R.id.camera_layout);
-        mPreview.setVisibility(View.GONE);
-
-//        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).
-//                hide(mTopGalleryBar).hide(mBottomGalleryBar).commit();
     }
 
     @Override
@@ -125,21 +122,15 @@ public class AutoFocusFragment extends BaseCameraFragment
     public void onChaper_0() {
         Log.i(TAG, "onChaper_0");
 
-        getFragmentManager().beginTransaction().show(mTopMenuBar).show(mBottomMenuBar).commit();
-
+        mCameraLayout.setVisibility(View.VISIBLE);
         mPreview.addView(mCameraSurface);
-        mPreview.setVisibility(View.VISIBLE);
         mFocusIcon.bringToFront();
 
-        mCaptureBtn.setVisibility(View.VISIBLE);
-        mCaptureBtn.bringToFront();
-
-        mTapSuper.setVisibility(View.VISIBLE);
-        mTapSuper.bringToFront();
-        mTapSuper.setClickable(false);
-
-        mCaptureSuper.setVisibility(View.VISIBLE);
-        mCaptureSuper.bringToFront();
+//        mCaptureBtn.bringToFront();
+//
+//        mTapSuper.bringToFront();
+//
+//        mCaptureSuper.bringToFront();
 
     }
 
@@ -147,13 +138,9 @@ public class AutoFocusFragment extends BaseCameraFragment
     public void onChaper_1() {
         Log.i(TAG, "onChaper_0");
 
-//        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
-//        getFragmentManager().beginTransaction().show(mTopGalleryBar).show(mBottomGalleryBar).commit();
+        mCameraLayout.setVisibility(View.GONE);
+        mGalleryLayout.setVisibility(View.VISIBLE);
 
-//        mPreview.setVisibility(View.GONE);
-//        mCaptureBtn.setVisibility(View.GONE);
-//        mGalleryPreview.setVisibility(View.VISIBLE);
-//        mCaptureSuper.setVisibility(View.GONE);
     }
 
     @OnChapter(chapterIndex = 2)

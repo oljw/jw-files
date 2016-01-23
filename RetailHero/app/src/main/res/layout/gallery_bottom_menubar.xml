@@ -6,34 +6,34 @@
     android:weightSum="3"
     android:background="@drawable/bottom_gradient">
 
-    <ImageButton
-        android:id="@+id/share_button"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-        android:scaleType="fitEnd"
-        android:background="@android:color/transparent"
-        android:src="@drawable/share_icon"/>
+    <!--<ImageButton-->
+        <!--android:id="@+id/share_button"-->
+        <!--android:layout_width="35dp"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:scaleType="fitEnd"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:src="@drawable/share_icon"/>-->
 
-    <ImageButton
-        android:id="@+id/edit_button"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_vertical"
-        android:scaleType="fitCenter"
-        android:background="@android:color/transparent"
-        android:src="@drawable/edit_icon"/>
+    <!--<ImageButton-->
+        <!--android:id="@+id/edit_button"-->
+        <!--android:layout_width="35dp"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:src="@drawable/edit_icon"/>-->
 
-    <ImageButton
-        android:id="@+id/delete_button"
-        android:scaleType="fitStart"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_weight="1"
-        android:src="@drawable/delete_icon"
-        android:background="@android:color/transparent"
-        android:layout_gravity="center_vertical" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/delete_button"-->
+        <!--android:scaleType="fitStart"-->
+        <!--android:layout_width="35dp"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:src="@drawable/delete_icon"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:layout_gravity="center_vertical" />-->
 
 </LinearLayout>
