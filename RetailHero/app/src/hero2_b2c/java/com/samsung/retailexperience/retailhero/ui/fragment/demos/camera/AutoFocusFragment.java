@@ -94,13 +94,12 @@ public class AutoFocusFragment extends BaseCameraFragment
         mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon_test);
 
         mGalleryPreview = (GalleryZoomView) view.findViewById(R.id.gallery_view_test);
-        mGalleryPreview.setVisibility(View.GONE);
 
-        mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
+        mPreview = (RelativeLayout) view.findViewById(R.id.camera_layout);
         mPreview.setVisibility(View.GONE);
 
-        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).
-                hide(mTopGalleryBar).hide(mBottomGalleryBar).commit();
+//        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).
+//                hide(mTopGalleryBar).hide(mBottomGalleryBar).commit();
     }
 
     @Override
@@ -148,18 +147,18 @@ public class AutoFocusFragment extends BaseCameraFragment
     public void onChaper_1() {
         Log.i(TAG, "onChaper_0");
 
+//        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
+//        getFragmentManager().beginTransaction().show(mTopGalleryBar).show(mBottomGalleryBar).commit();
+
+//        mPreview.setVisibility(View.GONE);
+//        mCaptureBtn.setVisibility(View.GONE);
+//        mGalleryPreview.setVisibility(View.VISIBLE);
+//        mCaptureSuper.setVisibility(View.GONE);
     }
 
     @OnChapter(chapterIndex = 2)
     public void onChaper_2() {
         Log.i(TAG, "onChaper_1");
-
-        getFragmentManager().beginTransaction().hide(mTopMenuBar).hide(mBottomMenuBar).commit();
-        getFragmentManager().beginTransaction().show(mTopGalleryBar).show(mBottomGalleryBar).commit();
-
-        mPreview.setVisibility(View.GONE);
-        mCaptureBtn.setVisibility(View.GONE);
-        mGalleryPreview.setVisibility(View.VISIBLE);
 
     }
 
