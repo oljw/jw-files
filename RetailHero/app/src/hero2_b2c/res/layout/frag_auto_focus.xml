@@ -26,14 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/capture_button"
-                android:src="@drawable/camera_button"
-                android:layout_below="@+id/camera_view_test"
-                android:layout_centerHorizontal="true" />
-
             <RelativeLayout
                 android:id="@+id/camera_view_test"
                 android:layout_width="match_parent"
@@ -72,22 +64,37 @@
 
 
         <!-- Interactive Icons-->
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tap anywhere to auto-focus"
             android:id="@+id/tap_super"
-            android:layout_centerVertical="true"
-            android:clickable="false"/>
+            android:src="@drawable/tap_super"
+            android:clickable="false"
+            android:layout_centerInParent="true" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:id="@+id/capture_super"
+            android:clickable="false"
             android:src="@drawable/capture_super"
             android:layout_centerHorizontal="true"
+            android:paddingBottom="35dp"
+            android:paddingRight="3dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/capture_button"
+            android:src="@drawable/camera_button"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:baselineAlignBottom="false"
+            android:layout_alignParentBottom="true"
+            android:clickable="false"
             android:paddingBottom="35dp" />
+
     </RelativeLayout>
 
 
@@ -102,7 +109,7 @@
             android:id="@+id/gallery_view_test"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/test_picture1"
+            android:src="@drawable/test_picture2"
             android:longClickable="true"
             android:clickable="true" />
 

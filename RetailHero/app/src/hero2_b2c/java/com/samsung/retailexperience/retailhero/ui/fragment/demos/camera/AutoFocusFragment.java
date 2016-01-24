@@ -4,9 +4,17 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,13 +50,12 @@ public class AutoFocusFragment extends BaseCameraFragment
     private TopGalleryBarFragment mTopGalleryBar = null;
     private BottomGalleryBarFragment mBottomGalleryBar = null;
     private GalleryZoomView mGalleryPreview;
-    private ImageButton mCaptureBtn;
-    private MediaPlayer mediaPlayer;
-    private TextView mTapSuper;
     private ImageView mCaptureSuper;
     private RelativeLayout mCameraLayout;
     private RelativeLayout mGalleryLayout;
-
+    private ImageButton mCaptureBtn;
+    private ImageView mTapSuper;
+    private Animation rightIn;
 
     public static AutoFocusFragment newInstance(FragmentModel<VideoModel> fragmentModel) {
         AutoFocusFragment fragment = new AutoFocusFragment();
@@ -62,7 +69,6 @@ public class AutoFocusFragment extends BaseCameraFragment
     @Override
     public void onViewCreated(View view) {
 
-        final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
 
 
         mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
@@ -80,11 +86,10 @@ public class AutoFocusFragment extends BaseCameraFragment
         mGalleryPreview = (GalleryZoomView) view.findViewById(R.id.gallery_view_test);
 
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
-
-        mCaptureSuper = (ImageView) view.findViewById(R.id.capture_super);
         mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon_test);
 
-        mTapSuper = (TextView) view.findViewById(R.id.tap_super);
+        mCaptureSuper = (ImageView) view.findViewById(R.id.capture_super);
+        mTapSuper = (ImageView) view.findViewById(R.id.tap_super);
 
         mCamera = getCameraInstance(-1);
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
@@ -94,7 +99,7 @@ public class AutoFocusFragment extends BaseCameraFragment
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mp.start();
+                setForcedSeekToChapter(2);
             }
         });
     }
@@ -122,42 +127,47 @@ public class AutoFocusFragment extends BaseCameraFragment
     public void onChaper_0() {
         Log.i(TAG, "onChaper_0");
 
+
+        setFadeIn(mTapSuper);
+
+
         mCameraLayout.setVisibility(View.VISIBLE);
         mPreview.addView(mCameraSurface);
         mFocusIcon.bringToFront();
-
-//        mCaptureBtn.bringToFront();
-//
-//        mTapSuper.bringToFront();
-//
-//        mCaptureSuper.bringToFront();
-
+        mCaptureSuper.setVisibility(View.GONE);
     }
 
     @OnChapter(chapterIndex = 1)
     public void onChaper_1() {
-        Log.i(TAG, "onChaper_0");
+        Log.i(TAG, "onChaper_1");
 
-        mCameraLayout.setVisibility(View.GONE);
-        mGalleryLayout.setVisibility(View.VISIBLE);
+        setFadeOut(mTapSuper);
+        setFadeIn(mCaptureSuper);
 
+        mTapSuper.setVisibility(View.GONE);
+        mCaptureSuper.setVisibility(View.VISIBLE);
+        mCaptureBtn.setClickable(true);
     }
 
     @OnChapter(chapterIndex = 2)
     public void onChaper_2() {
-        Log.i(TAG, "onChaper_1");
+        Log.i(TAG, "onChaper_2");
 
+        //Blinking Effect
+        setBlinkAnimation(mPreview);
+
+        //Shutter Sound
+        final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
+        mp.start();
     }
 
     @OnChapter(chapterIndex = 3)
     public void onChaper_3() {
-        Log.i(TAG, "onChaper_1");
+        Log.i(TAG, "onChaper_3");
+
+        releaseCamera();
+        mCameraLayout.setVisibility(View.GONE);
+        mGalleryLayout.setVisibility(View.VISIBLE);
 
     }
-//
-//    @OnChapter(chapterIndex = 3)
-//    public void onChaper_3() {
-//        Log.i(TAG, "onChaper_1");
-//
-//    }
 }

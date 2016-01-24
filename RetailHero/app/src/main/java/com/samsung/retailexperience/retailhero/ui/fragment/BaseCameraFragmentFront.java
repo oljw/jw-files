@@ -1,50 +1,52 @@
-package com.samsung.retailexperience.camerahero.fragment;
+package com.samsung.retailexperience.retailhero.ui.fragment;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.media.ExifInterface;
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
-import com.samsung.retailexperience.camerahero.CameraHeroApplication;
-import com.samsung.retailexperience.camerahero.R;
-import com.samsung.retailexperience.camerahero.activity.MainActivity;
-import com.samsung.retailexperience.camerahero.util.AppConsts;
-import com.samsung.retailexperience.camerahero.view.CameraSurfaceView;
+import com.samsung.retailexperience.retailhero.R;
+import com.samsung.retailexperience.retailhero.ui.activity.MainActivity;
+import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment;
+import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment;
+import com.samsung.retailexperience.retailhero.util.AppConsts;
+import com.samsung.retailexperience.retailhero.view.CameraSurfaceView;
+import com.samsung.retailexperience.retailhero.view.CameraSurfaceViewFront;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
- * Created by icanmobile on 1/14/16.
+ * Created by JW on 1/23/2016.
  */
-public class CameraFragment extends BaseCameraFragment
-    implements BottomMenuBarFragment.BottomMenuBarListener,
-    CameraSurfaceView.CameraSurfaceListener {
-    private static final String TAG = CameraFragment.class.getSimpleName();
+public class BaseCameraFragmentFront extends BaseVideoFragment
+        implements BottomMenuBarFragment.BottomMenuBarListener,
+        CameraSurfaceViewFront.CameraSurfaceFrontListener {
+    private static final String TAG = BaseCameraFragment.class.getSimpleName();
 
-    public static CameraFragment newInstance(String fragmentModel) {
+    public static BaseCameraFragmentFront newInstance(String fragmentModel) {
         Log.d(TAG, "##### CameraFragment newInstance Called");
 
-        CameraFragment fragment = new CameraFragment();
+        BaseCameraFragmentFront fragment = new BaseCameraFragmentFront();
 
         Bundle args = new Bundle();
         args.putString(AppConsts.ARG_JSON_MODEL, fragmentModel);
@@ -52,23 +54,22 @@ public class CameraFragment extends BaseCameraFragment
         return fragment;
     }
 
-    public static final int MEDIA_TYPE_IMAGE = 1;
+    protected TopMenuBarFragment mTopMenuBar = null;
+    protected BottomMenuBarFragment mBottomMenuBar = null;
+    protected RelativeLayout mPreview = null;
+    protected Camera mCamera = null;
+    protected CameraSurfaceViewFront mCameraSurface = null;
+    protected ImageView mFocusIcon = null;
+    protected ImageView mGallerybtn = null;
+    protected String path = "/sdcard/Pictures/MyCameraApp";
 
-    private TopMenuBarFragment mTopMenuBar = null;
-    private BottomMenuBarFragment mBottomMenuBar = null;
-    private RelativeLayout mPreview = null;
-    private Camera mCamera = null;
-    private CameraSurfaceView mCameraSurface = null;
-    private ImageView mFocusIcon = null;
-    private ImageView mGallerybtn = null;
-    private String path = "/sdcard/Pictures/MyCameraApp";
+    protected int mCameraId = 0;
+    protected boolean mCameraBack = true;
+    protected int mScreenOrientation = 90;
+    protected MediaPlayer mediaPlayer;
 
-    private int mCameraId = 0;
-    private boolean mCameraFront = true;
-    private int mScreenOrientation = 90;
-
-    @Override
     public void onViewCreated(View view) {
+
         Log.d(TAG, "##### CameraFragment onViewCreated Called");
 
         mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
@@ -78,7 +79,9 @@ public class CameraFragment extends BaseCameraFragment
         mCamera = getCameraInstance(-1);
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_preview);
 
-        mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
+        mediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
+
+        mCameraSurface = new CameraSurfaceViewFront((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
         mPreview.addView(mCameraSurface);
 
@@ -86,7 +89,34 @@ public class CameraFragment extends BaseCameraFragment
         mFocusIcon.bringToFront();
 
         mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
-        mGallerybtn.setRotation(90);
+//        mGallerybtn.setRotation(90);
+    }
+
+    protected void setFadeIn(View view)
+    {
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
+        fadeIn.setDuration(2500);
+        view.setAnimation(fadeIn);
+    }
+
+    protected void setFadeOut(View view) {
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
+        fadeOut.setDuration(1000);
+        view.setAnimation(fadeOut);
+    }
+
+    protected void setBlinkAnimation (View view) {
+        Animation blink = new AlphaAnimation(1, 0);
+        blink.setDuration(400);
+        blink.setInterpolator(new LinearInterpolator());
+        blink.setRepeatCount(0);
+        view.startAnimation(blink);
+    }
+
+    protected  void setRightIn (View view){
+
     }
 
     @Override
@@ -99,17 +129,19 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onBackPressed() {
         Log.d("TAG", "##################CameraFragment onBackPressed called");
-        changeFragment(AppConsts.UIState.UI_STATE_CAMERA,
-                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
+//        changeFragment(AppConsts.UIState.UI_STATE_CAMERA,
+//                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
     }
 
     @Override
     public void onStillClicked() {
         Log.d(TAG, "onClick captureButton called");
-        mCameraSurface.setStillShotParam(mCameraFront);
+//        mCameraSurface.setStillShotParam(mCameraBack);
 
         // get an image from the camera
-        mCamera.takePicture(shutter, null, preview);
+//        mCamera.takePicture(shutter, null, preview);
+//        mediaPlayer.start();
+        Toast.makeText(getActivity(), "스틸샷찍힘", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -117,7 +149,7 @@ public class CameraFragment extends BaseCameraFragment
         //get the number of cameras
         int camerasNumber = Camera.getNumberOfCameras();
         if (camerasNumber > 1) {
-            chooseCamera(!mCameraFront);
+            chooseCamera(!mCameraBack);
         } else {
             //dude
         }
@@ -125,13 +157,14 @@ public class CameraFragment extends BaseCameraFragment
 
     @Override
     public void onGalleryClicked() {
-        changeFragment(AppConsts.UIState.UI_STATE_GALLERY, AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
+//        changeFragment(AppConsts.UIState.UI_STATE_GALLERY, AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
     }
 
-    private void releaseCamera(){
+    protected void releaseCamera(){
         Log.d(TAG, "##### releaseCamera called");
 
         if (mCamera != null){
+
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
@@ -142,6 +175,7 @@ public class CameraFragment extends BaseCameraFragment
         Log.d(TAG, "##### onPause called");
 
         super.onPause();
+        mCameraSurface.getHolder().removeCallback(mCameraSurface);
         releaseCamera();              // release the camera immediately on pause event
     }
 
@@ -151,6 +185,11 @@ public class CameraFragment extends BaseCameraFragment
         super.onResume();
         if (mCamera == null)
             chooseCamera(true);
+    }
+
+    @Override
+    public void onSetDrawer() {
+
     }
 
     public static Camera getCameraInstance(int cameraId){
@@ -171,13 +210,13 @@ public class CameraFragment extends BaseCameraFragment
         return c; // returns null if camera is unavailable
     }
 
-    private Camera.ShutterCallback shutter = new Camera.ShutterCallback(){
+    protected Camera.ShutterCallback shutter = new Camera.ShutterCallback(){
         public void onShutter() {
             Log.d(TAG, "shutter !!");
         }
     };
 
-    private Camera.PictureCallback preview = new Camera.PictureCallback() {
+    protected Camera.PictureCallback preview = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
 
@@ -241,7 +280,7 @@ public class CameraFragment extends BaseCameraFragment
 
             }
             mGallerybtn.setImageBitmap(realImage);
-            chooseCamera(mCameraFront);
+            chooseCamera(mCameraBack);
         }
     };
 
@@ -252,7 +291,7 @@ public class CameraFragment extends BaseCameraFragment
                 source.getHeight(), matrix, false);
     }
 
-    private int findFrontFacingCamera() {
+    protected int findFrontFacingCamera() {
         Log.d(TAG, "findFrontFacingCamera called");
 
         int cameraId = -1;
@@ -270,7 +309,7 @@ public class CameraFragment extends BaseCameraFragment
     }
 
     //Find Back Facing Camera
-    private int findBackFacingCamera() {
+    protected int findBackFacingCamera() {
         Log.d(TAG, "findBackFacingCamera called");
 
         int cameraId = -1;
@@ -315,8 +354,8 @@ public class CameraFragment extends BaseCameraFragment
             }
         }
         mCameraSurface.startCameraPreview();
-        mCameraFront = cameraBack;
-        Log.d(TAG, "##### CHOOSECAMERA : mCameraBack = " + mCameraFront);
+        mCameraBack = cameraBack;
+        Log.d(TAG, "##### CHOOSECAMERA : mCameraBack = " + mCameraBack);
         mCameraId = cameraId;
     }
 
@@ -325,15 +364,17 @@ public class CameraFragment extends BaseCameraFragment
         mScreenOrientation = screenOrientation;
     }
 
-    ObjectAnimator rotateIconAnimator = null;
+    protected ObjectAnimator rotateIconAnimator = null;
     @Override
     public void drawFocusIcon(final float x, final float y) {
+        Log.d(TAG, "########## BaseCameraFragment drawFocusIcon");
+
         if (rotateIconAnimator != null && rotateIconAnimator.isRunning())
             rotateIconAnimator.cancel();
 
-            rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 180f);
-            rotateIconAnimator.setDuration(200);
-            rotateIconAnimator.addListener(new Animator.AnimatorListener() {
+        rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 180f);
+        rotateIconAnimator.setDuration(200);
+        rotateIconAnimator.addListener(new Animator.AnimatorListener() {
 
             @Override
             public void onAnimationStart(Animator animation) {
@@ -343,9 +384,9 @@ public class CameraFragment extends BaseCameraFragment
                         (ViewGroup.MarginLayoutParams)mFocusIcon.getLayoutParams();
                 marginLayoutParams.setMargins
                         ((int)(x - 300/2),
-                        (int)(y - 300/2),
-                        (int)(-x + 300/2),
-                        (int)(-y + 300 / 2));
+                                (int)(y - 300/2),
+                                (int)(-x + 300/2),
+                                (int)(-y + 300 / 2));
                 mFocusIcon.setLayoutParams(marginLayoutParams);
             }
 

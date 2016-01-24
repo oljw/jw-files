@@ -1,9 +1,11 @@
 package com.samsung.retailexperience.retailhero.ui.fragment.demos.camera;
 
 import android.hardware.Camera;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -13,19 +15,35 @@ import com.samsung.retailexperience.retailhero.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailhero.gson.models.VideoModel;
 import com.samsung.retailexperience.retailhero.ui.activity.MainActivity;
 import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFragment;
+import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFragmentFront;
 import com.samsung.retailexperience.retailhero.ui.fragment.BaseVideoFragment;
+import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomGalleryBarFragment;
 import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment;
+import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopGalleryBarFragment;
 import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment;
 import com.samsung.retailexperience.retailhero.util.AppConst;
 import com.samsung.retailexperience.retailhero.util.AppConsts;
 import com.samsung.retailexperience.retailhero.view.CameraSurfaceView;
+import com.samsung.retailexperience.retailhero.view.CameraSurfaceViewFront;
+import com.samsung.retailexperience.retailhero.view.GalleryZoomView;
 
 /**
  * Created by smheo on 1/15/2016.
  */
-public class SelfiesFragment extends BaseCameraFragment {
+public class SelfiesFragment extends BaseCameraFragmentFront
+        implements BottomMenuBarFragment.BottomMenuBarListener,
+        CameraSurfaceViewFront.CameraSurfaceFrontListener  {
 
     private static final String TAG = SelfiesFragment.class.getSimpleName();
+
+    private TopGalleryBarFragment mTopGalleryBar = null;
+    private BottomGalleryBarFragment mBottomGalleryBar = null;
+    private GalleryZoomView mGalleryPreview;
+    private ImageView mCaptureSuper;
+    private RelativeLayout mCameraLayout;
+    private RelativeLayout mGalleryLayout;
+    private ImageButton mCaptureBtn;
+    private ImageView mTapSuper;
 
     public static SelfiesFragment newInstance(FragmentModel<VideoModel> fragmentModel) {
         SelfiesFragment fragment = new SelfiesFragment();
@@ -39,6 +57,39 @@ public class SelfiesFragment extends BaseCameraFragment {
     @Override
     public void onViewCreated(View view) {
 
+
+
+        mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
+        mGalleryLayout = (RelativeLayout) view.findViewById(R.id.gallery_layout);
+
+        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().
+                findFragmentById(R.id.top_fragment_test);
+        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().
+                findFragmentById(R.id.bottom_fragment_test);
+        mTopGalleryBar = (TopGalleryBarFragment) getChildFragmentManager().
+                findFragmentById(R.id.top_gallery_fragment_test);
+        mBottomGalleryBar = (BottomGalleryBarFragment) getChildFragmentManager().
+                findFragmentById(R.id.bottom_gallery_fragment_test);
+
+        mGalleryPreview = (GalleryZoomView) view.findViewById(R.id.gallery_view_test);
+
+        mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
+        mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon_test);
+
+        mCaptureSuper = (ImageView) view.findViewById(R.id.capture_super);
+        mTapSuper = (ImageView) view.findViewById(R.id.tap_super);
+
+        mCamera = getCameraInstance(-1);
+        mCameraSurface = new CameraSurfaceViewFront((MainActivity)getActivity(), mCamera);
+//        mCameraSurface.setListener(this);
+
+        mCaptureBtn = (ImageButton) view.findViewById(R.id.capture_button);
+        mCaptureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setForcedSeekToChapter(2);
+            }
+        });
     }
 
     @Override
@@ -64,11 +115,47 @@ public class SelfiesFragment extends BaseCameraFragment {
     public void onChaper_0() {
         Log.i(TAG, "onChaper_0");
 
+
+        setFadeIn(mTapSuper);
+
+
+        mCameraLayout.setVisibility(View.VISIBLE);
+        mPreview.addView(mCameraSurface);
+        mFocusIcon.bringToFront();
+        mCaptureSuper.setVisibility(View.GONE);
     }
 
     @OnChapter(chapterIndex = 1)
     public void onChaper_1() {
         Log.i(TAG, "onChaper_1");
+
+        setFadeOut(mTapSuper);
+        setFadeIn(mCaptureSuper);
+
+        mTapSuper.setVisibility(View.GONE);
+        mCaptureSuper.setVisibility(View.VISIBLE);
+        mCaptureBtn.setClickable(true);
+    }
+
+    @OnChapter(chapterIndex = 2)
+    public void onChaper_2() {
+        Log.i(TAG, "onChaper_2");
+
+        //Blinking Effect
+        setBlinkAnimation(mPreview);
+
+        //Shutter Sound
+        final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
+        mp.start();
+    }
+
+    @OnChapter(chapterIndex = 3)
+    public void onChaper_3() {
+        Log.i(TAG, "onChaper_3");
+
+        releaseCamera();
+        mCameraLayout.setVisibility(View.GONE);
+        mGalleryLayout.setVisibility(View.VISIBLE);
 
     }
 }

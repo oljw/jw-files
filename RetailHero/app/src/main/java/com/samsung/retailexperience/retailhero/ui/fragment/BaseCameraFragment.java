@@ -10,9 +10,17 @@ import android.media.ExifInterface;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.transition.AutoTransition;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -64,6 +72,7 @@ public class BaseCameraFragment extends BaseVideoFragment
     protected MediaPlayer mediaPlayer;
 
     public void onViewCreated(View view) {
+
         Log.d(TAG, "##### CameraFragment onViewCreated Called");
 
         mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().findFragmentById(R.id.top_fragment);
@@ -84,6 +93,33 @@ public class BaseCameraFragment extends BaseVideoFragment
 
 //        mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
 //        mGallerybtn.setRotation(90);
+    }
+
+    protected void setFadeIn(View view)
+    {
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
+        fadeIn.setDuration(2500);
+        view.setAnimation(fadeIn);
+    }
+
+    protected void setFadeOut(View view) {
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
+        fadeOut.setDuration(1000);
+        view.setAnimation(fadeOut);
+    }
+
+    protected void setBlinkAnimation (View view) {
+        Animation blink = new AlphaAnimation(1, 0);
+        blink.setDuration(400);
+        blink.setInterpolator(new LinearInterpolator());
+        blink.setRepeatCount(0);
+        view.startAnimation(blink);
+    }
+
+    protected  void setRightIn (View view){
+
     }
 
     @Override
@@ -131,6 +167,7 @@ public class BaseCameraFragment extends BaseVideoFragment
         Log.d(TAG, "##### releaseCamera called");
 
         if (mCamera != null){
+
             mCamera.release();        // release the camera for other applications
             mCamera = null;
         }
@@ -141,6 +178,7 @@ public class BaseCameraFragment extends BaseVideoFragment
         Log.d(TAG, "##### onPause called");
 
         super.onPause();
+        mCameraSurface.getHolder().removeCallback(mCameraSurface);
         releaseCamera();              // release the camera immediately on pause event
     }
 

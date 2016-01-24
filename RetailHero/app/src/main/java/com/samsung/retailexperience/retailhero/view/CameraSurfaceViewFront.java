@@ -1,34 +1,22 @@
-package com.samsung.retailexperience.camerahero.view;
+package com.samsung.retailexperience.retailhero.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.hardware.Camera;
 import android.hardware.SensorManager;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import android.graphics.Matrix;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-
-import com.samsung.retailexperience.camerahero.R;
 
 /**
- * Created by JW on 1/14/16.
+ * Created by JW on 1/23/2016.
  */
-public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
-    private static final String TAG = CameraSurfaceView.class.getSimpleName();
+public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder.Callback {
+    private static final String TAG = CameraSurfaceViewFront.class.getSimpleName();
 
     private Context mContext;
     private SurfaceHolder mHolder;
@@ -38,7 +26,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 //    private ImageButton mStillBtn;
 
 
-    public CameraSurfaceView(Context context, Camera camera) {
+    public CameraSurfaceViewFront(Context context, Camera camera) {
         super(context);
         mContext = context;
         mCamera = camera;
@@ -55,16 +43,16 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 //        setOnTouchListener(mPreviewTouchListener);
     }
 
-    public interface CameraSurfaceListener {
+    public interface CameraSurfaceFrontListener {
         void changeScreenOrientation(int screenOrientation);
         void drawFocusIcon(float x, float y);
     }
 
-    private CameraSurfaceListener mListener = null;
-    public void setListener(CameraSurfaceListener listener) {
+    private CameraSurfaceFrontListener mListener = null;
+    public void setListener(CameraSurfaceFrontListener listener) {
         mListener = listener;
     }
-    public CameraSurfaceListener getListener() {
+    public CameraSurfaceFrontListener getListener() {
         return mListener;
     }
     private OrientationEventListener mOrientationListener;
@@ -142,7 +130,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         mCamera.setDisplayOrientation(90);
         Camera.Size size = getBestPreviewSize(mWidth, mHeight);
         parameters.setPreviewSize(size.width, size.height);
-        parameters.set("flash mode", "on");
 //        if (cameraFront)
 //            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
         mCamera.setParameters(parameters);
@@ -390,5 +377,3 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         return x;
     }
 }
-
-

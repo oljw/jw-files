@@ -21,23 +21,10 @@
             android:src="@drawable/tap_focus_icon"
             android:scaleType="fitCenter"
             android:background="@android:color/transparent"
-            android:alpha="0.4"
             android:visibility="invisible"
             android:adjustViewBounds="true" />
 
     </RelativeLayout>
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/stop_button"-->
-        <!--android:layout_width="65dp"-->
-        <!--android:layout_height="65dp"-->
-        <!--android:scaleType="fitCenter"-->
-        <!--android:src="@drawable/stop_button"-->
-        <!--android:background="@null"-->
-        <!--android:alpha="0.6"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginBottom="26dp" />-->
 
     <fragment
         android:id="@+id/top_fragment"
