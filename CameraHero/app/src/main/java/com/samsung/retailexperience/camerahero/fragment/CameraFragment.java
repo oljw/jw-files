@@ -64,7 +64,7 @@ public class CameraFragment extends BaseCameraFragment
     private String path = "/sdcard/Pictures/MyCameraApp";
 
     private int mCameraId = 0;
-    private boolean mCameraFront = true;
+    private boolean mCameraBack = true;
     private int mScreenOrientation = 90;
 
     @Override
@@ -106,7 +106,7 @@ public class CameraFragment extends BaseCameraFragment
     @Override
     public void onStillClicked() {
         Log.d(TAG, "onClick captureButton called");
-        mCameraSurface.setStillShotParam(mCameraFront);
+        mCameraSurface.setStillShotParam(mCameraBack);
 
         // get an image from the camera
         mCamera.takePicture(shutter, null, preview);
@@ -117,7 +117,7 @@ public class CameraFragment extends BaseCameraFragment
         //get the number of cameras
         int camerasNumber = Camera.getNumberOfCameras();
         if (camerasNumber > 1) {
-            chooseCamera(!mCameraFront);
+            chooseCamera(!mCameraBack);
         } else {
             //dude
         }
@@ -159,9 +159,9 @@ public class CameraFragment extends BaseCameraFragment
         Camera c = null;
         try {
             if (cameraId == -1)
-                c = Camera.open(1);
+                c = Camera.open();
             else
-                c = Camera.open(1); // attempt to get a Camera instance
+                c = Camera.open(cameraId); // attempt to get a Camera instance
             Log.d(TAG, "##### Camera Opened");
         }
         catch (Exception e) {
@@ -241,7 +241,7 @@ public class CameraFragment extends BaseCameraFragment
 
             }
             mGallerybtn.setImageBitmap(realImage);
-            chooseCamera(mCameraFront);
+            chooseCamera(mCameraBack);
         }
     };
 
@@ -315,8 +315,8 @@ public class CameraFragment extends BaseCameraFragment
             }
         }
         mCameraSurface.startCameraPreview();
-        mCameraFront = cameraBack;
-        Log.d(TAG, "##### CHOOSECAMERA : mCameraBack = " + mCameraFront);
+        mCameraBack = cameraBack;
+        Log.d(TAG, "##### CHOOSECAMERA : mCameraBack = " + mCameraBack);
         mCameraId = cameraId;
     }
 

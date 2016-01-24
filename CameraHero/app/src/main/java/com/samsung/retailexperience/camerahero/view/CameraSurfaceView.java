@@ -52,7 +52,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-//        setOnTouchListener(mPreviewTouchListener);
+        setOnTouchListener(mPreviewTouchListener);
     }
 
     public interface CameraSurfaceListener {
@@ -125,15 +125,15 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         mHeight = h;
 
         stopCameraPreview();
-        refreshCamera(mCamera, mCameraFront);
+        refreshCamera(mCamera, mCameraBack);
         startCameraPreview();
     }
     boolean mVideoMode = true;
-    boolean mCameraFront = true;
-    public void refreshCamera(Camera camera, boolean cameraFront) {
-        Log.d(TAG, "###################### refreshCamera)+ cameraBack = " + cameraFront);
+    boolean mCameraBack = true;
+    public void refreshCamera(Camera camera, boolean cameraBack) {
+        Log.d(TAG, "###################### refreshCamera)+ cameraBack = " + cameraBack);
         mVideoMode = true;
-        mCameraFront = cameraFront;
+        mCameraBack = cameraBack;
 
         if(mHolder.getSurface() ==null) return;
         setCamera(camera);
@@ -142,9 +142,8 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         mCamera.setDisplayOrientation(90);
         Camera.Size size = getBestPreviewSize(mWidth, mHeight);
         parameters.setPreviewSize(size.width, size.height);
-        parameters.set("flash mode", "on");
-//        if (cameraFront)
-//            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        if (cameraBack)
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
         mCamera.setParameters(parameters);
 
         Log.d(TAG, "###################### refreshCamera)- ");
@@ -153,7 +152,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void refreshCamcorder(Camera camera, boolean cameraBack) {
         Log.d(TAG, "###################### refreshCamcorder)+ ");
         mVideoMode = false;
-        mCameraFront = cameraBack;
+        mCameraBack = cameraBack;
 
         if(mHolder.getSurface() ==null) return;
         setCamera(camera);
@@ -256,57 +255,57 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         Log.d(TAG, "###################### startCameraPreview)- ");
     }
 
-//    //tap to focus example
-//    private Rect focusRect = null;
-//    private OnTouchListener mPreviewTouchListener = (new View.OnTouchListener() {
-//        @Override
-//        public boolean onTouch(View v, MotionEvent event) {
-//            if (event.getAction() == MotionEvent.ACTION_DOWN && mCameraFront && mCamera != null) {
-//                Log.d(TAG, "##### onTouch)+ ");
-//                Camera camera = mCamera;
-//                camera.cancelAutoFocus();
-//                focusRect = calculateTapArea(event.getX(), event.getY(), 1f);
-//                Log.d(TAG, "##### (X, Y) = (" + event.getX() + ", " + event.getY());
-//                Log.d(TAG, "##### (" + focusRect.left + ", " + focusRect.top + ", " + focusRect.right + ", " + focusRect.bottom + ")");
-//
-//                if (mListener != null)
-//                    mListener.drawFocusIcon(event.getX(), event.getY());
-//
-//                Camera.Parameters parameters = camera.getParameters();
-//                if (parameters.getFocusMode() != Camera.Parameters.FOCUS_MODE_AUTO) {
-//                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-//                }
-//                if (parameters.getMaxNumFocusAreas() > 0) {
-//                    List<Camera.Area> mylist = new ArrayList<Camera.Area>();
-//                    mylist.add(new Camera.Area(focusRect, 1000));
-//                    parameters.setFocusAreas(mylist);
-//                }
-//
-//                try {
-//                    camera.cancelAutoFocus();
-//                    camera.setParameters(parameters);
-//                    camera.startPreview();
-//                    camera.autoFocus(new Camera.AutoFocusCallback() {
-//                        @Override
-//                        public void onAutoFocus(boolean success, Camera camera) {
-//                            if (camera.getParameters().getFocusMode() != Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE) {
-//                                Camera.Parameters parameters = camera.getParameters();
-//                                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-//                                if (parameters.getMaxNumFocusAreas() > 0) {
-//                                    parameters.setFocusAreas(null);
-//                                }
-//                                camera.setParameters(parameters);
-//                                camera.startPreview();
-//                            }
-//                        }
-//                    });
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return true;
-//        }
-//    });
+    //tap to focus example
+    private Rect focusRect = null;
+    private OnTouchListener mPreviewTouchListener = (new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN && mCameraBack && mCamera != null) {
+                Log.d(TAG, "##### onTouch)+ ");
+                Camera camera = mCamera;
+                camera.cancelAutoFocus();
+                focusRect = calculateTapArea(event.getX(), event.getY(), 1f);
+                Log.d(TAG, "##### (X, Y) = (" + event.getX() + ", " + event.getY());
+                Log.d(TAG, "##### (" + focusRect.left + ", " + focusRect.top + ", " + focusRect.right + ", " + focusRect.bottom + ")");
+
+                if (mListener != null)
+                    mListener.drawFocusIcon(event.getX(), event.getY());
+
+                Camera.Parameters parameters = camera.getParameters();
+                if (parameters.getFocusMode() != Camera.Parameters.FOCUS_MODE_AUTO) {
+                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                }
+                if (parameters.getMaxNumFocusAreas() > 0) {
+                    List<Camera.Area> mylist = new ArrayList<Camera.Area>();
+                    mylist.add(new Camera.Area(focusRect, 1000));
+                    parameters.setFocusAreas(mylist);
+                }
+
+                try {
+                    camera.cancelAutoFocus();
+                    camera.setParameters(parameters);
+                    camera.startPreview();
+                    camera.autoFocus(new Camera.AutoFocusCallback() {
+                        @Override
+                        public void onAutoFocus(boolean success, Camera camera) {
+                            if (camera.getParameters().getFocusMode() != Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE) {
+                                Camera.Parameters parameters = camera.getParameters();
+                                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                                if (parameters.getMaxNumFocusAreas() > 0) {
+                                    parameters.setFocusAreas(null);
+                                }
+                                camera.setParameters(parameters);
+                                camera.startPreview();
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return true;
+        }
+    });
 
     /**
      * Convert touch position x:y to {@link Camera.Area} position -1000:-1000 to 1000:1000.
