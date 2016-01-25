@@ -44,17 +44,6 @@ public class BottomMenuBarFragment extends Fragment {
     {
         mView = inflater.inflate( R.layout.camera_bottom_menubar, container, false );
 
-//        mStillBtn = (ImageButton) mView.findViewById(R.id.still_button);
-//        mStillBtn.setOnClickListener(mStillBtnClickListener);
-//
-//        mSwitchBtn = (ImageButton) mView.findViewById(R.id.switch_button);
-//        mSwitchBtn.setOnClickListener(mSwitchBtnClickListener);
-//
-//        mVideoBtn = (ImageButton) mView.findViewById(R.id.video_button);
-//
-//        mGalleryBtn = (ImageView) mView.findViewById(R.id.gallery_button);
-//        mGalleryBtn.setOnClickListener(mGalleryBtnClickListener);
-
         return mView;
     }
 

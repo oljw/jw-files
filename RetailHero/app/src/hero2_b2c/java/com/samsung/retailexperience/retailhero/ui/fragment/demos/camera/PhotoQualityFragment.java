@@ -34,7 +34,7 @@ public class PhotoQualityFragment extends BaseCameraFragment {
 
     private TopGalleryBarFragment mTopGalleryBar = null;
     private BottomGalleryBarFragment mBottomGalleryBar = null;
-    private GalleryZoomView mGalleryPreview;
+    private ImageView mGalleryPreview;
     private ImageView mCaptureSuper;
     private RelativeLayout mCameraLayout;
     private RelativeLayout mGalleryLayout;
@@ -64,7 +64,7 @@ public class PhotoQualityFragment extends BaseCameraFragment {
         mBottomGalleryBar = (BottomGalleryBarFragment) getChildFragmentManager().
                 findFragmentById(R.id.bottom_gallery_fragment_test);
 
-        mGalleryPreview = (GalleryZoomView) view.findViewById(R.id.gallery_view_test);
+        mGalleryPreview = (ImageView) view.findViewById(R.id.gallery_view_test);
 
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
 

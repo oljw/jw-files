@@ -105,7 +105,7 @@
         android:id="@+id/gallery_layout"
         android:visibility="gone">
 
-        <com.samsung.retailexperience.retailhero.view.GalleryZoomView
+        <ImageView
             android:id="@+id/gallery_view_test"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

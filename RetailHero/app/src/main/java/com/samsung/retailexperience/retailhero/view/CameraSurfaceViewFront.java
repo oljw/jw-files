@@ -23,7 +23,6 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
     private Camera mCamera;
     private int mWidth = 0;
     private int mHeight = 0;
-//    private ImageButton mStillBtn;
 
 
     public CameraSurfaceViewFront(Context context, Camera camera) {
@@ -39,8 +38,6 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
 
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-//        setOnTouchListener(mPreviewTouchListener);
     }
 
     public interface CameraSurfaceFrontListener {
@@ -61,8 +58,6 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
     public void surfaceCreated(SurfaceHolder holder) {
         Log.d(TAG, "##### surfaceCreated +");
 
-//        mStillBtn =(ImageButton) findViewById(R.id.still_button);
-
         mOrientationListener = new OrientationEventListener(mContext, SensorManager.SENSOR_DELAY_UI) {
             public void onOrientationChanged (int orientation) {
                 //Log.d (TAG, "onOrientationChanged : " + orientation);
@@ -78,8 +73,6 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
                     Log.d(TAG, "####### PLEASE ROTATE ICON : " + mScreenOrientation);
                     if (mListener != null) {
                         mListener.changeScreenOrientation(mScreenOrientation);
-
-//                        mStillBtn.setRotation(90);
                     }
                 }
             }
@@ -116,6 +109,7 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
         refreshCamera(mCamera, mCameraFront);
         startCameraPreview();
     }
+
     boolean mVideoMode = true;
     boolean mCameraFront = true;
     public void refreshCamera(Camera camera, boolean cameraFront) {
@@ -130,31 +124,9 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
         mCamera.setDisplayOrientation(90);
         Camera.Size size = getBestPreviewSize(mWidth, mHeight);
         parameters.setPreviewSize(size.width, size.height);
-//        if (cameraFront)
-//            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
         mCamera.setParameters(parameters);
 
         Log.d(TAG, "###################### refreshCamera)- ");
-    }
-
-    public void refreshCamcorder(Camera camera, boolean cameraBack) {
-        Log.d(TAG, "###################### refreshCamcorder)+ ");
-        mVideoMode = false;
-        mCameraFront = cameraBack;
-
-        if(mHolder.getSurface() ==null) return;
-        setCamera(camera);
-
-        mCamera.setDisplayOrientation(90);
-
-        Camera.Parameters parameters = mCamera.getParameters();
-        if (cameraBack)
-            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-        Camera.Size size = getBestPreviewSizeForFull(mWidth, mHeight, parameters);
-        parameters.setPreviewSize(size.width, size.height);
-        mCamera.setParameters(parameters);
-
-        Log.d(TAG, "###################### refreshCamcorder)- ");
     }
 
     private Camera.Size getBestPreviewSize(int width, int height) {
@@ -179,36 +151,18 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
         return result;
     }
 
-
-    private Camera.Size getBestPreviewSizeForFull(int width, int height, Camera.Parameters parameters){
-        List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
-
-        Camera.Size bestSize = sizeList.get(0);
-
-        for(int i = 1; i < sizeList.size(); i++){
-            if((sizeList.get(i).width * sizeList.get(i).height) >
-                    (bestSize.width * bestSize.height)){
-                bestSize = sizeList.get(i);
-            }
-        }
-        return bestSize;
-    }
-
     public void setStillShotParam(boolean cameraBack) {
-//        Camera.Parameters parameters = mCamera.getParameters();
-//        if (cameraBack) {
-////            parameters.setRotation(mScreenOrientation);
-//            parameters.setPictureSize(4032, 3024);
-//        }
-//        else {
-//            if (mScreenOrientation == 90)
-//                parameters.setRotation(270);
-//            else
-////                parameters.setRotation(mScreenOrientation);
-//
-//            parameters.setPictureSize(2592, 1944);
-//        }
-//        mCamera.setParameters(parameters);
+        Camera.Parameters parameters = mCamera.getParameters();
+        if (cameraBack) {
+            if (mScreenOrientation == 90)
+                parameters.setRotation(270);
+                parameters.setPictureSize(2592, 1944);        }
+        else {
+            if (mScreenOrientation == 90)
+                parameters.setRotation(270);
+                parameters.setPictureSize(2592, 1944);
+        }
+        mCamera.setParameters(parameters);
     }
 
 
@@ -241,139 +195,5 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
             Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
         }
         Log.d(TAG, "###################### startCameraPreview)- ");
-    }
-
-//    //tap to focus example
-//    private Rect focusRect = null;
-//    private OnTouchListener mPreviewTouchListener = (new View.OnTouchListener() {
-//        @Override
-//        public boolean onTouch(View v, MotionEvent event) {
-//            if (event.getAction() == MotionEvent.ACTION_DOWN && mCameraFront && mCamera != null) {
-//                Log.d(TAG, "##### onTouch)+ ");
-//                Camera camera = mCamera;
-//                camera.cancelAutoFocus();
-//                focusRect = calculateTapArea(event.getX(), event.getY(), 1f);
-//                Log.d(TAG, "##### (X, Y) = (" + event.getX() + ", " + event.getY());
-//                Log.d(TAG, "##### (" + focusRect.left + ", " + focusRect.top + ", " + focusRect.right + ", " + focusRect.bottom + ")");
-//
-//                if (mListener != null)
-//                    mListener.drawFocusIcon(event.getX(), event.getY());
-//
-//                Camera.Parameters parameters = camera.getParameters();
-//                if (parameters.getFocusMode() != Camera.Parameters.FOCUS_MODE_AUTO) {
-//                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-//                }
-//                if (parameters.getMaxNumFocusAreas() > 0) {
-//                    List<Camera.Area> mylist = new ArrayList<Camera.Area>();
-//                    mylist.add(new Camera.Area(focusRect, 1000));
-//                    parameters.setFocusAreas(mylist);
-//                }
-//
-//                try {
-//                    camera.cancelAutoFocus();
-//                    camera.setParameters(parameters);
-//                    camera.startPreview();
-//                    camera.autoFocus(new Camera.AutoFocusCallback() {
-//                        @Override
-//                        public void onAutoFocus(boolean success, Camera camera) {
-//                            if (camera.getParameters().getFocusMode() != Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE) {
-//                                Camera.Parameters parameters = camera.getParameters();
-//                                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-//                                if (parameters.getMaxNumFocusAreas() > 0) {
-//                                    parameters.setFocusAreas(null);
-//                                }
-//                                camera.setParameters(parameters);
-//                                camera.startPreview();
-//                            }
-//                        }
-//                    });
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return true;
-//        }
-//    });
-
-    /**
-     * Convert touch position x:y to {@link Camera.Area} position -1000:-1000 to 1000:1000.
-     */
-    private int focusAreaSize = 300;
-    private Rect calculateTapArea(float x, float y, float coefficient) {
-        int width = 0;
-        int height = 0;
-        float input_x = 0.0f;
-        float input_y = 0.0f;
-        if (mScreenOrientation == 90) {
-            width = getWidth();
-            height = getHeight();
-            input_x = x;
-            input_y = y;
-        }
-        else {
-            width = getHeight();
-            height = getWidth();
-            input_x = y;
-            input_y = (width - x);
-        }
-        Log.d(TAG, "##### width = " + width + ", height = " + height);
-
-        float focus_x = 0.0f;
-        float focus_y = 0.0f;
-        float unit_x = ((width/2.0f)/1000.0f);
-        float unit_y = ((height/2.0f)/1000.0f);
-        int left = 0;
-        int top = 0;
-
-        Log.d(TAG, "unit_x = " + unit_x + ", unit_y = " + unit_y);
-        if (input_x <= width/2 && input_y <= height/2) {   //1
-            //-1000< x <=0, -1000 < y <= 0
-            focus_x = -1 * (input_x * unit_x);
-            focus_y = -1 * (input_y * unit_y);
-
-            Log.d(TAG, "focus_x = " + focus_x + ", focus_y = " + focus_y);
-
-            left = clamp( (int)Math.round(focus_x - focusAreaSize / 2), -1000, 0);
-            top = clamp ( (int)Math.round(focus_y - focusAreaSize / 2), -1000, 0);
-        }
-        else if(input_x > width/2 && input_y <= height/2) { //2
-            focus_x = (input_x - width/2) * unit_x;
-            focus_y = -1 * (input_y * unit_y);
-
-            Log.d(TAG, "focus_x = " + focus_x + ", focus_y = " + focus_y);
-
-            left = clamp( (int)Math.round(focus_x - focusAreaSize / 2), 0, 1000);
-            top = clamp ( (int)Math.round(focus_y - focusAreaSize / 2), -1000, 0);
-        }
-        else if(input_x <= width/2 && input_y > height/2) { //3
-            focus_x = -1 * (input_x * unit_x);
-            focus_y = (input_y - height/2) * unit_y;
-
-            Log.d(TAG, "focus_x = " + focus_x + ", focus_y = " + focus_y);
-
-            left = clamp( (int)Math.round(focus_x - focusAreaSize / 2), -1000, 0);
-            top = clamp ( (int)Math.round(focus_y - focusAreaSize / 2), 0, 1000);
-        }
-        else if(input_x > width/2 && input_y > height/2) {  //4
-            focus_x = (input_x - width/2) * unit_x;
-            focus_y = (input_y - height/2) * unit_y;
-
-            Log.d(TAG, "focus_x = " + focus_x + ", focus_y = " + focus_y);
-
-            left = clamp( (int)Math.round(focus_x - focusAreaSize / 2), 0, 1000);
-            top = clamp ( (int)Math.round(focus_y - focusAreaSize / 2), 0, 1000);
-        }
-
-        return new Rect(left, top, left+(focusAreaSize/2), top+(focusAreaSize/2));
-    }
-
-    private int clamp(int x, int min, int max) {
-        if (x > max) {
-            return max;
-        }
-        if (x < min) {
-            return min;
-        }
-        return x;
     }
 }

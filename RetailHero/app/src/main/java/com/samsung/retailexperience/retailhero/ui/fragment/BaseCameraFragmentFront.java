@@ -89,30 +89,6 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
         mFocusIcon.bringToFront();
 
         mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
-//        mGallerybtn.setRotation(90);
-    }
-
-    protected void setFadeIn(View view)
-    {
-        Animation fadeIn = new AlphaAnimation(0, 1);
-        fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
-        fadeIn.setDuration(2500);
-        view.setAnimation(fadeIn);
-    }
-
-    protected void setFadeOut(View view) {
-        Animation fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
-        fadeOut.setDuration(1000);
-        view.setAnimation(fadeOut);
-    }
-
-    protected void setBlinkAnimation (View view) {
-        Animation blink = new AlphaAnimation(1, 0);
-        blink.setDuration(400);
-        blink.setInterpolator(new LinearInterpolator());
-        blink.setRepeatCount(0);
-        view.startAnimation(blink);
     }
 
     @Override
@@ -131,23 +107,12 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
 
     @Override
     public void onStillClicked() {
-        Log.d(TAG, "onClick captureButton called");
-        mCameraSurface.setStillShotParam(mCameraBack);
 
-        mCamera.takePicture(shutter, null, preview);
-//        mediaPlayer.start();
-        Toast.makeText(getActivity(), "스틸샷찍힘", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onSwitchClicked() {
-        //get the number of cameras
-        int camerasNumber = Camera.getNumberOfCameras();
-        if (camerasNumber > 1) {
-            chooseCamera(!mCameraBack);
-        } else {
-            //dude
-        }
+
     }
 
     @Override
@@ -359,47 +324,35 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
         mScreenOrientation = screenOrientation;
     }
 
-    protected ObjectAnimator rotateIconAnimator = null;
     @Override
-    public void drawFocusIcon(final float x, final float y) {
-        Log.d(TAG, "########## BaseCameraFragment drawFocusIcon");
+    public void drawFocusIcon(float x, float y) {
 
-        if (rotateIconAnimator != null && rotateIconAnimator.isRunning())
-            rotateIconAnimator.cancel();
-
-        rotateIconAnimator = ObjectAnimator.ofFloat(mFocusIcon , "rotation", 0f, 180f);
-        rotateIconAnimator.setDuration(200);
-        rotateIconAnimator.addListener(new Animator.AnimatorListener() {
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-                mFocusIcon.setVisibility(View.VISIBLE);
-
-                ViewGroup.MarginLayoutParams marginLayoutParams =
-                        (ViewGroup.MarginLayoutParams)mFocusIcon.getLayoutParams();
-                marginLayoutParams.setMargins
-                        ((int)(x - 300/2),
-                                (int)(y - 300/2),
-                                (int)(-x + 300/2),
-                                (int)(-y + 300 / 2));
-                mFocusIcon.setLayoutParams(marginLayoutParams);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mFocusIcon.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-                mFocusIcon.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        rotateIconAnimator.start();
     }
+
+
+    protected void setFadeIn(View view)
+    {
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
+        fadeIn.setDuration(2500);
+        view.setAnimation(fadeIn);
+    }
+
+    protected void setFadeOut(View view) {
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
+        fadeOut.setDuration(1000);
+        view.setAnimation(fadeOut);
+    }
+
+    protected void setBlinkAnimation (View view) {
+        Animation blink = new AlphaAnimation(1, 0);
+        blink.setDuration(400);
+        blink.setInterpolator(new LinearInterpolator());
+        blink.setRepeatCount(0);
+        view.startAnimation(blink);
+    }
+
+
+
 }

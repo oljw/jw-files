@@ -37,14 +37,10 @@ public class SelfiesFragment extends BaseCameraFragmentFront
 
     private static final String TAG = SelfiesFragment.class.getSimpleName();
 
-    private TopGalleryBarFragment mTopGalleryBar = null;
-    private BottomGalleryBarFragment mBottomGalleryBar = null;
-    private GalleryZoomView mGalleryPreview;
     private ImageView mCaptureSuper;
     private RelativeLayout mCameraLayout;
-    private RelativeLayout mGalleryLayout;
     private ImageButton mCaptureBtn;
-    private ImageView mTapSuper;
+    private ImageView mNotSavedSuper;
 
     public static SelfiesFragment newInstance(FragmentModel<VideoModel> fragmentModel) {
         SelfiesFragment fragment = new SelfiesFragment();
@@ -60,9 +56,6 @@ public class SelfiesFragment extends BaseCameraFragmentFront
 
         mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
 
-        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().
-                findFragmentById(R.id.bottom_fragment_test);
-
         mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
 
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
@@ -72,14 +65,14 @@ public class SelfiesFragment extends BaseCameraFragmentFront
         mCamera = getCameraInstance(-1);
         mCameraSurface = new CameraSurfaceViewFront(getActivity(), mCamera);
 
+        mNotSavedSuper = (ImageView) view.findViewById(R.id.not_saved);
+
         mCaptureBtn = (ImageButton) view.findViewById(R.id.capture_button);
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCameraSurface.setStillShotParam(mCameraBack);
-
-                mCamera.takePicture(shutter, null, preview);
-                Toast.makeText(getActivity(), "스틸샷찍힘", Toast.LENGTH_LONG).show();
+                mCamera.takePicture(null, null, preview);
                 setForcedSeekToChapter(2);
             }
         });
@@ -117,7 +110,6 @@ public class SelfiesFragment extends BaseCameraFragmentFront
         Log.i(TAG, "onChaper_1");
 
         setFadeIn(mCaptureSuper);
-
         mCaptureSuper.setVisibility(View.VISIBLE);
         mCaptureBtn.setClickable(true);
 
@@ -127,6 +119,9 @@ public class SelfiesFragment extends BaseCameraFragmentFront
     public void onChaper_2() {
         Log.i(TAG, "onChaper_2");
 
+        mCaptureBtn.performClick();
+        mCaptureBtn.setClickable(false);
+
         //Blinking Effect
         setBlinkAnimation(mPreview);
 
@@ -134,16 +129,20 @@ public class SelfiesFragment extends BaseCameraFragmentFront
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
         mp.start();
 
-        mGallerybtn.setVisibility(View.VISIBLE);
-        mGallerybtn.bringToFront();
     }
 
     @OnChapter(chapterIndex = 3)
     public void onChaper_3() {
         Log.i(TAG, "onChaper_3");
-        mGallerybtn.setVisibility(View.VISIBLE);
 
+        mGallerybtn.setVisibility(View.VISIBLE);
+        mGallerybtn.bringToFront();
+
+        mNotSavedSuper.setVisibility(View.VISIBLE);
+        setFadeIn(mNotSavedSuper);
+        mNotSavedSuper.bringToFront();
+
+        mCameraLayout.setVisibility(View.GONE);
         releaseCamera();
-//        mCameraLayout.setVisibility(View.GONE);
     }
 }
