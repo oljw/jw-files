@@ -259,7 +259,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private OnTouchListener mPreviewTouchListener = (new OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN && mCameraBack && mCamera != null) {
+            if (event.getAction() == MotionEvent.ACTION_UP && mCameraBack && mCamera != null) {
                 Log.d(TAG, "##### onTouch)+ ");
                 Camera camera = mCamera;
                 camera.cancelAutoFocus();

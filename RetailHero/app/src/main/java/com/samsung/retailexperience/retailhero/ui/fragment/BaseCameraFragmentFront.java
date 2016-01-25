@@ -61,7 +61,7 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
     protected CameraSurfaceViewFront mCameraSurface = null;
     protected ImageView mFocusIcon = null;
     protected ImageView mGallerybtn = null;
-    protected String path = "/sdcard/Pictures/MyCameraApp";
+    protected String path = "/sdcard/Pictures/samsungPhoto/samsungPhoto";
 
     protected int mCameraId = 0;
     protected boolean mCameraBack = true;
@@ -127,6 +127,7 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
 
             mCamera.release();        // release the camera for other applications
             mCamera = null;
+            System.out.println(new File(path).getAbsoluteFile().delete());
         }
     }
 
@@ -190,7 +191,7 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
 
             try {
                 // Write to SD Card
-                outStream = new FileOutputStream(path + c.getTime().getSeconds() + ".jpg");
+                outStream = new FileOutputStream(path);
                 outStream.write(data);
                 outStream.close();
 
@@ -213,8 +214,7 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
             realImage = BitmapFactory.decodeByteArray(data,0,data.length,options);
             ExifInterface exif = null;
             try {
-                exif = new ExifInterface(path + c.getTime().getSeconds()
-                        + ".jpg");
+                exif = new ExifInterface(path);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

@@ -166,6 +166,5 @@ public class AutoFocusFragment extends BaseCameraFragment
         releaseCamera();
         mCameraLayout.setVisibility(View.GONE);
         mGalleryLayout.setVisibility(View.VISIBLE);
-
     }
 }
