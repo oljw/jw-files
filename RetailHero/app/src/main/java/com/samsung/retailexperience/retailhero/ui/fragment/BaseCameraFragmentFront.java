@@ -115,10 +115,6 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
         view.startAnimation(blink);
     }
 
-    protected  void setRightIn (View view){
-
-    }
-
     @Override
     public void onDestroyView () {
         releaseCamera();
@@ -136,10 +132,9 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
     @Override
     public void onStillClicked() {
         Log.d(TAG, "onClick captureButton called");
-//        mCameraSurface.setStillShotParam(mCameraBack);
+        mCameraSurface.setStillShotParam(mCameraBack);
 
-        // get an image from the camera
-//        mCamera.takePicture(shutter, null, preview);
+        mCamera.takePicture(shutter, null, preview);
 //        mediaPlayer.start();
         Toast.makeText(getActivity(), "스틸샷찍힘", Toast.LENGTH_LONG).show();
     }
@@ -244,7 +239,7 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
 
             Bitmap realImage;
             final BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 5;
+            options.inSampleSize = 1;
 
             options.inPurgeable=true;                   //Tell to gc that whether it needs free memory, the Bitmap can be cleared
 
@@ -286,7 +281,7 @@ public class BaseCameraFragmentFront extends BaseVideoFragment
 
     public static Bitmap rotate(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
+        matrix.postRotate(270);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
                 source.getHeight(), matrix, false);
     }

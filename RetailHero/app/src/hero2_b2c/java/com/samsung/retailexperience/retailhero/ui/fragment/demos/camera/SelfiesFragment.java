@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.samsung.retailexperience.retailhero.R;
 import com.samsung.retailexperience.retailhero.annotation.OnChapter;
@@ -57,36 +58,28 @@ public class SelfiesFragment extends BaseCameraFragmentFront
     @Override
     public void onViewCreated(View view) {
 
-
-
         mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
-        mGalleryLayout = (RelativeLayout) view.findViewById(R.id.gallery_layout);
 
-        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().
-                findFragmentById(R.id.top_fragment_test);
         mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().
                 findFragmentById(R.id.bottom_fragment_test);
-        mTopGalleryBar = (TopGalleryBarFragment) getChildFragmentManager().
-                findFragmentById(R.id.top_gallery_fragment_test);
-        mBottomGalleryBar = (BottomGalleryBarFragment) getChildFragmentManager().
-                findFragmentById(R.id.bottom_gallery_fragment_test);
 
-        mGalleryPreview = (GalleryZoomView) view.findViewById(R.id.gallery_view_test);
+        mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
 
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
-        mFocusIcon = (ImageView) view.findViewById(R.id.focus_icon_test);
 
         mCaptureSuper = (ImageView) view.findViewById(R.id.capture_super);
-        mTapSuper = (ImageView) view.findViewById(R.id.tap_super);
 
         mCamera = getCameraInstance(-1);
-        mCameraSurface = new CameraSurfaceViewFront((MainActivity)getActivity(), mCamera);
-//        mCameraSurface.setListener(this);
+        mCameraSurface = new CameraSurfaceViewFront(getActivity(), mCamera);
 
         mCaptureBtn = (ImageButton) view.findViewById(R.id.capture_button);
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mCameraSurface.setStillShotParam(mCameraBack);
+
+                mCamera.takePicture(shutter, null, preview);
+                Toast.makeText(getActivity(), "스틸샷찍힘", Toast.LENGTH_LONG).show();
                 setForcedSeekToChapter(2);
             }
         });
@@ -115,26 +108,19 @@ public class SelfiesFragment extends BaseCameraFragmentFront
     public void onChaper_0() {
         Log.i(TAG, "onChaper_0");
 
-
-        setFadeIn(mTapSuper);
-
-
         mCameraLayout.setVisibility(View.VISIBLE);
         mPreview.addView(mCameraSurface);
-        mFocusIcon.bringToFront();
-        mCaptureSuper.setVisibility(View.GONE);
     }
 
     @OnChapter(chapterIndex = 1)
     public void onChaper_1() {
         Log.i(TAG, "onChaper_1");
 
-        setFadeOut(mTapSuper);
         setFadeIn(mCaptureSuper);
 
-        mTapSuper.setVisibility(View.GONE);
         mCaptureSuper.setVisibility(View.VISIBLE);
         mCaptureBtn.setClickable(true);
+
     }
 
     @OnChapter(chapterIndex = 2)
@@ -147,15 +133,17 @@ public class SelfiesFragment extends BaseCameraFragmentFront
         //Shutter Sound
         final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
         mp.start();
+
+        mGallerybtn.setVisibility(View.VISIBLE);
+        mGallerybtn.bringToFront();
     }
 
     @OnChapter(chapterIndex = 3)
     public void onChaper_3() {
         Log.i(TAG, "onChaper_3");
+        mGallerybtn.setVisibility(View.VISIBLE);
 
         releaseCamera();
-        mCameraLayout.setVisibility(View.GONE);
-        mGalleryLayout.setVisibility(View.VISIBLE);
-
+//        mCameraLayout.setVisibility(View.GONE);
     }
 }

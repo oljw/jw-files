@@ -69,8 +69,6 @@ public class AutoFocusFragment extends BaseCameraFragment
     @Override
     public void onViewCreated(View view) {
 
-
-
         mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
         mGalleryLayout = (RelativeLayout) view.findViewById(R.id.gallery_layout);
 

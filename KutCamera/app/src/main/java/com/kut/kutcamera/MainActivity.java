@@ -247,7 +247,7 @@ public class MainActivity extends Activity {
 
 	public static Bitmap rotate(Bitmap source, float angle) {
 		Matrix matrix = new Matrix();
-		matrix.postRotate(angle);
+		matrix.postRotate(270);
 		return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
 				source.getHeight(), matrix, false);
 	}

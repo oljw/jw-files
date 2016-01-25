@@ -94,18 +94,17 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/camera" />
 
-            <ImageView
-                android:id="@+id/imageView_photo"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/fotocekicon" />
-
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/fotocekicon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
     </FrameLayout>
 

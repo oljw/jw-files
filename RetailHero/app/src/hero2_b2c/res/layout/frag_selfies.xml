@@ -14,12 +14,21 @@
         app:isShowVideoFrame="true"
         app:scaleToVideoSize="true"/>
 
+    <ImageView
+        android:id="@+id/gallery_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/tap_focus_icon"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        android:adjustViewBounds="true" />
+
     <!-- Camera Preview Layout-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/camera_layout"
-        android:visibility="">
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,26 +41,6 @@
                 android:layout_below="@+id/top_fragment_test"
                 android:layout_above="@+id/bottom_fragment_test"
                 android:background="#000000">
-
-                <ImageView
-                    android:id="@+id/focus_icon_test"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/tap_focus_icon"
-                    android:scaleType="fitCenter"
-                    android:background="@android:color/transparent"
-                    android:alpha="0.4"
-                    android:visibility="invisible"
-                    android:adjustViewBounds="true" />
-
-                <ImageView
-                    android:id="@+id/gallery_button"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/tap_focus_icon"
-                    android:scaleType="fitCenter"
-                    android:background="@android:color/transparent"
-                    android:adjustViewBounds="true" />
 
             </RelativeLayout>
 
@@ -72,13 +61,6 @@
 
 
         <!-- Interactive Icons-->
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tap_super"
-            android:src="@drawable/tap_super"
-            android:clickable="false"
-            android:layout_centerInParent="true" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -88,6 +70,7 @@
             android:clickable="false"
             android:src="@drawable/capture_super"
             android:layout_centerHorizontal="true"
+            android:visibility="gone"
             android:paddingBottom="35dp"
             android:paddingRight="3dp" />
 
@@ -104,39 +87,6 @@
             android:paddingBottom="35dp" />
 
     </RelativeLayout>
-
-
-    <!--GalleryLayout-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/gallery_layout"
-        android:visibility="gone">
-
-        <com.samsung.retailexperience.retailhero.view.GalleryZoomView
-            android:id="@+id/gallery_view_test"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/test_picture2"
-            android:longClickable="true"
-            android:clickable="true" />
-
-        <fragment
-            android:id="@+id/bottom_gallery_fragment_test"
-            android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomGalleryBarFragment"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
-
-        <fragment
-            android:id="@+id/top_gallery_fragment_test"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_alignParentTop="true"
-            android:name="com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopGalleryBarFragment" />
-    </RelativeLayout>
-
 
 
 

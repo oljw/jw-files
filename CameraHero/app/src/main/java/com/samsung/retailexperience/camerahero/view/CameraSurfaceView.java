@@ -209,14 +209,14 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void setStillShotParam(boolean cameraBack) {
         Camera.Parameters parameters = mCamera.getParameters();
         if (cameraBack) {
-            parameters.setRotation(mScreenOrientation);
+//            parameters.setRotation(mScreenOrientation);
             parameters.setPictureSize(4032, 3024);
         }
         else {
             if (mScreenOrientation == 90)
                 parameters.setRotation(270);
             else
-                parameters.setRotation(mScreenOrientation);
+//                parameters.setRotation(mScreenOrientation);
 
             parameters.setPictureSize(2592, 1944);
         }
