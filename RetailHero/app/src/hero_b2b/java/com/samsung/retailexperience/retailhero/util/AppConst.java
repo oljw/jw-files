@@ -36,8 +36,9 @@ public class AppConst {
         UI_STATE_DESIGN_MAIN,
         UI_STATE_DESIGN_DEMO_VIDEO,
         UI_STATE_DESIGN_DEMO_AMOLED,
+        UI_STATE_DESIGN_DEMO_CAMERA
 //        UI_STATE_DESIGN_DEMO_EDGE_FUNC,
-        UI_STATE_DESIGN_DEMO_CAMERA,
+        ,
 
         // compare device - ref decision
         UI_STATE_DEVICE_SPECS,

@@ -47,8 +47,6 @@ public class AutoFocusFragment extends BaseCameraFragment
 
     private static final String TAG = AutoFocusFragment.class.getSimpleName();
 
-    private TopGalleryBarFragment mTopGalleryBar = null;
-    private BottomGalleryBarFragment mBottomGalleryBar = null;
     private ImageView mGalleryPreview;
     private ImageView mCaptureSuper;
     private RelativeLayout mCameraLayout;
@@ -71,15 +69,6 @@ public class AutoFocusFragment extends BaseCameraFragment
 
         mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
         mGalleryLayout = (RelativeLayout) view.findViewById(R.id.gallery_layout);
-
-        mTopMenuBar = (TopMenuBarFragment) getChildFragmentManager().
-                findFragmentById(R.id.top_fragment_test);
-        mBottomMenuBar = (BottomMenuBarFragment) getChildFragmentManager().
-                findFragmentById(R.id.bottom_fragment_test);
-        mTopGalleryBar = (TopGalleryBarFragment) getChildFragmentManager().
-                findFragmentById(R.id.top_gallery_fragment_test);
-        mBottomGalleryBar = (BottomGalleryBarFragment) getChildFragmentManager().
-                findFragmentById(R.id.bottom_gallery_fragment_test);
 
         mGalleryPreview = (ImageView) view.findViewById(R.id.gallery_view_test);
 
@@ -125,10 +114,7 @@ public class AutoFocusFragment extends BaseCameraFragment
     public void onChaper_0() {
         Log.i(TAG, "onChaper_0");
 
-
         setFadeIn(mTapSuper);
-
-
         mCameraLayout.setVisibility(View.VISIBLE);
         mPreview.addView(mCameraSurface);
         mFocusIcon.bringToFront();
