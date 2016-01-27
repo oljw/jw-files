@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.samsung.retailexperience.retailhero.R;
@@ -108,6 +109,19 @@ public class MissingContentActivity extends BaseActivity {
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onBackKeyPressed() {
+        return false;
+    }
+
+    @Override
+    public void onSlideDrawer(View drawerView, float slideOffset) {
+    }
+
+    @Override
+    public void onSelectDrawerItem(int position) {
     }
 
     @Override

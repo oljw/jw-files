@@ -13,4 +13,29 @@
         app:autoPlay="false"
         app:isShowVideoFrame="true"
         app:scaleToVideoSize="true"/>
+
+    <FrameLayout
+        android:id="@+id/plus_tap_scan_now_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="371px"
+            android:layout_marginTop="625px"
+            android:src="@drawable/plus_scan_now"
+            />
+        <View
+            android:id="@+id/plus_tap_scan_now_icon_clickable"
+            android:layout_width="696px"
+            android:layout_height="696px"
+            android:layout_marginLeft="371px"
+            android:layout_marginTop="909px"
+            android:clickable="true"
+            android:background="@color/super_overlay_clickable_icon_area_bg"
+            />
+    </FrameLayout>
+
 </FrameLayout>

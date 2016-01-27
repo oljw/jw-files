@@ -41,12 +41,6 @@ public class SamsungPayFragment extends BaseVideoFragment {
         super.onPause();
     }
 
-    @Override
-    public void onBackPressed() {
-        changeFragment(AppConst.UIState.valueOf(getFragmentModel().getActionBackKey()),
-                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
-    }
-
     /**
      * Chapter callback methods
      */

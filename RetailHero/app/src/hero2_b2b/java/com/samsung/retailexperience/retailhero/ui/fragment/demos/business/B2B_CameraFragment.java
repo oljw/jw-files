@@ -54,6 +54,7 @@ public class B2B_CameraFragment extends BaseCameraFragment
         mCamera = getCameraInstance(-1);
         mCameraSurface = new CameraSurfaceView((MainActivity) getActivity(), mCamera);
         mCameraSurface.setListener(this);
+        mCameraSurface.setEnabled(false);
 
         mTapIcon = (ImageView) view.findViewById(R.id.tap_camera_icon);
         mTapIcon.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +82,8 @@ public class B2B_CameraFragment extends BaseCameraFragment
     @Override
     public void onResume() {
         super.onResume();
+        mCameraLayout.setVisibility(View.GONE);
+        mTapIcon.setVisibility(View.GONE);
     }
 
     @Override
@@ -115,7 +118,7 @@ public class B2B_CameraFragment extends BaseCameraFragment
 
         setFadeIn(mCaptureSuper);
         mCaptureSuper.setVisibility(View.VISIBLE);
-        mCaptureBtn.setClickable(true);
+//        mCaptureBtn.setClickable(true);
     }
 
     @OnChapter(chapterIndex = 2)
@@ -126,9 +129,9 @@ public class B2B_CameraFragment extends BaseCameraFragment
         mCameraLayout.setVisibility(View.GONE);
     }
 
-    @OnChapter(chapterIndex = 3)
-    public void onChaper_3() {
-        Log.i(TAG, "onChaper_3");
-
-    }
+//    @OnChapter(chapterIndex = 3)
+//    public void onChaper_3() {
+//        Log.i(TAG, "onChaper_3");
+//
+//    }
 }

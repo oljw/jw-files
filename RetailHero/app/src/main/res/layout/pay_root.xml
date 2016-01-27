@@ -8,13 +8,21 @@
 
     <include layout="@layout/pay_gallery_list" />
 
-    <ImageView
-        android:id="@+id/pay_knob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/pay_knob_c"
-        android:layout_gravity="bottom|center_horizontal"
-        />
+    <FrameLayout
+        android:id="@+id/pay_lock_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/pay_lock_bg"
+        >
+
+        <ImageView
+            android:id="@+id/pay_knob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pay_knob_c"
+            android:layout_gravity="bottom|center_horizontal"
+            />
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/pay_transparent_card"

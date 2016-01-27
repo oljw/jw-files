@@ -12,7 +12,5 @@
         app:looped="true"
         app:autoPlay="true"
         app:isShowVideoFrame="true"
-        app:scaleToVideoSize="true"
-        app:videoFile="video/attractor.mp4"
-        app:videoFrameFile="frame/attractor_frame.jpg"/>
+        app:scaleToVideoSize="true"/>
 </FrameLayout>

@@ -37,6 +37,11 @@ public abstract class BaseMenuFragment extends BaseFragment
     protected ListView mListView = null;
     protected ArrayList<MenuItemModel> mMenuItems = null;
 
+    // If subtitle have one line, the height of list item view is below pixel
+    private static final int ITEM_VIEW_HEIGHT_AT_LINE_ONE = 250;
+    // If subtitle have two line, the height of list item view is below pixel
+    private static final int ITEM_VIEW_HEIGHT_AT_LINE_TWO = 312;
+
     public BaseMenuFragment() {
     }
 
@@ -62,7 +67,7 @@ public abstract class BaseMenuFragment extends BaseFragment
         // Hamburger menu button
         mMenuButton = mView.findViewById(R.id.hamburger_menu_container);
         if (mMenuButton != null) {
-            if (mFragmentModel.getDrawerResId() == 0) {
+            if (mFragmentModel.getDrawerId() == null) {
                 mMenuButton.setVisibility(View.INVISIBLE);
             }
             else {
@@ -74,10 +79,11 @@ public abstract class BaseMenuFragment extends BaseFragment
                 });
             }
         }
+        //set drawer lock/unlock
+        setDrawer(mFragmentModel.getDrawerId());
 
         // set title
         View titleView = mView.findViewById(R.id.title);
-        //if (mFragmentModel.getFragment().getTitleResId() > 0 &&  mView.findViewById(R.id.title) != null) {
         if (mFragmentModel.getFragment().getTitleResId() > 0 && titleView != null) {
             if (titleView instanceof ImageView) {
                 ((ImageView) titleView).setImageResource(mFragmentModel.getFragment().getTitleResId());
@@ -126,14 +132,6 @@ public abstract class BaseMenuFragment extends BaseFragment
     @Override
     public void onDestroy()  {
         super.onDestroy();
-    }
-
-    @Override
-    public void onSetDrawer() {
-        if (mFragmentModel != null)
-            setDrawer(mFragmentModel.getDrawerResId());
-        else
-            setDrawer(0);
     }
 
     protected FragmentModel<MenuModel> loadJsonFragmentModel() {
@@ -187,9 +185,24 @@ public abstract class BaseMenuFragment extends BaseFragment
             }
 
             // Sub-Title
-            if ((TextView) menuItemView.findViewById(R.id.menuItemSubTitle) != null) {
+            TextView tvSubtitle = (TextView) menuItemView.findViewById(R.id.menuItemSubTitle);
+            if (tvSubtitle != null) {
                 if (item.getSubTitleResId() > 0) {
-                    ((TextView) menuItemView.findViewById(R.id.menuItemSubTitle)).setText(item.getSubTitleResId());
+                    tvSubtitle.setText(item.getSubTitleResId());
+                    if (menuItemView != null) {
+                        ViewGroup.LayoutParams lparm = (ViewGroup.LayoutParams) menuItemView.getLayoutParams();
+                        int lineCnt = countLines(tvSubtitle.getText().toString());
+
+                        //Log.d(TAG, "##### Line Cnt : " + lineCnt);
+                        if (lineCnt == 1) {
+                            lparm.height = ITEM_VIEW_HEIGHT_AT_LINE_ONE;
+                        } else if (lineCnt == 2) {
+                            lparm.height = ITEM_VIEW_HEIGHT_AT_LINE_TWO;
+                        } else {
+                            // no change
+                        }
+                        menuItemView.setLayoutParams(lparm);
+                    }
                 } else
                     menuItemView.findViewById(R.id.menuItemSubTitle).setVisibility(View.GONE);
             }
@@ -200,4 +213,9 @@ public abstract class BaseMenuFragment extends BaseFragment
             return menuItemView;
         }
     };
+
+    private int countLines(String str){
+        String[] lines = str.split("\r\n|\r|\n");
+        return  lines.length;
+    }
 }

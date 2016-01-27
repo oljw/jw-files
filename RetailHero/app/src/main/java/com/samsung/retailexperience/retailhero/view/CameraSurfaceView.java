@@ -1,11 +1,7 @@
 package com.samsung.retailexperience.retailhero.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.hardware.Camera;
 import android.hardware.SensorManager;
 import android.util.Log;
@@ -18,9 +14,6 @@ import android.view.View;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import android.graphics.Matrix;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 
 
 /**
@@ -34,23 +27,17 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private Camera mCamera;
     private int mWidth = 0;
     private int mHeight = 0;
-//    private ImageButton mStillBtn;
-
 
     public CameraSurfaceView(Context context, Camera camera) {
         super(context);
         mContext = context;
         mCamera = camera;
 
-        // Install a SurfaceHolder.Callback so we get notified when the
-        // underlying surface is created and destroyed.
         mHolder = getHolder();
         mHolder.addCallback(this);
         Log.d(TAG, "##### getHolder and addCallBack +");
 
-        // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
         setOnTouchListener(mPreviewTouchListener);
     }
 
@@ -72,11 +59,8 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void surfaceCreated(SurfaceHolder holder) {
         Log.d(TAG, "##### surfaceCreated +");
 
-//        mStillBtn =(ImageButton) findViewById(R.id.still_button);
-
         mOrientationListener = new OrientationEventListener(mContext, SensorManager.SENSOR_DELAY_UI) {
             public void onOrientationChanged (int orientation) {
-                //Log.d (TAG, "onOrientationChanged : " + orientation);
                 int prevScreenOrientation = mScreenOrientation;
 
                 if( orientation > 340 || (orientation >= 0 && orientation <= 20))
@@ -89,32 +73,23 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                     Log.d(TAG, "####### PLEASE ROTATE ICON : " + mScreenOrientation);
                     if (mListener != null) {
                         mListener.changeScreenOrientation(mScreenOrientation);
-
-//                        mStillBtn.setRotation(90);
                     }
                 }
             }
         };
         mOrientationListener.enable();
-
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
-            Log.d(TAG, "##### surfaceCreated : mholder = " + mHolder);
             mCamera.setPreviewDisplay(mHolder);
-            Log.d(TAG, "##### surfaceCreated : holder = " + holder);
-
-            Log.d(TAG, "##### surfaceCreated Start preview");
             mCamera.startPreview();
-            Log.d(TAG, "#####  surfaceCreated preview started");
         } catch (IOException e) {
             Log.e(TAG, "Error setting camera preview: " + e.getMessage());
         }
-        Log.d(TAG, "##### surfaceCreated -");
     }
 
     public void surfaceDestroyed(SurfaceHolder holder) {
         Log.d(TAG, "##### surfaceDestroyed");
-        // empty. Take care of releasing the Camera preview in your activity.
+        // empty.
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
@@ -127,6 +102,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         refreshCamera(mCamera, mCameraBack);
         startCameraPreview();
     }
+
     boolean mVideoMode = true;
     boolean mCameraBack = true;
     public void refreshCamera(Camera camera, boolean cameraBack) {
@@ -146,26 +122,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         mCamera.setParameters(parameters);
 
         Log.d(TAG, "###################### refreshCamera)- ");
-    }
-
-    public void refreshCamcorder(Camera camera, boolean cameraBack) {
-        Log.d(TAG, "###################### refreshCamcorder)+ ");
-        mVideoMode = false;
-        mCameraBack = cameraBack;
-
-        if(mHolder.getSurface() ==null) return;
-        setCamera(camera);
-
-        mCamera.setDisplayOrientation(90);
-
-        Camera.Parameters parameters = mCamera.getParameters();
-        if (cameraBack)
-            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-        Camera.Size size = getBestPreviewSizeForFull(mWidth, mHeight, parameters);
-        parameters.setPreviewSize(size.width, size.height);
-        mCamera.setParameters(parameters);
-
-        Log.d(TAG, "###################### refreshCamcorder)- ");
     }
 
     private Camera.Size getBestPreviewSize(int width, int height) {
@@ -189,39 +145,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         }
         return result;
     }
-
-
-    private Camera.Size getBestPreviewSizeForFull(int width, int height, Camera.Parameters parameters){
-        List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
-
-        Camera.Size bestSize = sizeList.get(0);
-
-        for(int i = 1; i < sizeList.size(); i++){
-            if((sizeList.get(i).width * sizeList.get(i).height) >
-                    (bestSize.width * bestSize.height)){
-                bestSize = sizeList.get(i);
-            }
-        }
-        return bestSize;
-    }
-
-    public void setStillShotParam(boolean cameraBack) {
-        Camera.Parameters parameters = mCamera.getParameters();
-        if (cameraBack) {
-            parameters.setRotation(mScreenOrientation);
-            parameters.setPictureSize(4032, 3024);
-        }
-        else {
-            if (mScreenOrientation == 90)
-                parameters.setRotation(270);
-            else
-                parameters.setRotation(mScreenOrientation);
-
-            parameters.setPictureSize(2592, 1944);
-        }
-        mCamera.setParameters(parameters);
-    }
-
 
     public void setCamera(Camera camera) {
         Log.d(TAG, "####setCamera called");
@@ -254,7 +177,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         Log.d(TAG, "###################### startCameraPreview)- ");
     }
 
-    //tap to focus example
+    //Tap To Focus
     private Rect focusRect = null;
     private OnTouchListener mPreviewTouchListener = (new OnTouchListener() {
         @Override
@@ -291,7 +214,10 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                                 Camera.Parameters parameters = camera.getParameters();
                                 parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
                                 if (parameters.getMaxNumFocusAreas() > 0) {
-                                    parameters.setFocusAreas(null);
+                                    //Auto-focuses 3 times when setFocusAreas(null).
+                                    //parameters.setFocusAreas(null);
+                                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+
                                 }
                                 camera.setParameters(parameters);
                                 camera.startPreview();

@@ -1,58 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="200px"
-             android:background="@color/white"
-             android:orientation="vertical"
-             android:paddingTop="@dimen/status_bar_height"
-             android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-    <!--ImageView
-        android:id="@+id/avatar"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_margin="@dimen/spacing_large"
-        android:elevation="4dp"
-        tools:src="@drawable/ic_launcher"/-->
-
-
-    <!--android:layout_above="@+id/email"-->
-    <!--TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/spacing_large"
-        android:layout_marginStart="@dimen/spacing_large"
-        android:text="@string/menu_header_title"
-        android:textColor="@color/menu_header_color"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"/-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
 
     <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+        android:id="@+id/drawer_item_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/spacing_large"
-        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_height="@dimen/drawer_header_height"
+        android:paddingTop="@dimen/drawer_header_paddingtop"
+        android:layout_marginLeft="@dimen/drawer_header_marginleft"
         app:customFont="fonts/SamsungSharpSans-Bold.ttf"
-        android:text="@string/menu_header_title"
-        android:textSize="@dimen/header_font_size"
-        android:textColor="@color/menu_header_color"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-
-
-        />
-
-    <!--<TextView-->
-        <!--android:id="@+id/email"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginLeft="@dimen/spacing_large"-->
-        <!--android:layout_marginStart="@dimen/spacing_large"-->
-        <!--android:layout_marginBottom="@dimen/spacing_large"-->
-        <!--android:text="username@mymail.com"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>-->
+        android:text="@string/select_a_category"
+        android:textSize="@dimen/drawer_header_font_size"
+        android:textColor="@color/drawer_header_color" />
 
 </RelativeLayout>

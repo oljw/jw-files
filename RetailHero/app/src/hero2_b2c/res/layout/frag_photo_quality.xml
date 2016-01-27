@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/camera_layout"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:clickable="false">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,10 +32,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/top_fragment_test"
                 android:layout_above="@+id/bottom_fragment_test"
-                android:background="#000000"
-                android:clickable="false">
-
-            </RelativeLayout>
+                android:background="#000000"/>
 
             <fragment
                 android:id="@+id/top_fragment_test"

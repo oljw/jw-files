@@ -41,7 +41,6 @@
                     android:src="@drawable/tap_focus_icon"
                     android:scaleType="fitCenter"
                     android:background="@android:color/transparent"
-                    android:alpha="0.4"
                     android:visibility="invisible"
                     android:adjustViewBounds="true" />
 

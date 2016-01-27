@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Menu Button : Hamburger -->
+    <dimen name="menu_button_container_width">300px</dimen>
+    <dimen name="menu_button_container_height">240px</dimen>
+    <dimen name="menu_button_margin_top">100px</dimen>
+    <dimen name="menu_button_margin_left">100px</dimen>
+
+    <!-- MenuFragment layout -->
+    <dimen name="frag_menu_padding_top">100px</dimen>
+    <dimen name="frag_menu_layout_padding_left">100px</dimen>
+    <dimen name="frag_menu_title_margin_top">-31px</dimen>
+    <dimen name="frag_menu_subtitle_margin_top">16px</dimen>
+    <dimen name="frag_menu_list_margin_top">95px</dimen>
+    <dimen name="menu_title_font_size">110px</dimen>
+    <dimen name="menu_subtitle_font_size">52px</dimen>
+    <dimen name="menu_video_container_margin_Bottom">435px</dimen>
+    <dimen name="menu_video_icon_margin_left">100px</dimen>
+    <dimen name="menu_video_icon_margin_top">54px</dimen>
+    <dimen name="menu_video_text_container_margin_left">47px</dimen>
+
+    <!-- menu item -->
+    <dimen name="menu_item_height">250px</dimen>
+    <dimen name="menu_item_padding_left">132px</dimen>
+    <dimen name="menu_item_icon_margin_top">59px</dimen>
+    <dimen name="menu_item_text_container_margin_left">57px</dimen>
+    <dimen name="menu_item_title_font_size">80px</dimen>
+    <dimen name="menu_item_subtitle_font_size">52px</dimen>
+    <dimen name="menu_item_subtitle_margin_top">2px</dimen>
+
+    <!-- Decision Page -->
+    <dimen name="decision_title_margin_left">101px</dimen>
+    <dimen name="decision_subtitle_margin_top">20px</dimen>
+    <dimen name="decision_subtitle_margin_left">101px</dimen>
+    <dimen name="decision_list_margin_top">86px</dimen>
+    <dimen name="decision_layout_padding_top">180px</dimen>
+
+    <!-- End Page -->
+    <dimen name="end_page_title_margin_left">101px</dimen>
+    <dimen name="end_page_subtitle_margin_top">20px</dimen>
+    <dimen name="end_page_subtitle_margin_left">101px</dimen>
+    <dimen name="end_page_list_margin_top">38px</dimen>
+    <dimen name="end_page_layout_padding_top">180px</dimen>
+
+    <!-- end menu item -->
+    <dimen name="end_menu_item_height">207px</dimen>
+    <dimen name="end_menu_title_margin_left">60px</dimen>
+
+</resources>

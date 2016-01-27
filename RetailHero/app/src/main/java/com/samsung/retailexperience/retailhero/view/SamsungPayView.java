@@ -28,7 +28,6 @@ import com.samsung.retailexperience.retailhero.R;
 public class SamsungPayView extends FrameLayout implements CustomizedGallery.GalleryTapListener {
     private static final String TAG = SamsungPayView.class.getSimpleName();
 
-    private static final long TRANSPARENT_CARD_INIT_ANIM_DURATION = 100;
     private static final long TRANSPARENT_CARD_ANIM_DURATION = 250;
 
     // if a user moved this threshold, it is up or down motion (or swiping)
@@ -39,16 +38,19 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
 
     private static final List<Integer> CARDS = new ArrayList<>(2);
     static {
-        CARDS.add(R.drawable.pay_card_1);
         CARDS.add(R.drawable.pay_card_2);
+        CARDS.add(R.drawable.pay_card_1);
         CARDS.add(R.drawable.pay_card_3);
+        CARDS.add(R.drawable.pay_card_4);
     }
+    private static final int TRANSPARENT_CARD_RESOURCE_ID = R.drawable.pay_card_1;
 
     private View mKnob;
     private View mTransparentCard;
     private View mCardListRoot;
     private View mCardList;
     private View mCardSelectionIndicator;
+    private View mLockScreen;
 
     private boolean mIsDraggingATransparentCard;
     // touch X position is not necessarily since card is moving only up and downwards.
@@ -57,7 +59,7 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
     private long mLastUpwardGestureTime;
     private float mTransparentCardInitY;
 
-    private SamsungPayEventsListener samsungPayEventsListener;
+    private SamsungPayEventsListener mSamsungPayEventsListener;
 
     public SamsungPayView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -79,7 +81,7 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
     }
 
     public void setSamsungPayEventsListener(SamsungPayEventsListener samsungPayEventsListener) {
-        this.samsungPayEventsListener = samsungPayEventsListener;
+        this.mSamsungPayEventsListener = samsungPayEventsListener;
     }
 
     private void init(Context context) {
@@ -87,11 +89,12 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
         mTransparentCard = findViewById(R.id.pay_transparent_card);
         // TODO hide transparent card below the screen
         mTransparentCard.setX(this.getBottom());
-        ((ImageView) mTransparentCard).setImageResource(CARDS.get(0));
+        ((ImageView) mTransparentCard).setImageResource(TRANSPARENT_CARD_RESOURCE_ID);
 
         mCardListRoot = findViewById(R.id.pay_gallery_root);
         mCardList = findViewById(R.id.pay_cardlist);
         mCardSelectionIndicator = findViewById(R.id.pay_selectoin_indicator);
+        mLockScreen = findViewById(R.id.pay_lock_root);
 
         initGallery(context, (Gallery) mCardList);
         initCardSelectionIndicator(context, (RadioGroup) mCardSelectionIndicator);
@@ -152,25 +155,26 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
         cardSelectionIndicator.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                updateSelectedCard(checkedId);
+                updateSelectedCard(checkedId, true);
             }
         });
     }
 
-    private void updateSelectedCard(int position) {
+    public void updateSelectedCard(int position, boolean animate) {
         Gallery g = ((Gallery) mCardList);
         if (g.getSelectedItemPosition() != position) {
-            g.setSelection(position, true);
+            g.setSelection(position, animate);
         }
     }
 
-    private void animateTransparentCard(float targetPosY, long milliSeconds) {
-        animateTransparentCard(targetPosY, milliSeconds, null);
+    private void animateTransparentCard(float targetPosY) {
+        animateTransparentCard(targetPosY, null);
     }
 
-    private void animateTransparentCard(float targetPosY, long milliSeconds, Animator.AnimatorListener animatorListener) {
+    private void animateTransparentCard(float targetPosY, Animator.AnimatorListener animatorListener) {
         ObjectAnimator animY = ObjectAnimator.ofFloat(mTransparentCard, "y", targetPosY);
         AnimatorSet animSet = new AnimatorSet();
+        long milliSeconds = Math.abs((long) ((mTransparentCard.getY() - targetPosY) / 6f));
         animSet.setDuration(milliSeconds);
         if (animatorListener != null) {
             animSet.addListener(animatorListener);
@@ -205,7 +209,7 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
         // 2. show transparent card (transparent card is hidden below the screen.  scroll the card upward, and show partially)
         mTransparentCardInitY = this.getBottom() - INIT_TRANSPARENT_VISIBLE_HEIGHT;
         mTransparentCard.setY(this.getBottom());
-        animateTransparentCard(mTransparentCardInitY, TRANSPARENT_CARD_INIT_ANIM_DURATION);
+        animateTransparentCard(mTransparentCardInitY);
         mTransparentCard.setVisibility(VISIBLE);
 
         mIsDraggingATransparentCard = true;
@@ -257,27 +261,36 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
 
         // if it didn't meet the above conditions, it is most likely we have to animate dragging a card to downward.
 
-        if (upward && samsungPayEventsListener != null) {
-            samsungPayEventsListener.swipeUpAnimationStarted();
+        if (upward && mSamsungPayEventsListener != null) {
+            mSamsungPayEventsListener.swipeUpAnimationStarted();
         }
 
         performDraggingTransparentCardAnimation(upward);
     }
 
-//    private void showCardList() {
+    //    private void showCardList() {
 //        mCardListRoot.setVisibility(VISIBLE);
 //        mTransparentCard.setVisibility(GONE);
 //    }
     private void notifyTransparentCardAtTop() {
         mTransparentCard.setVisibility(GONE);
 
-        if (samsungPayEventsListener != null) {
-            samsungPayEventsListener.swipUpAnimationEnded();
+        if (mSamsungPayEventsListener != null) {
+            mSamsungPayEventsListener.swipUpAnimationEnded();
         }
     }
 
     public void showCardList() {
         mCardListRoot.setVisibility(VISIBLE);
+        mLockScreen.setVisibility(GONE);
+    }
+
+    public void forceSwipingUpAnimation() {
+        mKnob.setVisibility(GONE);
+
+        mTransparentCard.setY(this.getBottom());
+        mTransparentCard.setVisibility(VISIBLE);
+        performDraggingTransparentCardAnimation(true);
     }
 
     private void showKnob() {
@@ -316,7 +329,7 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
             }
         };
         float targetY = upward ? getTransparentCardMinY() : this.getBottom();
-        animateTransparentCard(targetY, TRANSPARENT_CARD_ANIM_DURATION, animatorListener);
+        animateTransparentCard(targetY, animatorListener);
     }
 
     @Override
@@ -335,8 +348,8 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (isTouchingKnob(touchX, touchY)) {
-                    if (samsungPayEventsListener != null) {
-                        samsungPayEventsListener.swipeUpTouchStarted();
+                    if (mSamsungPayEventsListener != null) {
+                        mSamsungPayEventsListener.swipeUpTouchStarted();
                     }
                     showTransparentCard(touchX, touchY);
                     return true;
@@ -349,6 +362,8 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
                 }
                 break;
             case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_OUTSIDE:
                 if (mIsDraggingATransparentCard) {
                     wrapUpDragging();
                     return true;
@@ -360,8 +375,8 @@ public class SamsungPayView extends FrameLayout implements CustomizedGallery.Gal
 
     @Override
     public void onGalleyTap() {
-        if (samsungPayEventsListener != null) {
-            samsungPayEventsListener.paymentSelected();
+        if (mSamsungPayEventsListener != null) {
+            mSamsungPayEventsListener.paymentSelected();
         }
     }
 

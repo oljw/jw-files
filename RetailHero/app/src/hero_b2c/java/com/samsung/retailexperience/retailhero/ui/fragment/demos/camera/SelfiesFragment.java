@@ -1,6 +1,5 @@
 package com.samsung.retailexperience.retailhero.ui.fragment.demos.camera;
 
-import android.hardware.Camera;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,30 +7,21 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.samsung.retailexperience.retailhero.R;
 import com.samsung.retailexperience.retailhero.annotation.OnChapter;
 import com.samsung.retailexperience.retailhero.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailhero.gson.models.VideoModel;
-import com.samsung.retailexperience.retailhero.ui.activity.MainActivity;
-import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFragmentFront;
-import com.samsung.retailexperience.retailhero.ui.fragment.BaseVideoFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomGalleryBarFragment;
+import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFrontFragment;
 import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopGalleryBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment;
 import com.samsung.retailexperience.retailhero.util.AppConst;
 import com.samsung.retailexperience.retailhero.util.AppConsts;
-import com.samsung.retailexperience.retailhero.view.CameraSurfaceView;
 import com.samsung.retailexperience.retailhero.view.CameraSurfaceViewFront;
-import com.samsung.retailexperience.retailhero.view.GalleryZoomView;
 
 /**
  * Created by smheo on 1/15/2016.
  */
-public class SelfiesFragment extends BaseCameraFragmentFront
+public class SelfiesFragment extends BaseCameraFrontFragment
         implements BottomMenuBarFragment.BottomMenuBarListener,
         CameraSurfaceViewFront.CameraSurfaceFrontListener  {
 
@@ -56,6 +46,7 @@ public class SelfiesFragment extends BaseCameraFragmentFront
 
         mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
 
+        //Selfie Output. not Gallery Button
         mGallerybtn =(ImageView) view.findViewById(R.id.gallery_button);
 
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_view_test);
@@ -64,6 +55,7 @@ public class SelfiesFragment extends BaseCameraFragmentFront
 
         mCamera = getCameraInstance(-1);
         mCameraSurface = new CameraSurfaceViewFront(getActivity(), mCamera);
+        mCameraSurface.setEnabled(false);
 
         mNotSavedSuper = (ImageView) view.findViewById(R.id.not_saved);
 
@@ -81,6 +73,9 @@ public class SelfiesFragment extends BaseCameraFragmentFront
     @Override
     public void onResume() {
         super.onResume();
+        mCameraLayout.setVisibility(View.GONE);
+        mGallerybtn.setVisibility(View.GONE);
+        mNotSavedSuper.setVisibility(View.GONE);
     }
 
     @Override

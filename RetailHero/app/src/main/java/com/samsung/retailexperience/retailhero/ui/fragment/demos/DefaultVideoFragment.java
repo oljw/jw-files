@@ -32,12 +32,6 @@ public class DefaultVideoFragment extends BaseVideoFragment {
     }
 
     @Override
-    public void onBackPressed() {
-        changeFragment(AppConst.UIState.valueOf(getFragmentModel().getActionBackKey()),
-                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
-    }
-
-    @Override
     public void onCompletion(MediaPlayer mp) {
         super.onCompletion(mp);
         changeEndDemoFragment(AppConst.UIState.valueOf(getFragmentModel().getActionBackKey()),

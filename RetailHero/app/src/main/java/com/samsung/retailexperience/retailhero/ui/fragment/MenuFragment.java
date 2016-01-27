@@ -1,7 +1,6 @@
 package com.samsung.retailexperience.retailhero.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -32,7 +31,6 @@ public class MenuFragment extends BaseMenuFragment {
 
     @Override
     public void onViewCreated(View view) {
-        if (view != null) {
             View videoButton = view.findViewById(R.id.menu_video_button);
             if (videoButton != null) {
                 videoButton.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +55,6 @@ public class MenuFragment extends BaseMenuFragment {
                 }
             }
         }
-    }
 
     @Override
     public ArrayList<MenuItemModel> onMenuItemsRequested() {
@@ -67,6 +64,7 @@ public class MenuFragment extends BaseMenuFragment {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         String action = (String)view.getTag();
+
         if (action == null) return;
         changeFragment(AppConst.UIState.valueOf(action), AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
     }

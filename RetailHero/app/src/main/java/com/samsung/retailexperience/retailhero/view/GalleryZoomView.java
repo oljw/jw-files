@@ -5,30 +5,30 @@ package com.samsung.retailexperience.retailhero.view;
  */
 
 //        import android.annotation.TargetApi;
-        import android.content.Context;
-        import android.content.res.Configuration;
-        import android.graphics.Bitmap;
-        import android.graphics.Canvas;
-        import android.graphics.Matrix;
-        import android.graphics.PointF;
-        import android.graphics.RectF;
-        import android.graphics.drawable.Drawable;
-        import android.net.Uri;
-        import android.os.Build;
-        import android.os.Build.VERSION;
-        import android.os.Build.VERSION_CODES;
-        import android.os.Bundle;
-        import android.os.Parcelable;
-        import android.util.AttributeSet;
-        import android.util.Log;
-        import android.view.GestureDetector;
-        import android.view.MotionEvent;
-        import android.view.ScaleGestureDetector;
-        import android.view.View;
-        import android.view.animation.AccelerateDecelerateInterpolator;
-        import android.widget.ImageView;
-        import android.widget.OverScroller;
-        import android.widget.Scroller;
+
+import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.PointF;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
+import android.widget.OverScroller;
+import android.widget.Scroller;
 
 public class GalleryZoomView extends ImageView {
 
@@ -39,8 +39,8 @@ public class GalleryZoomView extends ImageView {
     // zoomed below or above the zoom boundaries, before animating back to the
     // min/max zoom boundary.
     //
-    private static final float SUPER_MIN_MULTIPLIER = .75f;
-    private static final float SUPER_MAX_MULTIPLIER = 1.25f;
+    private static final float SUPER_MIN_MULTIPLIER = 1.0f;
+    private static final float SUPER_MAX_MULTIPLIER = 1.0f;
 
     //
     // Scale of image ranges from minScale to maxScale, where minScale == 1
@@ -118,7 +118,7 @@ public class GalleryZoomView extends ImageView {
             mScaleType = ScaleType.FIT_CENTER;
         }
         minScale = 1;
-        maxScale = 3;
+        maxScale = 7;
         superMinScale = SUPER_MIN_MULTIPLIER * minScale;
         superMaxScale = SUPER_MAX_MULTIPLIER * maxScale;
         setImageMatrix(matrix);
@@ -952,7 +952,7 @@ public class GalleryZoomView extends ImageView {
     private class DoubleTapZoom implements Runnable {
 
         private long startTime;
-        private static final float ZOOM_TIME = 500;
+        private static final float ZOOM_TIME = 230;
         private float startZoom, targetZoom;
         private float bitmapX, bitmapY;
         private boolean stretchImageToSuper;

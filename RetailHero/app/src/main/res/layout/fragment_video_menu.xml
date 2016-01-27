@@ -1,50 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <LinearLayout
-        android:id="@+id/hamburger_menu_container"
-        android:layout_width="@dimen/menu_button_container_width"
-        android:layout_height="@dimen/menu_button_container_height">
-        <ImageView
-            android:id="@+id/drawer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/menu_button_margin_top"
-            android:layout_marginLeft="@dimen/menu_button_margin_left"
-            android:src="@drawable/menu_hamburger"/>
-    </LinearLayout>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/frag_menu_layout_padding_left"
-        android:paddingRight="@dimen/frag_menu_layout_padding_right"
-        android:orientation="vertical"
-        android:gravity="left|top">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.samsung.retailexperience.retailhero.view.CustomFontTextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/hamburger_menu_container"
+            android:layout_width="@dimen/menu_button_container_width"
+            android:layout_height="@dimen/menu_button_container_height">
+            <ImageView
+                android:id="@+id/drawer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/menu_button_margin_top"
+                android:layout_marginLeft="@dimen/menu_button_margin_left"
+                android:src="@drawable/menu_hamburger"/>
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/frag_menu_title_margin_top"
-            app:customFont="fonts/SamsungSharpSans-Bold.ttf"
-            android:textSize="@dimen/menu_title_font_size"
-            android:letterSpacing="0.02"
-            android:textColor="@color/text_color_white" />
+            android:paddingLeft="@dimen/frag_menu_layout_padding_left"
+            android:orientation="vertical">
 
-        <com.samsung.retailexperience.retailhero.view.CustomFontTextView
-            android:id="@+id/subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/frag_menu_subtitle_margin_top"
-            app:customFont="fonts/SamsungOne-400_v1.0.ttf"
-            android:textSize="@dimen/menu_subtitle_font_size"
-            android:textColor="@color/text_color_white"/>
+            <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:customFont="fonts/SamsungSharpSans-Bold.ttf"
+                android:textSize="@dimen/menu_title_font_size"
+                android:letterSpacing="0.02"
+                android:textColor="@color/text_color_white"/>
+
+            <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/frag_menu_subtitle_margin_top"
+                app:customFont="fonts/SamsungOne-400_v1.0.ttf"
+                android:textSize="@dimen/menu_subtitle_font_size"
+                android:textColor="@color/text_color_white"/>
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/list"
@@ -54,15 +59,20 @@
             android:overScrollMode="never"
             android:dividerHeight="-1px">
         </ListView>
+    </LinearLayout>
 
+    <!--&lt;!&ndash; video button in fragment &ndash;&gt;-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <!-- video button in fragment -->
         <LinearLayout
             android:id="@+id/menu_video_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/menu_video_container_margin_top">
+            android:layout_marginBottom="@dimen/menu_video_container_margin_Bottom">
 
             <ImageView
                 android:id="@+id/videoMenuIcon"
@@ -98,8 +108,6 @@
                     android:textColor="@color/text_color_white" />
             </LinearLayout>
         </LinearLayout>
+    </FrameLayout>
 
-
-    </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>

@@ -13,4 +13,29 @@
         app:autoPlay="false"
         app:isShowVideoFrame="true"
         app:scaleToVideoSize="true"/>
+
+    <!-- left margin 342, top margin 1077 -->
+    <FrameLayout
+        android:id="@+id/knox_icon_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="342px"
+            android:layout_marginTop="1077px"
+            android:src="@drawable/knox_tap_on_icon"
+            />
+        <View
+            android:id="@+id/knox_icon_clickable"
+            android:layout_width="223px"
+            android:layout_height="235px"
+            android:layout_marginLeft="437px"
+            android:layout_marginTop="1531px"
+            android:clickable="true"
+            android:background="@color/super_overlay_clickable_icon_area_bg"
+            />
+    </FrameLayout>
 </FrameLayout>

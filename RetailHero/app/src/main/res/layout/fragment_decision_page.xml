@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingTop="@dimen/decision_layout_padding_top"
+              android:orientation="vertical">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/decision_title_margin_left"/>
+
+        <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/decision_subtitle_margin_top"
+            android:layout_marginLeft="@dimen/decision_subtitle_margin_left"
+            app:customFont="fonts/SamsungOne-400_v1.0.ttf"
+            android:textSize="@dimen/menu_subtitle_font_size"
+            android:textColor="@color/text_color_white"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/decision_list_margin_top"
+        android:overScrollMode="never"
+        android:dividerHeight="-1px">
+    </ListView>
+
+</LinearLayout>

@@ -2,12 +2,26 @@
     <!--string name="app_name">Galaxy S7 retail experience</string-->
 
     <!-- Demo End page -->
-    <string name="demo_end_subtitle">Lorem ipsum dolor sit amet, consectetur elit sed do\n eiusmod tem</string>
+    <string name="demo_end_subtitle">Select another demo to see what else the Hero 2 \nhas to offer or exit to explore the phone.</string>
     <string name="back_to_menu_title">Back to Menu</string>
     <string name="back_to_menu_subtitle">Lorem ipsum dolor sit amet</string>
-    <string name="free_explore_title">Play With Device</string>
+    <string name="free_explore_title">Explore the Phone</string>
     <string name="free_explore_subtitle">Lorem ipsum dolor sit amet</string>
 
     <!--ForegroundDetectingService message-->
     <string name="foregrounddetectingservice_message">Do you want to allow RetailHero app for detecting the foreground app pacakge name?</string>
+
+<!--Navigation Drawer-->
+    <string name="select_a_category">Select a Category</string>
+    <string name="discover_top_features">Discover Top Features</string>
+    <string name="enhanced_productivity">Enhanced Productivity</string>
+    <string name="designed_for_business">Designed for Business</string>
+    <string name="samsung_exclusives">Samsung Exclusives</string>
+    <string name="switching_to_samsung">Switching to Samsung?</string>
+    <string name="explore_the_phone">Explorer the Phone</string>
+    <string name="discover_new_features">Discover New Features</string>
+    <string name="dazzling_display">Dazzling Display</string>
+    <string name="advanced_camera">Advanced Camera</string>
+    <string name="device_specs">Device Specs</string>
+
 </resources>

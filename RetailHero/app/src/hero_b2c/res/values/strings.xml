@@ -5,85 +5,93 @@
     <string name="model_name">Galaxy-S7 B2C</string>
 
     <!-- Hambuger Menu title -->
-    <string name="menu_header_title">Select a category</string>
-    <string name="menu_whats_new">New Feature</string>
-    <string name="menu_camera">Camera</string>
-    <string name="menu_design">Beautiful Desgin</string>
+    <string name="menu_header_title">Select a Category</string>
+    <string name="menu_whats_new">Discover New Features</string>
+    <string name="menu_camera">Advanced Camera</string>
+    <string name="menu_design">Dazzling Display</string>
     <string name="menu_ss_exclusives">Samsung Exclusives</string>
-    <string name="menu_new_to_android">Switching to Android?</string>
+    <string name="menu_new_to_android">Switching to Samsung?</string>
     <string name="menu_device_spec">Device Specs</string>
-    <string name="menu_exit_app">Exit App</string>
+    <string name="menu_exit_app">Explore the Phone</string>
 
     <!-- Decision page-->
-    <string name="decision_subtitle">Welcome! Dive in and explore a galaxy of goodness. \nSelect an item to get started.</string>
-    <string name="whats_new_title">New Features</string>
-    <string name="whats_new_subtitle">Take a tour to see what\'s new</string>
+    <string name="decision_subtitle">Dive into the Galaxy you deserve by selecting one\nof the items below.</string>
+    <string name="whats_new_title">Discover New Features</string>
+    <string name="whats_new_subtitle">Interact with the demos to get the full tour</string>
     <string name="device_specs_title">Device Specs</string>
-    <string name="device_specs_subtitle">Compare this phone with others</string>
-    <string name="new_to_android_title">Switching to Android?</string>
-    <string name="new_to_android_subtitle">Discover a seamless transition</string>
-    <string name="explore_title">Play with the Phone</string>
-    <string name="explore_subtitle">Explore the HERO on your own</string>
+    <string name="device_specs_subtitle">Compare with other Samsung devices</string>
+    <string name="new_to_android_title">Switching to Samsung?</string>
+    <string name="new_to_android_subtitle">Make an easy transition to the HERO</string>
+    <string name="explore_title">Explore the Phone</string>
+    <string name="explore_subtitle">You can easily come back to the demos anytime</string>
 
-    <!-- what's new (New Features) demos -->
-    <string name="whats_new_demo_title">New Features</string>
-    <string name="whats_new_demo_subtitle">Tap on a feature and a Samsung Owner will walk \nyou through it.</string>
+    <!-- what's new (New Features) demo -->
+    <string name="whats_new_demo_title">Discover New Features</string>
+    <string name="whats_new_demo_subtitle">Tap on a feature and a Samsung Owner will walk you\nthrough the interactive demo.</string>
     <string name="whats_new_demo_1_title">Water &amp; Dust Resistant</string>
-    <string name="whats_new_demo_1_subtitle">See durability and design at its best</string>
+    <string name="whats_new_demo_1_subtitle">Durable metal and glass that’s water resistant\nup to 5 feet</string>
     <string name="whats_new_demo_2_title">Expandable Memory</string>
-    <string name="whats_new_demo_2_subtitle">Create more storage space</string>
+    <string name="whats_new_demo_2_subtitle">Store more photos, music and more with up\nto 128GB on an external SD card</string>
     <string name="whats_new_demo_3_title">Advanced Camera</string>
-    <string name="whats_new_demo_3_subtitle">Shoot quality photos like a pro</string>
-    <string name="whats_new_demo_4_title">No Touch Convenience</string>
-    <string name="whats_new_demo_4_subtitle">View apps, even if the display is off </string>
+    <string name="whats_new_demo_3_subtitle">Dual pixel technology and faster auto-focus\nlets you shoot like a pro</string>
+    <string name="whats_new_demo_4_title">No Touch Experience</string>
+    <string name="whats_new_demo_4_subtitle">See notifications and the time without\nwaking the screen</string>
     <!--string name="whats_new_demo_5_title">Edge Functionality</string>
     <string name="whats_new_demo_5_subtitle">Access people and news faster</string-->
 
-    <!-- Design demos -->
-    <string name="design_demo_title">Beautiful Design</string>
-    <string name="design_demo_subtitle">Explore the vibrant display and ergonomic design\nwith Jerise.</string>
-    <string name="design_demo_1_title">Super AMOLED Display</string>
-    <string name="design_demo_1_subtitle">See games come to life and colors pop</string>
-    <string name="design_demo_2_title">Perfect Shape</string>
-    <string name="design_demo_2_subtitle">Get a feel for the slim, sleek design</string>
-    <!--string name="design_demo_3_title">Edge Functionality</string>
-    <string name="design_demo_3_subtitle">Access people and news faster</string-->
-    <string name="design_demo_3_title">No Touch Convenience</string>
-    <string name="design_demo_3_subtitle"> View apps, even if the display is off</string>
-    <string name="design_demo_video_title">Jerise\'s Story</string>
-    <string name="design_demo_video_subtitle">Discover how Jerise uses his phone to\nshape his fitness routines. </string>
+    <!-- Design & Display demo -->
+    <string name="design_demo_title">Dazzling Display</string>
+    <string name="design_demo_subtitle">Explore the vibrant screen and ergonomic design\nthat helps Jerise teach fitness.</string>
+    <string name="design_demo_1_title">Breathtaking Colors</string>
+    <string name="design_demo_1_subtitle">Experience a brilliant, QUAD HD \nSuper AMOLED Display</string>
+    <string name="design_demo_2_title">Perfect Fit</string>
+    <string name="design_demo_2_subtitle">Water-resistant metal and glass \nthat feels great in your palm</string>
+    <string name="design_demo_3_title">No Touch Experience</string>
+    <string name="design_demo_3_subtitle">See notifications and time without \nwaking the screen</string>
+    <!--string name="design_demo_4_title">Edge Functionality</string>
+    <string name="design_demo_4_subtitle">Instantly access people, apps \nand news from the Edge</string-->
+    <string name="design_demo_video_title">Jerise’s Story</string>
+    <string name="design_demo_video_subtitle">Discover how Jerise uses his phone \nto shape his fitness routines.</string>
 
-    <!-- Camera demos -->
-    <string name="camera_demo_title">Camera</string>
-    <string name="camera_demo_subtitle">Watch Jason demonstrate the all-new camera.</string>
-    <string name="camera_demo_1_title">Brighter Photos</string>
-    <string name="camera_demo_1_subtitle">See the difference DP technology makes</string>
-    <string name="camera_demo_2_title">Sharper Results</string>
-    <string name="camera_demo_2_subtitle">Capture the moment with 4x faster autofocus</string>
+    <!-- Camera demo -->
+    <string name="camera_demo_title">Advanced Camera</string>
+    <string name="camera_demo_subtitle">Let Cassandra demonstrate the great features of the\nall-new camera.</string>
+    <string name="camera_demo_1_title">Brighter, Better Photos</string>
+    <string name="camera_demo_1_subtitle">Learn about the first smartphone with\ndual pixel technology</string>
+    <string name="camera_demo_2_title">More Detail, Less Blur</string>
+    <string name="camera_demo_2_subtitle">Capture every moment with 4x faster auto-focus</string>
     <string name="camera_demo_3_title">Better Selfies</string>
-    <string name="camera_demo_3_subtitle">Snap a flattering shot using the Selfie flash</string>
-    <string name="camera_demo_video_title">Cassandra\'s Story</string>
-    <string name="camera_demo_video_subtitle">See Cassandra saving rescue dogs with\nevery photo she takes.</string>
+    <string name="camera_demo_3_subtitle">Snap a flattering shot using the selfie flash</string>
+    <string name="camera_demo_video_title">Cassandra’s Story</string>
+    <string name="camera_demo_video_subtitle">Find out how Cassandra uses her phones\ncamera to help place rescue dogs.</string>
 
-    <!-- Samsung Exclusives demos -->
+    <!-- Samsung Exclusives -->
     <string name="ss_exclusives_demo_title">Samsung Exclusives</string>
-    <string name="ss_exclusives_demo_subtitle">Let Matt guide you through the perks of owning\na Samsung phone.</string>
-    <string name="ss_exclusives_demo_1_title">All-Day Battery</string>
-    <string name="ss_exclusives_demo_1_subtitle">Discover incredible battery life</string>
-    <string name="ss_exclusives_demo_2_title">More Storage</string>
-    <string name="ss_exclusives_demo_2_subtitle">See how to store more, delete less</string>
-    <string name="ss_exclusives_demo_3_title">Samsung Pay</string>
-    <string name="ss_exclusives_demo_3_subtitle">Transform the way you shop</string>
-    <string name="ss_exclusives_demo_4_title">Samsung +</string>
-    <string name="ss_exclusives_demo_4_subtitle">Get tips, tricks and VIP support</string>
-    <string name="ss_exclusives_demo_5_title">Gear VR</string>
-    <string name="ss_exclusives_demo_5_subtitle">Explore virtual reality via your phone</string>
-    <string name="ss_exclusives_demo_video_title">Matt\'s Story</string>
-    <string name="ss_exclusives_demo_video_subtitle">Watch Matt run his company off his\nphone, on the go.</string>
+    <string name="ss_exclusives_demo_subtitle">Let Matt guide you through the perks of\nowning a Samsung phone.</string>
+    <string name="ss_exclusives_demo_1_title">Gear VR</string>
+    <string name="ss_exclusives_demo_1_subtitle">Use your phone to explore virtual reality</string>
+    <string name="ss_exclusives_demo_2_title">Samsung Pay</string>
+    <string name="ss_exclusives_demo_2_subtitle">Purchase in-store items with your phone</string>
+    <string name="ss_exclusives_demo_3_title">Samsung +</string>
+    <string name="ss_exclusives_demo_3_subtitle">Learn how to get tips, tricks and VIP support</string>
+    <string name="ss_exclusives_demo_4_title">Gear S2</string>
+    <string name="ss_exclusives_demo_4_subtitle">Stay connected with notifications on your wrist</string>
+    <string name="ss_exclusives_demo_5_title">More Power to You</string>
+    <string name="ss_exclusives_demo_5_subtitle">Stay charged longer in Ultra Power Saving Mode</string>
+    <string name="ss_exclusives_demo_video_title">Matt’s Story</string>
+    <string name="ss_exclusives_demo_video_subtitle">Watch Matt run his company\nall day long from his phone.</string>
 
-    <!-- New to Android demos -->
-    <string name="new_to_android_demo_title">New To Android</string>
-    <string name="new_to_android_demo_subtitle">Lorem ipsum dolor sit amet, consectetur elit sed\ndo eiusmod tempo</string>
+    <!-- New To Android -->
+    <string name="new_to_android_demo_title">Switching to Samsung?</string>
+    <string name="new_to_android_demo_subtitle">See Matt demonstrate how to seamlessly transition\nto the new HERO.</string>
     <string name="new_to_android_demo_1_title">Smart Switch</string>
-    <string name="new_to_android_demo_1_subtitle">Maecenas interdum semper turpis</string>
+    <string name="new_to_android_demo_1_subtitle">Learn how to easily transfer content\nfrom your current device</string>
+    <string name="new_to_android_demo_2_title">Expandable Memory</string>
+    <string name="new_to_android_demo_2_subtitle">Store more photos, music and files with\nup to 128GB on an external SD card</string>
+
+    <!-- Demo End page -->
+    <string name="demo_end_subtitle">Select another demo to see what else the Hero\nhas to offer or exit to explore the phone.</string>
+    <string name="back_to_menu_title">Back to Menu</string>
+    <string name="back_to_decision_title">Back to Main Menu</string>
+    <string name="free_explore_title">Explore the Phone</string>
 </resources>

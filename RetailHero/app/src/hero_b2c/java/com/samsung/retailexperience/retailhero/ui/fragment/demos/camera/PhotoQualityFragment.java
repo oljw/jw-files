@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,11 +15,7 @@ import com.samsung.retailexperience.retailhero.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailhero.gson.models.VideoModel;
 import com.samsung.retailexperience.retailhero.ui.activity.MainActivity;
 import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.BaseVideoFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomGalleryBarFragment;
 import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopGalleryBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment;
 import com.samsung.retailexperience.retailhero.util.AppConst;
 import com.samsung.retailexperience.retailhero.util.AppConsts;
 import com.samsung.retailexperience.retailhero.view.CameraSurfaceView;
@@ -29,7 +24,9 @@ import com.samsung.retailexperience.retailhero.view.GalleryZoomView;
 /**
  * Created by smheo on 1/15/2016.
  */
-public class PhotoQualityFragment extends BaseCameraFragment {
+public class PhotoQualityFragment extends BaseCameraFragment
+        implements BottomMenuBarFragment.BottomMenuBarListener,
+        CameraSurfaceView.CameraSurfaceListener {
 
     private static final String TAG = PhotoQualityFragment.class.getSimpleName();
 
@@ -63,6 +60,7 @@ public class PhotoQualityFragment extends BaseCameraFragment {
 
         mCamera = getCameraInstance(-1);
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
+        mCameraSurface.setEnabled(false);
 
         mCaptureBtn = (ImageButton) view.findViewById(R.id.capture_button);
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +84,10 @@ public class PhotoQualityFragment extends BaseCameraFragment {
     @Override
     public void onResume() {
         super.onResume();
+        mCameraLayout.setVisibility(View.GONE);
+        mGalleryLayout.setVisibility(View.GONE);
+        mZoomOverlay.setVisibility(View.GONE);
+        mCameraSurface.setEnabled(false);
     }
 
     @Override

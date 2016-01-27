@@ -98,11 +98,6 @@ public class FragmentModel<T> extends ResourceModel implements Serializable {
     public String getDrawerId() {
         return this.drawerId;
     }
-    public int getDrawerResId() {
-        if (this.drawerId != null)
-            return getResId(this.drawerId);
-        return 0;
-    }
     public void setDrawerId(String drawerId) {
         this.drawerId = drawerId;
     }

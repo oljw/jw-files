@@ -3,19 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/menu_item_height"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/menu_item_padding_left"
+    android:orientation="horizontal"
+    android:gravity="top">
 
     <ImageView
         android:id="@+id/menuItemIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/menu_item_icon_margin_left"
-        android:layout_marginTop="@dimen/menu_item_icon_margin_top" />
+        android:layout_marginTop="23px"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:layout_marginLeft="@dimen/menu_item_text_container_margin_left">
 

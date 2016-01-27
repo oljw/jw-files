@@ -15,11 +15,7 @@ import com.samsung.retailexperience.retailhero.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailhero.gson.models.VideoModel;
 import com.samsung.retailexperience.retailhero.ui.activity.MainActivity;
 import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.BaseVideoFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomGalleryBarFragment;
 import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopGalleryBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment;
 import com.samsung.retailexperience.retailhero.util.AppConst;
 import com.samsung.retailexperience.retailhero.util.AppConsts;
 import com.samsung.retailexperience.retailhero.view.CameraSurfaceView;
@@ -80,6 +76,9 @@ public class AutoFocusFragment extends BaseCameraFragment
     @Override
     public void onResume() {
         super.onResume();
+        mCameraLayout.setVisibility(View.GONE);
+        mGalleryLayout.setVisibility(View.GONE);
+        mCameraSurface.setListener(this);
     }
 
     @Override

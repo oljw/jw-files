@@ -4,7 +4,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,15 +14,9 @@ import com.samsung.retailexperience.retailhero.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailhero.gson.models.VideoModel;
 import com.samsung.retailexperience.retailhero.ui.activity.MainActivity;
 import com.samsung.retailexperience.retailhero.ui.fragment.BaseCameraFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.BaseVideoFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomGalleryBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopGalleryBarFragment;
-import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment;
 import com.samsung.retailexperience.retailhero.util.AppConst;
 import com.samsung.retailexperience.retailhero.util.AppConsts;
 import com.samsung.retailexperience.retailhero.view.CameraSurfaceView;
-import com.samsung.retailexperience.retailhero.view.GalleryZoomView;
 
 /**
  * Created by smheo on 1/15/2016.
@@ -49,6 +42,7 @@ public class PhotoQualityFragment extends BaseCameraFragment {
 
     @Override
     public void onViewCreated(View view) {
+        Log.d(TAG, "########### PhotoQuality onViewCreated +");
 
         mCameraLayout = (RelativeLayout) view.findViewById(R.id.camera_layout);
         mGalleryLayout = (RelativeLayout) view.findViewById(R.id.gallery_layout);
@@ -61,6 +55,7 @@ public class PhotoQualityFragment extends BaseCameraFragment {
 
         mCamera = getCameraInstance(-1);
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
+        mCameraSurface.setEnabled(false);
 
         mCaptureBtn = (ImageButton) view.findViewById(R.id.capture_button);
         mCaptureBtn.setOnClickListener(new View.OnClickListener() {
@@ -69,16 +64,28 @@ public class PhotoQualityFragment extends BaseCameraFragment {
                 setForcedSeekToChapter(2);
             }
         });
+        Log.d(TAG, "########### PhotoQuality onViewCreated -");
+
     }
 
     @Override
     public void onResume() {
+        Log.d(TAG, "########### PhotoQuality onResume +");
         super.onResume();
+
+        mCameraLayout.setVisibility(View.GONE);
+        mGalleryLayout.setVisibility(View.GONE);
+        mCameraSurface.setEnabled(false);
+        Log.d(TAG, "########### PhotoQuality onResume -");
     }
 
     @Override
     public void onPause() {
+        Log.d(TAG, "########### PhotoQuality onPause +");
+
         super.onPause();
+        Log.d(TAG, "########### PhotoQuality onPause -");
+
     }
 
     @Override
@@ -95,7 +102,6 @@ public class PhotoQualityFragment extends BaseCameraFragment {
         Log.i(TAG, "onChaper_0");
 
         setFadeIn(mCaptureSuper);
-
         mCameraLayout.setVisibility(View.VISIBLE);
         mPreview.addView(mCameraSurface);
     }

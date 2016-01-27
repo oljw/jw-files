@@ -22,7 +22,7 @@
         "subTitle": "@string/design_demo_3_subtitle",
         "icon": "@drawable/chevron",
         "tag": "design_demo_3",
-        "action": "UI_STATE_DESIGN_DEMO_EDGE_SHORTCUT"
+        "action": "UI_STATE_DESIGN_DEMO_TOUCH_DISPLAY"
       },
       {
         "layout": "@layout/menu_item",
@@ -30,7 +30,7 @@
         "subTitle": "@string/design_demo_4_subtitle",
         "icon": "@drawable/chevron",
         "tag": "design_demo_4",
-        "action": "UI_STATE_DESIGN_DEMO_TOUCH_DISPLAY"
+        "action": "UI_STATE_DESIGN_DEMO_EDGE_SHORTCUT"
       }
     ]
 }

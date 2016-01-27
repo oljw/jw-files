@@ -94,6 +94,9 @@ public class AutoFocusFragment extends BaseCameraFragment
     @Override
     public void onResume() {
         super.onResume();
+        mCameraLayout.setVisibility(View.GONE);
+        mGalleryLayout.setVisibility(View.GONE);
+        mCameraSurface.setListener(this);
     }
 
     @Override

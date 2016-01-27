@@ -3,7 +3,6 @@ package com.samsung.retailexperience.retailhero.ui.fragment.demos.exclusives;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.samsung.retailexperience.retailhero.R;
 import com.samsung.retailexperience.retailhero.annotation.OnChapter;
@@ -12,16 +11,21 @@ import com.samsung.retailexperience.retailhero.gson.models.VideoModel;
 import com.samsung.retailexperience.retailhero.ui.fragment.BaseVideoFragment;
 import com.samsung.retailexperience.retailhero.util.AppConst;
 import com.samsung.retailexperience.retailhero.util.AppConsts;
+import com.samsung.retailexperience.retailhero.util.TimerHandler;
 import com.samsung.retailexperience.retailhero.view.SamsungPayView;
 
 /**
  * Created by smheo on 1/17/2016.
  */
-public class B2B_SamsungPayFragment extends BaseVideoFragment implements SamsungPayView.SamsungPayEventsListener {
+public class B2B_SamsungPayFragment extends BaseVideoFragment implements
+        SamsungPayView.SamsungPayEventsListener, TimerHandler.OnTimeoutListener {
 
     private static final String TAG = B2B_SamsungPayFragment.class.getSimpleName();
+    private static final int USER_INTERACTION_DURATION = 6000;
 
     private SamsungPayView mSamsungPayView;
+    private TimerHandler mTimerHandler;
+    private int mChapterIndex = -1;
 
     public static B2B_SamsungPayFragment newInstance(FragmentModel<VideoModel> fragmentModel) {
         B2B_SamsungPayFragment fragment = new B2B_SamsungPayFragment();
@@ -50,44 +54,24 @@ public class B2B_SamsungPayFragment extends BaseVideoFragment implements Samsung
 
     @Override
     public void onViewCreated(View view) {
-        ViewGroup viewGroup = (ViewGroup) view;
         mSamsungPayView = (SamsungPayView) view.findViewById(R.id.pay_root_container);
         mSamsungPayView.setSamsungPayEventsListener(this);
         mSamsungPayView.setVisibility(View.GONE);
+
+        mTimerHandler = new TimerHandler();
+        mTimerHandler.setOnTimeoutListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        mSamsungPayView.updateSelectedCard(1, false);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    public void onBackPressed() {
-        changeFragment(AppConst.UIState.valueOf(getFragmentModel().getActionBackKey()),
-                AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
-    }
-
-    /**
-     * Chapter callback methods
-     */
-    @OnChapter(chapterIndex = 0)
-    public void onChaper_0() {
-        Log.i(TAG, "onChaper_0");
-        pauseVideo();
-        mSamsungPayView.setVisibility(View.VISIBLE);
-    }
-
-    @OnChapter(chapterIndex = 1)
-    public void onChaper_1() {
-        Log.i(TAG, "onChaper_1");
-        pauseVideo();
-        mSamsungPayView.setVisibility(View.VISIBLE);
-        mSamsungPayView.showCardList();
     }
 
     @Override
@@ -97,13 +81,12 @@ public class B2B_SamsungPayFragment extends BaseVideoFragment implements Samsung
 
     @Override
     public void swipeUpAnimationStarted() {
-
+        mTimerHandler.stop();
     }
 
     @Override
     public void swipUpAnimationEnded() {
-        playVideo();
-        mSamsungPayView.setVisibility(View.GONE);
+        jumpToChapter(CHAPTER_1_NOW_PICK_A_CARD_VIDEO);
     }
 
     @Override
@@ -111,4 +94,74 @@ public class B2B_SamsungPayFragment extends BaseVideoFragment implements Samsung
         playVideo();
         mSamsungPayView.setVisibility(View.GONE);
     }
+
+    private void forceSwipingUpAnimation() {
+        mSamsungPayView.forceSwipingUpAnimation();
+    }
+
+    private void jumpToChapter(int chapter) {
+        setForcedSeekToChapter(chapter);
+        playVideo();
+    }
+
+    @Override
+    public void onTimeout() {
+        switch (mChapterIndex) {
+            case CHAPTER_0_SWIPE_TO_SHOW_A_CARD_VIEW:
+                // User didn't swipe to show a card.  start animation manually
+                forceSwipingUpAnimation();
+                break;
+            case CHAPTER_2_SWIPE_CARD_LEFT_RIGHT_VIEW:
+                jumpToChapter(CHAPTER_3_AUTHORIZING_CARD_VIDEO);
+                break;
+        }
+    }
+
+    private static final int CHAPTER_0_SWIPE_TO_SHOW_A_CARD_VIEW = 0;
+    private static final int CHAPTER_1_NOW_PICK_A_CARD_VIDEO = 1;
+    private static final int CHAPTER_2_SWIPE_CARD_LEFT_RIGHT_VIEW = 2;
+    private static final int CHAPTER_3_AUTHORIZING_CARD_VIDEO = 3;
+
+    /**
+     * Chapter callback methods
+     */
+    @OnChapter(chapterIndex = 0)
+    public void onChaper_0() {
+        Log.i(TAG, "onChaper_0");
+        mChapterIndex = CHAPTER_0_SWIPE_TO_SHOW_A_CARD_VIEW;
+
+        // show swipe to show a card
+        pauseVideo();
+        mSamsungPayView.setVisibility(View.VISIBLE);
+        mTimerHandler.start(USER_INTERACTION_DURATION);
+    }
+
+    @OnChapter(chapterIndex = 1)
+    public void onChaper_1() {
+        Log.i(TAG, "onChaper_1");
+        mChapterIndex = CHAPTER_1_NOW_PICK_A_CARD_VIDEO;
+
+        // play video (tell users that they can swipe cards)
+        mSamsungPayView.setVisibility(View.GONE);
+    }
+
+    @OnChapter(chapterIndex = 2)
+    public void onChaper_2() {
+        Log.i(TAG, "onChaper_2");
+        mChapterIndex = CHAPTER_2_SWIPE_CARD_LEFT_RIGHT_VIEW;
+
+        // show a card list, so customer can swipe left and right
+        pauseVideo();
+        mSamsungPayView.showCardList();
+        mSamsungPayView.setVisibility(View.VISIBLE);
+        mTimerHandler.start(USER_INTERACTION_DURATION);
+    }
+
+    @OnChapter(chapterIndex = 3)
+    public void onChaper_3() {
+        Log.i(TAG, "onChaper_3");
+        mChapterIndex = CHAPTER_3_AUTHORIZING_CARD_VIDEO;
+        mSamsungPayView.setVisibility(View.GONE);
+    }
+
 }

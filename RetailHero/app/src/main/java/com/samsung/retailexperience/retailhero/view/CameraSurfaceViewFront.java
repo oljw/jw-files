@@ -1,7 +1,6 @@
 package com.samsung.retailexperience.retailhero.view;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.hardware.Camera;
 import android.hardware.SensorManager;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by JW on 1/23/2016.
@@ -42,7 +40,6 @@ public class CameraSurfaceViewFront extends SurfaceView implements SurfaceHolder
 
     public interface CameraSurfaceFrontListener {
         void changeScreenOrientation(int screenOrientation);
-        void drawFocusIcon(float x, float y);
     }
 
     private CameraSurfaceFrontListener mListener = null;

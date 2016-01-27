@@ -14,7 +14,7 @@
         "subTitle": "@string/design_demo_2_subtitle",
         "icon": "@drawable/chevron",
         "tag": "design_demo_2",
-        "action": "UI_STATE_DESIGN_DEMO_EDGE_FUNC"
+        "action": "UI_STATE_DESIGN_DEMO_CAMERA"
       }
     ]
 }

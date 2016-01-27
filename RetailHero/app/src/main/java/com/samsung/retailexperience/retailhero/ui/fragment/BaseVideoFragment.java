@@ -78,6 +78,9 @@ public abstract class BaseVideoFragment extends BaseFragment implements
 
         mView = inflater.inflate(mFragmentModel.getLayoutResId(), container, false);
 
+        //set drawer lock/unlock
+        setDrawer(mFragmentModel.getDrawerId());
+
         //set background color
         if (mFragmentModel.getBackgroundResId() > 0)
             mView.setBackgroundResource(mFragmentModel.getBackgroundResId());
@@ -132,6 +135,9 @@ public abstract class BaseVideoFragment extends BaseFragment implements
             }
         }
 
+        Log.d(TAG, "##### BaseVideoFragment : setDrawer : mFragmentModel.getDrawerResId() = " + mFragmentModel.getDrawerId());
+        setDrawer(mFragmentModel.getDrawerId());
+
         onViewCreated(mView);
         return mView;
     }
@@ -152,6 +158,8 @@ public abstract class BaseVideoFragment extends BaseFragment implements
     public void onResume() {
         super.onResume();
 
+        setMaxVolume();
+
         if (mVideoView != null) {
             try {
                 mVideoView.play();
@@ -168,6 +176,10 @@ public abstract class BaseVideoFragment extends BaseFragment implements
     @Override
     public void onPause() {
         super.onPause();
+        Log.d(TAG, "########## onPause)+ ");
+
+        Log.d(TAG, "########## onPause : mSuperTV = " + mSuperTV);
+        Log.d(TAG, "########## onPause : mVideoView = " + mVideoView);
 
         if (mVideoView != null) {
             mVideoView.release();
@@ -183,12 +195,16 @@ public abstract class BaseVideoFragment extends BaseFragment implements
         super.onDestroy();
     }
 
+    public View getView() {
+        return mView;
+    }
+
     @Override
-    public void onSetDrawer() {
-        if (mFragmentModel != null)
-            setDrawer(mFragmentModel.getDrawerResId());
-        else
-            setDrawer(0);
+    public void onBackPressed() {
+        if (mFragmentModel != null) {
+            changeFragment(AppConst.UIState.valueOf(mFragmentModel.getActionBackKey()),
+                    AppConsts.TransactionDir.TRANSACTION_DIR_BACKWARD);
+        }
     }
 
     protected FragmentModel<VideoModel> loadJsonFragmentModel() {
@@ -387,6 +403,8 @@ public abstract class BaseVideoFragment extends BaseFragment implements
             skipBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    // end page
                     changeEndDemoFragment(AppConst.UIState.valueOf(mFragmentModel.getActionBackKey()),
                             AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
                 }

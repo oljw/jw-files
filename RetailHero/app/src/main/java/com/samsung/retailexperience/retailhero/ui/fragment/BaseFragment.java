@@ -53,21 +53,18 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        onSetDrawer();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        setMaxVolume();
+        //setMaxVolume();
     }
 
     private void getGlobalVariables() {
         mEnvMgr = ((ConfigProvider)getActivity().getApplicationContext()).getEnvironmentConfig();
         mSetMgr = ((ConfigProvider) getActivity().getApplicationContext()).getSettingsManager();
         mResMgr = ((ConfigProvider)getActivity().getApplicationContext()).getResourceUtil();
-
-        Log.i(TAG, "Fragment Target : " + mEnvMgr.getStringValue(Environments.FLAVOR));
     }
 
 
@@ -79,8 +76,7 @@ public abstract class BaseFragment extends Fragment {
         ((MainActivity)getActivity()).changeEndDemoFragment(backFragment, dir);
     }
 
-    public abstract void onSetDrawer();
-    public void setDrawer(int drawerId) {
+    public void setDrawer(String drawerId) {
         ((MainActivity)getActivity()).setDrawer(drawerId);
     }
 
@@ -124,6 +120,4 @@ public abstract class BaseFragment extends Fragment {
         if (vib != null)
             vib.vibrate(VIBRATE_DURATION);
     }
-
-
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/drawer_item_height" >
+
+        <ImageView
+            android:id="@+id/drawer_item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/drawer_item_icon_marginleft"
+            android:layout_gravity="center_vertical" />
+
+        <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+            android:id="@+id/drawer_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/drawer_item_name_marginleft"
+            app:customFont="fonts/SamsungSharpSans-Bold.ttf"
+            android:textSize="@dimen/drawer_item_font_size"
+            android:textColor="@color/text_color_black" />
+
+</LinearLayout>

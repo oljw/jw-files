@@ -10,14 +10,14 @@
             android:title="@string/menu_whats_new"/>
 
         <item
-            android:id="@+id/drawer_camera"
-            android:icon="@drawable/chevron"
-            android:title="@string/menu_camera"/>
-
-        <item
             android:id="@+id/drawer_design"
             android:icon="@drawable/chevron"
             android:title="@string/menu_design"/>
+
+        <item
+            android:id="@+id/drawer_camera"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_camera"/>
 
         <item
             android:id="@+id/drawer_ss_exclusives"

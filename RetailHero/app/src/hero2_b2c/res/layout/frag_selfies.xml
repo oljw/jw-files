@@ -15,11 +15,11 @@
         app:isShowVideoFrame="true"
         app:scaleToVideoSize="true"/>
 
+    <!-- Gallery Things,Selfie output. not gallery button-->
     <ImageView
         android:id="@+id/gallery_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/tap_focus_icon"
         android:scaleType="fitCenter"
         android:visibility="invisible"
         android:adjustViewBounds="true" />

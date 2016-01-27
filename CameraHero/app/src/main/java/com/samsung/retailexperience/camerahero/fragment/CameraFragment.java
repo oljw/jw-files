@@ -185,27 +185,27 @@ public class CameraFragment extends BaseCameraFragment
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
 
-            FileOutputStream outStream = null;
-            Calendar c = Calendar.getInstance();
-            File videoDirectory = new File(path);
-
-            if (!videoDirectory.exists()) {
-                videoDirectory.mkdirs();
-            }
-
-            try {
-                // Write to SD Card
-                outStream = new FileOutputStream(path + c.getTime().getSeconds() + ".jpg");
-                outStream.write(data);
-                outStream.close();
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-
-            }
+//            FileOutputStream outStream = null;
+//            Calendar c = Calendar.getInstance();
+//            File videoDirectory = new File(path);
+//
+//            if (!videoDirectory.exists()) {
+//                videoDirectory.mkdirs();
+//            }
+//
+//            try {
+//                // Write to SD Card
+//                outStream = new FileOutputStream(path);
+//                outStream.write(data);
+//                outStream.close();
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } finally {
+//
+//            }
 
             Bitmap realImage;
             final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -218,8 +218,7 @@ public class CameraFragment extends BaseCameraFragment
             realImage = BitmapFactory.decodeByteArray(data,0,data.length,options);
             ExifInterface exif = null;
             try {
-                exif = new ExifInterface(path + c.getTime().getSeconds()
-                        + ".jpg");
+                exif = new ExifInterface(path);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

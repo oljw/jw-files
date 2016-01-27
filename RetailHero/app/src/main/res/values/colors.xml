@@ -7,11 +7,16 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- font colors -->
-    <color name="text_color_white">#FFFFFF</color>
+    <color name="text_color_white">#FFFFFFFF</color>
     <color name="text_color_black">#FF000000</color>
-    <color name="menu_header_color">#00B3E3</color>
+    <color name="drawer_header_color">#FF00B3E3</color>
 
     <!-- CoreSuperTextView -->
     <color name="subtitle_background">#BFFFFFFF</color>
     <color name="feature_background">#BF000000</color>
+
+
+    <color name="super_overlay">#CC000000</color>
+    <color name="super_overlay_clickable_icon_area_bg">#AAFF0000</color>
+
 </resources>

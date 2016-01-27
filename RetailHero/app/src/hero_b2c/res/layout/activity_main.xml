@@ -8,20 +8,39 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/fragmentContainer"
-        android:orientation="vertical"
-        android:layout_width="@dimen/display_width"
-        android:layout_height="@dimen/display_height" />
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="wrap_content"
+    <com.samsung.retailexperience.retailhero.view.PaginationView
+        android:id="@+id/paginationView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:background="@android:color/black" >
+        <FrameLayout
+            android:id="@+id/paginationContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/dots_layout"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="310px" />
+    </com.samsung.retailexperience.retailhero.view.PaginationView>
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"/>
+
+    <ListView
+        android:id="@+id/navigation_view"
+        android:layout_width="@dimen/drawer_width"
+        android:layout_height="@dimen/drawer_height"
         android:layout_gravity="start"
-        app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer"/>
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
 
 </android.support.v4.widget.DrawerLayout>

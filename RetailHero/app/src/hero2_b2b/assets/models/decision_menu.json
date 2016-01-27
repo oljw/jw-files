@@ -18,6 +18,14 @@
       },
       {
         "layout": "@layout/menu_item",
+        "title": "@string/new_to_android_title",
+        "subTitle": "@string/new_to_android_subtitle",
+        "icon": "@drawable/chevron",
+        "tag": "decision_new_to_android",
+        "action": "UI_STATE_NEW_TO_ANDROID_MAIN"
+      },
+      {
+        "layout": "@layout/menu_item",
         "title": "@string/explore_title",
         "subTitle": "@string/explore_subtitle",
         "icon": "@drawable/chevron",
