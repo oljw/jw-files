@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.samsung.retailexperience.retailhero.R;
 import com.samsung.retailexperience.retailhero.gson.models.BaseModel;
 import com.samsung.retailexperience.retailhero.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailhero.ui.fragment.BaseFragment;
@@ -43,16 +42,12 @@ public class GearS2Fragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(mFragmentModel.getLayoutResId(), container, false);
 
-        if (mView != null) {
-            mView.findViewById(R.id.skip_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // end page
-                    changeEndDemoFragment(AppConst.UIState.valueOf(mFragmentModel.getActionBackKey()),
-                            AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
-                }
-            });
-        }
+        //set background color
+        if (mFragmentModel.getBackgroundResId() > 0)
+            mView.setBackgroundResource(mFragmentModel.getBackgroundResId());
+
+        //set drawer lock/unlock
+        setDrawer(mFragmentModel.getDrawerId());
 
         return mView;
     }

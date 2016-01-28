@@ -17,36 +17,23 @@ import android.widget.FrameLayout;
 
 import com.samsung.retailexperience.retailhero.R;
 import com.samsung.retailexperience.retailhero.RetailHeroApplication;
-import com.samsung.retailexperience.retailhero.gson.models.MenuModel;
+import com.samsung.retailexperience.retailhero.ui.fragment.BaseFragment;
 
 import java.util.ArrayList;
 
 /**
  * Created by icanmobile on 1/19/16.
  */
-public class PaginationView extends FrameLayout {
+public class PaginationView<T> extends FrameLayout {
     private static final String TAG = PaginationView.class.getSimpleName();
-
-    public static PaginationView sInstance = null;
-
-    public static PaginationView newInstance(Context context, ArrayList<PaginationViewItem<MenuModel>> pages) {
-        sInstance = new PaginationView(context, pages);
-        return sInstance;
-    }
 
     private Context mContext = null;
     private GestureDetector mGestureDetector = null;
-    private ArrayList<PaginationViewItem<MenuModel>> mPages = new ArrayList<PaginationViewItem<MenuModel>>();
+    private ArrayList<PaginationViewItem<T>> mPages = new ArrayList<PaginationViewItem<T>>();
     private int mIndex = 0;
 
     public PaginationView(Context context) {
         super(context);
-        init(context);
-    }
-
-    public PaginationView(Context context, ArrayList<PaginationViewItem<MenuModel>> pages) {
-        super(context);
-        setPages(pages);
         init(context);
     }
 
@@ -70,26 +57,35 @@ public class PaginationView extends FrameLayout {
         super.onFinishInflate();
     }
 
-    public ArrayList<PaginationViewItem<MenuModel>> getPages() {
+    public ArrayList<PaginationViewItem<T>> getPages() {
         return mPages;
     }
 
-    public void setPages(ArrayList<PaginationViewItem<MenuModel>> pages) {
+    public void setPages(ArrayList<PaginationViewItem<T>> pages, final String uiState) {
         mPages = pages;
         setPageIndex(mPages.size() - 1);
+
+        mPages.get(getPageIndex(uiState)).getFragment().getView().post(new Runnable() {
+            @Override
+            public void run() {
+                if (mListener != null)
+                    mListener.onPaginationReady(uiState);
+            }
+        });
     }
 
 
     private PaginationViewListener mListener = null;
     public interface PaginationViewListener {
-        void onChangedPage(PaginationViewItem<MenuModel> page, int pageIndex);
+        void onPaginationReady(String uiState);
+        void onChangedPage(BaseFragment fragment, String uiState, String drawerId, int pageIndex);
     }
     public void setListener(PaginationViewListener listener) {
         mListener = listener;
     }
 
     private View getPageView(int index) {
-        if (mPages == null || mPages.size() < -0) return null;
+        if (mPages == null || mPages.size() < 0) return null;
         return mPages.get(index).getFragment().getView();
     }
 
@@ -185,7 +181,11 @@ public class PaginationView extends FrameLayout {
                     setPageMarginX(view, 0);
                 }
                 if (mListener != null)
-                    mListener.onChangedPage(mPages.get(mPages.size() - 1), (mPages.size() - 1));
+                    mListener.onChangedPage(mPages.get(mPages.size() - 1).getFragment(),
+                            mPages.get(mPages.size() - 1).getUIState(),
+                            mPages.get(mPages.size() - 1).getModel().getDrawerId(),
+                            (mPages.size() - 1));
+
                 setPageIndex(mPages.size() - 1);
             }
         } else {
@@ -195,7 +195,10 @@ public class PaginationView extends FrameLayout {
                     setPageMarginX(view, getResources().getInteger(R.integer.animXOffsetMinus));
                 }
                 if (mListener != null)
-                    mListener.onChangedPage(mPages.get(0), 0);
+                        mListener.onChangedPage(mPages.get(0).getFragment(),
+                                mPages.get(0).getUIState(),
+                                mPages.get(0).getModel().getDrawerId(),
+                                0);
                 setPageIndex(0);
             }
         }
@@ -215,6 +218,7 @@ public class PaginationView extends FrameLayout {
 
     private void movingRight(int diffX) {
         if (getPageIndex() == mPages.size() - 1) return;
+        if (diffX < 0) return;
         setPageMarginX(getPageView(getPrevPageIndex()), (getResources().getInteger(R.integer.animXOffsetMinus) + diffX));
     }
 
@@ -247,6 +251,7 @@ public class PaginationView extends FrameLayout {
     private int mTargetValue = 0;
 
     private void pageMarginXAnimation(final View view, float diffX) {
+        if (view == null) return;
         if (marginXAnimator != null && marginXAnimator.isRunning())
             marginXAnimator.cancel();
 
@@ -291,7 +296,10 @@ public class PaginationView extends FrameLayout {
 
                     //change index
                     setPageIndex(index);
-                    mListener.onChangedPage(mPages.get(getPageIndex()), getPageIndex());
+                    mListener.onChangedPage(mPages.get(getPageIndex()).getFragment(),
+                            mPages.get(getPageIndex()).getUIState(),
+                            mPages.get(getPageIndex()).getModel().getDrawerId(),
+                            getPageIndex());
                 }
             }
         });
@@ -301,6 +309,7 @@ public class PaginationView extends FrameLayout {
     }
 
     public void setScaleXY(View view, boolean bMoveLeft, float diffX) {
+        if (view == null) return;
         view.setPivotX(RetailHeroApplication.getContext().getResources().getInteger(R.integer.animXOffset) / 2);
         view.setPivotY(RetailHeroApplication.getContext().getResources().getInteger(R.integer.animYOffset) / 2);
 
@@ -390,16 +399,14 @@ public class PaginationView extends FrameLayout {
         setPageIndex(pageIndex);
     }
 
-    public PaginationViewItem<MenuModel> getPage(String uiState) {
+    public PaginationViewItem<T> getPage(String uiState) {
         int pageIndex = getPageIndex(uiState);
         return mPages.get(pageIndex);
     }
 
-    public PaginationViewItem<MenuModel> getPage() {
+    public PaginationViewItem<T> getPage() {
         return mPages.get(getPageIndex());
     }
-
-
 
     private void setEnableChildsInPage(View view, boolean isEnable) {
         if (!(view instanceof ViewGroup))
@@ -422,7 +429,7 @@ public class PaginationView extends FrameLayout {
 
             mAnimTime = 1000000/Math.round(Math.abs(velocityX));
             mAnimTime = Math.max(mAnimTime, 50);
-            mAnimTime = Math.min(mAnimTime, 400);
+            mAnimTime = Math.min(mAnimTime, RetailHeroApplication.getContext().getResources().getInteger(R.integer.animTime));
             return super.onFling(e1, e2, velocityX, velocityY);
         }
     }

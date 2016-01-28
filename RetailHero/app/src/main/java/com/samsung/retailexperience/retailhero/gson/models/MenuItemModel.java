@@ -14,16 +14,16 @@ public class MenuItemModel extends ResourceModel {
     public String action;
 
     public MenuItemModel() {
-        this(null, null, null, null, null, null);
+        this(null);
     }
     public MenuItemModel(String layout) {
-        this(layout, null, null, null, null, null);
+        this(layout, null, null, null);
     }
     public MenuItemModel(String layout,
                          String title,
                          String subTitle,
                          String tag) {
-        this(layout, title, subTitle, tag, null, null);
+        this(layout, title, subTitle, tag, null);
     }
     public MenuItemModel(String layout,
                          String title,

@@ -1,7 +1,7 @@
 package com.samsung.retailexperience.retailhero.ui.fragment.demos;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +22,6 @@ public class DeviceSpecsFragment extends BaseFragment {
     protected View mView = null;
     private FragmentModel<BaseModel> mFragmentModel = null;
 
-    public DeviceSpecsFragment() {
-    }
-
     public static DeviceSpecsFragment newInstance(FragmentModel<BaseModel> fragmentModel) {
         DeviceSpecsFragment fragment = new DeviceSpecsFragment();
 
@@ -32,6 +29,9 @@ public class DeviceSpecsFragment extends BaseFragment {
         args.putSerializable(AppConsts.ARG_FRAGMENT_MODEL, fragmentModel);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public DeviceSpecsFragment() {
     }
 
     @Override
@@ -45,27 +45,18 @@ public class DeviceSpecsFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, "##### DeviceSpecsFragment : onCreateView : " + mFragmentModel.getLayout());
+
         mView = inflater.inflate(mFragmentModel.getLayoutResId(), container, false);
+
+        //set background color
+        if (mFragmentModel.getBackgroundResId() > 0)
+            mView.setBackgroundResource(mFragmentModel.getBackgroundResId());
 
         //set drawer lock/unlock
         setDrawer(mFragmentModel.getDrawerId());
 
         return mView;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    @Override
-    public void onDestroy()  {
-        super.onDestroy();
     }
 
     @Override

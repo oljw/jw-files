@@ -112,6 +112,12 @@ public abstract class BaseMenuFragment extends BaseFragment
             mListView.setOnItemClickListener(this);
         }
 
+        //for scale up and down transition
+        if (mFragmentModel.getPivotX() != null)
+            mView.setPivotX(mFragmentModel.getPivotXValue());
+        if (mFragmentModel.getPivotY() != null)
+            mView.setPivotY(mFragmentModel.getPivotYValue());
+
         onViewCreated(mView);
         return mView;
     }

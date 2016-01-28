@@ -15,12 +15,22 @@
         android:background="@drawable/pay_lock_bg"
         >
 
+        <!-- I couldn't find placing an original image size at the bottom of image view.
+             Alternatively, use padding
+             - 890 x 514 image, screen width 1440
+             - (1440-890) / 2 = 275px left and right padding
+             TODO investigate it or update padding size for each device.
+        -->
         <ImageView
             android:id="@+id/pay_knob"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/pay_knob_c"
-            android:layout_gravity="bottom|center_horizontal"
+            android:scaleType="fitEnd"
+            android:foregroundGravity="bottom|center_horizontal"
+            android:background="@color/super_overlay"
+            android:paddingLeft="275px"
+            android:paddingRight="275px"
             />
     </FrameLayout>
 
@@ -28,7 +38,6 @@
         android:id="@+id/pay_transparent_card"
         android:layout_width="@dimen/pay_card_width"
         android:layout_height="@dimen/pay_card_height"
-        android:visibility="invisible"
         android:layout_gravity="center_horizontal"
         android:alpha="0.5"
         />

@@ -364,19 +364,14 @@ public class VideoTextureView extends FrameLayout implements
                         }
 
                         if (mPlayer != null) {
-                            if (mPlayer.isPlaying() && mPlayer.getCurrentPosition() > 70) { //25 -> 100 -> 50 -> 35 -> 80
-                                //Log.d(TAG, "INVISIBLE:" + mPlayer.getCurrentPosition());
+                            if (mPlayer.isPlaying() && mPlayer.getCurrentPosition() > 150) { // 70 -> 150
                                 mImgView_VideoFrame.setVisibility(View.INVISIBLE);
-                                mImgView_VideoFrame.postInvalidate();
                             } else {
-                                //if (mPlayer.isPlaying()) {
-                                //    Log.d(TAG, "INVISIBLE X:" + mPlayer.getCurrentPosition());
-                                //}
                                 mImgView_VideoFrame.postOnAnimation(this);
                             }
                         }
                     }
-                }, 50); //150
+                }, 100); //150 -> 50 -> 100
             }
 
             if (mPlayer != null) mPlayer.start();
@@ -805,7 +800,7 @@ public class VideoTextureView extends FrameLayout implements
                 mImgView_VideoFrame.setVisibility(View.INVISIBLE);
             }
             else {
-                //if (!mVideoFrameFileName.equals(mPreVideoFrameFile)) {
+                if (!mVideoFrameFileName.equals(mPreVideoFrameFile)) {
                     // save the current video frame file name
                     mPreVideoFrameFile = mVideoFrameFileName;
 
@@ -831,7 +826,7 @@ public class VideoTextureView extends FrameLayout implements
                         mImgView_VideoFrame.setImageBitmap(mBgBitmap);
 
                     }
-                //}
+                }
                 mImgView_VideoFrame.setVisibility(View.VISIBLE);
             }
         }

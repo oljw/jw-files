@@ -4,7 +4,7 @@
     <integer name="animOffsetMinus">-1000</integer>
 
 
-    <integer name="animTime">400</integer>
+    <integer name="animTime">300</integer>
     <integer name="animStartOffset">0</integer>
     <integer name="animXOffset">1440</integer>
     <integer name="animXOffsetMinus">-1440</integer>

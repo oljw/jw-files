@@ -1,6 +1,7 @@
 package com.samsung.retailexperience.retailhero.ui.fragment;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.hardware.Camera;
 import android.media.MediaPlayer;
@@ -63,8 +64,6 @@ public class BaseCameraFragment extends BaseVideoFragment
         mCamera = getCameraInstance(-1);
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_preview);
 
-        mediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
-
         mCameraSurface = new CameraSurfaceView((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
         mPreview.addView(mCameraSurface);
@@ -96,7 +95,52 @@ public class BaseCameraFragment extends BaseVideoFragment
         view.startAnimation(blink);
     }
 
-    protected  void setRightIn (View view){
+    public void animateRightIn(View view) {
+        view.setX(1440f);
+        view.setScaleX(0.5f);
+        view.setScaleY(0.5f);
+
+        ObjectAnimator animX = ObjectAnimator.ofFloat(view, "x", 0);
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.setDuration(300);
+        ObjectAnimator animScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f);
+        ObjectAnimator animScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f);
+        ObjectAnimator bgAlpha = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+
+        animSet.play(animX).with(bgAlpha).with(animScaleX).with(animScaleY);
+        animSet.start();
+    }
+
+    public void animateGrow(View view) {
+        view.setScaleX(0.5f);
+        view.setScaleY(0.5f);
+
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.setDuration(300);
+        ObjectAnimator animScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f);
+        ObjectAnimator animScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f);
+        ObjectAnimator bgAlpha = ObjectAnimator.ofFloat(view, "alpha", 0.5f, 1f);
+
+        animSet.play(bgAlpha).with(animScaleX).with(animScaleY);
+        animSet.start();
+    }
+
+    protected MediaPlayer cameraShutter;
+    protected void playShutterSound(){
+        Log.d(TAG, "########playshuttersound + ");
+        cameraShutter = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
+        try {
+            if (cameraShutter.isPlaying()) {
+                cameraShutter.stop();
+                cameraShutter.release();
+                Log.d(TAG, "camerashutter released");
+                cameraShutter = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
+            }
+            cameraShutter.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "########playshuttersound - ");
 
     }
 
@@ -171,7 +215,6 @@ public class BaseCameraFragment extends BaseVideoFragment
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-
             }
         });
         rotateIconAnimator.start();
@@ -184,6 +227,10 @@ public class BaseCameraFragment extends BaseVideoFragment
         super.onPause();
         mCameraSurface.getHolder().removeCallback(mCameraSurface);
         releaseCamera();
+        if (cameraShutter != null) {
+            cameraShutter.release();
+            cameraShutter = null;
+        }
     }
 
     public void onResume() {

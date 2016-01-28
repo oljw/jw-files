@@ -32,6 +32,9 @@ public class CustomizedGallery  extends Gallery {
 
     private GalleryTapListener listener;
 
+    private boolean mIsScrollable = true;
+    private boolean mTouchStartedWhileNonScrollable;
+
     /**
      * Saturation factor (0-1) of items that reach the outer effects distance.
      */
@@ -51,6 +54,13 @@ public class CustomizedGallery  extends Gallery {
 
     public void setGalleryTapListener(GalleryTapListener listener) {
         this.listener = listener;
+    }
+
+    public void setScrollable(boolean scrollable) {
+        mIsScrollable = scrollable;
+        if (!mIsScrollable) {
+            mTouchStartedWhileNonScrollable = false;
+        }
     }
 
     /**
@@ -147,7 +157,33 @@ public class CustomizedGallery  extends Gallery {
         return true;
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (mIsScrollable) {
+            return super.onTouchEvent(event);
+        } else {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    mTouchStartedWhileNonScrollable = true;
+                break;
+                case MotionEvent.ACTION_UP:
+                    if (mTouchStartedWhileNonScrollable) {
+                        if (listener != null) {
+                            listener.onGalleyTap();
+                        }
+                        mTouchStartedWhileNonScrollable = false;
+                    }
+                    // TODO FIX it.  Need this code (When user is scrolling and gallery scroll is disabled, gallery is stuck)
+                    // it should return true instead of super.onTouchEvent(event)!!!!!!!!
+                    return super.onTouchEvent(event);
+            }
+            return true;
+        }
+
+    }
+
     public interface GalleryTapListener {
         void onGalleyTap();
     }
+
 }

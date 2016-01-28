@@ -113,6 +113,7 @@ public abstract class BaseActivity extends Activity implements ResourceUtil.Miss
                         for (Class objClass : NO_INTERACTION_DETECT_CLASS) {
                             if (objClass.equals(mFragment.getClass())) {
                                 Log.d(TAG, "@@@ user interaction didn't occur for " + NO_INTERACTION_TIMEOUT + "ms");
+                                closeDrawer();
                                 mFragment.changeFragment(AppConst.UIState.UI_STATE_ATTRACT_LOOP,
                                         AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
                             }
@@ -224,7 +225,7 @@ public abstract class BaseActivity extends Activity implements ResourceUtil.Miss
         }
     }
 
-    public void insertFragment(BaseFragment fragment, String uiState) {
+    public void insertFragment(BaseFragment fragment) {
         mFragments.add(fragment);
     }
     public void removeFragments() {
@@ -403,7 +404,9 @@ public abstract class BaseActivity extends Activity implements ResourceUtil.Miss
             mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, mNavigationView);
         }
         else {
-            if (mDrawerLayout.isDrawerOpen(mNavigationView)) mDrawerLayout.closeDrawer(mNavigationView);
+            if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
+                mDrawerLayout.closeDrawer(mNavigationView);
+            }
             mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, mNavigationView);
         }
     }

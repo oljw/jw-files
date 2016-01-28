@@ -1,8 +1,11 @@
 package com.samsung.retailexperience.retailhero.ui.fragment;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.media.ExifInterface;
 import android.media.MediaPlayer;
@@ -22,14 +25,10 @@ import com.samsung.retailexperience.retailhero.ui.activity.MainActivity;
 import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.BottomMenuBarFragment;
 import com.samsung.retailexperience.retailhero.ui.fragment.camera_app.TopMenuBarFragment;
 import com.samsung.retailexperience.retailhero.util.AppConsts;
-import com.samsung.retailexperience.retailhero.view.CameraSurfaceView;
 import com.samsung.retailexperience.retailhero.view.CameraSurfaceViewFront;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Calendar;
 
 /**
  * Created by JW on 1/23/2016.
@@ -64,7 +63,6 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
     protected int mCameraId = 0;
     protected boolean mCameraBack = true;
     protected int mScreenOrientation = 90;
-    protected MediaPlayer mediaPlayer;
 
     public void onViewCreated(View view) {
 
@@ -76,8 +74,6 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
 
         mCamera = getCameraInstance(-1);
         mPreview = (RelativeLayout) view.findViewById(R.id.camera_preview);
-
-        mediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
 
         mCameraSurface = new CameraSurfaceViewFront((MainActivity)getActivity(), mCamera);
         mCameraSurface.setListener(this);
@@ -124,11 +120,11 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
         }
     };
 
+    private Bitmap realImage = null;
     protected Camera.PictureCallback preview = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
 
-            Bitmap realImage;
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 1;
 
@@ -137,6 +133,7 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
             options.inInputShareable=true;              //Which kind of reference will be used to recover the Bitmap data after being clear, when it will be used in the future
 
             realImage = BitmapFactory.decodeByteArray(data,0,data.length,options);
+
             ExifInterface exif = null;
             try {
                 exif = new ExifInterface(path);
@@ -169,6 +166,25 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
         }
     };
 
+    protected MediaPlayer cameraShutter;
+    protected void playShutterSound(){
+        Log.d(TAG, "########playshuttersound + ");
+        cameraShutter = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
+        try {
+            if (cameraShutter.isPlaying()) {
+                cameraShutter.stop();
+                cameraShutter.release();
+                Log.d(TAG, "camerashutter released");
+                cameraShutter = MediaPlayer.create(getActivity(), R.raw.camera_shutter_1);
+            }
+            cameraShutter.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "########playshuttersound - ");
+
+    }
+
     public static Bitmap rotate(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(270);
@@ -193,26 +209,6 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
         return cameraId;
     }
 
-    //Find Back Facing Camera
-    protected int findBackFacingCamera() {
-        Log.d(TAG, "findBackFacingCamera called");
-
-        int cameraId = -1;
-        //Search for the back facing camera
-        //get the number of cameras
-        int numberOfCameras = Camera.getNumberOfCameras();
-        //for every camera check
-        for (int i = 0; i < numberOfCameras; i++) {
-            Camera.CameraInfo info = new Camera.CameraInfo();
-            Camera.getCameraInfo(i, info);
-            if (info.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
-                cameraId = i;
-                break;
-            }
-        }
-        return cameraId;
-    }
-
     //Choose Camera Method
     public void chooseCamera(boolean cameraBack) {
         Log.d(TAG, "chooseCamera called : cameraBack = " + cameraBack);
@@ -220,23 +216,14 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
         mCameraSurface.stopCameraPreview();
 
         releaseCamera();
-        int cameraId = 0;
+        int cameraId = 1;
 
         //if the camera preview is the front
         if (cameraBack) {
-            cameraId = findBackFacingCamera();
-            if (cameraId >= 0) {
-                Log.d(TAG, "##### chooseCamera : cameraId = " + cameraId);
-                mCamera = getCameraInstance(cameraId);
-                mCameraSurface.refreshCamera(mCamera, cameraBack);
-            }
-        } else {
             cameraId = findFrontFacingCamera();
-            if (cameraId >= 0) {
-                Log.d(TAG, "##### chooseCamera : cameraId = " + cameraId);
-                mCamera = getCameraInstance(cameraId);
-                mCameraSurface.refreshCamera(mCamera, cameraBack);
-            }
+            Log.d(TAG, "##### chooseCamera : cameraId = " + cameraId);
+            mCamera = getCameraInstance(cameraId);
+            mCameraSurface.refreshCamera(mCamera, cameraBack);
         }
         mCameraSurface.startCameraPreview();
         mCameraBack = cameraBack;
@@ -264,6 +251,36 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
         view.setAnimation(fadeOut);
     }
 
+    public void animateRightIn(View view) {
+        view.setX(1440f);
+        view.setScaleX(0.5f);
+        view.setScaleY(0.5f);
+
+        ObjectAnimator animX = ObjectAnimator.ofFloat(view, "x", 0);
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.setDuration(300);
+        ObjectAnimator animScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f);
+        ObjectAnimator animScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f);
+        ObjectAnimator bgAlpha = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+
+        animSet.play(animX).with(bgAlpha).with(animScaleX).with(animScaleY);
+        animSet.start();
+    }
+
+    public void animateGrow(View view) {
+        view.setScaleX(0.5f);
+        view.setScaleY(0.5f);
+
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.setDuration(300);
+        ObjectAnimator animScaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f);
+        ObjectAnimator animScaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f);
+        ObjectAnimator bgAlpha = ObjectAnimator.ofFloat(view, "alpha", 0.5f, 1f);
+
+        animSet.play(bgAlpha).with(animScaleX).with(animScaleY);
+        animSet.start();
+    }
+
     protected void setBlinkAnimation (View view) {
         Animation blink = new AlphaAnimation(1, 0);
         blink.setDuration(400);
@@ -279,6 +296,23 @@ public class BaseCameraFrontFragment extends BaseVideoFragment
         super.onPause();
         mCameraSurface.getHolder().removeCallback(mCameraSurface);
         releaseCamera();
+
+        Log.e(TAG, "onPuase 1");
+        if (mGallerybtn != null && mGallerybtn.getDrawable() != null) {
+            Log.e(TAG, "onPuase 2");
+            BitmapDrawable b = (BitmapDrawable)mGallerybtn.getDrawable();
+            if (b != null && b.getBitmap() != null) {
+                Log.e(TAG, "onPuase 3");
+                b.getBitmap().recycle();
+                Log.e(TAG, "onPuase 4");
+            }
+        }
+        mGallerybtn.setImageBitmap(null);
+
+        if (cameraShutter != null) {
+            cameraShutter.release();
+            cameraShutter = null;
+        }
     }
 
     public void onResume() {

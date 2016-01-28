@@ -21,6 +21,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
 
         <receiver android:name=".widget.WidgetProvider1" >
@@ -44,21 +45,7 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info_3" />
         </receiver>
-        <receiver android:name=".widget.WidgetProvider4" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info_4" />
-        </receiver>
-        <receiver android:name=".widget.WidgetProvider5" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info_5" />
-        </receiver>
-        
+
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait" >

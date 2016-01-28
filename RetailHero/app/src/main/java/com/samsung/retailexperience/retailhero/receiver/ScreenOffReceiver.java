@@ -18,10 +18,7 @@ public class ScreenOffReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
 
-            Log.i(TAG, "### Screen Off");
-
-            //Context ctx = context.getApplicationContext();
-            //RetailModeApp ctx = (RetailModeApp) context.getApplicationContext();
+            Log.i(TAG, "### We have detected that the screen is turned off");
 
             wakeUpDevice(context);
             Intent i = new Intent(context, MainActivity.class);
@@ -30,9 +27,7 @@ public class ScreenOffReceiver extends BroadcastReceiver {
         }
     }
 
-    private void wakeUpDevice(/*RetailModeApp*/ Context context) {
-        // get WakeLock reference via application context
-        //PowerManager.WakeLock wakeLock = context.getWakeLock();
+    private void wakeUpDevice(Context context) {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "wakeup");
 

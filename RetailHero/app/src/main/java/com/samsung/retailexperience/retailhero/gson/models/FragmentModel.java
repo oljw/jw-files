@@ -13,21 +13,23 @@ public class FragmentModel<T> extends ResourceModel implements Serializable {
     private T fragment;
     private String background;
     private String drawerId;
+    private String pivotX;
+    private String pivotY;
 
     public FragmentModel() {
-        this(null, null, null, null, null);
+        this(null);
     }
     public FragmentModel( String layout) {
-        this(layout, null, null, null, null);
+        this(layout, null);
     }
     public FragmentModel( String layout,
                           String actionBackKey) {
-        this(layout, actionBackKey, null, null, null);
+        this(layout, actionBackKey, null);
     }
     public FragmentModel( String layout,
                           String actionBackKey,
                           T fragment) {
-        this(layout, actionBackKey, fragment, null, null);
+        this(layout, actionBackKey, fragment, null);
     }
     public FragmentModel( String layout,
                           String actionBackKey,
@@ -40,13 +42,23 @@ public class FragmentModel<T> extends ResourceModel implements Serializable {
                           T fragment,
                           String background,
                           String drawerId) {
+        this(layout, actionBackKey, fragment, background, drawerId, null, null);
+    }
+    public FragmentModel( String layout,
+                          String actionBackKey,
+                          T fragment,
+                          String background,
+                          String drawerId,
+                          String pivotX,
+                          String pivotY) {
         this.layout         = layout;
         this.actionBackKey  = actionBackKey;
         this.fragment       = fragment;
         this.background     = background;
         this.drawerId       = drawerId;
+        this.pivotX         = pivotX;
+        this.pivotY         = pivotY;
     }
-
 
 
     public String getLayout() {
@@ -104,6 +116,35 @@ public class FragmentModel<T> extends ResourceModel implements Serializable {
 
 
 
+    public String getPivotX() {
+        return this.pivotX;
+    }
+    public void setPivotX(String pivotX) {
+        this.pivotX = pivotX;
+    }
+    public int getPivotXValue() {
+        return Integer.parseInt(this.pivotX);
+    }
+    public void setPivotXValue(int pivotX) {
+        this.pivotX = String.valueOf(pivotX);
+    }
+    public String getPivotY() {
+        return this.pivotY;
+    }
+    public void setPivotY(String pivotY) {
+        this.pivotY = pivotY;
+    }
+    public int getPivotYValue() {
+        return Integer.parseInt(this.pivotY);
+    }
+    public void setPivotYValue(int pivotY) {
+        this.pivotY = String.valueOf(pivotY);
+    }
+    public void setPivot(int x, int y) {
+        this.pivotX = String.valueOf(x);
+        this.pivotY = String.valueOf(y);
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (this.layout != null)
@@ -119,6 +160,10 @@ public class FragmentModel<T> extends ResourceModel implements Serializable {
             appendString(builder, "background = " + this.background);
         if (this.drawerId != null)
             appendString(builder, "drawerId = " + this.drawerId);
+        if (this.pivotX != null)
+            appendString(builder, "pivotX = " + this.pivotX);
+        if (this.pivotY != null)
+            appendString(builder, "pivotY = " + this.pivotY);
 
         return builder.toString();
     }

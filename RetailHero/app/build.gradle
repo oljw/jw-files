@@ -39,17 +39,17 @@ android {
     }
 
     productFlavors {
-        Hero_B2B {
-            applicationId = "com.samsung.retailexperience.retailhero.hero_b2b"
+        B2B_Hero {
+            applicationId = "com.samsung.retailexperience.retailhero.b2b_hero"
         }
-        Hero_B2C {
-            applicationId = "com.samsung.retailexperience.retailhero.hero_b2c"
+        B2C_Hero {
+            applicationId = "com.samsung.retailexperience.retailhero.b2c_hero"
         }
-        Hero2_B2B {
-            applicationId = "com.samsung.retailexperience.retailhero.hero2_b2b"
+        B2B_Hero2 {
+            applicationId = "com.samsung.retailexperience.retailhero.b2b_hero2"
         }
-        Hero2_B2C {
-            applicationId = "com.samsung.retailexperience.retailhero.hero2_b2c"
+        B2C_Hero2 {
+            applicationId = "com.samsung.retailexperience.retailhero.b2c_hero2"
         }
     }
 }

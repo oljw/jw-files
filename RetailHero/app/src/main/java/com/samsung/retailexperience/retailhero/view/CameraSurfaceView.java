@@ -59,28 +59,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void surfaceCreated(SurfaceHolder holder) {
         Log.d(TAG, "##### surfaceCreated +");
 
-        mOrientationListener = new OrientationEventListener(mContext, SensorManager.SENSOR_DELAY_UI) {
-            public void onOrientationChanged (int orientation) {
-                int prevScreenOrientation = mScreenOrientation;
-
-                if( orientation > 340 || (orientation >= 0 && orientation <= 20))
-                    mScreenOrientation = 90;
-                else if( orientation >= 250 && orientation <= 290 )
-                    mScreenOrientation = 0;
-
-                //icon change when orientation is changed.
-                if( prevScreenOrientation != mScreenOrientation) {
-                    Log.d(TAG, "####### PLEASE ROTATE ICON : " + mScreenOrientation);
-                    if (mListener != null) {
-                        mListener.changeScreenOrientation(mScreenOrientation);
-                    }
-                }
-            }
-        };
-        mOrientationListener.enable();
-        // The Surface has been created, now tell the camera where to draw the preview.
         try {
             mCamera.setPreviewDisplay(mHolder);
+            mCamera.setDisplayOrientation(90);
             mCamera.startPreview();
         } catch (IOException e) {
             Log.e(TAG, "Error setting camera preview: " + e.getMessage());

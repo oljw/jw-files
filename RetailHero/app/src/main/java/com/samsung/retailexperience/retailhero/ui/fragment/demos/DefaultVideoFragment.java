@@ -31,11 +31,4 @@ public class DefaultVideoFragment extends BaseVideoFragment {
     public void onViewCreated(View view) {
     }
 
-    @Override
-    public void onCompletion(MediaPlayer mp) {
-        super.onCompletion(mp);
-        changeEndDemoFragment(AppConst.UIState.valueOf(getFragmentModel().getActionBackKey()),
-                AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
-    }
-
 }

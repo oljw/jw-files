@@ -11,11 +11,9 @@ import java.util.List;
  * Created by MONSTER on 1/19/2016.
  */
 public class WidgetProviderConstants {
-    static int FEATURE_COUNT = 5;
+    static int FEATURE_COUNT = 3;
     static List<Integer> featureDescriptions = new ArrayList<>(FEATURE_COUNT);
     static {
-        featureDescriptions.add(R.drawable.widget_item_desc_1);
-        featureDescriptions.add(R.drawable.widget_item_desc_1);
         featureDescriptions.add(R.drawable.widget_item_desc_1);
         featureDescriptions.add(R.drawable.widget_item_desc_1);
         featureDescriptions.add(R.drawable.widget_item_desc_1);
@@ -26,17 +24,12 @@ public class WidgetProviderConstants {
         featureExplorers.add(BaseActivity.class);
         featureExplorers.add(BaseActivity.class);
         featureExplorers.add(BaseActivity.class);
-        featureExplorers.add(BaseActivity.class);
-        featureExplorers.add(BaseActivity.class);
     }
 
-    // TODO Make seperate
     static List<String> featureExplorerFragments = new ArrayList<>(FEATURE_COUNT);
     static {
         featureExplorerFragments.add(AppConst.UIState.UI_STATE_WHATS_NEW_MAIN.name());
-        featureExplorerFragments.add(AppConst.UIState.UI_STATE_WHATS_NEW_MAIN.name());
-        featureExplorerFragments.add(AppConst.UIState.UI_STATE_EXCLUSIVES_MAIN.name());
-        featureExplorerFragments.add(AppConst.UIState.UI_STATE_WHATS_NEW_MAIN.name());
-        featureExplorerFragments.add(AppConst.UIState.UI_STATE_WHATS_NEW_MAIN.name());
+        featureExplorerFragments.add(AppConst.UIState.UI_STATE_DEVICE_SPECS.name());
+        featureExplorerFragments.add(AppConst.UIState.UI_STATE_NEW_TO_ANDROID_MAIN.name());
     }
 }

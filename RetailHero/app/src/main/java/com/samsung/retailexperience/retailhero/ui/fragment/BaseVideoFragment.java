@@ -138,6 +138,12 @@ public abstract class BaseVideoFragment extends BaseFragment implements
         Log.d(TAG, "##### BaseVideoFragment : setDrawer : mFragmentModel.getDrawerResId() = " + mFragmentModel.getDrawerId());
         setDrawer(mFragmentModel.getDrawerId());
 
+        //for scale up and down transition
+        if (mFragmentModel.getPivotX() != null)
+            mView.setPivotX(mFragmentModel.getPivotXValue());
+        if (mFragmentModel.getPivotY() != null)
+            mView.setPivotY(mFragmentModel.getPivotYValue());
+
         onViewCreated(mView);
         return mView;
     }
@@ -220,6 +226,18 @@ public abstract class BaseVideoFragment extends BaseFragment implements
         return mFragmentModel;
     }
 
+    /**
+     * When a video is completed, move to End page
+     * Override this function if moving to end page is unnecessary
+     */
+    protected void onVideoCompleted() {
+        moveToEndPage();
+    }
+
+    private void moveToEndPage() {
+        changeEndDemoFragment(AppConst.UIState.valueOf(mFragmentModel.getActionBackKey()),
+                AppConsts.TransactionDir.TRANSACTION_DIR_FORWARD);
+    }
 
     /**
      * methods for the VideoTextureView
@@ -257,6 +275,8 @@ public abstract class BaseVideoFragment extends BaseFragment implements
     @Override
     public void onCompletion(MediaPlayer mp) {
         Log.d(TAG, "Video Completion");
+
+        onVideoCompleted();
     }
 
     @Override
