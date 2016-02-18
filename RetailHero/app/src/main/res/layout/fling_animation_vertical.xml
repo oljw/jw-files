@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.samsung.retailexperience.retailhero.view.FlingAnimationVertical
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vertical_fling_anim_container"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="656px"
+    android:layout_marginTop="2215px"
+    >
+
+    <!-- 126 x 126 size -->
+    <ImageView
+        android:id="@+id/vertical_fling_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pay_fling_icon"
+        />
+    <ImageView
+        android:id="@+id/vertical_fling_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pay_fling_icon"
+        android:layout_marginTop="-63px"
+        android:alpha="0.3"
+        />
+    <ImageView
+        android:id="@+id/vertical_fling_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pay_fling_icon"
+        android:layout_marginTop="-63px"
+        android:alpha="0.3"
+        />
+    <ImageView
+        android:id="@+id/vertical_fling_four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pay_fling_icon"
+        android:layout_marginTop="-63px"
+        android:alpha="0.1"
+        />
+</com.samsung.retailexperience.retailhero.view.FlingAnimationVertical>

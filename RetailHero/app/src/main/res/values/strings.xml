@@ -1,0 +1,38 @@
+<resources>
+    <!--string name="app_name">Galaxy S7 retail experience</string-->
+
+    <!-- Demo End page -->
+    <string name="demo_end_subtitle">Select another demo to see what else the Hero 2 \nhas to offer or exit to explore the phone.</string>
+    <string name="back_to_menu_title">Back to Menu</string>
+    <string name="back_to_menu_subtitle">Lorem ipsum dolor sit amet</string>
+    <string name="free_explore_title">Explore the Phone</string>
+    <string name="free_explore_subtitle">Lorem ipsum dolor sit amet</string>
+
+    <string name="demo_end_return_to_main_menu">Return to Main Menu</string>
+    <string name="demo_end_back_to">Back to</string>
+    <string name="video_gallery">Video Gallery</string>
+    <string name="game_gallery">Game Gallery</string>
+
+    <!--ForegroundDetectingService message-->
+    <string name="foregrounddetectingservice_message">Do you want to allow RetailHero app for detecting the foreground app pacakge name?</string>
+
+    <!--Navigation Drawer-->
+    <string name="select_a_category">Select a Category</string>
+    <!--<string name="discover_top_features">Discover Top Features</string>-->
+    <!--<string name="enhanced_productivity">Enhanced Productivity</string>-->
+    <!--<string name="designed_for_business">Designed for Business</string>-->
+    <!--<string name="samsung_exclusives">Samsung Exclusives</string>-->
+    <!--<string name="switching_to_samsung">Switching to Samsung?</string>-->
+    <string name="explore_the_phone">Explore the Phone</string>
+    <!--<string name="discover_new_features">Discover New Features</string>-->
+    <!--<string name="dazzling_display">Dazzling Display</string>-->
+    <!--<string name="advanced_camera">Advanced Camera</string>-->
+    <string name="device_specs">Device Specs</string>
+
+    <string name="help_mainmenu_swipe">SWIPE LEFT OR RIGHT TO NAVIGATE</string>
+    <string name="help_mainmenu_tap">TAP THE MENU TO NAVIGATE</string>
+
+
+    <string name="consumer_legal_end_card">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, Super AMOLED, Samsung Pay, Samsung Smart Switch, Samsung Gear and Samsung+ are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Dust and water-resistant based on IP68 rating, which tests submersion in up to 5 feet of water for up to 30 minutes. Fast Charging requires an AFC-compatible charger to work. Wireless phone charging pad sold separately. Battery power consumption depends on factors such as network configuration, carrier network, signal strength, operating temperature, features selected, vibrate mode, backlight settings, browser use, frequency of calls, and voice, data and other application-usage patterns. Portion of memory occupied by existing content. Memory card sold separately. Memory may be expanded up to 2TB. Gear VR: Read and follow warnings and instructions with the Headset before use. The Headset should be calibrated before each use. Not for use by children under 13. A virtual reality experience may trigger health reactions. See a doctor before use if you have a history of seizures. Stop use if you experience health reactions. Gear S2: Sold separately. Gear S2 is compatible with select devices using Android 4.4 and later with at least 1.5GB RAM. Supported devices may vary by carrier and device. Some features may not be available. For best results, connect with compatible Samsung Galaxy devices. Samsung Pay: Samsung Pay is only compatible with select cards, carriers and Samsung devices; see Samsung Pay Support (http://www.samsung.com/Pay) for compatibility information. Smart Switch: Visit www.samsungsmartswitch.com for a list of compatible systems, platforms, devices and terms of use. Certain content (such as DRM-protected content) may not be compatible. Consult any applicable terms and conditions with your content providers to ensure that you have rights to transfer content off your previous device. App matching and recommendation system not available on all devices. Samsung+ app is available via Galaxy Essentials.</string>
+    <string name="business_legal_end_card">©2016 Samsung Electronics America, Inc. Samsung,  Samsung Galaxy S, Super AMOLED, Samsung Pay, Samsung Smart Switch, Samsung Gear and Samsung+ are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Dust and water-resistant based on IP68 rating, which tests submersion in up to 5 feet of water for up to 30 minutes. Fast Charging requires an AFC-compatible charger to work. Wireless phone charging pad sold separately. Battery power consumption depends on factors such as network configuration, carrier network, signal strength, operating temperature, features selected, vibrate mode, backlight settings, browser use, frequency of calls, and voice, data and other application-usage patterns. Portion of memory occupied by existing content. Memory card sold separately. Memory may be expanded up to 2TB. Fingerprint unlocking of device may not be permitted for access to corporate Microsoft Exchange ActiveSync servers.  Check with your company IT administrator.  Knox is a mark for a Samsung device tested for security and is specifically configured with enterprise use in mind.  For information about Samsung’s Knox device, please refer to www.samsung.com/us/knox. Samsung Pay is only compatible with select cards, carriers and Samsung devices; see Samsung Pay Support (http://www.samsung.com/Pay) for compatibility information. Smart Switch: Visit www.samsungsmartswitch.com for a list of compatible systems, platforms, devices and terms of use. Certain content (such as DRM-protected content) may not be compatible. Consult any applicable terms and conditions with your content providers to ensure that you have rights to transfer content off your previous device. App matching and recommendation system not available on all devices.</string>
+</resources>

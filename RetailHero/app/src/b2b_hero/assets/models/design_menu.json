@@ -1,0 +1,28 @@
+{
+    "menuItems": [
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/design_demo_1_title",
+        "subTitle": "@string/design_demo_1_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "design_demo_1",
+        "action": "UI_STATE_DESIGN_DEMO_AMOLED"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/design_demo_2_title",
+        "subTitle": "@string/design_demo_2_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "design_demo_2",
+        "action": "UI_STATE_DESIGN_DEMO_HEAD_TURNING_DESIGN"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/design_demo_3_title",
+        "subTitle": "@string/design_demo_3_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "design_demo_3",
+        "action": "UI_STATE_DESIGN_DEMO_CAMERA"
+      }
+    ]
+}

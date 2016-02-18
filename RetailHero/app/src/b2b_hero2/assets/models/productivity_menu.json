@@ -1,0 +1,20 @@
+{
+    "menuItems": [
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/productivity_demo_1_title",
+        "subTitle": "@string/productivity_demo_1_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "productivity_demo_1",
+        "action": "UI_STATE_PRODUCTIVITY_DEMO_BATTERY"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/productivity_demo_2_title",
+        "subTitle": "@string/productivity_demo_2_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "productivity_demo_2",
+        "action": "UI_STATE_PRODUCTIVITY_DEMO_SD"
+      }
+    ]
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/video_container">
+
+    <com.samsung.retailexperience.retailhero.view.VideoTextureView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:looped="false"
+        app:autoPlay="false"
+        app:isShowVideoFrame="true"
+        app:scaleToVideoSize="true"/>
+
+    <FrameLayout
+        android:id="@+id/display_rotate_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+
+        <!-- 494 684 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="494px"
+            android:layout_marginTop="684px"
+            android:src="@drawable/rotate_title"
+            />
+
+        <!-- 476 846 -->
+        <ImageView
+            android:id="@+id/display_rotate_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="476px"
+            android:layout_marginTop="846px"
+            android:src="@drawable/rotate_device_img"
+            />
+        </FrameLayout>
+
+
+    <com.samsung.retailexperience.retailhero.view.VideoTextureView
+        android:id="@+id/game_video_view"
+        android:layout_width="2560px"
+        android:layout_height="1440px"
+        android:layout_marginTop="2560px"
+        android:transformPivotX="0px"
+        android:transformPivotY="0px"
+        android:rotation="270"
+        app:looped="false"
+        app:autoPlay="false"
+        app:isShowVideoFrame="true"
+        app:scaleToVideoSize="true"
+        />
+
+    <FrameLayout
+        android:id="@+id/display_select_sample"
+        android:background="@color/super_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/design_select_video_c"
+            />
+
+        <LinearLayout
+            android:layout_width="550px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="7px"
+            android:layout_marginLeft="171px"
+            android:orientation="vertical"
+            >
+            <View
+                android:id="@+id/display_game_one"
+                android:layout_width="match_parent"
+                android:layout_height="634px"
+                android:layout_marginBottom="4px"
+                android:clickable="true"
+                android:tag="b2c_hero_display_demo_0"
+                android:background="@color/super_overlay_clickable_icon_area_bg"
+                />
+            <View
+                android:id="@+id/display_game_two"
+                android:layout_width="match_parent"
+                android:layout_height="634px"
+                android:layout_marginBottom="4px"
+                android:clickable="true"
+                android:tag="b2c_hero_display_demo_1"
+                android:background="@color/super_overlay_clickable_icon_area_bg"
+                />
+            <View
+                android:id="@+id/display_game_three"
+                android:layout_width="match_parent"
+                android:layout_height="634px"
+                android:layout_marginBottom="4px"
+                android:clickable="true"
+                android:tag="b2c_hero_display_demo_2"
+                android:background="@color/super_overlay_clickable_icon_area_bg"
+                />
+            <View
+                android:id="@+id/display_game_four"
+                android:layout_width="match_parent"
+                android:layout_height="634px"
+                android:layout_marginBottom="4px"
+                android:clickable="true"
+                android:tag="b2c_hero_display_demo_3"
+                android:background="@color/super_overlay_clickable_icon_area_bg"
+                />
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

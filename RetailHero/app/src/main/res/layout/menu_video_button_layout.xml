@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/menu_video_button_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/menu_video_container_height"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="@dimen/device_spec_button_height">
+    <LinearLayout
+        android:id="@+id/menu_video_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/videoMenuIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/menu_video_icon_margin_left"
+            android:layout_marginTop="@dimen/menu_video_icon_margin_top"
+            android:src="@drawable/play_button"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/menu_video_text_container_margin_left">
+
+            <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+                android:id="@+id/videoMenuTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:customFont="fonts/SamsungOneGreek-700_v1.0.ttf"
+                android:textSize="@dimen/menu_item_title_font_size"
+                android:textIsSelectable="false"
+                android:textColor="@color/text_color_white" />
+
+            <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+                android:id="@+id/videoMenuSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/menu_item_subtitle_margin_top"
+                app:customFont="fonts/SamsungOne-400_v1.0.ttf"
+                android:textSize="@dimen/menu_item_subtitle_font_size"
+                android:textIsSelectable="false"
+                android:textColor="@color/text_color_white" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

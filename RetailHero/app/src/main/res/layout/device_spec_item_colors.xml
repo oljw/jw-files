@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+        android:id="@+id/device_spec_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spec_item_margin_top"
+        app:customFont="fonts/SamsungSharpSans-Bold.ttf"
+        android:textSize="@dimen/spec_item_font_size"
+        android:textColor="@color/text_color_black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/colors_layout"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/spec_margin_top"
+            android:layout_marginBottom="@dimen/spec_margin_bottom"
+            android:paddingRight="@dimen/device_compare_item_padding_right"
+            android:orientation="horizontal"/>
+
+        <LinearLayout
+            android:id="@+id/compared_colors_layout"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/spec_margin_top"
+            android:layout_marginBottom="@dimen/spec_margin_bottom"
+            android:paddingLeft="@dimen/device_compare_item_padding_left"
+            android:orientation="horizontal"/>
+
+    </LinearLayout>
+
+</LinearLayout>

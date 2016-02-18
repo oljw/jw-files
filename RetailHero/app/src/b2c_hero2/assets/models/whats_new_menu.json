@@ -1,0 +1,52 @@
+{
+    "menuItems": [
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/whats_new_demo_1_title",
+        "subTitle": "@string/whats_new_demo_1_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "whats_new_demo_1",
+        "action": "UI_STATE_WHATS_DEMO_1"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/whats_new_demo_2_title",
+        "subTitle": "@string/whats_new_demo_2_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "whats_new_demo_2",
+        "action": "UI_STATE_WHATS_DEMO_2"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/whats_new_demo_3_title",
+        "subTitle": "@string/whats_new_demo_3_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "whats_new_demo_3",
+        "action": "UI_STATE_WHATS_DEMO_3"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/whats_new_demo_4_title",
+        "subTitle": "@string/whats_new_demo_4_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "whats_new_demo_4",
+        "action": "UI_STATE_WHATS_DEMO_4"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/whats_new_demo_5_title",
+        "subTitle": "@string/whats_new_demo_5_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "whats_new_demo_5",
+        "action": "UI_STATE_WHATS_DEMO_5"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/whats_new_demo_6_title",
+        "subTitle": "@string/whats_new_demo_6_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "whats_new_demo_6",
+        "action": "UI_STATE_WHATS_DEMO_6"
+      }
+    ]
+}

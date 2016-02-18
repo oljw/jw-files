@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/video_container">
+
+    <com.samsung.retailexperience.retailhero.view.VideoTextureView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:looped="false"
+        app:autoPlay="false"
+        app:isShowVideoFrame="true"
+        app:scaleToVideoSize="true"/>
+
+
+    <FrameLayout
+        android:id="@+id/edge_swipe_shortcut"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <!-- margin top: 546 px
+            align right
+        -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edge_swipe_shortcut"
+            android:layout_marginTop="546px"
+            android:layout_gravity="right"
+            />
+    </FrameLayout>
+
+    <!-- TODO image is not available.  replace textview with super image -->
+    <FrameLayout
+        android:id="@+id/edge_swipe_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <!--
+            margin top 222
+            align right
+        -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edge_swipe_blue_tab"
+            android:layout_marginTop="222px"
+            android:layout_gravity="right"
+            />
+    </FrameLayout>
+
+    <!-- TODO image is not available.  replace textview with super image -->
+    <FrameLayout
+        android:id="@+id/edge_swipe_feeds"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <!--
+            166 737
+        -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edge_swipe_feeds"
+            android:layout_marginLeft="166px"
+            android:layout_marginTop="737px"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edge_swipe_feed_existing"
+            android:layout_gravity="right"
+            />
+    </FrameLayout>
+
+    <!-- TODO this image is from B2B, replace this image if a new image is available -->
+    <FrameLayout
+        android:id="@+id/edge_tap_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <!-- edge_tap_calendar.png left 468, top 364 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="467px"
+            android:layout_marginTop="363px"
+            android:src="@drawable/edge_tap_calendar"
+            />
+
+        <!-- 183 x 184
+        margin 1194 364
+
+            android:layout_width="183px"
+            android:layout_height="184px"
+            android:layout_marginLeft="1194px"
+            android:layout_marginTop="364px"
+
+        -->
+        <View
+            android:id="@+id/edge_tap_calendar_clickable_area"
+            android:layout_width="283px"
+            android:layout_height="384px"
+            android:layout_marginLeft="1144px"
+            android:layout_marginTop="314px"
+            android:clickable="true"
+            android:background="@color/super_overlay_clickable_icon_area_bg"
+            />
+
+    </FrameLayout>
+
+</FrameLayout>

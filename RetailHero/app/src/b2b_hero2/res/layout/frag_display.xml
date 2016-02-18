@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/video_container">
+
+    <com.samsung.retailexperience.retailhero.view.VideoTextureView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:looped="false"
+        app:autoPlay="false"
+        app:isShowVideoFrame="true"
+        app:scaleToVideoSize="true"/>
+
+    <ImageView
+        android:id="@+id/amoled_tap_a_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/amoled_tap_a_photo"
+        android:background="@color/super_overlay"
+        android:clickable="true"
+        />
+
+    <ImageView
+        android:id="@+id/amoled_zooming_in_animation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:transformPivotX="0px"
+        android:transformPivotY="0px"
+        />
+    <com.samsung.retailexperience.retailhero.view.GalleryZoomView
+        android:id="@+id/amoled_zoom_in_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <ImageView
+        android:id="@+id/almoed_zoom_in_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/image_zoom_in"
+        android:background="@color/super_overlay"
+        android:scaleType="center"
+        />
+
+    <!-- 455 2025 -->
+    <ImageView
+        android:id="@+id/amoled_curved_super"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="455px"
+        android:layout_marginTop="2025px"
+        android:src="@drawable/amoled_curved_super"
+        />
+
+    <ImageView
+        android:id="@+id/amoled_water_resistant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="151px"
+        android:src="@drawable/amoled_water_resistant"
+        />
+
+</FrameLayout>

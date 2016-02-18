@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- font colors -->
+    <color name="text_color_white">#FFFFFFFF</color>
+    <color name="text_color_black">#FF000000</color>
+    <color name="drawer_header_color">#FF00B3E3</color>
+
+    <!-- CoreSuperTextView -->
+    <color name="subtitle_background">#BFFFFFFF</color>
+    <color name="feature_background">#BF000000</color>
+
+
+    <color name="super_overlay">#CC000000</color>
+    <color name="super_overlay_clickable_icon_area_bg">#00000000</color>
+
+    <!--Device Spec Colors-->
+    <!--<color name="device_color_black">#FF000000</color>-->
+    <!--<color name="device_color_silver">#FFFFFFFF</color>-->
+    <!--<color name="device_color_white">#FFFFFFFF</color>-->
+    <!--<color name="device_color_gold">#FFCBAE78</color>-->
+    <!--<color name="device_color_blue">#FF1A68A9</color>-->
+    <!--<color name="device_color_pink">#FFEDD1DF</color>-->
+    <!--<color name="device_color_platinum">#FFFFFFFF</color>-->
+
+    <color name="device_color_platinum">#FF4B4B4B</color>
+    <color name="device_color_silver_titanium">#FF989898</color>
+    <color name="device_color_gold_platinum">#FFCBAE78</color>
+    <color name="device_color_copper_gold">#FFCBAE78</color>
+    <color name="device_color_bronze_gold">#FFCBAE78</color>
+    <color name="device_color_black">#FF000000</color>
+    <color name="device_color_black_sapphire">#FF000000</color>
+    <color name="device_color_charcoal_black">#FF000000</color>
+    <color name="device_color_frosted_white">#FFFFFFFF</color>
+    <color name="device_color_white_pearl">#FFFFFFFF</color>
+    <color name="device_color_white_frost">#FFFFFFFF</color>
+    <color name="device_color_shimmery_white">#FFFFFFFF</color>
+    <color name="device_color_electric_blue">#FF1A68A9</color>
+    <color name="device_color_blossom_pink">#FFEDD1DF</color>
+</resources>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="s4">GALAXY_S4</string>
+    <string name="s5">GALAXY_S5</string>
+    <string name="s6">GALAXY_S6</string>
+    <string name="s6_edge">GALAXY_S6_EDGE</string>
+    <string name="s6_edge_plus">GALAXY_S6_EDGE_PLUS</string>
+    <string name="s7">GALAXY_S7</string>
+    <string name="s7_edge">GALAXY_S7_EDGE</string>
+    <string name="note3">GALAXY_NOTE3</string>
+    <string name="note4">GALAXY_NOTE4</string>
+    <string name="note5">GALAXY_NOTE5</string>
+    <string name="note_edge">GALAXY_NOTE_EDGE</string>
+
+    <!--Device Spec Items-->
+    <string name="device_spec_item_colors">Colors</string>
+    <string name="device_spec_item_resistance">Water &amp; Dust Resistance</string>
+    <string name="device_spec_item_display">Display</string>
+    <string name="device_spec_item_camera">Camera</string>
+    <string name="device_spec_item_process">Processor</string>
+    <string name="device_spec_item_memory">Memory</string>
+    <string name="device_spec_item_battery">Battery</string>
+    <string name="device_spec_item_os">OS</string>
+    <string name="device_spec_item_wireless_charging">Wireless Charging</string>
+    <string name="device_spec_item_fingerprint_sensor">Fingerprint Sensor</string>
+    <string name="device_spec_item_heart_rate_monitor">Heart Rate Monitor</string>
+    <string name="device_spec_item_samsung_pay">Samsung Pay</string>
+    <string name="device_spec_item_enterprise">Enterprise</string>
+    <string name="device_spec_item_dimensions">Dimensions</string>
+    <string name="device_spec_item_weight">Weight</string>
+
+
+    <!--Galaxy S7 Edge Spec-->
+    <string name="s7_edge_colors">Black Onyx, Gold, Platinum, Silver Titanium</string>
+    <string name="s7_edge_resistance">Y</string>
+    <string name="s7_edge_display">5.5\" Quad HD Super AMOLED® (2560 x 1440), Dual edge</string>
+    <string name="s7_edge_camera">Rear: 12MP Dual Pixel, Auto Real-Time HDR, Quick Launch, UHD Video Recording (3840 x 2160)\nFront: 5MP Wide-Angle, QHD Recording</string>
+    <string name="s7_edge_os">Android™ Marshmallow 6.0</string>
+    <string name="s7_edge_process">Qualcomm  Snapdragon 820 Quad-Core; 64-bit Processor</string>
+    <string name="s7_edge_memory">32GB expandable up to 200GB enabled up to 2TB</string>
+    <string name="s7_edge_battery">3600 mAh, Ultra Power Saving Mode, Fast Charging</string>
+    <string name="s7_edge_wireless_charging">Yes - Fast Wireless Charging, WPC and PMA</string>
+    <string name="s7_edge_fingerprint_sensor">Y</string>
+    <string name="s7_edge_heart_rate_monitor">Y</string>
+    <string name="s7_edge_samsung_pay">Y</string>
+    <string name="s7_edge_enterprise">Supports Knox™ 2.4</string>
+    <string name="s7_edge_dimensions">150.9 x 72.6 x 7.7mm</string>
+    <string name="s7_edge_weight">157g</string>
+
+
+    <!--Galaxy S7 Spec-->
+    <string name="s7_colors">Black Onyx, Gold, Platinum, Silver Titanium</string>
+    <string name="s7_resistance">Y</string>
+    <string name="s7_display">5.1\" Quad HD Super AMOLED® (2560 x 1440)</string>
+    <string name="s7_camera">Rear: 12MP Dual Pixel, Auto Real-Time HDR, Quick Launch, UHD Video Recording (3840 x 2160)\nFront: 5MP Wide-Angle, QHD Recording</string>
+    <string name="s7_os">Android™ Marshmallow 6.0</string>
+    <string name="s7_process">Qualcomm  Snapdragon 820 Quad-Core; 64-bit Processor</string>
+    <string name="s7_memory">32GB expandable up to 200GB enabled up to 2TB</string>
+    <string name="s7_battery">3000 mAh, Ultra Power Saving Mode, Fast Charging</string>
+    <string name="s7_wireless_charging">Yes - Fast Wireless Charging, WPC and PMA</string>
+    <string name="s7_fingerprint_sensor">Y</string>
+    <string name="s7_heart_rate_monitor">Y</string>
+    <string name="s7_samsung_pay">Y</string>
+    <string name="s7_enterprise">Supports Knox™ 2.4</string>
+    <string name="s7_dimensions">142.4 x 69.6 x 7.9mm</string>
+    <string name="s7_weight">152g</string>
+
+
+    <!--Galaxy S6 Edge Plus Spec-->
+    <string name="s6_edge_plus_colors">Gold Platinum, Black Sapphire</string>
+    <string name="s6_edge_plus_resistance">N</string>
+    <string name="s6_edge_plus_display">5.7\" Quad HD Super AMOLED® (2560 x 1440), Dual edge</string>
+    <string name="s6_edge_plus_camera">Rear: 16MP, Auto Real-Time HDR, Quick Launch, UHD Video Recording (3840 x 2160)\nFront: 5MP Wide-Angle, QHD Recording</string>
+    <string name="s6_edge_plus_os">Android™ 5.1, Lollipop</string>
+    <string name="s6_edge_plus_process">Samsung Exynos® 7420 Octa-Core  (2.1 GHz Quad-Core &amp; 1.5 GHz Quad-Core), 64-bit Processor</string>
+    <string name="s6_edge_plus_memory">32GB, 64GB, 128GB\n4GB RAM</string>
+    <string name="s6_edge_plus_battery">3000 mAh, Ultra Power Saving Mode, Fast Charging</string>
+    <string name="s6_edge_plus_wireless_charging">Yes - Qi/WPC and PMA</string>
+    <string name="s6_edge_plus_fingerprint_sensor">Y</string>
+    <string name="s6_edge_plus_heart_rate_monitor">Y</string>
+    <string name="s6_edge_plus_samsung_pay">Y</string>
+    <string name="s6_edge_plus_enterprise">Supports Knox™ 2.4</string>
+    <string name="s6_edge_plus_dimensions">154.4 x 75.8 x 6.9mm</string>
+    <string name="s6_edge_plus_weight">156g</string>
+
+    <!--Galaxy S6 Edge Spec-->
+    <string name="s6_edge_colors">Gold Platinum, Black Sapphire, White Pearl</string>
+    <string name="s6_edge_resistance">N</string>
+    <string name="s6_edge_display">5.1\" Quad HD Super AMOLED® (2560 x 1440), Dual edge</string>
+    <string name="s6_edge_camera">Rear: 16MP, f/1.9, OIS, Auto Real-Time HDR, Quick Launch, UHD Video Recording (3840 x 2160)\nFront: 5MP Wide-Angle, f/1.9 UHD 4K Recording (2560 x 1440)</string>
+    <string name="s6_edge_os">Android™ 5.0, Lollipop</string>
+    <string name="s6_edge_process">Samsung Exynos® 7420 Octa-Core (1.5 GHz Quad-Core &amp; 2.1 GHz Quad-Core), 64-bit Processor</string>
+    <string name="s6_edge_memory">32GB, 64GB, 128GB\n3GB RAM</string>
+    <string name="s6_edge_battery">2600 mAh, Ultra Power Saving Mode, Fast Charging</string>
+    <string name="s6_edge_wireless_charging">Yes - PMA and WPC</string>
+    <string name="s6_edge_fingerprint_sensor">Y</string>
+    <string name="s6_edge_heart_rate_monitor">Y</string>
+    <string name="s6_edge_samsung_pay">Y</string>
+    <string name="s6_edge_enterprise">Supports Knox™ 2.4</string>
+    <string name="s6_edge_dimensions">142.1 x 70.1 x 7.0mm</string>
+    <string name="s6_edge_weight">132g</string>
+
+    <!--Galaxy S6-->
+    <string name="s6_colors">Gold Platinum, Black Sapphire, White Pearl</string>
+    <string name="s6_resistance">N</string>
+    <string name="s6_display">5.1\" Quad HD Super AMOLED® (2560 x 1440)</string>
+    <string name="s6_camera">Rear: 16MP, f/1.9, OIS, Auto Real-Time HDR, Quick Launch, UHD Video Recording (3840 x 2160)\nFront: 5MP Wide-Angle, f/1.9 UHD 4K Recording (2560 x 1440)</string>
+    <string name="s6_os">Android™ 5.0, Lollipop</string>
+    <string name="s6_process">Samsung Exynos® 7420 Octa-Core (1.5 GHz Quad-Core &amp; 2.1 GHz Quad-Core), 64-bit Processor</string>
+    <string name="s6_memory">32GB, 64GB, 128GB\n3GB RAM</string>
+    <string name="s6_battery">2600 mAh, Ultra Power Saving Mode, Fast Charging</string>
+    <string name="s6_wireless_charging">Yes - PMA and WPC</string>
+    <string name="s6_fingerprint_sensor">Y</string>
+    <string name="s6_heart_rate_monitor">Y</string>
+    <string name="s6_samsung_pay">Y</string>
+    <string name="s6_enterprise">Supports Knox™ 2.4</string>
+    <string name="s6_dimensions">143.4 x 70.5 x 6.8mm</string>
+    <string name="s6_weight">138g</string>
+
+    <!--Galaxy S5-->
+    <string name="s5_colors">Charcoal Black, Copper Gold, Electric Blue, Shimmery White</string>
+    <string name="s5_resistance">Y</string>
+    <string name="s5_display">5.1\" Full HD Super AMOLED® (1920 x 1080)</string>
+    <string name="s5_camera">Rear: 16MP, f/2.0, Phase Detection Auto Focus Camera, Flash, Zero Shutter Lag, BSI\nFront: 2MP Camera; Full HD Recording @30fps, BSI</string>
+    <string name="s5_os">Android™ 4.4, KitKat or higher</string>
+    <string name="s5_process">2.5 GHz Quad-Core Processor</string>
+    <string name="s5_memory">16GB User Memory + MicroSD slot (up to 64GB)\n2GB RAM</string>
+    <string name="s5_battery">2800 mAh</string>
+    <string name="s5_wireless_charging">N</string>
+    <string name="s5_fingerprint_sensor">Y</string>
+    <string name="s5_heart_rate_monitor">Y</string>
+    <string name="s5_samsung_pay">N</string>
+    <string name="s5_enterprise">Supports Knox™ 2.0, 2.3</string>
+    <string name="s5_dimensions">142.0 x 72.5 x 8.1mm</string>
+    <string name="s5_weight">145g</string>
+
+    <!--Galaxy S4-->
+    <string name="s4_colors">White Frost</string>
+    <string name="s4_resistance">N</string>
+    <string name="s4_display">5\" Full HD Super AMOLED (1920 x 1080)</string>
+    <string name="s4_camera">Main(Rear): 13 Mega pixel Auto Focus camera with Flash &amp; Zero Shutter Lag, BIS\nSub (Front): 2 Mega pixel camera, Full HD recording @30fps with Zero Shutter Lag, BIS</string>
+    <string name="s4_os">Android™ 4.2.2, Jelly bean</string>
+    <string name="s4_process">1.9 GHz Quad-Core Processor / 1.6 GHz Octa-Core Processor</string>
+    <string name="s4_memory">16 / 32 / 64GB memory + microSD slot (up to 64GB), 2GB RAM</string>
+    <string name="s4_battery">2,600mAh</string>
+    <string name="s4_wireless_charging">N</string>
+    <string name="s4_fingerprint_sensor">N</string>
+    <string name="s4_heart_rate_monitor">N</string>
+    <string name="s4_samsung_pay">N</string>
+    <string name="s4_enterprise">Supports Knox™</string>
+    <string name="s4_dimensions">136.6 x 69.8 x 7.9mm</string>
+    <string name="s4_weight">130g</string>
+
+    <!--Galaxy Note 5-->
+    <string name="note5_colors">Black Sapphire, White Pearl</string>
+    <string name="note5_resistance">N</string>
+    <string name="note5_display">5.7\" Quad HD Super AMOLED® (2560 x 1440)</string>
+    <string name="note5_camera">Rear: 16MP, f/1.9, OIS, Auto Real-Time HDR, Quick Launch, UHD Video Recording (3840 x 2160)\nFront: 5MP Wide-Angle, f/1.9 QHD Recording</string>
+    <string name="note5_os">Android™ 5.1, Lollipop</string>
+    <string name="note5_process">Samsung Exynos® 7420 Octa-Core (2.1 GHz Quad-Core &amp; 1.5 GHz Quad-Core), 64-bit Processor</string>
+    <string name="note5_memory">32GB, 64GB, 128GB\n4GB RAM</string>
+    <string name="note5_battery">3000 mAh, Ultra Power Saving Mode, Fast Charging</string>
+    <string name="note5_wireless_charging">Yes - Qi/WPC and PMA</string>
+    <string name="note5_fingerprint_sensor">Y</string>
+    <string name="note5_heart_rate_monitor">Y</string>
+    <string name="note5_samsung_pay">Y</string>
+    <string name="note5_enterprise">Supports Knox™ 2.4</string>
+    <string name="note5_dimensions">153.2 x 76.1 x 7.6mm</string>
+    <string name="note5_weight">171g</string>
+
+    <!--Galaxy Note 4-->
+    <string name="note4_colors">Frost White, Charcoal Black, Bronze Gold, Blossom Pink</string>
+    <string name="note4_resistance">N</string>
+    <string name="note4_display">5.7\" Quad HD Super AMOLED® (2560 x 1440)</string>
+    <string name="note4_camera">Rear: 16MP, 8x Digital Zoom, HDR, Dual Camera\nFront: 3.7MP Front Camera, OIS, Wide-Angle Selfie</string>
+    <string name="note4_os">Android™ 4.4, KitKat</string>
+    <string name="note4_process">2.7 GHz Quad-Core Processor</string>
+    <string name="note4_memory">32GB internal memory, 128GB expandable\n3GB RAM</string>
+    <string name="note4_battery">3220 mAh</string>
+    <string name="note4_wireless_charging">N</string>
+    <string name="note4_fingerprint_sensor">Y</string>
+    <string name="note4_heart_rate_monitor">Y</string>
+    <string name="note4_samsung_pay">N</string>
+    <string name="note4_enterprise">Supports Knox™</string>
+    <string name="note4_dimensions">153.5 x 78.6 x 8.5mm</string>
+    <string name="note4_weight">176g</string>
+
+
+    <!--Galaxy Note Edge-->
+    <string name="note_edge_colors">Charcoal Black, Frosted White</string>
+    <string name="note_edge_resistance">N</string>
+    <string name="note_edge_display">5.6\” Quad HD+ Super AMOLED (2560 x 1440)</string>
+    <string name="note_edge_camera">Rear Camera 16M+ Smart OIS/ Fast AF, Live HDR (Rich Tone)\nFront Camera 3.7MP + F1.9/ Selfie (90º), Wide selfie (120º)</string>
+    <string name="note_edge_os">Android 4.4™, KitKat</string>
+    <string name="note_edge_process">2.7 GHz Quad-Core Processor</string>
+    <string name="note_edge_memory">3GB RAM + 32GB Internal memory\nSupports microSD slot up to 128GB</string>
+    <string name="note_edge_battery">3000 mAh Fast Charging</string>
+    <string name="note_edge_wireless_charging">N</string>
+    <string name="note_edge_fingerprint_sensor">Y</string>
+    <string name="note_edge_heart_rate_monitor">N</string>
+    <string name="note_edge_samsung_pay">N</string>
+    <string name="note_edge_enterprise">Supports Knox™</string>
+    <string name="note_edge_dimensions">151.3 x 82.4 x 8.3mm</string>
+    <string name="note_edge_weight">174g</string>
+
+
+    <!--Galaxy Note 3-->
+    <string name="note3_colors">Black</string>
+    <string name="note3_resistance">N</string>
+    <string name="note3_display">5.7\" Full HD Super AMOLED® (1920 x 1080)</string>
+    <string name="note3_camera">Rear: 13MP\/Front: 2MP</string>
+    <string name="note3_os">Android™ KitKat 4.4</string>
+    <string name="note3_process">2.3GHz Quad-Core</string>
+    <string name="note3_memory">3GB RAM; 32GB ROM</string>
+    <string name="note3_battery">3200 mAh</string>
+    <string name="note3_wireless_charging">N</string>
+    <string name="note3_fingerprint_sensor">N</string>
+    <string name="note3_heart_rate_monitor">N</string>
+    <string name="note3_samsung_pay">N</string>
+    <string name="note3_enterprise">Supports Knox™</string>
+    <string name="note3_dimensions">5.95\" x 3.12\" x 0.33\"</string>
+    <string name="note3_weight">5.93 oz</string>
+
+</resources>

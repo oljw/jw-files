@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/video_container">
+
+    <com.samsung.retailexperience.retailhero.view.VideoTextureView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:looped="false"
+        app:autoPlay="false"
+        app:isShowVideoFrame="true"
+        app:scaleToVideoSize="true"/>
+
+    <FrameLayout
+        android:id="@+id/edge_swipe_shortcut"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <!-- margin top: 546 px
+            align right
+        -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edge_swipe_shortcut"
+            android:layout_marginTop="546px"
+            android:layout_gravity="right"
+            />
+    </FrameLayout>
+
+    <!-- -->
+    <FrameLayout
+        android:id="@+id/edge_tap_email"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <!-- left 277, top 1161 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="277px"
+            android:layout_marginTop="1161px"
+            android:src="@drawable/edge_tap_email"
+            />
+
+        <!-- 187 x 189
+            left: 1194 top: 1160
+            Need more space add 50 pixel
+            287 x 389 (height: add another 100 for icon title)
+            new left: 1154, new top 1110
+        -->
+        <View
+            android:id="@+id/edge_tap_email_clickable_area"
+            android:layout_width="287px"
+            android:layout_height="389px"
+            android:layout_marginLeft="1154px"
+            android:layout_marginTop="1110px"
+            android:clickable="true"
+            android:background="@color/super_overlay_clickable_icon_area_bg"
+            />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/edge_tap_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        >
+        <!-- edge_tap_calendar.png left 480, top 364 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="480px"
+            android:layout_marginTop="364px"
+            android:src="@drawable/edge_tap_calendar"
+            />
+
+        <!-- 183 x 184
+        margin 1194 364
+        Need more space add 50 pixel
+         new size 283 x 384 (height + 100 for icon title)
+         new left 1144, new top 314
+        -->
+        <View
+            android:id="@+id/edge_tap_calendar_clickable_area"
+            android:layout_width="283px"
+            android:layout_height="384px"
+            android:layout_marginLeft="1154px"
+            android:layout_marginTop="314px"
+            android:clickable="true"
+            android:background="@color/super_overlay_clickable_icon_area_bg"
+            />
+
+    </FrameLayout>
+
+</FrameLayout>

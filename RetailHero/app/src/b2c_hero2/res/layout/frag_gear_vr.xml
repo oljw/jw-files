@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/video_container"
+             android:background="@android:color/black">
+
+    <com.samsung.retailexperience.retailhero.view.VideoTextureView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:looped="false"
+        app:autoPlay="false"
+        app:isShowVideoFrame="true"
+        app:scaleToVideoSize="true"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/vr_rotate_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="494px"
+            android:layout_marginTop="684px"
+            android:src="@drawable/rotate_title" />
+        <ImageView
+            android:id="@+id/vr_rotate_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="476px"
+            android:layout_marginTop="846px"
+            android:src="@drawable/rotate_device_img"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/gear_vr_scene_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/super_overlay"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/gear_vr_list"/>
+        <GridView
+            android:id="@+id/vr_grid"
+            android:layout_width="786px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="527px"
+            android:layout_marginTop="242px"
+            android:verticalSpacing="30px"
+            android:horizontalSpacing="30px"
+            android:numColumns="2">
+        </GridView>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/vr_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/vr_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF000000"
+        android:visibility="gone"/>
+
+    <!--com.samsung.retailexperience.retailhero.view.VideoTextureView
+        android:id="@+id/vr_video_view"
+        android:layout_width="2560px"
+        android:layout_height="1440px"
+        android:layout_marginTop="2560px"
+        android:transformPivotX="0px"
+        android:transformPivotY="0px"
+        android:rotation="270"
+        app:looped="false"
+        app:autoPlay="false"
+        app:isShowVideoFrame="true"
+        app:scaleToVideoSize="false"
+        android:visibility="gone"/-->
+
+    <ImageView
+        android:id="@+id/gear_vr_disclaimer_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="80px"
+        android:src="@drawable/gear_vr_disclaimer"
+        android:visibility="gone"/>
+
+</FrameLayout>

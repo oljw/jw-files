@@ -1,0 +1,86 @@
+{
+  "deviceSpecItems": [
+    {
+      "layout": "@layout/device_spec_item_category",
+      "deviceImage": "@drawable/device_img_note3",
+      "deviceName": "@drawable/device_logo_note3"
+    },
+    {
+      "layout": "@layout/device_spec_item_colors",
+      "deviceSpecItem": "@string/device_spec_item_colors",
+      "colors": [
+        "@color/device_color_black"
+      ]
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_resistance",
+      "deviceSpec": "@string/note3_resistance"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_display",
+      "deviceSpec": "@string/note3_display"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_camera",
+      "deviceSpec": "@string/note3_camera"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_process",
+      "deviceSpec": "@string/note3_process"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_memory",
+      "deviceSpec": "@string/note3_memory"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_battery",
+      "deviceSpec": "@string/note3_battery"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_os",
+      "deviceSpec": "@string/note3_os"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_wireless_charging",
+      "deviceSpec": "@string/note3_wireless_charging"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_fingerprint_sensor",
+      "deviceSpec": "@string/note3_fingerprint_sensor"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_heart_rate_monitor",
+      "deviceSpec": "@string/note3_heart_rate_monitor"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_samsung_pay",
+      "deviceSpec": "@string/note3_samsung_pay"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_enterprise",
+      "deviceSpec": "@string/note3_enterprise"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_dimensions",
+      "deviceSpec": "@string/note3_dimensions"
+    },
+    {
+      "layout": "@layout/device_spec_item",
+      "deviceSpecItem": "@string/device_spec_item_weight",
+      "deviceSpec": "@string/note3_weight"
+    }
+  ]
+}

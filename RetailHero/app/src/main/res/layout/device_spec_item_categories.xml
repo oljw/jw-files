@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/device_cateogry"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/device_compare_item_padding_right"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/device_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/device_img_margin_bottom"/>
+
+        <ImageView
+            android:id="@+id/device_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/device_name_margin_bottom"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/compared_device_cateogry"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/device_compare_item_padding_left"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/compared_device_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/device_img_margin_bottom" />
+
+        <ImageView
+            android:id="@+id/compared_device_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/device_name_margin_bottom" />
+    </LinearLayout>
+</LinearLayout>

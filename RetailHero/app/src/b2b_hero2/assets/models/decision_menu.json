@@ -1,0 +1,44 @@
+{
+    "menuItems": [
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/whats_new_title",
+        "subTitle": "@string/whats_new_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "decision_whats_new",
+        "action": "UI_STATE_WHATS_NEW_MAIN"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/galaxy_of_technology_title",
+        "subTitle": "@string/galaxy_of_technology_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "decision_galaxy_technology",
+        "action": "UI_STATE_EXCLUSIVES_MAIN"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/device_specs_title",
+        "subTitle": "@string/device_specs_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "decision_compare_devices",
+        "action": "UI_STATE_DEVICE_SPECS"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/new_to_android_title",
+        "subTitle": "@string/new_to_android_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "decision_new_to_android",
+        "action": "UI_STATE_NEW_TO_ANDROID_MAIN"
+      },
+      {
+        "layout": "@layout/menu_list_item",
+        "title": "@string/explore_title",
+        "subTitle": "@string/explore_subtitle",
+        "icon": "@drawable/chevron_blue",
+        "tag": "decision_explore",
+        "action": "UI_STATE_NONE"
+      }
+    ]
+}

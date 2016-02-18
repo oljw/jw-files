@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_whats_new"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_whats_new"/>
+
+        <item
+            android:id="@+id/drawer_design"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_design"/>
+
+        <item
+            android:id="@+id/drawer_camera"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_camera"/>
+
+        <item
+            android:id="@+id/drawer_ss_exclusives"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_ss_exclusives"/>
+
+        <item
+            android:id="@+id/drawer_new_to_android"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_new_to_android"/>
+
+        <item
+            android:id="@+id/drawer_device_specs"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_device_spec"/>
+
+        <item
+            android:id="@+id/drawer_exit_demo"
+            android:icon="@drawable/chevron"
+            android:title="@string/menu_exit_app"/>
+
+    </group>
+</menu>

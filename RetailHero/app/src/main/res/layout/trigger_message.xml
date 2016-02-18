@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/trigger_message_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/trigger_box"
+    android:paddingLeft="50px"
+    android:paddingRight="50px">
+
+    <ImageView
+        android:id="@+id/trigger_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/trigger_message_camera"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/trigger_message"
+        android:layout_marginLeft="50px"
+        android:layout_centerVertical="true"
+        android:src="@drawable/trigger_chevron" />
+
+</RelativeLayout>

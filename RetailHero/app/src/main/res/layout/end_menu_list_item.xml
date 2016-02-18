@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/end_menu_item_height"
+    android:paddingLeft="@dimen/frag_menu_layout_padding_left"
+    android:paddingRight="@dimen/frag_menu_layout_padding_right">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
+
+        <com.samsung.retailexperience.retailhero.view.CustomFontTextView
+            android:id="@+id/menuItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:customFont="fonts/SamsungSharpSans-Bold.ttf"
+            android:textSize="@dimen/menu_item_title_font_size"
+            android:textIsSelectable="false"
+            android:textColor="@color/text_color_black"
+            android:text="Title"
+            android:layout_weight="8"
+            android:gravity="center_vertical|left"/>
+
+        <ImageView
+            android:id="@+id/menuItemIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical|end"
+            android:src="@drawable/chevron_blue"/>
+    </LinearLayout>
+
+</RelativeLayout>
