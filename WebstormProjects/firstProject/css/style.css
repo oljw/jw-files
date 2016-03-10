@@ -1,21 +1,19 @@
 #character {
-    width: 60px;
-    height: auto;
-    margin-top: 180px;
-    margin-left: 60px;
-    position: absolute;
+    /*width: 60px;*/
+    /*height: auto;*/
+    /*margin-top: 180px;*/
+    /*margin-left: 60px;*/
+    /*position: absolute;*/
 }
 
 #ground {
-    position: fixed;
-    width: inherit;
-    margin-top: 242px;
+    /*position: absolute;*/
+    /*width: inherit;*/
+    /*margin-top: 242px;*/
 }
 
 #gameScreen {
     position: absolute;
-    height: 300px;
-    width: 800px;
     border: 2px solid black;
     border-radius: 5px;
 }

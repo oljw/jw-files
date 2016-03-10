@@ -7,10 +7,10 @@
     <script type="text/javascript" src="js/script.js"></script>
     <link type="text/css" rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
-    <div id="gameScreen">
-        <img id="character" src="res/image/trex_char.png"/>
-        <img id="ground" src="res/image/ground.png"/>
-    </div>
+<body onresize='onresize()' onload='onload()' style='position: absolute; height: 300px; width: 800px'>
+    <canvas id="gameScreen">
+        <img id="character"/>
+        <img id="ground"/>
+    </canvas>
 </body>
 </html>
