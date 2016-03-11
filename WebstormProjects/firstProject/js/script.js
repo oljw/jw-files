@@ -10,8 +10,8 @@ var imageReady = false;
 var runAnim = false;
 var isPlaying = false;
 
-Dino = {};
-Dino.config = {
+var Dino = {};
+Dino.attr = {
     SPRITE_HEIGHT: 47,
     SPRITE_WIDTH: 264,
     FRAME_WIDTH: 44,
@@ -22,25 +22,15 @@ Dino.config = {
 };
 var dinoRunningIndex = 0;
 
-Ground = {
+var Ground = {
     SPRITE_HEIGHT: 12,
     SPRITE_WIDTH: 1200,
     FRAME_WIDTH: 800,
     GROUND_MAX_WIDTH: 800,
+    //GROUND_MOVING_FRAME_RATE: 200,
     POS_X: 0,
-    POS_Y: 242
+    POS_Y: 230
 };
-
-window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame       ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame    ||
-            window.oRequestAnimationFrame      ||
-            window.msRequestAnimationFrame     ||
-            function( callback ){
-                window.setTimeout(callback, 1000 / 60);
-            };
-})();
 
 $(document).ready(function() {
     console.log("Document Ready");
@@ -50,19 +40,56 @@ $(document).ready(function() {
 
     loadGroundImage();
     loadDinoImage();
-    moveGround();
+
     dinoImg.onload = function () {
         imageReady = true;
         setTimeout(update, 1000/60);
     };
-
     resize();
-
-    $(document).keydown(function() {
-        console.log("Key Pressed");
-        stopAnimation();
-    });
 });
+
+function redraw() {
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if (imageReady) {
+        ctx.drawImage(dinoImg, Dino.attr.RUNNING_POS[dinoRunningIndex], 0, Dino.attr.FRAME_WIDTH, Dino.attr.SPRITE_HEIGHT,
+            Dino.attr.POS_X, Dino.attr.POS_Y, Dino.attr.FRAME_WIDTH, Dino.attr.SPRITE_HEIGHT);
+
+        var offsetX = parseInt(Date.now() / 6) % Ground.FRAME_WIDTH;
+
+        console.log(parseInt(Date.now() / 6) % Ground.FRAME_WIDTH);
+
+        //ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
+        //    Ground.POS_X - 1, Ground.POS_Y, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT);
+        //
+        //ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
+        //    Ground.POS_X + Ground.SPRITE_WIDTH, Ground.POS_Y, Ground.FRAME_WIDTH, Ground.SPRITE_HEIGHT);
+
+        ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
+            Ground.POS_X - offsetX, Ground.POS_Y, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT);
+
+        ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
+            Ground.POS_X + Ground.SPRITE_WIDTH - offsetX, Ground.POS_Y, Ground.FRAME_WIDTH, Ground.SPRITE_HEIGHT);
+    }
+}
+
+function update() {
+    runAnim = requestAnimFrame(update);
+    dinoRunningIndex = getRunningDinoIndex();
+
+    redraw();
+}
+
+function getRunningDinoIndex() {
+    var index = parseInt(Date.now() / Dino.attr.RUNNING_FRAME_RATE) % Dino.attr.RUNNING_POS.length;
+    return index;
+}
+
+function resize() {
+    canvas.width = 800;
+    canvas.height = 300;
+    redraw();
+}
 
 function loadDinoImage() {
     dinoImg = new Image();
@@ -70,50 +97,29 @@ function loadDinoImage() {
     $("#character").attr("src", dinoImg.src);
 }
 
-function moveGround() {
-    $("#ground").animate({left: "-= 500"}, 10000);
-}
-
 function loadGroundImage() {
     groundImg = new Image();
     groundImg.src = "res/image/ground.png";
-    $("#ground").attr("src", groundImg.src)
+    $("#ground").attr("src", groundImg.src);
 }
 
-function redraw() {
-    console.log("redraw called");
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    if (imageReady) {
-        ctx.drawImage(dinoImg, Dino.config.RUNNING_POS[dinoRunningIndex], 0, Dino.config.FRAME_WIDTH, Dino.config.SPRITE_HEIGHT,
-            Dino.config.POS_X, Dino.config.POS_Y, Dino.config.FRAME_WIDTH, Dino.config.SPRITE_HEIGHT);
-        ctx.drawImage(groundImg, 0, 0, Ground.FRAME_WIDTH, Ground.SPRITE_HEIGHT, Ground.POS_X, Ground.POS_Y, Ground.FRAME_WIDTH, Ground.SPRITE_HEIGHT);
-    }
-}
-
-function resize() {
-    //canvas.width = canvas.parentNode.clientWidth;
-    //canvas.height = canvas.parentNode.clientHeight;
-    canvas.width = 800;
-    canvas.height = 300;
-    redraw();
-}
-
-function stopAnimation() {
+function stopRunAnimation() {
     window.cancelAnimationFrame(runAnim);
 }
 
-function update() {
-    runAnim = requestAnimFrame(update);
-    var runningIndex = getRunningDinoIndex();
+window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame    ||
+        window.oRequestAnimationFrame      ||
+        window.msRequestAnimationFrame     ||
+        function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
 
-    if (runningIndex !== dinoRunningIndex) {
-        dinoRunningIndex = runningIndex;
-        redraw();
-    }
-}
+$(document).keydown(function() {
+    console.log("Key Pressed");
+    stopRunAnimation();
+});
 
-function getRunningDinoIndex() {
-    var index = parseInt(Date.now() / Dino.config.RUNNING_FRAME_RATE) % Dino.config.RUNNING_POS.length;
-    return index;
-}
