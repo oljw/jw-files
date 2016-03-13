@@ -59,9 +59,9 @@ $(document).ready(function() {
 
         groundW = groundImg.width * scale;
         groundH = groundImg.height * scale;
-        //if (groundW > CANVAS_WIDTH) {
+        //if (GROUND_NEW_WIDTH > CANVAS_WIDTH) {
         //    console.log("#test 1");
-        //    Ground.POS_X = groundW;
+        //    Ground.POS_X = GROUND_NEW_WIDTH;
         //}
     };
 
@@ -95,10 +95,10 @@ function redraw() {
             //    console.log("###test 3");
             //    Ground.POS_X = 0;
             //}
-            //if (Ground.POS_X > (CANVAS_WIDTH - groundW)) {
+            //if (Ground.POS_X > (CANVAS_WIDTH - GROUND_NEW_WIDTH)) {
             //    console.log("####test 4");
             //
-            //    ctx.drawImage(groundImg, CANVAS_WIDTH + 1, Ground.POS_Y, groundW, groundH);
+            //    ctx.drawImage(groundImg, CANVAS_WIDTH + 1, Ground.POS_Y, GROUND_NEW_WIDTH, GROUND_NEW_HEIGHT);
             //}
         } else {
             console.log("#####test 5");
@@ -108,7 +108,7 @@ function redraw() {
                 console.log("##########################test 6")
             }
             if(Ground.POS_X > CANVAS_WIDTH - groundW) {
-                console.log("#######test 7" + "groundW: " + groundW + "groundposX: " + Ground.POS_X);
+                //console.log("#######test 7" + "GROUND_NEW_WIDTH: " + GROUND_NEW_WIDTH + "groundposX: " + Ground.POS_X);
                 ctx.drawImage(groundImg, Ground.POS_X + groundW - 1, Ground.POS_Y, groundW, groundH);
             }
         }

@@ -10,14 +10,6 @@ var imageReady = false;
 var runAnim = false;
 var isPlaying = false;
 var scale = 1.01;
-var groundW;
-var groundH;
-var dx = 10;
-//var x = 0;
-var currentTime = 0;
-
-var CANVAS_WIDTH = 800;
-var CANVAS_HEIGHT = 300;
 
 var Dino = {};
 Dino.attr = {
@@ -33,10 +25,11 @@ var dinoRunningIndex = 0;
 
 var Ground = {
     SPRITE_HEIGHT: 12,
-    SPRITE_WIDTH: 800,
-    FRAME_WIDTH: 800,
+    SPRITE_WIDTH: 1200,
     GROUND_MAX_WIDTH: 800,
-    //GROUND_MOVING_FRAME_RATE: 200,
+    GROUND_MOVING_SPEED: 5,
+    GROUND_NEW_WIDTH: 0,
+    GROUND_NEW_HEIGHT: 0,
     POS_X: 0,
     POS_Y: 230
 };
@@ -58,16 +51,10 @@ $(document).ready(function() {
     groundImg.onload = function() {
         console.log("test 0");
 
-        groundW = groundImg.width * scale;
-        groundH = groundImg.height * scale;
-        if (groundW > CANVAS_WIDTH) {
-            console.log("#test 1");
-            Ground.POS_X = CANVAS_WIDTH - groundW;
-        }
+        Ground.GROUND_NEW_WIDTH = groundImg.width * scale;
+        Ground.GROUND_NEW_HEIGHT = groundImg.height * scale;
     };
-
     resize();
-    currentTime = Date.now();
 });
 
 function redraw() {
@@ -77,56 +64,31 @@ function redraw() {
         ctx.drawImage(dinoImg, Dino.attr.RUNNING_POS[dinoRunningIndex], 0, Dino.attr.FRAME_WIDTH, Dino.attr.SPRITE_HEIGHT,
             Dino.attr.POS_X, Dino.attr.POS_Y, Dino.attr.FRAME_WIDTH, Dino.attr.SPRITE_HEIGHT);
 
-        var offsetX = parseInt((Date.now()-currentTime) / 3) % Ground.FRAME_WIDTH;
-
-        //console.log(parseInt(Date.now() / 3) % Ground.FRAME_WIDTH);
-
-        //ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
-        //    Ground.POS_X - 1, Ground.POS_Y, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT);
-
-        //ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
-        //    Ground.POS_X + Ground.SPRITE_WIDTH, Ground.POS_Y, Ground.FRAME_WIDTH, Ground.SPRITE_HEIGHT);
-
-        ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
-            Ground.POS_X - offsetX, Ground.POS_Y, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT);
-        ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
-            Ground.POS_X + Ground.SPRITE_WIDTH - offsetX, Ground.POS_Y, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT);
-
-        //if(groundW <= CANVAS_WIDTH) {
-        ////    console.log("##test 2");
-        ////
-        ////    if (Ground.POS_X > CANVAS_WIDTH) {
-        ////        console.log("###test 3");
-        ////        Ground.POS_X = 0;
-        ////    }
-        ////    if (Ground.POS_X > (CANVAS_WIDTH - groundW)) {
-        ////        console.log("####test 4");
-        ////
-        ////        ctx.drawImage(groundImg, CANVAS_WIDTH + 1, Ground.POS_Y, groundW, groundH);
-        ////    }
-        //}
+        if(Ground.GROUND_NEW_WIDTH <= Ground.GROUND_MAX_WIDTH) {
+        //    console.log("##test 2");
         //
-        //else {
-            //console.log("#####test 5");
-
-        //    if(Ground.POS_X < -CANVAS_WIDTH) {
-        //        console.log("######test 6");
-        //        Ground.POS_X = CANVAS_WIDTH - groundW;
+        //    if (Ground.POS_X > CANVAS_WIDTH) {
+        //        console.log("###test 3");
+        //        Ground.POS_X = 0;
         //    }
-        //    if(Ground.POS_X < CANVAS_WIDTH - groundW) {
-        //        //console.log("#######test 7" + (CANVAS_WIDTH - groundW) + "groundW: " + groundW + "ground.posX: " + Ground.POS_X);
-        //        //ctx.drawImage(groundImg, Ground.POS_X - groundW, Ground.POS_Y, groundW, groundH);
+        //    if (Ground.POS_X > (CANVAS_WIDTH - GROUND_NEW_WIDTH)) {
+        //        console.log("####test 4");
+        //
+        //        ctx.drawImage(groundImg, CANVAS_WIDTH + 1, Ground.POS_Y, GROUND_NEW_WIDTH, GROUND_NEW_HEIGHT);
         //    }
-        //}
-        //
-        //ctx.drawImage(groundImg, Ground.POS_X, Ground.POS_Y, groundW, groundH);
-        //
-        //Ground.POS_X -= dx;
+        }
 
-        //
-        //ctx.drawImage(groundImg, 0, 0, Ground.SPRITE_WIDTH, Ground.SPRITE_HEIGHT,
-        //    Ground.POS_X + Ground.SPRITE_WIDTH - offsetX, Ground.POS_Y, Ground.FRAME_WIDTH, Ground.SPRITE_HEIGHT);
-        //console.log("##############test 8");
+        else {
+            if(Ground.POS_X < 0) {
+                Ground.POS_X = Ground.GROUND_NEW_WIDTH;
+            }
+            if(Ground.POS_X > 0) {
+                ctx.drawImage(groundImg, Ground.POS_X - Ground.GROUND_NEW_WIDTH, Ground.POS_Y, Ground.GROUND_NEW_WIDTH, Ground.GROUND_NEW_HEIGHT);
+            }
+        }
+        ctx.drawImage(groundImg, Ground.POS_X, Ground.POS_Y, Ground.GROUND_NEW_WIDTH, Ground.GROUND_NEW_HEIGHT);
+
+        Ground.POS_X -= Ground.GROUND_MOVING_SPEED;
     }
 }
 
