@@ -144,7 +144,7 @@ function resize() {
 
 function loadDinoImage() {
     dinoImg = new Image();
-    dinoImg.src = "res/image/trex_move.png";
+    dinoImg.src = "res/image/dino_move.png";
     $("#character").attr("src", dinoImg.src);
 }
 
