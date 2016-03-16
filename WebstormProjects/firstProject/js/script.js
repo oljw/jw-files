@@ -6,6 +6,7 @@ var canvas = null;
 var dinoImg = null;
 var groundImg = null;
 var smObstaImg = null;
+var scoreImg = null;
 var ctx = null;
 var imageReady = false;
 var runAnim = false;
@@ -17,6 +18,8 @@ var obstacleIndex = 0;
 var jumping = null;
 var inAir = false;
 var jumpVelocity = 0;
+
+var startTime = 0;
 
 var Dino = {
     SPRITE_HEIGHT: 47,
@@ -43,21 +46,52 @@ var Ground = {
     POS_Y: 230
 };
 
-var Obstacle = {};
+var Score = {
+    SPRITE_HEIGHT: 21,
+    SPRITE_WIDTH: 3000, // update
+    NUMBER_WIDTH: 20
+};
+
+var Obstacle = {
+
+};
+
 Obstacle.sm = {
+//    SM_OBSTA1 = function() {
+//    smObstaImg = new Image();
+//    //smObstaImg.src = "res/image/obstacle_sm.png";
+//}
     SPRITE_HEIGHT: 35,
     SPRITE_WIDTH: 102,
     FRAME_WIDTH: 35,
+    OBSTACLE_START_X: 1000,
     OBSTACLE_FRAME_POS: [35, 17.5, 52.5],
     OBSTACLE_POS: [0, 35, 52.5],
     OBSTACLE_FRAME_RATE: 1000,
     POS_X: 0,
-    POS_Y: 210
+    POS_Y: 215,
+    OBSTACLE_NEW_WIDTH: 0,
+    OBSTACLE_NEW_HEIGHT: 0
 };
+
+//Obstacle.series = {
+//    obsta1: ctx.drawImage(smObstaImg, this.sm.OBSTACLE_POS[currentIndex], 0, this.sm.OBSTACLE_FRAME_POS[currentIndex], this.sm.SPRITE_HEIGHT,
+//        this.sm.POS_X - this.sm.OBSTACLE_NEW_WIDTH, this.sm.POS_Y, this.sm.OBSTACLE_FRAME_POS[currentIndex], this.sm.OBSTACLE_NEW_HEIGHT),
+//
+//    obsta2: ctx.drawImage(smObstaImg, this.sm.OBSTACLE_POS[currentIndex], 0, this.sm.OBSTACLE_FRAME_POS[currentIndex], this.sm.SPRITE_HEIGHT,
+//        this.sm.POS_X - this.sm.OBSTACLE_NEW_WIDTH, this.sm.POS_Y, this.sm.OBSTACLE_FRAME_POS[currentIndex], this.sm.OBSTACLE_NEW_HEIGHT),
+//
+//    obsta3: ctx.drawImage(smObstaImg, this.sm.OBSTACLE_POS[currentIndex], 0, this.sm.OBSTACLE_FRAME_POS[currentIndex], this.sm.SPRITE_HEIGHT,
+//        this.sm.POS_X - this.sm.OBSTACLE_NEW_WIDTH, this.sm.POS_Y, this.sm.OBSTACLE_FRAME_POS[currentIndex], this.sm.OBSTACLE_NEW_HEIGHT)
+//};
+
+
 
 //Obstacle.lg = {
 //
 //};
+
+
 
 $(document).ready(function() {
     console.log("Document Ready");
@@ -79,9 +113,9 @@ $(document).ready(function() {
                     console.log("Play");
                     isPlaying = true;
 
-                    loadGroundImage();
-                    loadDinoImage();
-                    loadObstacleImageSM();
+                    loadAllImages();
+
+                    startTime = Date.now();
 
                     dinoImg.onload = function () {
                         imageReady = true;
@@ -92,6 +126,12 @@ $(document).ready(function() {
                         Ground.GROUND_NEW_WIDTH = groundImg.width * scale;
                         Ground.GROUND_NEW_HEIGHT = groundImg.height * scale;
                     };
+
+                    smObstaImg.onload = function() {
+                        Obstacle.sm.OBSTACLE_NEW_WIDTH = smObstaImg.width * scale;
+                        Obstacle.sm.OBSTACLE_NEW_HEIGHT = smObstaImg.height * scale;
+                    };
+
                     resize();
                     break;
                 } else {
@@ -105,7 +145,12 @@ $(document).ready(function() {
     });
 });
 
+var obstaVisible = false;
+var currentIndex = null;
+var obstaState = 0;
+
 function redraw() {
+
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     if (imageReady) {
@@ -129,23 +174,45 @@ function redraw() {
         Ground.POS_X -= Ground.GROUND_MOVING_SPEED;
 
         //Obstacle small
-        if(Obstacle.sm.POS_Y >= 200) {
-            ctx.drawImage(smObstaImg, Obstacle.sm.OBSTACLE_POS[obstacleIndex], 0, Obstacle.sm.OBSTACLE_FRAME_POS[obstacleIndex], Obstacle.sm.SPRITE_HEIGHT,
-            400, Obstacle.sm.POS_Y, Obstacle.sm.OBSTACLE_FRAME_POS[obstacleIndex], Obstacle.sm.SPRITE_HEIGHT);
+        if(Obstacle.sm.POS_X < 0) {
+            Obstacle.sm.POS_X = 1000;
+            obstaVisible = false;
+            currentIndex = null;
         }
+
+        if (Obstacle.sm.POS_X > 0) {
+            if(currentIndex == null) {
+                if(obstaVisible) { return; }
+                obstaState = parseInt(Math.random() * 3);
+            }
+            currentIndex = obstaState;
+
+            ctx.drawImage(smObstaImg, Obstacle.sm.OBSTACLE_POS[currentIndex], 0, Obstacle.sm.OBSTACLE_FRAME_POS[currentIndex], Obstacle.sm.SPRITE_HEIGHT,
+                Obstacle.sm.POS_X - Obstacle.sm.OBSTACLE_NEW_WIDTH, Obstacle.sm.POS_Y, Obstacle.sm.OBSTACLE_FRAME_POS[currentIndex], Obstacle.sm.OBSTACLE_NEW_HEIGHT);
+
+            obstaVisible = true;
+        }
+        Obstacle.sm.POS_X -= Ground.GROUND_MOVING_SPEED;
+
+
+
+        //Time board
+        var elapsedTime = Date.now() - startTime;
+        var intElapsed = parseInt(elapsedTime / 100) % 10;
+        var scorePosition = 20;
+        ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+            scorePosition, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     }
 }
 
 function jump() {
     inAir = true;
-    console.log("jumping " + "Pos_Y: " + Dino.POS_Y);
+    //console.log("jumping " + "Pos_Y: " + Dino.POS_Y);
     if(Dino.POS_Y > Dino.JUMP_LIMIT && !goingDown) {
-
         Dino.POS_Y -= Dino.JUMP_VELOCITY;
         Dino.JUMP_VELOCITY -= Dino.JUMP_GRAVITY;
     } else {
         goingDown = true;
-
         Dino.POS_Y += Dino.JUMP_VELOCITY;
         Dino.JUMP_VELOCITY += Dino.JUMP_GRAVITY;
         if(Dino.POS_Y >= 200) {
@@ -155,13 +222,12 @@ function jump() {
             Dino.JUMP_VELOCITY = 8;
         }
     }
-    console.log("velocity: " +  jumpVelocity);
+    //console.log("velocity: " +  jumpVelocity);
 }
 
 function update() {
     runAnim = requestAnimFrame(update);
     dinoRunningIndex = getRunningDinoIndex();
-    obstacleIndex = getObstacleIndex();
 
     redraw();
 }
@@ -171,34 +237,26 @@ function getRunningDinoIndex() {
     return index;
 }
 
-function getObstacleIndex() {
-    var index = parseInt(Date.now() / Obstacle.sm.OBSTACLE_FRAME_RATE) % Obstacle.sm.OBSTACLE_POS.length;
-    var index2 = parseInt(Date.now() / Obstacle.sm.OBSTACLE_FRAME_RATE) % Obstacle.sm.OBSTACLE_FRAME_POS.length;
-    return index;
-    return index2;
-}
-
 function resize() {
     canvas.width = 800;
     canvas.height = 300;
     redraw();
 }
 
-function loadDinoImage() {
+function loadAllImages() {
     dinoImg = new Image();
     dinoImg.src = "res/image/dino_move.png";
     $("#character").attr("src", dinoImg.src);
-}
 
-function loadGroundImage() {
     groundImg = new Image();
     groundImg.src = "res/image/ground.png";
     $("#ground").attr("src", groundImg.src);
-}
 
-function loadObstacleImageSM() {
     smObstaImg = new Image();
     smObstaImg.src = "res/image/obstacle_sm.png";
+
+    scoreImg = new Image();
+    scoreImg.src = "res/image/time.png";
 }
 
 function stopRunAnimation() {
