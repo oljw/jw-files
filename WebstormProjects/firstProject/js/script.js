@@ -97,9 +97,6 @@ var Score = {
 
 function setY(element) {
     var y = (Game.CANVAS_HEIGHT/2) - element.SPRITE_HEIGHT + 100;
-    //element.POS_Y = y;
-    //return y;
-    //var y = Game.CANVAS_HEIGHT - element.SPRITE_HEIGHT - 48;
     element.POS_Y = y;
     return y;
 }
@@ -109,12 +106,6 @@ function getY(element) {
 
 $(document).ready(function() {
     console.log("Document Ready");
-
-    console.log(setY(Dino));
-    console.log(Dino.POS_Y);
-    console.log(setY(Obstacle.lg) + Obstacle.lg.SPRITE_HEIGHT);
-
-
     canvas = document.getElementById('gameScreen');
     ctx = canvas.getContext("2d");
 
@@ -152,7 +143,7 @@ function reDraw() {
     if (imageReady) {
         if(Dino.POS_Y >= 200) {
             ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT,
-                Dino.POS_X, setY(Dino), Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+                Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
         } else {
             ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X,
             Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
@@ -181,21 +172,32 @@ function reDraw() {
                     temp["posX"], setY(Obstacle.sm), Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.sm.OBSTACLE_NEW_HEIGHT);
 
                 Obstacle.sm.POS_X -= Game.GAME_SPEED;
+
+                if(Dino.POS_X < temp["posX"] + Obstacle.sm.FRAME_WIDTH &&
+                    Dino.POS_X + Dino.FRAME_WIDTH > temp["posX"] &&
+                    Dino.POS_Y < Obstacle.sm.POS_Y + Obstacle.sm.SPRITE_HEIGHT &&
+                    Dino.POS_Y + Dino.SPRITE_HEIGHT > Obstacle.sm.POS_Y) {
+
+                    window.cancelAnimationFrame(runAnim);
+                    console.log("Dead");
+                }
+
             } else {
                 //Obstacle Large
                 ctx.drawImage(lgObstaImg, Obstacle.lg.OBSTACLE_POS[obstaState], 0, Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.lg.SPRITE_HEIGHT,
                     temp["posX"], setY(Obstacle.lg), Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.lg.OBSTACLE_NEW_HEIGHT);
 
                 Obstacle.lg.POS_X -= Game.GAME_SPEED;
+
+                if(Dino.POS_X < temp["posX"] + Obstacle.lg.FRAME_WIDTH &&
+                    Dino.POS_X + Dino.FRAME_WIDTH > temp["posX"] &&
+                    Dino.POS_Y < Obstacle.lg.POS_Y + Obstacle.lg.SPRITE_HEIGHT &&
+                    Dino.POS_Y + Dino.SPRITE_HEIGHT > Obstacle.lg.POS_Y) {
+
+                    window.cancelAnimationFrame(runAnim);
+                    console.log("Dead");
+                }
             }
-        }
-
-        if(Dino.POS_X < temp["posX"] + Obstacle.sm.FRAME_WIDTH &&
-            Dino.POS_X + Dino.FRAME_WIDTH > temp["posX"] &&
-            Dino.POS_Y < setY(Obstacle.sm) + temp["posX"] &&
-            Dino.SPRITE_HEIGHT + Dino.POS_Y > setY(Obstacle.sm)) {
-
-            console.log("what");
         }
 
         //Time board
