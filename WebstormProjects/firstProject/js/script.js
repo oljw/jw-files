@@ -22,8 +22,13 @@ var jumpVelocity = 0;
 var lastObsta = 0;
 var nextObsta = 0;
 var obstaArray = [];
+var dinoCut = 7;
+var bigCut = 7;
+var smallCut = 4;
 
 var startTime = 0;
+
+var debug = false;
 
 var Game = {
     CANVAS_WIDTH: 800,
@@ -33,7 +38,13 @@ var Game = {
     INITIAL_X: 0,
     END_X: 800,
     MAX_OBSTA_ON_SCREEN: 5,
-    FPS: 60
+    FPS: 60,
+    ACCELERATE: 0.001,
+    ACCELERATE_INTERVAL_TIME: 10
+};
+Game.status = {
+    PLAYING: "PLAYING",
+    GAME_OVER: "GAMEOVER"
 };
 
 var Dino = {
@@ -43,12 +54,19 @@ var Dino = {
     RUNNING_FRAME_RATE: 100,
     RUNNING_POS: [88, 132],
     JUMP_POS: 0,
+    DEAD_POS: 176,
     JUMP_LIMIT: 100,
     JUMP_VELOCITY: jumpVelocity += 8,
     JUMP_INITIAL_VELOCITY: 8,
     JUMP_GRAVITY: 0.33,
     POS_X: 50,
     POS_Y: 200
+};
+Dino.collisionBox = {
+    POS_X: Dino.POS_X - dinoCut,
+    POS_Y: Dino.POS_Y + dinoCut,
+    FRAME_WIDTH: Dino.FRAME_WIDTH - (dinoCut * 2),
+    FRAME_HEIGHT: Dino.SPRITE_HEIGHT - (dinoCut * 2)
 };
 
 var Ground = {
@@ -95,13 +113,10 @@ var Score = {
     NUMBER_WIDTH: 20
 };
 
-function setY(element) {
+function getY(element) {
     var y = (Game.CANVAS_HEIGHT/2) - element.SPRITE_HEIGHT + 100;
     element.POS_Y = y;
     return y;
-}
-function getY(element) {
-
 }
 
 $(document).ready(function() {
@@ -134,29 +149,31 @@ $(document).ready(function() {
                 }
         }
     });
-
     startTime = Date.now();
+
+    (function raiseSpeed() {
+        Game.GAME_SPEED += Game.ACCELERATE;
+        setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
+        return Game.GAME_SPEED;
+    })();
 });
 
 function reDraw() {
-
-    var dinoCut = 7;
-
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    if (imageReady) {
-        if(Dino.POS_Y >= 200) {
-            ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT,
-                Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 
-            ctx.strokeStyle="#FF0000";
-            ctx.strokeRect(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
+    if (imageReady) {
+
+        //DINO
+        if(Dino.POS_Y >= 200) {
+            ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+
+            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
 
         } else {
-            ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X,
-            Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
-            ctx.strokeStyle="#FF0000";
-            ctx.strokeRect(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
+            ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+
+            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
         }
 
         //Ground Movement
@@ -170,9 +187,6 @@ function reDraw() {
 
         Ground.POS_X -= Game.GAME_SPEED;
 
-        var bigCut = 7;
-        var smallCut = 4;
-
         //Obstacles
         for(var obsta in obstaArray){
             var temp = obstaArray[obsta];
@@ -180,40 +194,39 @@ function reDraw() {
             if(temp["chooseOneBro"] === 0) {
                 //Obstacle Small
                 ctx.drawImage(smObstaImg, Obstacle.sm.OBSTACLE_POS[obstaState], 0, Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.sm.SPRITE_HEIGHT,
-                    temp["posX"], setY(Obstacle.sm), Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.sm.OBSTACLE_NEW_HEIGHT);
+                    temp["posX"], getY(Obstacle.sm), Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.sm.OBSTACLE_NEW_HEIGHT);
 
-                ctx.strokeStyle="#FF0000";
-                ctx.strokeRect(temp["posX"] + smallCut, setY(Obstacle.sm) + smallCut, Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState]- smallCut * 2, Obstacle.sm.OBSTACLE_NEW_HEIGHT - smallCut);
+                    var smObstaBox = new DrawBox(temp["posX"] + smallCut, getY(Obstacle.sm) + smallCut, Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState]- smallCut * 2, Obstacle.sm.OBSTACLE_NEW_HEIGHT - smallCut);
 
                 Obstacle.sm.POS_X -= Game.GAME_SPEED;
 
-                if(Dino.POS_X < temp["posX"] + Obstacle.sm.FRAME_WIDTH &&
-                    Dino.POS_X + Dino.FRAME_WIDTH > temp["posX"] &&
-                    Dino.POS_Y < Obstacle.sm.POS_Y + Obstacle.sm.SPRITE_HEIGHT &&
-                    Dino.POS_Y + Dino.SPRITE_HEIGHT > Obstacle.sm.POS_Y) {
+                if(dinoBox.x < smObstaBox.x + smObstaBox.width &&
+                    dinoBox.x + dinoBox.width > smObstaBox.x &&
+                    dinoBox.y < smObstaBox.y + smObstaBox.height &&
+                    dinoBox.y + dinoBox.height > smObstaBox.y) {
 
-                    // window.cancelAnimationFrame(runAnim);
+                    gameOver();
                     console.log("Dead");
                 }
 
             } else {
                 //Obstacle Large
                 ctx.drawImage(lgObstaImg, Obstacle.lg.OBSTACLE_POS[obstaState], 0, Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.lg.SPRITE_HEIGHT,
-                    temp["posX"], setY(Obstacle.lg), Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.lg.OBSTACLE_NEW_HEIGHT);
+                    temp["posX"], getY(Obstacle.lg), Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.lg.OBSTACLE_NEW_HEIGHT);
 
-                ctx.strokeStyle="#FF0000";
-                ctx.strokeRect(temp["posX"] + bigCut, setY(Obstacle.lg) + bigCut, Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState] - bigCut * 2, Obstacle.lg.OBSTACLE_NEW_HEIGHT - bigCut);
+                    var lgObstaBox = new DrawBox(temp["posX"] + bigCut, getY(Obstacle.lg) + bigCut, Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState] - bigCut * 2, Obstacle.lg.OBSTACLE_NEW_HEIGHT - bigCut);
 
                 Obstacle.lg.POS_X -= Game.GAME_SPEED;
 
-                if(Dino.POS_X < temp["posX"] + Obstacle.lg.FRAME_WIDTH &&
-                    Dino.POS_X + Dino.FRAME_WIDTH > temp["posX"] &&
-                    Dino.POS_Y < Obstacle.lg.POS_Y + Obstacle.lg.SPRITE_HEIGHT &&
-                    Dino.POS_Y + Dino.SPRITE_HEIGHT > Obstacle.lg.POS_Y) {
+                if(dinoBox.x < lgObstaBox.x + lgObstaBox.width &&
+                    dinoBox.x + dinoBox.width > lgObstaBox.x &&
+                    dinoBox.y < lgObstaBox.y + lgObstaBox.height &&
+                    dinoBox.y + dinoBox.height > lgObstaBox.y) {
 
-                    // window.cancelAnimationFrame(runAnim);
+                    gameOver();
                     console.log("Dead");
                 }
+
             }
         }
 
@@ -229,10 +242,10 @@ function reDraw() {
         ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
             scorePosition + 50, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
         intElapsed -= thousands * 1000;
-        var hundes = parseInt(intElapsed / 100);
-        ctx.drawImage(scoreImg, hundes * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+        var hundreds = parseInt(intElapsed / 100);
+        ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
             scorePosition + 75, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= hundes * 100;
+        intElapsed -= hundreds * 100;
         var tens = parseInt(intElapsed / 10);
         ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
             scorePosition + 100, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
@@ -281,9 +294,25 @@ function update() {
     reDraw();
 }
 
+function gameOver() {
+    window.cancelAnimationFrame(runAnim);
+    ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+}
+
 function getRunningDinoIndex() {
     var index = parseInt(Date.now() / Dino.RUNNING_FRAME_RATE) % Dino.RUNNING_POS.length;
     return index;
+}
+
+function  DrawBox(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+    debug ? ctx.strokeStyle = "#FF0000" : ctx.strokeStyle = "transparent";
+
+    box = ctx.strokeRect(x, y, w, h);
+    return box;
 }
 
 function reSize() {
