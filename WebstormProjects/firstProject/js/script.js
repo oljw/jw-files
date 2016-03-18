@@ -1,7 +1,6 @@
 /**
  * Created by JW on 3/4/2016.
  */
-
 var canvas = null;
 var dinoImg = null;
 var groundImg = null;
@@ -10,7 +9,7 @@ var lgObstaImg = null;
 var scoreImg = null;
 var ctx = null;
 var imageReady = false;
-var runAnim = false;
+var gameAnimation = false;
 var isPlaying = false;
 var scale = 1.01;
 var goingDown = false;
@@ -161,6 +160,7 @@ $(document).ready(function() {
 function reDraw() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    //console.log(Game.GAME_SPEED);
 
     if (imageReady) {
 
@@ -256,7 +256,7 @@ function reDraw() {
 }
 
 function update() {
-    runAnim = requestAnimFrame(update);
+    gameAnimation = requestAnimFrame(update);
     dinoRunningIndex = getRunningDinoIndex();
 
     if(isPlaying) {
@@ -288,14 +288,20 @@ function update() {
         );
 
         //distance between obstacles. need update these numbers to constant.
-        var obstaWidth = Math.floor((Math.random() * 2000) + 500);
+        if(Game.GAME_SPEED < 10){
+            var obstaWidth = Math.floor((Math.random() * 2000) + 500);
+        } else if(Game.GAME_SPEED > 10 && Game.GAME_SPEED < 15) {
+            var obstaWidth = Math.floor((Math.random() * 1000) + 250);
+        } else if(Game.GAME_SPEED > 15 && Game.GAME_SPEED < 20) {
+            var obstaWidth = Math.floor((Math.random() * 500) + 125);
+        }
         nextObsta = Date.now() + obstaWidth;
     }
     reDraw();
 }
 
 function gameOver() {
-    window.cancelAnimationFrame(runAnim);
+    window.cancelAnimationFrame(gameAnimation);
     ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 }
 
@@ -383,7 +389,7 @@ function imagesOnload() {
 }
 
 function stopRunAnimation() {
-    window.cancelAnimationFrame(runAnim);
+    window.cancelAnimationFrame(gameAnimation);
 }
 
 window.requestAnimFrame = (function(){
