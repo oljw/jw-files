@@ -129,14 +129,18 @@ $(document).ready(function() {
                 } else {
                     //Jump
                     if(inAir){ return }
-                    jumping = setInterval(dinoJump, 1000/Game.FPS);
+                    jumping = setInterval(dinoJump, 1000/(Game.FPS * 1.5));
                     break;
                 }
         }
     });
+
+    startTime = Date.now();
 });
 
 function reDraw() {
+
+    var dinoCut = 7;
 
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -144,9 +148,15 @@ function reDraw() {
         if(Dino.POS_Y >= 200) {
             ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT,
                 Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+
+            ctx.strokeStyle="#FF0000";
+            ctx.strokeRect(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
+
         } else {
             ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X,
             Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+            ctx.strokeStyle="#FF0000";
+            ctx.strokeRect(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
         }
 
         //Ground Movement
@@ -160,7 +170,8 @@ function reDraw() {
 
         Ground.POS_X -= Game.GAME_SPEED;
 
-
+        var bigCut = 7;
+        var smallCut = 4;
 
         //Obstacles
         for(var obsta in obstaArray){
@@ -171,6 +182,9 @@ function reDraw() {
                 ctx.drawImage(smObstaImg, Obstacle.sm.OBSTACLE_POS[obstaState], 0, Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.sm.SPRITE_HEIGHT,
                     temp["posX"], setY(Obstacle.sm), Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.sm.OBSTACLE_NEW_HEIGHT);
 
+                ctx.strokeStyle="#FF0000";
+                ctx.strokeRect(temp["posX"] + smallCut, setY(Obstacle.sm) + smallCut, Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState]- smallCut * 2, Obstacle.sm.OBSTACLE_NEW_HEIGHT - smallCut);
+
                 Obstacle.sm.POS_X -= Game.GAME_SPEED;
 
                 if(Dino.POS_X < temp["posX"] + Obstacle.sm.FRAME_WIDTH &&
@@ -178,7 +192,7 @@ function reDraw() {
                     Dino.POS_Y < Obstacle.sm.POS_Y + Obstacle.sm.SPRITE_HEIGHT &&
                     Dino.POS_Y + Dino.SPRITE_HEIGHT > Obstacle.sm.POS_Y) {
 
-                    window.cancelAnimationFrame(runAnim);
+                    // window.cancelAnimationFrame(runAnim);
                     console.log("Dead");
                 }
 
@@ -187,6 +201,9 @@ function reDraw() {
                 ctx.drawImage(lgObstaImg, Obstacle.lg.OBSTACLE_POS[obstaState], 0, Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.lg.SPRITE_HEIGHT,
                     temp["posX"], setY(Obstacle.lg), Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.lg.OBSTACLE_NEW_HEIGHT);
 
+                ctx.strokeStyle="#FF0000";
+                ctx.strokeRect(temp["posX"] + bigCut, setY(Obstacle.lg) + bigCut, Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState] - bigCut * 2, Obstacle.lg.OBSTACLE_NEW_HEIGHT - bigCut);
+
                 Obstacle.lg.POS_X -= Game.GAME_SPEED;
 
                 if(Dino.POS_X < temp["posX"] + Obstacle.lg.FRAME_WIDTH &&
@@ -194,7 +211,7 @@ function reDraw() {
                     Dino.POS_Y < Obstacle.lg.POS_Y + Obstacle.lg.SPRITE_HEIGHT &&
                     Dino.POS_Y + Dino.SPRITE_HEIGHT > Obstacle.lg.POS_Y) {
 
-                    window.cancelAnimationFrame(runAnim);
+                    // window.cancelAnimationFrame(runAnim);
                     console.log("Dead");
                 }
             }
@@ -202,10 +219,26 @@ function reDraw() {
 
         //Time board
         var elapsedTime = Date.now() - startTime;
-        var intElapsed = parseInt(elapsedTime / 100) % 10;
+        var intElapsed = parseInt(elapsedTime / 100);
         var scorePosition = 20;
+        var tenThousands = parseInt(intElapsed / 10000);
+        ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+            scorePosition + 25, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        intElapsed -= tenThousands * 10000;
+        var thousands = parseInt(intElapsed / 1000);
+        ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+            scorePosition + 50, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        intElapsed -= thousands * 1000;
+        var hundes = parseInt(intElapsed / 100);
+        ctx.drawImage(scoreImg, hundes * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+            scorePosition + 75, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        intElapsed -= hundes * 100;
+        var tens = parseInt(intElapsed / 10);
+        ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+            scorePosition + 100, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        intElapsed -= tens * 10;
         ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+            scorePosition + 125, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     }
 }
 
