@@ -10,7 +10,7 @@ var scoreImg = null;
 var ctx = null;
 var imageReady = false;
 var gameAnimation = false;
-var isPlaying = false;
+var isPlaying = true;         //Change
 var scale = 1.01;
 var goingDown = false;
 var dinoRunningIndex = 0;
@@ -30,12 +30,12 @@ var startTime = 0;
 var debug = false;
 
 var Game = {
-    CANVAS_WIDTH: 800,
-    CANVAS_HEIGHT: 300,
+    CANVAS_WIDTH: 320,
+    CANVAS_HEIGHT: 320,
     GAME_SPEED: 5,
-    INITIAL_Y: 200,
+    INITIAL_Y: 100,
     INITIAL_X: 0,
-    END_X: 800,
+    END_X: 300,
     MAX_OBSTA_ON_SCREEN: 7,
     FPS: 60,
     ACCELERATE: 0.001,
@@ -58,8 +58,8 @@ var Dino = {
     JUMP_VELOCITY: jumpVelocity += 8,
     JUMP_INITIAL_VELOCITY: 8,
     JUMP_GRAVITY: 0.34,
-    POS_X: 50,
-    POS_Y: 200
+    POS_X: 150,
+    POS_Y: 150
 };
 Dino.collisionBox = {
     POS_X: Dino.POS_X - dinoCut,
@@ -70,11 +70,11 @@ Dino.collisionBox = {
 
 var Ground = {
     SPRITE_HEIGHT: 12,
-    SPRITE_WIDTH: 1200,
+    SPRITE_WIDTH: 300,
     GROUND_NEW_WIDTH: 0,
     GROUND_NEW_HEIGHT: 0,
-    POS_X: 0,
-    POS_Y: 230
+    POS_X: 100,
+    POS_Y: 100
 };
 
 var Obstacle = {};
@@ -96,7 +96,7 @@ Obstacle.lg = {
     SPRITE_HEIGHT: 50,
     SPRITE_WIDTH: 150,
     FRAME_WIDTH: 35,
-    OBSTACLE_START_X: 1000,
+    OBSTACLE_START_X: 300,
     OBSTACLE_X_FRAME_SIZE_POS: [25, 50, 75],
     OBSTACLE_POS: [0, 25, 75],
     OBSTACLE_FRAME_RATE: 1000,
@@ -118,44 +118,76 @@ function getY(element) {
     return y;
 }
 
-$(document).ready(function() {
-    console.log("Document Ready");
-    canvas = document.getElementById('gameScreen');
-    ctx = canvas.getContext("2d");
+document.addEventListener("DOMContentLoaded", function () {
+	// executes when complete page is fully loaded, including all frames, objects and images
+	alert("Document Ready");
+	canvas = document.getElementById('gameScreen');
+	ctx = canvas.getContext("2d");
+	
+	loadAllImages();
+	imagesOnload();
+	reSize();
+	
+    canvas.addEventListener("touchstart", function(e) 
+    {
+//    	alert("touched");
+      if(inAir){ return }
 
-    $(document).keydown(function(e) {
-        console.log("Key Pressed");
+      jumping = setInterval(dinoJump, 1000/(Game.FPS * 1.5));
 
-        switch (e.keyCode) {
-            case 80 || 27:
-                console.log("Stop");
-                stopRunAnimation();
-                break;
+    }, false);
+    
+  startTime = Date.now();
 
-            case 32 || 0:
-                if(!isPlaying){
-                    console.log("Play");
-                    isPlaying = true;
-                    loadAllImages();
-                    imagesOnload();
-                    reSize();
-                    break;
-                } else {
-                    //Jump
-                    if(inAir){ return }
-                    jumping = setInterval(dinoJump, 1000/(Game.FPS * 1.5));
-                    break;
-                }
-        }
-    });
-    startTime = Date.now();
-
-    (function raiseSpeed() {
-        Game.GAME_SPEED += Game.ACCELERATE;
-        setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
-        return Game.GAME_SPEED;
-    })();
 });
+
+
+
+document.addEventListener("rotarydetent", function(ev){
+	   var direction = ev.detail.direction;
+	   /* Add behavior for detent detected event with a direction value */
+	   alert("spinned");
+	   
+	});
+
+//$(document).ready(function() {
+//    console.log("Document Ready");
+//    canvas = document.getElementById('gameScreen');
+//    ctx = canvas.getContext("2d");
+//
+//    $(document).keydown(function(e) {
+//        console.log("Key Pressed");
+//
+//        switch (e.keyCode) {
+//            case 80 || 27:
+//                console.log("Stop");
+//                stopRunAnimation();
+//                break;
+//
+//            case 32 || 0:
+//                if(!isPlaying){
+//                    console.log("Play");
+//                    isPlaying = true;
+//                    loadAllImages();
+//                    imagesOnload();
+//                    reSize();
+//                    break;
+//                } else {
+//                    //Jump
+//                    if(inAir){ return }
+//                    jumping = setInterval(dinoJump, 1000/(Game.FPS * 1.5));
+//                    break;
+//                }
+//        }
+//    });
+//    startTime = Date.now();
+
+//    (function raiseSpeed() {
+//        Game.GAME_SPEED += Game.ACCELERATE;
+//        setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
+//        return Game.GAME_SPEED;
+//    })();
+//});
 
 function reDraw() {
     ctx.fillStyle = '#ffffff';
@@ -164,17 +196,17 @@ function reDraw() {
 
     if (imageReady) {
 
-        //DINO
-        if(Dino.POS_Y >= 200) {
+//        //DINO
+//        if(Dino.POS_Y >= 200) {
             ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
-
-            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
-
-        } else {
-            ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
-
-            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
-        }
+//
+//            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
+//
+//        } else {
+//            ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+//
+//            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
+//        }
 
         //Ground Movement
         if(Ground.POS_X < 0) {
@@ -187,7 +219,7 @@ function reDraw() {
 
         Ground.POS_X -= Game.GAME_SPEED;
 
-        //Obstacles
+//        //Obstacles
         for(var obsta in obstaArray){
             var temp = obstaArray[obsta];
             var obstaState = temp["obstaState"];
@@ -199,16 +231,16 @@ function reDraw() {
                     var smObstaBox = new DrawBox(temp["posX"] + smallCut, getY(Obstacle.sm) + smallCut, Obstacle.sm.OBSTACLE_X_FRAME_SIZE_POS[obstaState]- smallCut * 2, Obstacle.sm.OBSTACLE_NEW_HEIGHT - smallCut);
 
                 Obstacle.sm.POS_X -= Game.GAME_SPEED;
-
-                if(dinoBox.x < smObstaBox.x + smObstaBox.width &&
-                    dinoBox.x + dinoBox.width > smObstaBox.x &&
-                    dinoBox.y < smObstaBox.y + smObstaBox.height &&
-                    dinoBox.y + dinoBox.height > smObstaBox.y) {
-
-                    gameOver();
-                    console.log("Dead");
-                }
-
+//
+//                if(dinoBox.x < smObstaBox.x + smObstaBox.width &&
+//                    dinoBox.x + dinoBox.width > smObstaBox.x &&
+//                    dinoBox.y < smObstaBox.y + smObstaBox.height &&
+//                    dinoBox.y + dinoBox.height > smObstaBox.y) {
+//
+//                    gameOver();
+//                    console.log("Dead");
+//                }
+//
             } else {
                 //Obstacle Large
                 ctx.drawImage(lgObstaImg, Obstacle.lg.OBSTACLE_POS[obstaState], 0, Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState], Obstacle.lg.SPRITE_HEIGHT,
@@ -217,41 +249,41 @@ function reDraw() {
                     var lgObstaBox = new DrawBox(temp["posX"] + bigCut, getY(Obstacle.lg) + bigCut, Obstacle.lg.OBSTACLE_X_FRAME_SIZE_POS[obstaState] - bigCut * 2, Obstacle.lg.OBSTACLE_NEW_HEIGHT - bigCut);
 
                 Obstacle.lg.POS_X -= Game.GAME_SPEED;
-
-                if(dinoBox.x < lgObstaBox.x + lgObstaBox.width &&
-                    dinoBox.x + dinoBox.width > lgObstaBox.x &&
-                    dinoBox.y < lgObstaBox.y + lgObstaBox.height &&
-                    dinoBox.y + dinoBox.height > lgObstaBox.y) {
-
-                    gameOver();
-                    console.log("Dead");
-                }
-
+//
+//                if(dinoBox.x < lgObstaBox.x + lgObstaBox.width &&
+//                    dinoBox.x + dinoBox.width > lgObstaBox.x &&
+//                    dinoBox.y < lgObstaBox.y + lgObstaBox.height &&
+//                    dinoBox.y + dinoBox.height > lgObstaBox.y) {
+//
+//                    gameOver();
+//                    console.log("Dead");
+//                }
+//
             }
         }
 
-        //Time board
-        var elapsedTime = Date.now() - startTime;
-        var intElapsed = parseInt(elapsedTime / 100);
-        var scorePosition = 20;
-        var tenThousands = parseInt(intElapsed / 10000);
-        ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 25, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= tenThousands * 10000;
-        var thousands = parseInt(intElapsed / 1000);
-        ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 50, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= thousands * 1000;
-        var hundreds = parseInt(intElapsed / 100);
-        ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 75, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= hundreds * 100;
-        var tens = parseInt(intElapsed / 10);
-        ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 100, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= tens * 10;
-        ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 125, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+//        //Time board
+//        var elapsedTime = Date.now() - startTime;
+//        var intElapsed = parseInt(elapsedTime / 100);
+//        var scorePosition = 20;
+//        var tenThousands = parseInt(intElapsed / 10000);
+//        ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+//            scorePosition + 25, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+//        intElapsed -= tenThousands * 10000;
+//        var thousands = parseInt(intElapsed / 1000);
+//        ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+//            scorePosition + 50, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+//        intElapsed -= thousands * 1000;
+//        var hundreds = parseInt(intElapsed / 100);
+//        ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+//            scorePosition + 75, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+//        intElapsed -= hundreds * 100;
+//        var tens = parseInt(intElapsed / 10);
+//        ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+//            scorePosition + 100, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+//        intElapsed -= tens * 10;
+//        ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+//            scorePosition + 125, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     }
 }
 
@@ -351,12 +383,12 @@ function dinoJump() {
 
 function loadAllImages() {
     dinoImg = new Image();
-    dinoImg.src = "res/image/dino_move.png";
-    $("#character").attr("src", dinoImg.src);
+    dinoImg.src = "images/dino_move.png";
+//    $("#character").attr("src", dinoImg.src);
 
     groundImg = new Image();
-    groundImg.src = "res/image/ground.png";
-    $("#ground").attr("src", groundImg.src);
+    groundImg.src = "images/ground.png";
+//    $("#ground").attr("src", groundImg.src);
 
     smObstaImg = new Image();
     smObstaImg.src = "res/image/obstacle_sm.png";
@@ -388,10 +420,6 @@ function imagesOnload() {
         Obstacle.lg.OBSTACLE_NEW_WIDTH = lgObstaImg.width * scale;
         Obstacle.lg.OBSTACLE_NEW_HEIGHT = lgObstaImg.height * scale;
     };
-}
-
-function stopRunAnimation() {
-    window.cancelAnimationFrame(gameAnimation);
 }
 
 window.requestAnimFrame = (function(){
