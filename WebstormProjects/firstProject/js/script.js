@@ -138,6 +138,7 @@ $(document).ready(function() {
                 if(!isPlaying){
                     console.log("Play");
                     isPlaying = true;
+                    startTime = Date.now();
                     loadAllImages();
                     imagesOnload();
                     reSize();
@@ -153,8 +154,6 @@ $(document).ready(function() {
                 }
         }
     });
-    startTime = Date.now();
-
     (function raiseSpeed() {
         Game.GAME_SPEED += Game.ACCELERATE;
         setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
@@ -236,27 +235,7 @@ function reDraw() {
         }
 
         //Time board
-        var elapsedTime = Date.now() - startTime;
-        var intElapsed = parseInt(elapsedTime / 100);
-        var scorePosition = 20;
-        var tenThousands = parseInt(intElapsed / 10000);
-        ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 25, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= tenThousands * 10000;
-        var thousands = parseInt(intElapsed / 1000);
-        ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 50, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= thousands * 1000;
-        var hundreds = parseInt(intElapsed / 100);
-        ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 75, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= hundreds * 100;
-        var tens = parseInt(intElapsed / 10);
-        ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 100, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= tens * 10;
-        ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-            scorePosition + 125, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        drawScoreBoard();
     }
 }
 
@@ -329,6 +308,33 @@ function DrawBox(x, y, w, h) {
     return box;
 }
 
+function drawScoreBoard() {
+    var elapsedTime = Date.now() - startTime;
+    console.log("elapsedTime: " + elapsedTime);
+    var intElapsed = parseInt(elapsedTime / 100);
+    console.log("divided by 100: " + parseInt(elapsedTime / 100));
+    var scorePosition = 20;
+    var tenThousands = parseInt(intElapsed / 10000);
+    console.log("divided by 10000: " + parseInt(intElapsed / 1000));
+    ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+        scorePosition + 25, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+    intElapsed -= tenThousands * 10000;
+    var thousands = parseInt(intElapsed / 1000);
+    ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+        scorePosition + 50, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+    intElapsed -= thousands * 1000;
+    var hundreds = parseInt(intElapsed / 100);
+    ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+        scorePosition + 75, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+    intElapsed -= hundreds * 100;
+    var tens = parseInt(intElapsed / 10);
+    ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+        scorePosition + 100, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+    intElapsed -= tens * 10;
+    ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+        scorePosition + 125, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+}
+
 function reSize() {
     canvas.width = Game.CANVAS_WIDTH;
     canvas.height = Game.CANVAS_HEIGHT;
@@ -372,6 +378,7 @@ function loadAllImages() {
 
     scoreImg = new Image();
     scoreImg.src = "res/image/time.png";
+    $("#scoreBoard").attr("src", scoreImg.src);
 }
 
 function imagesOnload() {
@@ -413,7 +420,7 @@ function stopRunAnimation() {
 }
 
 window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame       ||
+    return window.requestAnimationFrame       ||
             window.webkitRequestAnimationFrame ||
             window.mozRequestAnimationFrame    ||
             window.oRequestAnimationFrame      ||
