@@ -11,6 +11,7 @@ var ctx = null;
 var imageReady = false;
 var gameAnimation = false;
 var isPlaying = false;
+var isGameOver = false;
 var scale = 1.01;
 var goingDown = false;
 var dinoRunningIndex = 0;
@@ -33,6 +34,7 @@ var Game = {
     CANVAS_WIDTH: 800,
     CANVAS_HEIGHT: 300,
     GAME_SPEED: 5,
+    BASE_GAME_SPEED: 5,
     INITIAL_Y: 200,
     INITIAL_X: 0,
     END_X: 800,
@@ -53,11 +55,11 @@ var Dino = {
     RUNNING_FRAME_RATE: 100,
     RUNNING_POS: [88, 132],
     JUMP_POS: 0,
-    DEAD_POS: 176,
+    DEAD_POS: 220,
     JUMP_LIMIT: 100,
     JUMP_VELOCITY: jumpVelocity += 8,
     JUMP_INITIAL_VELOCITY: 8,
-    JUMP_GRAVITY: 0.34,
+    JUMP_GRAVITY: 0.33,
     POS_X: 50,
     POS_Y: 200
 };
@@ -84,12 +86,12 @@ Obstacle.sm = {
     FRAME_WIDTH: 35,
     OBSTACLE_START_X: 1000,
     OBSTACLE_X_FRAME_SIZE_POS: [17, 34, 51],
-    OBSTACLE_POS: [0, 35, 52.5],
+    OBSTACLE_POS: [0, 34, 51],
     OBSTACLE_FRAME_RATE: 1000,
     OBSTACLE_NEW_WIDTH: 0,
     OBSTACLE_NEW_HEIGHT: 0,
     POS_X: 0,
-    POS_Y: 215
+    POS_Y: 0
 };
 
 Obstacle.lg = {
@@ -140,10 +142,13 @@ $(document).ready(function() {
                     imagesOnload();
                     reSize();
                     break;
-                } else {
+                } else if(isPlaying && !isGameOver){
                     //Jump
                     if(inAir){ return }
-                    jumping = setInterval(dinoJump, 1000/(Game.FPS * 1.5));
+                    jumping = setInterval(dinoJump, 1000/(Game.FPS * 1.6));
+                    break;
+                } else if(isGameOver) {
+                    resetGame();
                     break;
                 }
         }
@@ -303,6 +308,7 @@ function update() {
 }
 
 function gameOver() {
+    isGameOver = true;
     window.cancelAnimationFrame(gameAnimation);
     ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 }
@@ -312,7 +318,7 @@ function getRunningDinoIndex() {
     return index;
 }
 
-function  DrawBox(x, y, w, h) {
+function DrawBox(x, y, w, h) {
     this.x = x;
     this.y = y;
     this.width = w;
@@ -388,6 +394,18 @@ function imagesOnload() {
         Obstacle.lg.OBSTACLE_NEW_WIDTH = lgObstaImg.width * scale;
         Obstacle.lg.OBSTACLE_NEW_HEIGHT = lgObstaImg.height * scale;
     };
+}
+
+function resetGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    startTime = Date.now();
+    Game.GAME_SPEED = Game.BASE_GAME_SPEED;
+    isPlaying = true;
+    obstaArray.splice(0, obstaArray.length);
+    loadAllImages();
+    imagesOnload();
+    reSize();
+    isGameOver = false;
 }
 
 function stopRunAnimation() {
