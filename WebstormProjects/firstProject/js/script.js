@@ -114,6 +114,17 @@ var Score = {
     NUMBER_WIDTH: 20
 };
 
+function DrawBox(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+    debug ? ctx.strokeStyle = "red" : ctx.strokeStyle = "transparent";
+
+    box = ctx.strokeRect(x, y, w, h);
+    return box;
+}
+
 function getY(element) {
     var y = (Game.CANVAS_HEIGHT/2) - element.SPRITE_HEIGHT + 100;
     element.POS_Y = y;
@@ -159,6 +170,8 @@ $(document).ready(function() {
         setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
         return Game.GAME_SPEED;
     })();
+
+    loadScore();
 });
 
 function reDraw() {
@@ -173,7 +186,6 @@ function reDraw() {
             ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 
             var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
-
         } else {
             ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 
@@ -233,7 +245,6 @@ function reDraw() {
 
             }
         }
-
         //Time board
         drawScoreBoard();
     }
@@ -290,6 +301,9 @@ function gameOver() {
     isGameOver = true;
     window.cancelAnimationFrame(gameAnimation);
     ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+
+    // TODO save it iif new highscore
+    saveScore();
 }
 
 function getRunningDinoIndex() {
@@ -297,42 +311,65 @@ function getRunningDinoIndex() {
     return index;
 }
 
-function DrawBox(x, y, w, h) {
-    this.x = x;
-    this.y = y;
-    this.width = w;
-    this.height = h;
-    debug ? ctx.strokeStyle = "red" : ctx.strokeStyle = "transparent";
-
-    box = ctx.strokeRect(x, y, w, h);
-    return box;
-}
+// TODO better name and move up?
+var score, highScore = 0;
 
 function drawScoreBoard() {
     var elapsedTime = Date.now() - startTime;
-    console.log("elapsedTime: " + elapsedTime);
-    var intElapsed = parseInt(elapsedTime / 100);
-    console.log("divided by 100: " + parseInt(elapsedTime / 100));
+    score = parseInt(elapsedTime / 100);
+
+    if (score > highScore) {
+        highScore = score;
+    }
+
+    // TODO score and highscore position Y
+    drawScore(score, 20);
+    drawScore(highScore, 250);
+
+}
+
+// TODO better name? & move around
+var HIGHSCORE_VAL_KEY = "highScoreVal";
+function saveScore() {
+    localStorage.setItem(HIGHSCORE_VAL_KEY, highScore);
+}
+
+function loadScore() {
+    highScore = localStorage.getItem(HIGHSCORE_VAL_KEY);
+    // TODO better way to check?
+    if (highScore == null) {
+        highScore = 0;
+    }
+}
+
+function drawScore(score, scorePositionY) {
+    // console.log("elapsedTime: " + score);
+    // var intElapsed = parseInt(score / 100);
+
+    var intElapsed = score;
     var scorePosition = 20;
+    //console.log("divided by 100: " + parseInt(score / 100));
+
+    
     var tenThousands = parseInt(intElapsed / 10000);
     console.log("divided by 10000: " + parseInt(intElapsed / 1000));
     ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-        scorePosition + 25, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        scorePosition + 25, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     intElapsed -= tenThousands * 10000;
     var thousands = parseInt(intElapsed / 1000);
     ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-        scorePosition + 50, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        scorePosition + 50, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     intElapsed -= thousands * 1000;
     var hundreds = parseInt(intElapsed / 100);
     ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-        scorePosition + 75, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        scorePosition + 75, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     intElapsed -= hundreds * 100;
     var tens = parseInt(intElapsed / 10);
     ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-        scorePosition + 100, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        scorePosition + 100, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     intElapsed -= tens * 10;
     ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-        scorePosition + 125, scorePosition, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        scorePosition + 125, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
 }
 
 function reSize() {
@@ -405,14 +442,14 @@ function imagesOnload() {
 
 function resetGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    startTime = Date.now();
-    Game.GAME_SPEED = Game.BASE_GAME_SPEED;
-    isPlaying = true;
     obstaArray.splice(0, obstaArray.length);
+    Game.GAME_SPEED = Game.BASE_GAME_SPEED;
+    startTime = Date.now();
+    isGameOver = false;
+    isPlaying = true;
     loadAllImages();
     imagesOnload();
     reSize();
-    isGameOver = false;
 }
 
 function stopRunAnimation() {
