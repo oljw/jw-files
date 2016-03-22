@@ -2,17 +2,21 @@
 <SignedInfo>
 <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"></CanonicalizationMethod>
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
+<Reference URI="Layer%201.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>h2R1bmxPmAxelfZBPG7JM3LGXnxbuZ0gdxAfv6NNM4w=</DigestValue>
+</Reference>
 <Reference URI="app.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>NiHIMZbEQps/vf+buVEpZIIC6oogQZRLI0ScV9FgiMk=</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>SJr/xWyp4DtnJfPhlr5qVmXQCRasQoytomrd8Ecfw7U=</DigestValue>
+<DigestValue>7em5vyeTw+TEpi2rDrAm2i4wRidpX980Z/nndy3GGPE=</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Wu2wQ0iGRoFWgPCEqwP4z15ZRhN1gVsbY1fsGJC5kss=</DigestValue>
+<DigestValue>CXwmNuovFlYOoJlr1nvW3ashL+eMbHKIGyroB25cnz4=</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -21,6 +25,10 @@
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>vPjxjOppORd6hn9Bw4sh06gqtDoJzoFbV/8e9FyIdvk=</DigestValue>
+</Reference>
+<Reference URI="images%2FLayer%201.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>3IoUvM32PvoIp+FU5EYifZVUvd9lNTLKUlwuF9YwfVw=</DigestValue>
 </Reference>
 <Reference URI="images%2Fdino_move.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -44,7 +52,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>vrV47NE+v7prf8KtVGu4D/xfKAM1MbJc2jmBeXW/dlc=</DigestValue>
+<DigestValue>zZPnZIyoWbM3o9JWtRTq7fP6ouxefe8WlwRnqbTBFDk=</DigestValue>
 </Reference>
 <Reference URI="js%2Fcircle-helper.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -52,7 +60,7 @@
 </Reference>
 <Reference URI="js%2Fscript.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>mcSNH0+k3EMrvUELbcWwPLJ1kSayefYFc7t748MsWZQ=</DigestValue>
+<DigestValue>X7aEBpr/OWCaLIhXyunggux4Z9jroUAMFns5kGfWWqo=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2FLICENSE.Flora">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -1027,11 +1035,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-XAejVEwXrRixRLu/m/O3xD4TWG2NN7v0Nj0OFMecKWUyEMDxq5+U6F3S40ieck+slrmz6ia65acm
-QvPmqgJuUyUh1cjB1c8V2Bvao1RpUc02+T9dpU/QNZCqMM49PH0VOt9zCKPruMimpbpDeMkrwV+n
-e6rVy0j2tQVZj8elCBo6wW6KBzFNmrH+4987ZFsJbGG6q0W856gkXLbaI9CF0Lyi2TWK+USiC2GS
-iN3J5XXu4fqNbU3OfOgpGXwenjgl0WHuxeX5r4AfKnelBqt/sZzHuoQASZIsmyCcsosNJzDjCbS4
-cQi/W4TuZk3YWjof4mA7RNdRZxMVpgcjbL9qiQ==
+MeF/k6et1K9qJMH4De3IBXDVS2iJC4UbxwVvlIYBLcaE+3v56ZiSYSWmscdxcSIvWBxptiuSH3F2
+mfh3kOcnSe2y4vq4mgEkF5r9/pEVVrbxVN8foVqSAHDFyyvuEv01qR+pBP3ul1X0xp+yx/57ElXY
+gsXRJgeGwf3aOr4FYjHE0AfDxfH49tr7rUcAWIK7a/RPh1xte8RHYKpdb4bCX3jBoBQD2YM/wlzP
+hd4r8Vn2a8jv6TEWGw+CKn0DHo/aj4MUAwpVLS2AudjsVB7sN2tJPDRtCYr7+hzroIm6EF+ErKpr
+QJdTtzK84OqijVWZf4yu+1JixZdBXLjb6a0Zzw==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

@@ -31,8 +31,8 @@ var debug = false;
 var Game = {
     CANVAS_WIDTH: 355,
     CANVAS_HEIGHT: 355,
-    GAME_SPEED: 4,
-    BASE_GAME_SPEED: 4,
+    GAME_SPEED: 5,
+    BASE_GAME_SPEED: 5,
     INITIAL_Y: 100,
     INITIAL_X: 0,
     END_X: 355,
@@ -115,16 +115,16 @@ var Score = {
 document.addEventListener("DOMContentLoaded", function() {
     alert("Document Ready");
     canvas = document.getElementById('gameScreen');
+    startButton = document.getElementById('startButton');
     ctx = canvas.getContext("2d");
-
+    
+    startButton.onclick = function() {
+        resetGame();
+        
+    }
+    
     canvas.addEventListener("touchstart", function(e) {
-        if (!isPlaying) {
-            isPlaying = true;
-            startTime = Date.now();
-            loadAllImages();
-            imagesOnload();
-            reSize();
-        } else if (isPlaying && !isGameOver) {
+    	if (isPlaying && !isGameOver) {
             //Jump
             if (inAir) {
                 return
@@ -135,11 +135,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, false);
 
-    (function raiseSpeed() {
-        Game.GAME_SPEED += Game.ACCELERATE;
-        setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
-        return Game.GAME_SPEED;
-    })();
+    if(isPlaying) {
+        (function raiseSpeed() {
+            Game.GAME_SPEED += Game.ACCELERATE;
+            setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
+            return Game.GAME_SPEED;
+        })();
+    }
 });
 
 document.addEventListener("rotarydetent", function(ev) {
@@ -351,9 +353,9 @@ function dinoJump() {
 }
 
 function resetGame() {
+    Game.GAME_SPEED = Game.BASE_GAME_SPEED;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     startTime = Date.now();
-    Game.GAME_SPEED = Game.BASE_GAME_SPEED;
     isPlaying = true;
     obstaArray.splice(0, obstaArray.length);
     loadAllImages();
