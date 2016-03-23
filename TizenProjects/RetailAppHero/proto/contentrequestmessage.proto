@@ -1,0 +1,6 @@
+option java_package = "com.samsung.retailexperience.commonmessaging.generated";
+option java_outer_classname = "ContentRequestMessageWrapper";
+
+message ContentRequestMessage {
+
+}

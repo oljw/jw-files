@@ -1,0 +1,623 @@
+* {
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+-webkit-tap-highlight-color: transparent;  
+}
+
+.clearfix:after {
+content: "";
+display: table;
+clear: both;
+}
+
+html{
+height:100%;
+overflow:hidden;
+}
+
+body {
+background-color:#000;
+margin: 0;
+padding: 0;
+width:360px;
+height:360px;
+overflow:hidden;
+position:relative;
+font-family: Verdana, Lucida Sans, Arial, Helvetica, sans-serif;
+}
+
+.screen {
+width: 360px;
+height: 480px;
+position: relative;
+left: 0;
+-webkit-transition-property: top, bottom, left, right;
+-webkit-transition-duration: 0.5s;
+-webkit-transition-delay: 0s;
+}
+
+#main {
+top: 0px;
+}
+
+.error {
+color:#f00;
+}
+
+.darkBackground {
+background:#111;
+}
+
+.demo {
+display:none;
+width:360px;
+height:360px;
+position:absolute;
+left:0px;
+top:0px;
+overflow:hidden;
+}
+
+.demo .chapter {
+width:360px;
+height:360px;
+position:absolute;
+left:0px;
+top:0px;
+overflow:hidden;
+}
+
+.scrollerContainer {
+position:absolute;
+left:0px;
+top:0px;
+height:360px;
+width:4000px;
+overflow:hidden;
+}
+
+.scrollerContainer img {
+float:left;
+clear:none;
+}
+
+.temporaryClass {
+padding-top:40px;
+text-align:center;
+color:#fff;
+background:#555;
+height:320px;	
+}
+
+#debugMenu {
+position:absolute;
+z-index:1000;
+top:20px;
+left:20px;
+width:300px;
+z-index:1010;
+}
+
+#debugMenu a {
+color:#f00;	
+}
+
+.menu {
+width:360px;
+height:360px;
+overflow:hidden;
+position:relative;
+background:url(../images/background.png);
+}
+
+.menu .overlay {
+width:360px;
+height:360px;
+position:absolute;
+top:0px;
+left:0px;
+background:url(../images/overlay.png);
+z-index:100;
+}
+
+.menu .overlay .arrow {
+width:180px;
+height:46px;
+position:absolute;
+top:20px;
+left:90px;
+background:url(../images/arrow.png);
+}
+
+.menu .indicatorContainer {
+position:absolute;
+left:0px;
+top:0px;
+overflow:hidden;
+width:360px;
+height:360px;
+transform: rotate(26deg);
+}
+
+.menu .indicator {
+position:absolute;
+width:16px;
+height:17px;
+background:url(../images/indicator.png);
+left:172px;
+top:82px;
+}
+
+.menu .label {
+color:#fff;
+text-align:center;
+height:20px;
+position:absolute;
+top:170px;
+width:360px;
+font-size:20px;
+}
+
+.menu .icon {
+width:70px;
+height:70px;
+overflow:hidden;
+position:absolute;
+transform: scale(.9,.9);
+opacity:0.5;
+}
+
+#fitnessDemo .menu .icon {
+opacity:0.3;
+}
+
+.menu .icon.keepOnTop, #fitnessDemo .menu .icon.keepOnTop {
+opacity:1;
+}
+
+.menu .icon.selected {
+transform: scale(1,1);	
+}
+
+.menu .moreApps {
+background:url(../images/demo_menu_icons/icon_moreapps.png);
+left:214px;
+top:24px;
+}
+
+.menu .timer {
+background:url(../images/demo_menu_icons/icon_timer.png);
+left:265px;
+top:73px;
+}
+
+#threeGDemo .menu .timer {
+background:url(../images/demo_menu_icons/icon_timer.png);
+left:286px;
+top:143px;
+}
+
+.menu .alarm {
+background:url(../images/demo_menu_icons/icon_alarm.png);
+left:265px;
+top:73px;
+}
+
+.menu .stopwatch {
+background:url(../images/demo_menu_icons/icon_stopwatch.png);
+left:286px;
+top:143px;
+}
+
+#threeGDemo .menu .stopwatch {
+background:url(../images/demo_menu_icons/icon_stopwatch.png);
+left:267px;
+top:211px;
+}
+
+.menu .gallery {
+background:url(../images/demo_menu_icons/icon_gallery.png);
+left:267px;
+top:211px;
+}
+
+.menu .buddy {
+background:url(../images/demo_menu_icons/icon_buddy.png);
+left:216px;
+top:266px;
+}
+
+.menu .email {
+background:url(../images/demo_menu_icons/icon_email.png);
+top:286px;
+left:146px;
+}
+
+.menu .milk {
+background:url(../images/demo_menu_icons/icon_milk.png);
+left:74px;
+top:266px;
+}
+
+.menu .findphone {
+background:url(../images/demo_menu_icons/icon_findphone.png);
+left:27px;
+top:211px;
+}
+
+.menu .voice {
+background:url(../images/demo_menu_icons/icon_voice.png);
+left:8px;
+top:143px;
+}
+
+#designDemo .rotateOverlay {
+width:360px;
+height:360px;
+position:absolute;
+z-index:6;
+background:url(../images/demo/design/rotate_overlay.png);
+}
+
+#designDemo .stepOverlay {
+width:360px;
+height:360px;
+position:absolute;
+z-index:3;
+background:url(../images/demo/design/step1.png);
+}
+
+#designDemo .stepOverlay.step2 {
+background:url(../images/demo/design/step2.png);
+}
+
+#designDemo .stepOverlay.step3 {
+background:url(../images/demo/design/step3.png);
+}
+
+#designDemo .stepOverlay.step4 {
+background:url(../images/demo/design/step4.png);
+}
+
+#designDemo .stepOverlay.step5 {
+background:url(../images/demo/design/step5.png);
+}
+
+#designDemo .stepOverlay.step6 {
+background:url(../images/demo/design/step6.png);
+}
+
+#designDemo .stepOverlay.step7 {
+background:url(../images/demo/design/step7.png);
+}
+
+#designDemo .stepOverlay.step8 {
+background:url(../images/demo/design/step8.png);
+}
+
+#designDemo .stepOverlay.step9 {
+background:url(../images/demo/design/step9.png);
+}
+
+#designDemo .stepOverlay.step10 {
+background:url(../images/demo/design/step10.png);
+}
+
+#designDemo .stepOverlay.step11 {
+background:url(../images/demo/design/step11.png);
+}
+
+#designDemo .styleOverlay {
+width:360px;
+height:360px;
+position:absolute;
+z-index:3;
+background:url(../images/demo/design/stylize_overlay.png);
+}
+
+#designDemo .scrollerContainer {
+z-index:2;
+}
+
+#designDemo .scrollerContainer img {
+margin-right:-110px;
+}
+
+#designDemo .background {
+width:360px;
+height:360px;
+position:absolute;
+z-index:1;
+background:url(../images/demo/design/background.png);
+}
+
+#fitnessDemo .menu .overlay, #accessDemo .menu .overlay, #accessDemo .scrollerContainer .overlay, #threeGDemo .menu .overlay {
+background:url(../images/demo/fitness/overlay.png);
+width:360px;
+height:360px;
+}
+
+#accessDemo .c6 .overlay {
+background:url(../images/demo/fitness/overlay_left.png);
+width:360px;
+height:360px;
+}
+
+#accessDemo .c4 .overlay {
+background:url(../images/demo/3g/rotateright.png);
+width:360px;
+height:360px;
+}
+
+#fitnessDemo .menu, #accessDemo .menu, #threeGDemo .menu {
+background:#000;
+}
+
+.menu .recent {
+background:url(../images/demo_menu_icons/icon_recent.png);
+left:214px;
+top:24px;
+}
+
+.menu .prev {
+background:url(../images/demo_menu_icons/icon_prev.png);
+left:214px;
+top:24px;
+}
+
+.menu .messages {
+background:url(../images/demo_menu_icons/icon_messages.png);
+left:265px;
+top:73px;
+}
+
+.menu .phone {
+background:url(../images/demo_menu_icons/icon_phone.png);
+left:286px;
+top:143px;
+}
+
+.menu .shealth {
+background:url(../images/demo_menu_icons/icon_shealth.png);
+left:267px;
+top:211px;
+}
+
+.menu .espn {
+background:url(../images/demo_menu_icons/icon_espn.png);
+left:216px;
+top:266px;
+}
+
+.menu .nike {
+background:url(../images/demo_menu_icons/icon_nike.png);
+left:216px;
+top:266px;
+}
+
+.menu .contacts {
+background:url(../images/demo_menu_icons/icon_contacts.png);
+left:216px;
+top:266px;
+}
+
+.menu .settings {
+background:url(../images/demo_menu_icons/icon_settings.png);
+top:286px;
+left:146px;
+}
+
+.menu .twitter {
+background:url(../images/demo_menu_icons/icon_twitter.png);
+top:286px;
+left:146px;
+}
+
+.menu .calendar {
+background:url(../images/demo_menu_icons/icon_calendar.png);
+left:74px;
+top:266px;
+}
+
+.menu .uber {
+background:url(../images/demo_menu_icons/icon_uber.png);
+left:74px;
+top:266px;
+}
+
+.menu .svoice {
+background:url(../images/demo_menu_icons/icon_svoice.png);
+left:27px;
+top:211px;
+}
+
+.menu .milk {
+background:url(../images/demo_menu_icons/icon_milk.png);
+left:27px;
+top:211px;
+}
+
+.menu .weather {
+background:url(../images/demo_menu_icons/icon_weather.png);
+left:8px;
+top:143px;
+}
+
+#threeGDemo .menu .buddy {
+background:url(../images/demo_menu_icons/icon_buddy.png);
+left:8px;
+top:143px;
+}
+
+.menu .next {
+background:url(../images/demo_menu_icons/icon_next.png);
+left:28px;
+top:73px;
+}
+
+.overlay {
+position:absolute;
+left:0px;
+top:0px;
+z-index:5;
+}
+
+.keepOnTop {
+z-index:1000;
+}
+
+.standaloneLabel {
+display:block!important;
+background:#000;
+color:#fff;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+z-index:1001;
+}
+
+#threeGDemo .c10 img {
+position:absolute;
+left:0px;
+top:0px;	
+}
+
+#threeGDemo .c10 .label {
+width:360px;
+height:40px;
+color:#fff;
+text-align:center;
+white-space:nowrap;
+padding-top:22px;
+font-size:20px;
+position:absolute;
+left:0px;
+top:0px;
+}
+
+#threeGDemo .c10 .menuText {
+text-align:center;
+white-space:nowrap;
+color:#999;
+width:360px;
+position:absolute;
+left:0px;
+top:100px;
+height:260px;
+font-size:22px;
+overflow:hidden;
+}
+
+#threeGDemo .c10 .menuTextContainer {
+width:360px;
+height:2000px;
+overflow:hidden;
+}
+
+#threeGDemo .c10 .menuItem {
+float:left;
+clear:left;
+height:65px;
+width:360px;
+}
+
+#threeGDemo .c10 .indicatorContainer {
+position:absolute;
+left:0px;
+top:0px;
+width:360px;
+height:360px;
+}
+
+#threeGDemo .c10 .indicatorContainer img {
+position:absolute;
+left:172px;
+top:3px;
+}
+
+.closeButton {
+width:340px;
+height:72px;
+position:absolute;
+left:10px;
+bottom:0px;
+background:url(../images/standalone/closebutton.png);
+z-index:1002;
+}
+
+.exitScreen {
+width:360px;
+height:360px;
+position:absolute;
+left:0px;
+top:0px;
+background:url(../images/standalone/leaving.png);
+z-index:1002;
+}
+
+.standaloneMenu {
+position:absolute;
+top:0px;
+left:0px;
+width:360px;
+height:360px;
+overflow:hidden;
+display:none;	
+}
+
+.menuPosition {
+background:url(../images/standalone/menudots.png);
+width:82px;
+height:14px;
+position:absolute;
+top:4px;
+left:139px;
+z-index:1000;
+}
+
+.menuPosition2 {
+background-position:0px -14px;
+}
+
+.menuPosition3 {
+background-position:0px -28px;
+}
+
+.menuPosition4 {
+background-position:0px -42px;
+}
+
+.menuPosition5 {
+background-position:0px -56px;
+}
+
+#threeGDemo .c11 img {
+position:absolute;
+left:0px;
+top:0px;
+}
+
+.attractor {
+position:absolute;
+left:0px;
+top:0px;
+width:360px;
+height:360px;	
+}
+
+.emoClick {
+width:120px;
+height:120px;
+position:absolute;
+left:120px;
+top:120px;	
+}
+
+#videoContainer {
+position:absolute;
+width:1px;
+height:1px;
+top:0px;
+left:0px;
+overflow:visible;
+z-index:10050;
+}

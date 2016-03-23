@@ -31,8 +31,8 @@ var debug = false;
 var Game = {
     CANVAS_WIDTH: 355,
     CANVAS_HEIGHT: 355,
-    GAME_SPEED: 5,
-    BASE_GAME_SPEED: 5,
+    GAME_SPEED: 4,
+    BASE_GAME_SPEED: 4,
     INITIAL_Y: 100,
     INITIAL_X: 0,
     END_X: 355,
@@ -112,15 +112,25 @@ var Score = {
     NUMBER_WIDTH: 20
 };
 
+window.addEventListener('tizenhwkey', function(e) {
+    if (e.keyName == "back") {
+//        tizen.application.getCurrentApplication().exit();
+        $.mobile.back();
+        window.cancelAnimationFrame(gameAnimation);
+
+        cleanGame();
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     alert("Document Ready");
     canvas = document.getElementById('gameScreen');
     startButton = document.getElementById('startButton');
     ctx = canvas.getContext("2d");
+    tau.event.disableGesture(canvas);
     
     startButton.onclick = function() {
         resetGame();
-        
     }
     
     canvas.addEventListener("touchstart", function(e) {
@@ -129,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (inAir) {
                 return
             }
-            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.6));
+            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
         } else if (isGameOver) {
             resetGame();
         }
@@ -142,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return Game.GAME_SPEED;
         })();
     }
+    loadScore();
 });
 
 document.addEventListener("rotarydetent", function(ev) {
@@ -162,7 +173,7 @@ document.addEventListener("rotarydetent", function(ev) {
 function reDraw() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    //console.log(Game.GAME_SPEED);
+    console.log(Game.GAME_SPEED);
 
     if (imageReady) {
         //DINO
@@ -170,7 +181,6 @@ function reDraw() {
             ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 
             var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
-
         } else {
             ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 
@@ -228,30 +238,7 @@ function reDraw() {
                 }
             }
         }
-
-        //Time Board
-        var elapsedTime = Date.now() - startTime;
-        var intElapsed = parseInt(elapsedTime / 100);
-        var scorePositionX = 355/2 - 87.5;
-        var scorePositionY = 355/6.5;
-        var tenThousands = parseInt(intElapsed / 10000);
-        ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-    		scorePositionX + 25, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= tenThousands * 10000;
-        var thousands = parseInt(intElapsed / 1000);
-        ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-    		scorePositionX + 50, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= thousands * 1000;
-        var hundreds = parseInt(intElapsed / 100);
-        ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-    		scorePositionX + 75, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= hundreds * 100;
-        var tens = parseInt(intElapsed / 10);
-        ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-    		scorePositionX + 100, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-        intElapsed -= tens * 10;
-        ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-    		scorePositionX + 125, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+        drawScoreBoard();
     }
 }
 
@@ -290,11 +277,11 @@ function update() {
         });
 
         //distance between obstacles. need update these numbers to constant.
-        if (Game.GAME_SPEED < 10) {
-            var obstaWidth = Math.floor((Math.random() * 2000) + 500);
-        } else if (Game.GAME_SPEED > 10 && Game.GAME_SPEED < 15) {
+        if (Game.GAME_SPEED < 8) {
+            var obstaWidth = Math.floor((Math.random() * 2000) + 700);
+        } else if (Game.GAME_SPEED > 8 && Game.GAME_SPEED < 13) {
             var obstaWidth = Math.floor((Math.random() * 1000) + 250);
-        } else if (Game.GAME_SPEED > 15 && Game.GAME_SPEED < 20) {
+        } else if (Game.GAME_SPEED > 13 && Game.GAME_SPEED < 20) {
             var obstaWidth = Math.floor((Math.random() * 500) + 125);
         } else {
             var obstaWidth = Math.floor((Math.random() * 250) + 62.5);
@@ -308,11 +295,73 @@ function gameOver() {
     isGameOver = true;
     window.cancelAnimationFrame(gameAnimation);
     ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+    // TODO save it if new highscore
+    saveScore();
 }
 
 function getRunningDinoIndex() {
     var index = parseInt(Date.now() / Dino.RUNNING_FRAME_RATE) % Dino.RUNNING_POS.length;
     return index;
+}
+
+var score, highScore = 0;
+
+function drawScoreBoard() {
+    var elapsedTime = Date.now() - startTime;
+    score = parseInt(elapsedTime / 100);
+
+    if (score > highScore) {
+        highScore = score;
+    }
+
+// TODO score and highscore position Y
+    drawScore(score, (355/6.5));
+    drawScore(highScore, ((355/(6.5))*5));
+
+}
+
+// TODO better name? & move around
+var HIGHSCORE_VAL_KEY = "highScoreVal";
+function saveScore() {
+    localStorage.setItem(HIGHSCORE_VAL_KEY, highScore);
+}
+
+function loadScore() {
+    highScore = localStorage.getItem(HIGHSCORE_VAL_KEY);
+    // TODO better way to check?
+    if (highScore == null) {
+        highScore = 0;
+    }
+}
+
+function drawScore(score, scorePositionY) {
+    // console.log("elapsedTime: " + score);
+    // var intElapsed = parseInt(score / 100);
+
+    var intElapsed = score;
+    var scorePositionX = 355/2 - 87.5;
+    //console.log("divided by 100: " + parseInt(score / 100));
+
+    
+//    var tenThousands = parseInt(intElapsed / 10000);
+//    console.log("divided by 10000: " + parseInt(intElapsed / 1000));
+//    ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+//		scorePositionX + 25, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+//    intElapsed -= tenThousands * 10000;
+    var thousands = parseInt(intElapsed / 1000);
+    ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+		scorePositionX + 50, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+    intElapsed -= thousands * 1000;
+    var hundreds = parseInt(intElapsed / 100);
+    ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+		scorePositionX + 75, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+    intElapsed -= hundreds * 100;
+    var tens = parseInt(intElapsed / 10);
+    ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+		scorePositionX + 100, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+    intElapsed -= tens * 10;
+    ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
+		scorePositionX + 125, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
 }
 
 function DrawBox(x, y, w, h) {
@@ -353,7 +402,7 @@ function dinoJump() {
 }
 
 function resetGame() {
-    Game.GAME_SPEED = Game.BASE_GAME_SPEED;
+    window.cancelAnimationFrame(gameAnimation);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     startTime = Date.now();
     isPlaying = true;
@@ -362,6 +411,16 @@ function resetGame() {
     imagesOnload();
     reSize();
     isGameOver = false;
+    Game.GAME_SPEED = Game.BASE_GAME_SPEED;
+}
+
+function cleanGame() {
+	if(isPlaying){return;}
+//    ctx.clearRect(0, 0, canvas.width, canvas.height);
+//    isPlaying = false;
+	Game.GAME_SPEED = null;
+	startTime = null;
+    obstaArray.splice(0, obstaArray.length);
 }
 
 function loadAllImages() {

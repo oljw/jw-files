@@ -1,0 +1,25 @@
+option java_package = "com.samsung.retailexperience.commonmessaging.generated";
+option java_outer_classname = "CommonMessageWrapper";
+
+message CommonMessage {
+    enum MessageType {
+        PEER_REQUEST = 0;
+        PEER_RESPONSE = 1;
+        PING = 2;
+        PONG = 3;
+        APPLICATION = 4;
+        DEVICE_NETWORK_STATE = 5;
+        CONNECTION = 6;
+        CONTENT_REQUESTED = 7;
+        CONTENT_RECEIVED = 8;
+        CONTENT_UPDATE_COMPLETE = 9;
+    }
+
+    required string id = 1;
+    required int64 timestamp = 2;
+    required string senderId = 3;
+    repeated string receiverId = 4;
+    optional string data = 5;
+
+    required MessageType messageType = 7;
+}

@@ -1,0 +1,63 @@
+import "changedemomessage.proto";
+import "endchaptermessage.proto";
+import "endlegalmessage.proto";
+import "enddemomessage.proto";
+import "seektoendofchaptermessage.proto";
+import "showlegalmessage.proto";
+import "startattractormessage.proto";
+import "startchaptermessage.proto";
+import "startdemomessage.proto";
+import "playdemomessage.proto";
+import "pausedemomessage.proto";
+
+import "trackevent.proto";
+import "gotosongmessage.proto";
+
+option java_package = "com.samsung.retailexperience.generated";
+option java_outer_classname = "MasterMessageWrapper";
+
+message MasterMessage {
+    enum MessageType {
+        CHANGE_DEMO = 0;
+        END_CHAPTER = 1;
+        END_DEMO = 2;
+        SEEK_TO_END_OF_CHAPTER = 3;
+        SHOW_LEGAL = 4;
+        START_ATTRACTOR = 5;
+        START_CHAPTER = 6;
+        START_DEMO = 7;
+        PLAY_DEMO = 8;
+        PAUSE_DEMO = 9;
+        MILK_ADD_GENRE = 10;
+        END_LEGAL = 11;
+        TRACK_EVENT = 12;
+        GOTO_SONG = 13;
+    }
+    enum DemoValue {
+        ATTRACTOR = 0;
+        DESIGN = 1;
+        ACCESS = 2;
+        THREEG = 3;
+        FITNESS = 4;
+        BATTERY = 5;
+        HOME = 6;
+    }
+
+    required MessageType messageType = 1;
+    optional DemoValue demoValue = 2;
+    optional string groupId = 3;
+
+   	optional ChangeDemoMessage changeDemoMessage = 4;
+   	optional EndChapterMessage endChapterMessage = 5;
+   	optional EndDemoMessage endDemoMessage = 6;
+   	optional SeekToEndOfChapterMessage seekToEndOfChapterMessage = 7;
+   	optional ShowLegalMessage showLegalMessage = 8;
+   	optional StartAttractorMessage startAttractorMessage = 9;
+   	optional StartChapterMessage startChapterMessage = 10;
+   	optional StartDemoMessage startDemoMessage = 11;
+   	optional PlayDemoMessage playDemoMessage = 12;
+   	optional PauseDemoMessage pauseDemoMessage = 13;
+   	optional EndLegalMessage endLegalMessage = 14;
+    optional TrackEventMessage trackEventMessage = 15;
+    optional GotoSongMessage gotoSongMessage = 16;
+}

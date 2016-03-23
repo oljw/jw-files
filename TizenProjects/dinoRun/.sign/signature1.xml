@@ -8,19 +8,19 @@
 </Reference>
 <Reference URI="app.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>NiHIMZbEQps/vf+buVEpZIIC6oogQZRLI0ScV9FgiMk=</DigestValue>
+<DigestValue>A3y8xFXYyGGS8gxJqObEK7ifC35IOPBgFgFUEadj56k=</DigestValue>
 </Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>7em5vyeTw+TEpi2rDrAm2i4wRidpX980Z/nndy3GGPE=</DigestValue>
+<DigestValue>MNtBK+P/QUsOPx8tCcWEusc5Sl7DXRQ9aYne5nLN110=</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CXwmNuovFlYOoJlr1nvW3ashL+eMbHKIGyroB25cnz4=</DigestValue>
+<DigestValue>QGy/XwqvK2aehEFE1irBgtmDUFEMBrCbXwFhgApgvLs=</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>n8U9lFGUdBAbAC5jEPimwSE0GOychOADAVNuhg8aMeY=</DigestValue>
+<DigestValue>knWxSBZlpjYso2FaiU0BveX+7tpR5tI7JWVdqAYXDD0=</DigestValue>
 </Reference>
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -52,31 +52,31 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>zZPnZIyoWbM3o9JWtRTq7fP6ouxefe8WlwRnqbTBFDk=</DigestValue>
+<DigestValue>Ph3ma9k3MLXGFf5IcwpnrQHJKTIINcHnK2v1YCYVJcE=</DigestValue>
 </Reference>
 <Reference URI="js%2Fcircle-helper.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Tx8HYx/0EDXBiyv3fp+dOgBWFmU+QpaaQZ2KKbc0nqU=</DigestValue>
+<DigestValue>seCHptc/27eSqY8KE5wz+S1vlKSkRjwHFmCPL94niDY=</DigestValue>
 </Reference>
 <Reference URI="js%2Fscript.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>X7aEBpr/OWCaLIhXyunggux4Z9jroUAMFns5kGfWWqo=</DigestValue>
+<DigestValue>97Wk1myCwhaR2Ow1RDn1OBgChdH4DH3tiVIQObUvHo8=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2FLICENSE.Flora">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>R4988xI3tkQMAcLGLOROY5Wp8YTDrI0X90uMvrydtQw=</DigestValue>
+<DigestValue>tuCd6gBbAOSeCefRp0udBM9rye3cF8cWFoKm2O1yYiI=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2FVERSION">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>A9tYVT8IJsInvraR7SEEnfIy/WMucrA11LAe7pASoX8=</DigestValue>
+<DigestValue>PSzpDStFov/5J1eaiSlx2FY365YOaIipgFb/Myt9Nr0=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Fjs%2Ftau.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>a+WZm0xQ7Tzkmm+8fTo77YSFUX0j7qFJCyoZy0EFFdQ=</DigestValue>
+<DigestValue>5GAdm+NLB8LJC3sp2ypMZKCwXBRV4HBJmPzqWurKKfA=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Fjs%2Ftau.min.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CpLL1Q4ftgbnM+41uvRx5bU1fjluVbFXq/bevObReAY=</DigestValue>
+<DigestValue>bOVudO+HUoIGvsC9ZKPgIB3X60kDXUQyOTqjfech5Kg=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fblue%2Fimages%2FActionbar%2Fb_more_option.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -296,11 +296,11 @@
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fblue%2Ftau.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>XLZ6/ACQVSnMlzi0fdWwBWqTolwdZdbjO1XSTUoEdRE=</DigestValue>
+<DigestValue>7wsZVaH8VxEqd45bMNxlPrsJqIQsg+3PbnV0g1CDO9g=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fblue%2Ftau.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>AHVqVYCRKDSeU5/uBumR3Qqr6r/9PoHsxNoMrGEDth4=</DigestValue>
+<DigestValue>A9Ph5Efh8BYkjQeItNIWS5Ke1sp35Zf3rKhSquagm/M=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fbrown%2Fimages%2FActionbar%2Fb_more_option.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -520,11 +520,11 @@
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fbrown%2Ftau.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>gdgc8iz2nxYOnLGEEkCkWRxGBBoe6mT9JE0z9JhqVbA=</DigestValue>
+<DigestValue>XI+KTgcKXFbpKRBIneVEjhO9Ot1pJw6YjJc+nrB6q8U=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fbrown%2Ftau.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GadzZXbAeqJ6mBi+8E3NLM+0cVTibVXwZdeQiHjG4xo=</DigestValue>
+<DigestValue>uHwZeOBfLKp0icuCWaYHU68CDbO4FRt2wGEooOPy9u8=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fchangeable%2Fimages%2FActionbar%2Fb_more_option.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -744,7 +744,7 @@
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fchangeable%2Ftau.circle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ELRJcVZGP2TOwlPUxO+l+xJbniAEjgFKe7bouBb8Ap4=</DigestValue>
+<DigestValue>t3qrbYEcyoh1h1f2+zAmdsvPCLhQ5WTFcXxqepTyUaw=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fchangeable%2Ftau.circle.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -756,15 +756,15 @@
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fchangeable%2Ftau.circle.template">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>WP0Df+XhatxB3Jmf0NpxVYBRJb7bXXw4eBJ/DTkyous=</DigestValue>
+<DigestValue>ufXA+R41jNzoVQUDG9kugz4XfVs5YMPibLiShUUT1n8=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fchangeable%2Ftau.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>XLZ6/ACQVSnMlzi0fdWwBWqTolwdZdbjO1XSTUoEdRE=</DigestValue>
+<DigestValue>7wsZVaH8VxEqd45bMNxlPrsJqIQsg+3PbnV0g1CDO9g=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fchangeable%2Ftau.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>AHVqVYCRKDSeU5/uBumR3Qqr6r/9PoHsxNoMrGEDth4=</DigestValue>
+<DigestValue>A9Ph5Efh8BYkjQeItNIWS5Ke1sp35Zf3rKhSquagm/M=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fchangeable%2Ftau.min.template">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -772,7 +772,7 @@
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fchangeable%2Ftau.template">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6oRuYL9SoPXMgqXskPC2XyffCV4qhg2Y5YjJINbGXCY=</DigestValue>
+<DigestValue>zQNc8l11pE/DirqdHO6egJ7RnFcTMLY2dT4aOkWbeIs=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fdefault%2Fimages%2FActionbar%2Fb_more_option.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -992,7 +992,7 @@
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fdefault%2Ftau.circle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ELRJcVZGP2TOwlPUxO+l+xJbniAEjgFKe7bouBb8Ap4=</DigestValue>
+<DigestValue>t3qrbYEcyoh1h1f2+zAmdsvPCLhQ5WTFcXxqepTyUaw=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fdefault%2Ftau.circle.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -1004,15 +1004,15 @@
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fdefault%2Ftau.circle.template">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>WP0Df+XhatxB3Jmf0NpxVYBRJb7bXXw4eBJ/DTkyous=</DigestValue>
+<DigestValue>ufXA+R41jNzoVQUDG9kugz4XfVs5YMPibLiShUUT1n8=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fdefault%2Ftau.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>XLZ6/ACQVSnMlzi0fdWwBWqTolwdZdbjO1XSTUoEdRE=</DigestValue>
+<DigestValue>7wsZVaH8VxEqd45bMNxlPrsJqIQsg+3PbnV0g1CDO9g=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fdefault%2Ftau.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>AHVqVYCRKDSeU5/uBumR3Qqr6r/9PoHsxNoMrGEDth4=</DigestValue>
+<DigestValue>A9Ph5Efh8BYkjQeItNIWS5Ke1sp35Zf3rKhSquagm/M=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fdefault%2Ftau.min.template">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -1020,11 +1020,11 @@
 </Reference>
 <Reference URI="lib%2Ftau%2Fwearable%2Ftheme%2Fdefault%2Ftau.template">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6oRuYL9SoPXMgqXskPC2XyffCV4qhg2Y5YjJINbGXCY=</DigestValue>
+<DigestValue>zQNc8l11pE/DirqdHO6egJ7RnFcTMLY2dT4aOkWbeIs=</DigestValue>
 </Reference>
 <Reference URI="lowBatteryCheck.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Vy4eAkGG3Qll16lg9iCNddEVsO6NSreHf9R1125fpwk=</DigestValue>
+<DigestValue>SBy21QGrzEgX4g1iEo8CDXC0v76ZZcfYgacfHbDtZmM=</DigestValue>
 </Reference>
 <Reference URI="#prop">
 <Transforms>
@@ -1035,11 +1035,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-MeF/k6et1K9qJMH4De3IBXDVS2iJC4UbxwVvlIYBLcaE+3v56ZiSYSWmscdxcSIvWBxptiuSH3F2
-mfh3kOcnSe2y4vq4mgEkF5r9/pEVVrbxVN8foVqSAHDFyyvuEv01qR+pBP3ul1X0xp+yx/57ElXY
-gsXRJgeGwf3aOr4FYjHE0AfDxfH49tr7rUcAWIK7a/RPh1xte8RHYKpdb4bCX3jBoBQD2YM/wlzP
-hd4r8Vn2a8jv6TEWGw+CKn0DHo/aj4MUAwpVLS2AudjsVB7sN2tJPDRtCYr7+hzroIm6EF+ErKpr
-QJdTtzK84OqijVWZf4yu+1JixZdBXLjb6a0Zzw==
+k78APHNbNowIBTxk3nsOFUVvny8IPYXw9oNXrKGpBWWsCIEotEE4PHUqAj0KKIwMU9B5M4ACKNqX
+Mxp+uQQA5brxVwiAKQgggSx1xRsRBeA6OpzQdzK8zrHOaAxK24uwg01vYf2CxZ5bYlkCZofTLPYy
+lnZK74si0fLHQLksxw/NgU+zKA2l8mkDvwCsTRc4glCIYgeBVyaoRfzno/qqFab3jHOx4/h2zxWq
+Mj3odRu5Syc7+4o82YMwT1Z4B6K6s08YAhk1IzpXHW4JqTsUE29zp6b0S/Lz8/fGb5chNWj+zFRG
+8fPRyDriU94ZhNpsfvSLq+tvlkaTzU2GOTKHKg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
@@ -1047,20 +1047,20 @@ QJdTtzK84OqijVWZf4yu+1JixZdBXLjb6a0Zzw==
 MIIDoTCCAomgAwIBAgIBZTANBgkqhkiG9w0BAQsFADCBnjELMAkGA1UEBhMCS1IxFDASBgNVBAgM
 C1NvdXRoIEtvcmVhMQ4wDAYDVQQHDAVTdXdvbjEmMCQGA1UECgwdU2Ftc3VuZyBFbGVjdHJvbmlj
 cyBDby4sIEx0ZC4xDzANBgNVBAsMBk1vYmlsZTEwMC4GA1UEAwwnU2Ftc3VuZyBUaXplbiBERVZF
-TE9QRVIgUHVibGljIENBIENsYXNzMB4XDTE2MDMyMDA2NDI1M1oXDTE3MDMyMDA2NDI1M1owbTER
+TE9QRVIgUHVibGljIENBIENsYXNzMB4XDTE2MDIxNTIxNDg1NVoXDTE3MDIxNDIxNDg1NVowbTER
 MA8GA1UEAwwIVGl6ZW5TREsxCTAHBgNVBAsMADEJMAcGA1UECgwAMQkwBwYDVQQHDAAxCTAHBgNV
 BAgMADEJMAcGA1UEBhMAMSEwHwYJKoZIhvcNAQkBFhJvbGphZXdvb0BnbWFpbC5jb20wggEiMA0G
-CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCFtZP2aS/xs5JioPjx/WJicqiFhyJ+h5ipBKBL+3t9
-tVhtSFnrg+8Ny7RtwDI/CgRIIx8GopJT25o7c8mV0zmlmCGlRnUcF8nuvOPSeXbYa1eoDCX0FUQP
-tHDq24is04wrlET2oKs886gKqE4hVQZ2uyXwdJ1MmqMplAYBYfdodZBSfYc2+MXXPYWc5Uddb19n
-0gCg7fzNq/MwnVpG31rsOCzUTs15oOa87/7OWEOHy8arDMOMcJYTj4wRgIgOGhH2GvS8bsIqVDgt
-OlVaWXuZZHMNLYlenPtx4E53Bw1LOmFhGPLSJ13o4s06+7PPrANPdkagDAza2j3cMgrmb31tAgMB
-AAGjGjAYMAkGA1UdEwQCMAAwCwYDVR0PBAQDAgeAMA0GCSqGSIb3DQEBCwUAA4IBAQAgSzuknkc8
-hmZhWzGz+CMp3YuZtr3TE7aQDYY+yJ0kiU6XkyQ0ghvUizMOZr2F5DmMYjK64wJjcQPe4TUWbpSA
-c3MqekIHwE/ZEwA7zz7E68r1ESTmE0JJrmARL/9+dwA1YMmoujvPV4BBT4AnThkSWn729AJkWZcc
-LMPsAUtXZIXjx0VrE8oEA3HenPxA2BONNGljR6ZiPh0udARWeq/0MUjuJV2x1764dhNcRYHf7y+N
-czJ6uvg+KeYXQt/nDU/Jbidie1f6d/iaaS9DpkAR5UzqV+pGiG5M6LIYi2xJOjiRVTYosdvSI9sD
-GI02BXSPW7x5TutyLSPAELyRXCyr
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDA3utoMJCs8wXImwZUJ5JYBA0frfbN2SoIUQX2NyBL
+aN6xwvaUwwYeXs6eiJqwzRl8puXFHugBmfueCHLhWJ39F+RBq+qqVH+tsGCijeK/HrspMiM5809w
+sGf/xfuVNyHBeVq4PijuHd68uqjp08z3XvnBXD65bUnc8OaDOfTi9Bo7PBi7ImZ/sCJ4EgBLWviA
+8NghoiJmV6FRJnMdcXGmnnPHPaUJBnONU+DonkMgGQCvxU9N9xJPVbP5OiTosc1YaZZYzhwcRORf
+4/UJgtI7Z5Gh4NqSc5TB8Wj81MQv27yHQQszW0MEOLmUW8HRfF7xlQYaam4FEUtL4xTy3r4DAgMB
+AAGjGjAYMAkGA1UdEwQCMAAwCwYDVR0PBAQDAgeAMA0GCSqGSIb3DQEBCwUAA4IBAQA6EAXrae4X
+91Ba1vi2FCb4ojwHhdPQR9kFY96JkfVA2FUCPz5vVZsoYvoHX6SA4kOAALf8VzidI8SsCj8ZE1xK
+k5aXH9r6LrXW9KHgsDdQsuMswsd4LspxQcDcIQb51ZbqhVg/CxBc+6ioME4XXC7kZNZb5bMwIuMC
+Lj3G0NtzJq2ECGR7QYNeRud/E123NiNG6UGnPlBpFqKDJHod9ExB9VGU/9eebZxRg+c8hSN4qvpW
+sNnDGy3xVL2M60edHvbQeh6M8W/YW9h4laInbSBIE+RNNeCY2ws8DIDIm8axBy2h6w8CJ57DfUfi
+dcM6bGRxUOR7e5aohOAK/QTBip8K
 </X509Certificate>
 <X509Certificate>
 MIIDuzCCAqOgAwIBAgICL+cwDQYJKoZIhvcNAQELBQAwgY8xCzAJBgNVBAYTAktSMRQwEgYDVQQI

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Tizen Wearable Web Basic Template" />
+
+    <title>Tizen Wearable Web Basic Application</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <div class="video-page" id="main">
+        <div class="contents">
+            <video id="v1" width="360" height="360" autoplay>
+            	<source src="raw/battery_charge.mp4" type="video/mp4">
+            </video>
+        </div>
+	</div>
+	<div class="video-page" id="secondpg">
+	    <video id="v2" width="360" height="360">            	
+          	<source src="raw/rotate.mp4" type="video/mp4">
+        </video> 
+	</div>   
+	<div class="ui-page" id="thirdpg">
+	    <video id="v2" width="360" height="360">            	
+          	<source src="raw/battery_charge_stand.mp4" type="video/mp4">
+        </video> 
+	</div> 
+	<div class="ui-page" id="fourthpg">
+	    <video id="v2" width="360" height="360">            	
+          	<source src="raw/espn.mp4" type="video/mp4">
+        </video> 
+	</div> 
+	<div class="ui-page" id="fifthpg">
+	    <video id="v2" width="360" height="360">            	
+          	<source src="raw/fitness_rotate.mp4" type="video/mp4">
+        </video> 
+	</div> 
+	<script>	
+       	video1 = document.getElementById("v1");
+       	video2 = document.getElementById("v2");
+        video1.addEventListener("ended", function () {
+        window.location = '#secondpg';
+        $("#v2").play();
+        }, false);
+    </script>
+	<script src="js/util/VideoControl.js"></script>
+</body>
+
+</html>
