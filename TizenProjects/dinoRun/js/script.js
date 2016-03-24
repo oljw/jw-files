@@ -30,7 +30,7 @@ var score = 0;
 var highScore = 0;
 
 
-var debug = true;
+var debug = false;
 
 var Game = {
     CANVAS_WIDTH: 360,
@@ -42,7 +42,7 @@ var Game = {
     END_X: 360,
     MAX_OBSTA_ON_SCREEN: 4,
     FPS: 60,
-    ACCELERATE: 0.001,
+    ACCELERATE: 0.0002,
     ACCELERATE_INTERVAL_TIME: 10
 };
 Game.status = {
@@ -79,7 +79,7 @@ var Ground = {
     GROUND_NEW_WIDTH: 0,
     GROUND_NEW_HEIGHT: 0,
     POS_X: 360,
-    POS_Y: 195
+    POS_Y: 200
 };
 
 var Obstacle = {};
@@ -117,7 +117,7 @@ var Score = {
 	HI_TEXT_X_POS: 101.5,
 	HI_TEXT_Y_POS: 35.5,
 	HI_TEXT_WIDTH: 40,
-	HI_TEXT_IMG_POS: 200,
+	HI_TEXT_IMG_POS: 198,
 	HIGH_SCORE_X_POS: 155.5,
 	HIGH_SCORE_Y_POS: 35.5,
 	SCORE_X_POS: 133.5,
@@ -173,20 +173,11 @@ document.addEventListener("rotarydetent", function(ev) {
 });
 
 function reDraw() {
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = '#99ccff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     if (imageReady) {
-        //DINO
-        if (Dino.POS_Y >= 150) {
-            ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 
-            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
-        } else {
-            ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
-
-            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
-        }
 
         //Ground Movement
         if (Ground.POS_X < 0) {
@@ -199,6 +190,17 @@ function reDraw() {
 
         Ground.POS_X -= Game.GAME_SPEED;
 
+        //DINO
+        if (Dino.POS_Y >= 150) {
+            ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+
+            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
+        } else {
+            ctx.drawImage(dinoImg, Dino.JUMP_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+
+            var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
+        }
+        
         //Obstacles
         for (var obsta in obstaArray) {
             var temp = obstaArray[obsta];
@@ -239,6 +241,8 @@ function reDraw() {
                 }
             }
         }
+
+        
         drawScoreBoard();
     }
 }
@@ -297,8 +301,8 @@ function gameOver() {
     window.cancelAnimationFrame(gameAnimation);
     
     //game over text TODO Change it smaller
-    ctx.drawImage(scoreImg, 0, 24, 203, Score.SPRITE_HEIGHT,
-    		80, 230, 203, Score.SPRITE_HEIGHT);
+    ctx.drawImage(scoreImg, 0, 24, 206, Score.SPRITE_HEIGHT,
+    		80, 230, 206, Score.SPRITE_HEIGHT);
     
     //dead dino face
     ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, 
@@ -440,14 +444,17 @@ function loadAllImages() {
 }
 
 function imagesOnload() {
+	
+    groundImg.onload = function() {
+        imageReady = true;
+
+        Ground.GROUND_NEW_WIDTH = groundImg.width * scale;
+        Ground.GROUND_NEW_HEIGHT = groundImg.height * scale;
+    };
+    
     dinoImg.onload = function() {
         imageReady = true;
         setTimeout(update, 1000 / Game.FPS);
-    };
-
-    groundImg.onload = function() {
-        Ground.GROUND_NEW_WIDTH = groundImg.width * scale;
-        Ground.GROUND_NEW_HEIGHT = groundImg.height * scale;
     };
 
     smObstaImg.onload = function() {

@@ -3,7 +3,7 @@
     <tizen:application id="Lr6aEj8uc5.dinoRun" package="Lr6aEj8uc5" required_version="2.3.1"/>
     <content src="index.html"/>
     <feature name="http://tizen.org/feature/screen.size.normal"/>
-    <icon src="Layer 1.png" height="117" width="117"/>
+    <icon src="icon.png" height="117" width="117"/>
     <name>dinoRun</name>
     <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:profile name="wearable"/>
