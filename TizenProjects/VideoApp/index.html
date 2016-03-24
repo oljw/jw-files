@@ -11,18 +11,18 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script type="text/javascript" src="js/util/jquery-2.1.1.min.js"></script>
     <script src="js/main.js"></script>
-   	<script src="js/util/VideoControl.js"></script>
+   	<script src="js/util/VideoController.js"></script>
+   	<script type="text/javascript" src="js/script.js"></script>
 </head>
 
 <body>
-    <div class="video-page" id="main">
-        <div class="contents">
-            <video id="v1" width="360" height="360" autoplay>
-            	<source src="raw/battery_charge.mp4" type="video/mp4">
-            </video>
-        </div>
+
+<!--     <div class="ui-page" id="main">
+        <video id="v1" width="360" height="360" autoplay>
+        	<source src="raw/battery_charge.mp4" type="video/mp4">
+        </video>
 	</div>
-	<div class="video-page" id="secondpg">
+	<div class="ui-page" id="secondpg">
 	    <video id="v2" width="360" height="360">            	
           	<source src="raw/rotate.mp4" type="video/mp4">
         </video> 
@@ -41,43 +41,7 @@
 	    <video id="v5" width="360" height="360">            	
           	<source src="raw/fitness_rotate.mp4" type="video/mp4">
         </video> 
-	</div> 
-	<script>	
-		$(document).ready(function() {
-		});
-        
-       	video1 = document.getElementById("v1");
-       	video2 = document.getElementById("v2");
-       	video3 = document.getElementById("v3");
-       	video4 = document.getElementById("v4");
-       	video5 = document.getElementById("v5");
-        video1.addEventListener("ended", function () {
-	        window.location = '#secondpg';
-	        video2.play();
-	        
-        }, false);
-        video2.addEventListener("ended", function () {
-	        window.location = '#thirdpg';
-	        video3.play();
-	        
-        }, false);
-        video3.addEventListener("ended", function () {
-	        window.location = '#fourthpg';
-	        video4.play();
-	        
-        }, false);
-        video4.addEventListener("ended", function () {
-	        window.location = '#fifthpg';
-	        video5.play();
-	        
-        }, false);
-        video5.addEventListener("ended", function () {
-            tizen.application.getCurrentApplication().exit();
-	 
-        }, false);
-        
-        
-    </script>
+	</div>  -->
 </body>
 
 </html>

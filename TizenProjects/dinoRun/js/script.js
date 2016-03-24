@@ -8,34 +8,38 @@ var smObstaImg = null;
 var lgObstaImg = null;
 var scoreImg = null;
 var ctx = null;
+var jumping = null;
 var imageReady = false;
 var gameAnimation = false;
 var isPlaying = false;
 var isGameOver = false;
-var scale = 1.01;
 var goingDown = false;
+var inAir = false;
+var obstaArray = [];
+var scale = 1.01;
 var dinoRunningIndex = 0;
 var obstacleIndex = 0;
-var jumping = null;
-var inAir = false;
 var jumpVelocity = 0;
 var lastObsta = 0;
 var nextObsta = 0;
-var obstaArray = [];
 var dinoCut = 7;
 var bigCut = 7;
 var smallCut = 4;
 var startTime = 0;
-var debug = false;
+var score = 0;
+var highScore = 0;
+
+
+var debug = true;
 
 var Game = {
-    CANVAS_WIDTH: 355,
-    CANVAS_HEIGHT: 355,
-    GAME_SPEED: 4,
-    BASE_GAME_SPEED: 4,
+    CANVAS_WIDTH: 360,
+    CANVAS_HEIGHT: 360,
+    GAME_SPEED: 3,
+    BASE_GAME_SPEED: 3,
     INITIAL_Y: 100,
     INITIAL_X: 0,
-    END_X: 355,
+    END_X: 360,
     MAX_OBSTA_ON_SCREEN: 4,
     FPS: 60,
     ACCELERATE: 0.001,
@@ -54,12 +58,13 @@ var Dino = {
     RUNNING_POS: [88, 132],
     JUMP_POS: 0,
     DEAD_POS: 220,
-    JUMP_LIMIT: 50,
+    JUMP_LIMIT: 65,
     JUMP_VELOCITY: jumpVelocity += 8,
     JUMP_INITIAL_VELOCITY: 8,
     JUMP_GRAVITY: 0.33,
+    INITIAL_POS_Y: 165,
     POS_X: 20,
-    POS_Y: 150
+    POS_Y: 165
 };
 Dino.collisionBox = {
     POS_X: Dino.POS_X - dinoCut,
@@ -73,8 +78,8 @@ var Ground = {
     SPRITE_WIDTH: 300,
     GROUND_NEW_WIDTH: 0,
     GROUND_NEW_HEIGHT: 0,
-    POS_X: 355,
-    POS_Y: 180
+    POS_X: 360,
+    POS_Y: 195
 };
 
 var Obstacle = {};
@@ -82,9 +87,23 @@ Obstacle.sm = {
     SPRITE_HEIGHT: 35,
     SPRITE_WIDTH: 102,
     FRAME_WIDTH: 35,
-    OBSTACLE_START_X: 355,
+    OBSTACLE_START_X: 360,
     OBSTACLE_X_FRAME_SIZE_POS: [17, 34, 51],
     OBSTACLE_POS: [0, 34, 51],
+    OBSTACLE_FRAME_RATE: 1000,
+    OBSTACLE_NEW_WIDTH: 0,
+    OBSTACLE_NEW_HEIGHT: 0,
+    POS_X: 0,
+    POS_Y: 177
+};
+
+Obstacle.lg = {
+    SPRITE_HEIGHT: 50,
+    SPRITE_WIDTH: 150,
+    FRAME_WIDTH: 35,
+    OBSTACLE_START_X: 360,
+    OBSTACLE_X_FRAME_SIZE_POS: [25, 50, 75],
+    OBSTACLE_POS: [0, 25, 75],
     OBSTACLE_FRAME_RATE: 1000,
     OBSTACLE_NEW_WIDTH: 0,
     OBSTACLE_NEW_HEIGHT: 0,
@@ -92,29 +111,23 @@ Obstacle.sm = {
     POS_Y: 162
 };
 
-Obstacle.lg = {
-    SPRITE_HEIGHT: 50,
-    SPRITE_WIDTH: 150,
-    FRAME_WIDTH: 35,
-    OBSTACLE_START_X: 355,
-    OBSTACLE_X_FRAME_SIZE_POS: [25, 50, 75],
-    OBSTACLE_POS: [0, 25, 75],
-    OBSTACLE_FRAME_RATE: 1000,
-    OBSTACLE_NEW_WIDTH: 0,
-    OBSTACLE_NEW_HEIGHT: 0,
-    POS_X: 0,
-    POS_Y: 147
-};
-
 var Score = {
-    SPRITE_HEIGHT: 21,
-    SPRITE_WIDTH: 3000, // update
-    NUMBER_WIDTH: 20
+	SPRITE_HEIGHT: 24,
+	SPRITE_WIDTH: 382,
+	HI_TEXT_X_POS: 101.5,
+	HI_TEXT_Y_POS: 35.5,
+	HI_TEXT_WIDTH: 40,
+	HI_TEXT_IMG_POS: 200,
+	HIGH_SCORE_X_POS: 155.5,
+	HIGH_SCORE_Y_POS: 35.5,
+	SCORE_X_POS: 133.5,
+	SCORE_Y_POS: 71,
+	NUMBER_WIDTH: 20,
+	HIGHSCORE_VAL_KEY : "highScoreVal"
 };
 
 window.addEventListener('tizenhwkey', function(e) {
     if (e.keyName == "back") {
-//        tizen.application.getCurrentApplication().exit();
         $.mobile.back();
         window.cancelAnimationFrame(gameAnimation);
 
@@ -123,7 +136,6 @@ window.addEventListener('tizenhwkey', function(e) {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    alert("Document Ready");
     canvas = document.getElementById('gameScreen');
     startButton = document.getElementById('startButton');
     ctx = canvas.getContext("2d");
@@ -136,22 +148,12 @@ document.addEventListener("DOMContentLoaded", function() {
     canvas.addEventListener("touchstart", function(e) {
     	if (isPlaying && !isGameOver) {
             //Jump
-            if (inAir) {
-                return
-            }
+            if (inAir) {return;}
             jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
         } else if (isGameOver) {
             resetGame();
         }
     }, false);
-
-    if(isPlaying) {
-        (function raiseSpeed() {
-            Game.GAME_SPEED += Game.ACCELERATE;
-            setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
-            return Game.GAME_SPEED;
-        })();
-    }
     loadScore();
 });
 
@@ -173,7 +175,6 @@ document.addEventListener("rotarydetent", function(ev) {
 function reDraw() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    console.log(Game.GAME_SPEED);
 
     if (imageReady) {
         //DINO
@@ -251,7 +252,7 @@ function update() {
             var temp = obstaArray[obsta];
             temp["posX"] -= Game.GAME_SPEED;
 
-            //Limit 4 obstacles on screen)
+            //Limit 4 obstacles on screen
             if (obstaArray.length > Game.MAX_OBSTA_ON_SCREEN) {
                 obstaArray.shift();
             }
@@ -276,7 +277,7 @@ function update() {
             "chooseOneBro": chooseOneBro
         });
 
-        //distance between obstacles. need update these numbers to constant.
+        //distance between obstacles.
         if (Game.GAME_SPEED < 8) {
             var obstaWidth = Math.floor((Math.random() * 2000) + 700);
         } else if (Game.GAME_SPEED > 8 && Game.GAME_SPEED < 13) {
@@ -294,7 +295,15 @@ function update() {
 function gameOver() {
     isGameOver = true;
     window.cancelAnimationFrame(gameAnimation);
-    ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+    
+    //game over text TODO Change it smaller
+    ctx.drawImage(scoreImg, 0, 24, 203, Score.SPRITE_HEIGHT,
+    		80, 230, 203, Score.SPRITE_HEIGHT);
+    
+    //dead dino face
+    ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, 
+    		Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
+    
     // TODO save it if new highscore
     saveScore();
 }
@@ -304,8 +313,6 @@ function getRunningDinoIndex() {
     return index;
 }
 
-var score, highScore = 0;
-
 function drawScoreBoard() {
     var elapsedTime = Date.now() - startTime;
     score = parseInt(elapsedTime / 100);
@@ -313,17 +320,19 @@ function drawScoreBoard() {
     if (score > highScore) {
         highScore = score;
     }
+    
 
 // TODO score and highscore position Y
-    drawScore(score, (355/6.5));
-    drawScore(highScore, ((355/(6.5))*5));
-
+    drawScore(highScore, Score.HIGH_SCORE_X_POS, Score.HIGH_SCORE_Y_POS); //10% 
+    drawScore(score, Score.SCORE_X_POS, Score.SCORE_Y_POS); //20%
+    
+    //HI
+    ctx.drawImage(scoreImg, Score.HI_TEXT_IMG_POS, 0, Score.HI_TEXT_WIDTH, Score.SPRITE_HEIGHT,
+    		Score.HI_TEXT_X_POS, Score.HI_TEXT_Y_POS, Score.HI_TEXT_WIDTH, Score.SPRITE_HEIGHT);
 }
 
-// TODO better name? & move around
-var HIGHSCORE_VAL_KEY = "highScoreVal";
 function saveScore() {
-    localStorage.setItem(HIGHSCORE_VAL_KEY, highScore);
+    localStorage.setItem(Score.HIGHSCORE_VAL_KEY, highScore);
 }
 
 function loadScore() {
@@ -334,44 +343,33 @@ function loadScore() {
     }
 }
 
-function drawScore(score, scorePositionY) {
-    // console.log("elapsedTime: " + score);
-    // var intElapsed = parseInt(score / 100);
-
+function drawScore(score, scorePositionX, scorePositionY) {
     var intElapsed = score;
-    var scorePositionX = 355/2 - 87.5;
-    //console.log("divided by 100: " + parseInt(score / 100));
 
-    
-//    var tenThousands = parseInt(intElapsed / 10000);
-//    console.log("divided by 10000: " + parseInt(intElapsed / 1000));
-//    ctx.drawImage(scoreImg, tenThousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-//		scorePositionX + 25, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
-//    intElapsed -= tenThousands * 10000;
     var thousands = parseInt(intElapsed / 1000);
     ctx.drawImage(scoreImg, thousands * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-		scorePositionX + 50, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+		scorePositionX, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     intElapsed -= thousands * 1000;
     var hundreds = parseInt(intElapsed / 100);
     ctx.drawImage(scoreImg, hundreds * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-		scorePositionX + 75, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+		scorePositionX + 22, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     intElapsed -= hundreds * 100;
     var tens = parseInt(intElapsed / 10);
     ctx.drawImage(scoreImg, tens * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-		scorePositionX + 100, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+		scorePositionX + 44, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
     intElapsed -= tens * 10;
     ctx.drawImage(scoreImg, intElapsed * Score.NUMBER_WIDTH, 0, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT,
-		scorePositionX + 125, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
+		scorePositionX + 66, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
 }
 
 function DrawBox(x, y, w, h) {
+    debug ? ctx.strokeStyle = "red" : ctx.strokeStyle = "transparent";
     this.x = x;
     this.y = y;
     this.width = w;
     this.height = h;
-    debug ? ctx.strokeStyle = "red" : ctx.strokeStyle = "transparent";
 
-    box = ctx.strokeRect(x, y, w, h);
+	box = ctx.strokeRect(x, y, w, h);
     return box;
 }
 
@@ -383,7 +381,6 @@ function reSize() {
 
 function dinoJump() {
     inAir = true;
-    //console.log("jumping " + "Pos_Y: " + Dino.POS_Y);
     if (Dino.POS_Y > Dino.JUMP_LIMIT && !goingDown) {
         Dino.POS_Y -= Dino.JUMP_VELOCITY;
         Dino.JUMP_VELOCITY -= Dino.JUMP_GRAVITY;
@@ -391,14 +388,13 @@ function dinoJump() {
         goingDown = true;
         Dino.POS_Y += Dino.JUMP_VELOCITY;
         Dino.JUMP_VELOCITY += Dino.JUMP_GRAVITY;
-        if (Dino.POS_Y >= 150) {
+        if (Dino.POS_Y >= Dino.INITIAL_POS_Y) {
             clearInterval(jumping);
             goingDown = false;
             inAir = false;
             Dino.JUMP_VELOCITY = Dino.JUMP_INITIAL_VELOCITY;
         }
     }
-    //console.log("velocity: " +  jumpVelocity);
 }
 
 function resetGame() {
@@ -412,12 +408,15 @@ function resetGame() {
     reSize();
     isGameOver = false;
     Game.GAME_SPEED = Game.BASE_GAME_SPEED;
+    (function raiseSpeed() {
+        Game.GAME_SPEED += Game.ACCELERATE;
+        setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
+        return Game.GAME_SPEED;
+    })();
 }
 
 function cleanGame() {
 	if(isPlaying){return;}
-//    ctx.clearRect(0, 0, canvas.width, canvas.height);
-//    isPlaying = false;
 	Game.GAME_SPEED = null;
 	startTime = null;
     obstaArray.splice(0, obstaArray.length);

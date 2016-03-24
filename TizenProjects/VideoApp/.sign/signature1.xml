@@ -4,7 +4,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>/XGZ9KCtaOYcVl+pBLqz5/G5JH+UB5u3hiKSfC9zQOE=</DigestValue>
+<DigestValue>njW94Bz+MQMujAV9fKWgjwRkYht0FW8qDk/DE8RA48E=</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -20,7 +20,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>mYUlrq5GAJmbd68/gUx9/epHLNIfKHrG/Sd7oUyaoAU=</DigestValue>
+<DigestValue>6RK9YNKDS6ido+FnflqShywzncbEGm4dX8I6d+Z9i+Q=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -28,7 +28,7 @@
 </Reference>
 <Reference URI="js%2Fscript.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>43HLoBzKQGzOJHYufheIetp9+ds8o0ot8Tk75fl2zks=</DigestValue>
+<DigestValue>JMhfX4jrlsCaRLlI+f2cb1Dagf4oFUuLSbpVPrVkRRw=</DigestValue>
 </Reference>
 <Reference URI="js%2Futil%2FVideoControl.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -36,7 +36,7 @@
 </Reference>
 <Reference URI="js%2Futil%2FVideoController.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=</DigestValue>
+<DigestValue>1GMjbZkzghM8Li8qZapVeRqv9h+XV66mm6KQW4aeNjw=</DigestValue>
 </Reference>
 <Reference URI="js%2Futil%2Fjquery-2.1.1.min.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -71,11 +71,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-LgRIjOonn5M5S5Upu8idE7/QDr64M315LZQykACYHJec/MF7E5mY3xEYV3IJfSgeMl5U6g5RBfRl
-QtH6QKBijVcWuiXF/CeNBeA32Z9bCOM1IwM8kAyCfK5yzFmoevS8UfQ6eamhN5uoxVdeKT2KysVU
-aCHQMCnQjYnxljwqb5F8Nieqy6Qc8FZNgNdNEIoe0zjowQiizDpV5qxrYlnnJU2i5QNy4xLKEn6O
-BqeJVyRtPWqKRtIsx0E78zD+BMDAsxO3vEo4pG+MYtVHtyOKDnLANcbXq6oTCRMTr/I91xxOapxd
-HARhhNustqxy3PbGjEA865et9VAThH+oNRyyFg==
+nNR5JD3NCb0SCPRWWX8M96/REb4ym1hbL5qvsysn9LU5nN6ywLtsCjCI2QV5suD+cR1Xa5WrWwZU
+CqddeosVG6Ox0p5e+ved1AcAJOaKPmbpmr5FcKF69LTyzoyPalTrYctG2bQrNzRSBnP5Ldvdp39W
+r6ZBDmqPwcpj0LUWpby6W/F2nFkv9Gicm/dAzJKdOhisaBLTZXNY0WWG35bea5/znNTjLxA3obvi
+35c0/33BWHQJj0ix02tq0VJpMlAtFnrRORru/t847s44+oRigIHRdgRg7X0p2DVTKlb0V98mFjbk
+KEMCrAhq3sFe9iCgd2Zv6zta0qZbz45AbWsMyA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

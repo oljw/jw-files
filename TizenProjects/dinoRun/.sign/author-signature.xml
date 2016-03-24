@@ -16,7 +16,7 @@
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>knWxSBZlpjYso2FaiU0BveX+7tpR5tI7JWVdqAYXDD0=</DigestValue>
+<DigestValue>hYExEUZv06FaMbE38GRkPH/oMCx/+nuYdRsuZvn1SHE=</DigestValue>
 </Reference>
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -44,7 +44,7 @@
 </Reference>
 <Reference URI="images%2Ftime.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>a5IPFOwL4Sv5Z5a24hRHMJkfV5lxH8XZTzTWFymUOow=</DigestValue>
+<DigestValue>5LGMFpjEe+jqjTDqfol2vJ7bbANYgV+VnVbM/bGA08g=</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -56,7 +56,7 @@
 </Reference>
 <Reference URI="js%2Fscript.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>97Wk1myCwhaR2Ow1RDn1OBgChdH4DH3tiVIQObUvHo8=</DigestValue>
+<DigestValue>v/obgdIQsGQPXqONtd8owXX6W04R3r2Dd4VKSzyXhUU=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2FLICENSE.Flora">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -1031,11 +1031,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-etV1QFzkDUxV7Iir63s8zx+tWfJ76tydab+iZzn70o4WNDWjy7y7JsDUZ7KGbt+T8ePnFkzszhPi
-kdTI1YEWnnUkjwQ/y57BdFgJndTp85XPFWPGEoth5JT0zYfmD0nLSUQDTfj/ljbm0qOiDE8mvWeL
-CTBt/PAbFFDWlfhykFEgJeDIjn5ERsVBTEipaXRtV+2YG7uREAFcbXFHW5hKLv6qv68HZ0BND2DF
-duruEiOE1RpTuFn8ImbztNvDEzXaDzYNsCp7mvT8t0E4mqj7Bz7upAcr15DRC2ZjhZfNr/Yp7w1X
-VS/Aqvo7uQnTRrIH5b+0BeXpYVTwKmykH3P6HQ==
+d7g2zUpqW9RXNAAUSum4X7praWF1wgWKKQNg7mvBQpBlZSKzDToDVceGCnZPulN84FrceBPO9Dp/
+uhY9K2QFl8aRQXSdHmfqsw4MCPz7fB6epT7fOfmGKGlrz01gTZMpvQCy27G0i8raYe87VaabcRSu
+/SEh+SZHwqxz0qqJRDD8tthsA6CsrGwvvkN10TCY21aUmbGPEGq7xhFk27ENsjnU4CEFgUamclTE
+KsNglaUWCvwL5ywaq691Fbp7wLXRVTHbAhF4zPdTrrfTBToPMqBjjqOCrpKCGxoC/sgwnW+b3Ai5
+uzO3/O8+3BqmfNuLXbZEHGQBHhiMWAYWBAFwMA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
