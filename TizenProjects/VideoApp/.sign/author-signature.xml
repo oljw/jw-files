@@ -16,7 +16,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6RK9YNKDS6ido+FnflqShywzncbEGm4dX8I6d+Z9i+Q=</DigestValue>
+<DigestValue>gc42B8RPryWo21Jv5wGh65A3bJV3Wxc14DAtwM9RSoM=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -24,7 +24,7 @@
 </Reference>
 <Reference URI="js%2Fscript.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>JMhfX4jrlsCaRLlI+f2cb1Dagf4oFUuLSbpVPrVkRRw=</DigestValue>
+<DigestValue>pEit3xzSwwQVZAjSbNohY3IfxT3OW2YOs0FdDBNzsJ0=</DigestValue>
 </Reference>
 <Reference URI="js%2Futil%2FVideoControl.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -32,7 +32,7 @@
 </Reference>
 <Reference URI="js%2Futil%2FVideoController.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>1GMjbZkzghM8Li8qZapVeRqv9h+XV66mm6KQW4aeNjw=</DigestValue>
+<DigestValue>tnDp1ULCZLOggQ9ufHErpaYM/ZrsqclSdlKVUb2WVMM=</DigestValue>
 </Reference>
 <Reference URI="js%2Futil%2Fjquery-2.1.1.min.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -67,11 +67,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-W7GHwaQTb8YPObFbXnwv24Bsj83vCu2gLXAeOky+0dEg9nhdnvTeOmSnhCDtxOFbXm5d5gbrToa0
-BTxeR4IwNamrbeSLyhdTQGeddwMQT3rBQ10SplwOpMQarhMY23kPczkxKoE7B9vw1Q2uGnV65E4r
-I49sL3J0GS9JopklcqWdtd7KQMtOTRzeZJZPhjH/UjF68oDuhvdQ2MjerxpglkV6q052ERntzou/
-pg9IoOMvoh52mQbSNpCanXSscWiH3bE/dwuU4uXe/WujvlGif6HBYxSNUEVOeRfVp+x4xF01I0UM
-lliIA5ZEGkTwaCEY07oQfbbrHROYbRxVTYyp5g==
+h4J7IDs8W0jqr7C4JW8Wq/WonQ5dmmCOwdbDgTcTlZgPWtbfSEzjmftOaCPvvEwOxiqFmJ2dBVlT
+xyys0XyA4ZC8MNJoyBw3JWn7q915uq2yJw/Ywk7B+91IAmg/IU+dT7r3hpeCI6pNpf2BrI/RbMGw
+2DkLCg1Mnf/41Rd+KguU/B0z+Br9rMqaveLrtmYlzVnGhPXRbhSQm4/4g1zLjdYndezOywJeQ6y1
+DJXRXme4nWyiSbH/5lXvqLOC5jtxXNrJZmMPYLbqHmcQKlxD9AuW7XZVW5oqXa0PNBhjlKvdejar
+W4V4TIseZpnZDf36R+YPeS3FsEUxh4iEDFqmJA==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

@@ -1,88 +1,90 @@
-$(document).ready(function(){
-	
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //$(document).ready(function(){
-//   	video1 = document.getElementById("v1");
-//   	video2 = document.getElementById("v2");
-//   	video3 = document.getElementById("v3");
-//   	video4 = document.getElementById("v4");
-//   	video5 = document.getElementById("v5");
-//   	
-//    video1.addEventListener("ended", function () {
-//        window.location = '#secondpg';
-//        video2.play();
-//    }, false);
-//    
-//    video2.addEventListener("ended", function () {
-//        window.location = '#thirdpg';
-//        video3.play();
-//    }, false);
-//    
-//    video3.addEventListener("ended", function () {
-//        window.location = '#fourthpg';
-//        video4.play();
-//    }, false);
-//    
-//    video4.addEventListener("ended", function () {
-//        window.location = '#fifthpg';
-//        video5.play();
-//    }, false);
-//    
-//    video5.addEventListener("ended", function () {
-//        tizen.application.getCurrentApplication().exit();
-//    }, false);
-//})
+//    var rootView = new ContainerCreator("helloWorld");
 //
-//var assignVideo = function(video) {
-//	
-//}
+//    alert(rootView.getContainer());
+//});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function(){
+   	video1 = document.getElementById("v1");
+   	video2 = document.getElementById("v2");
+   	video3 = document.getElementById("v3");
+   	video4 = document.getElementById("v4");
+   	video5 = document.getElementById("v5");
+   	
+    video1.addEventListener("ended", function () {
+        window.location = '#secondpg';
+        video2.play();
+    }, false);
+    
+    video2.addEventListener("ended", function () {
+        window.location = '#thirdpg';
+        video3.play();
+    }, false);
+    
+    video3.addEventListener("ended", function () {
+        window.location = '#fourthpg';
+        video4.play();
+    }, false);
+    
+    video4.addEventListener("ended", function () {
+        window.location = '#fifthpg';
+        video5.play();
+    }, false);
+    
+    video5.addEventListener("ended", function () {
+        tizen.application.getCurrentApplication().exit();
+    }, false);
+})
+
+var assignVideo = function(video) {
+	
+}
 
 
 

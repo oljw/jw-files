@@ -4,7 +4,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>njW94Bz+MQMujAV9fKWgjwRkYht0FW8qDk/DE8RA48E=</DigestValue>
+<DigestValue>Fef/RaEzDLvtRUGvog/OmFNvq76OmW/qU6mBP97urFA=</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -20,7 +20,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6RK9YNKDS6ido+FnflqShywzncbEGm4dX8I6d+Z9i+Q=</DigestValue>
+<DigestValue>gc42B8RPryWo21Jv5wGh65A3bJV3Wxc14DAtwM9RSoM=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -28,7 +28,7 @@
 </Reference>
 <Reference URI="js%2Fscript.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>JMhfX4jrlsCaRLlI+f2cb1Dagf4oFUuLSbpVPrVkRRw=</DigestValue>
+<DigestValue>pEit3xzSwwQVZAjSbNohY3IfxT3OW2YOs0FdDBNzsJ0=</DigestValue>
 </Reference>
 <Reference URI="js%2Futil%2FVideoControl.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -36,7 +36,7 @@
 </Reference>
 <Reference URI="js%2Futil%2FVideoController.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>1GMjbZkzghM8Li8qZapVeRqv9h+XV66mm6KQW4aeNjw=</DigestValue>
+<DigestValue>tnDp1ULCZLOggQ9ufHErpaYM/ZrsqclSdlKVUb2WVMM=</DigestValue>
 </Reference>
 <Reference URI="js%2Futil%2Fjquery-2.1.1.min.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -71,11 +71,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-nNR5JD3NCb0SCPRWWX8M96/REb4ym1hbL5qvsysn9LU5nN6ywLtsCjCI2QV5suD+cR1Xa5WrWwZU
-CqddeosVG6Ox0p5e+ved1AcAJOaKPmbpmr5FcKF69LTyzoyPalTrYctG2bQrNzRSBnP5Ldvdp39W
-r6ZBDmqPwcpj0LUWpby6W/F2nFkv9Gicm/dAzJKdOhisaBLTZXNY0WWG35bea5/znNTjLxA3obvi
-35c0/33BWHQJj0ix02tq0VJpMlAtFnrRORru/t847s44+oRigIHRdgRg7X0p2DVTKlb0V98mFjbk
-KEMCrAhq3sFe9iCgd2Zv6zta0qZbz45AbWsMyA==
+Duk5LGMZwmgapIkPLkQ98gPtoUut3Ug8iRZLRxEFYd2mnt74sMWT1afihZP3xhhV1n7p3VoXvgXQ
+L8sZ5MZVqC1YwnNxl/BuA3po3E9/XsD/rKlwWv+eI7rqc4A3RwvhcYjqpxvMd8HUh77gBvPYF1Tl
+kGOiukWlXZ9wA30GDVvo5uChAnBVQj1uqDBzqLF0Gi6Ehhn4lVmUlSZiSawrjCrHbu2A3r0Fm1SO
+njtpZXbkRl7HOm6LXd3+DLzbO8Ta+cUmsZmMxI9dAUk9KsYb6VrSrSX6H3BEE+f+KnJNqsArnHI5
++YNI4uklg3Nz4ow6k5/mtXuX4LUYQcBd2JyaWw==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

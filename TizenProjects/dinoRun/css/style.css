@@ -6,6 +6,7 @@ body {
     margin: 0px auto;
     background-color: #000000;
     position: absolute;
+    overflow: hidden;
 }
 
 .contents {

@@ -35,8 +35,8 @@ var debug = false;
 var Game = {
     CANVAS_WIDTH: 360,
     CANVAS_HEIGHT: 360,
-    GAME_SPEED: 3,
-    BASE_GAME_SPEED: 3,
+    GAME_SPEED: 3.5,
+    BASE_GAME_SPEED: 3.5,
     INITIAL_Y: 100,
     INITIAL_X: 0,
     END_X: 360,
@@ -140,12 +140,14 @@ document.addEventListener("DOMContentLoaded", function() {
     startButton = document.getElementById('startButton');
     ctx = canvas.getContext("2d");
     tau.event.disableGesture(canvas);
-    
+
     startButton.onclick = function() {
         resetGame();
     }
     
+    canvas.addEventListener('ontouchmove', function(e) {return;}, false);
     canvas.addEventListener("touchstart", function(e) {
+    	console.log(Game.GAME_SPEED)
     	if (isPlaying && !isGameOver) {
             //Jump
             if (inAir) {return;}
@@ -161,15 +163,15 @@ document.addEventListener("rotarydetent", function(ev) {
     var direction = ev.detail.direction;
     /* Add behavior for detent detected event with a direction value */
 
-    //	   if(isPlaying) {
-    //		   if (direction == 'CW') {
-    //			   canvas.width += 10;
-    //			   canvas.height += 10;
-    //		   } else {
-    //			   canvas.width -= 10;
-    //			   canvas.height -= 10;
-    //		   }
-    //	   }
+		   if (isPlaying && !isGameOver) {
+    		   if (direction == 'CW') {
+    	            if (inAir) {return;}
+    	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
+    		   } else {
+    	            if (inAir) {return;}
+    	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
+    		   }
+    	   }
 });
 
 function reDraw() {
@@ -326,9 +328,9 @@ function drawScoreBoard() {
     }
     
 
-// TODO score and highscore position Y
-    drawScore(highScore, Score.HIGH_SCORE_X_POS, Score.HIGH_SCORE_Y_POS); //10% 
-    drawScore(score, Score.SCORE_X_POS, Score.SCORE_Y_POS); //20%
+// TODO score and highscore position X, Y
+    drawScore(highScore, Score.HIGH_SCORE_X_POS, Score.HIGH_SCORE_Y_POS); 
+    drawScore(score, Score.SCORE_X_POS, Score.SCORE_Y_POS); 
     
     //HI
     ctx.drawImage(scoreImg, Score.HI_TEXT_IMG_POS, 0, Score.HI_TEXT_WIDTH, Score.SPRITE_HEIGHT,
@@ -340,7 +342,7 @@ function saveScore() {
 }
 
 function loadScore() {
-    highScore = localStorage.getItem(HIGHSCORE_VAL_KEY);
+    highScore = localStorage.getItem(Score.HIGHSCORE_VAL_KEY);
     // TODO better way to check?
     if (highScore == null) {
         highScore = 0;

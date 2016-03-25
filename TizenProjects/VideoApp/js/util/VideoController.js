@@ -14,10 +14,14 @@ var videoHTMLs = {};
 
 // add a constructor.  parameter should be the root view of videos.
 // constructor(r) { rootView = r;};
-function videoContainer(containerId) {
-	var rootView = $("'#" + containerId + "'");
-	return rootView;
+function ContainerCreator(containerId) {
+    var conId = "'#" + containerId + "'";
+    
+    this.getContainer = function () {
+        return conId;
+    }
 }
+
 
 /**
  * Create a video resource to use in demo or attractor or..by SRC we will only create one unique video element per video, demos share them.
