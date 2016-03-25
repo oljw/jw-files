@@ -7,6 +7,7 @@ var groundImg = null;
 var smObstaImg = null;
 var lgObstaImg = null;
 var scoreImg = null;
+var cloudImg = null;
 var ctx = null;
 var jumping = null;
 var imageReady = false;
@@ -80,6 +81,15 @@ var Ground = {
     GROUND_NEW_HEIGHT: 0,
     POS_X: 360,
     POS_Y: 200
+};
+
+var Cloud = {
+    SPRITE_HEIGHT: 14,
+    SPRITE_WIDTH: 46,
+    CLOUD_NEW_WIDTH: 0,
+    CLOUD_NEW_HEIGHT: 0,
+    POS_X: 0,
+    INITIAL_POS_Y: 360
 };
 
 var Obstacle = {};
@@ -163,15 +173,17 @@ document.addEventListener("rotarydetent", function(ev) {
     var direction = ev.detail.direction;
     /* Add behavior for detent detected event with a direction value */
 
-		   if (isPlaying && !isGameOver) {
-    		   if (direction == 'CW') {
-    	            if (inAir) {return;}
-    	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
-    		   } else {
-    	            if (inAir) {return;}
-    	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
-    		   }
-    	   }
+	   if (isPlaying && !isGameOver) {
+		   if (direction == 'CW') {
+	            if (inAir) {return;}
+	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
+	            jumping.stop();
+		   } else {
+	            if (inAir) {return;}
+	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
+	            jumping.stop();
+		   }
+	   }
 });
 
 function reDraw() {
@@ -191,6 +203,18 @@ function reDraw() {
         ctx.drawImage(groundImg, Ground.POS_X, Ground.POS_Y, Ground.GROUND_NEW_WIDTH, Ground.GROUND_NEW_HEIGHT);
 
         Ground.POS_X -= Game.GAME_SPEED;
+        
+        //Cloud
+        var cloud1 = new CloudObject(100, 100, 2);
+        
+        if(cloud1.x < 0) {
+        	cloud1.x = Cloud.INITIAL_POS_Y;
+        }
+        if(cloud1.x > 0) {
+        	cloud1.x -= cloud1.speed;
+        }
+        
+        
 
         //DINO
         if (Dino.POS_Y >= 150) {
@@ -368,6 +392,16 @@ function drawScore(score, scorePositionX, scorePositionY) {
 		scorePositionX + 66, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
 }
 
+function CloudObject(x, y, speed) {
+	this.x = x;
+	this.y = y;
+	this.speed = speed;
+	
+	cloud = ctx.drawImage(cloudImg, x, y, Cloud.CLOUD_NEW_WIDTH, Cloud.CLOUD_NEW_HEIGHT);
+	
+	return cloud;
+}
+
 function DrawBox(x, y, w, h) {
     debug ? ctx.strokeStyle = "red" : ctx.strokeStyle = "transparent";
     this.x = x;
@@ -443,10 +477,12 @@ function loadAllImages() {
 
     scoreImg = new Image();
     scoreImg.src = "images/time.png";
+    
+    cloudImg = new Image();
+    cloudImg.src = "images/cloud.png";
 }
 
 function imagesOnload() {
-	
     groundImg.onload = function() {
         imageReady = true;
 
@@ -458,6 +494,11 @@ function imagesOnload() {
         imageReady = true;
         setTimeout(update, 1000 / Game.FPS);
     };
+    
+    cloudImg.onload = function() {
+    	Cloud.CLOUD_NEW_WIDTH = cloudImg.width * scale;
+    	Cloud.CLOUD_NEW_HEIGHT = cloudImg.height * scale;
+    }
 
     smObstaImg.onload = function() {
         Obstacle.sm.OBSTACLE_NEW_WIDTH = smObstaImg.width * scale;

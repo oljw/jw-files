@@ -85,6 +85,7 @@
 		<item value="org.tizen.unittest.feature:2.0.0.201602191916"/>
 		<item value="org.tizen.web.feature:2.0.0.201602221227"/>
 		<item value="org.tizen.web.simulator.feature:1.0.0.201509101132"/>
+		<item value="org.tizen.web.tv.sec.feature:1.0.0.201602221401"/>
 	</list>
 	<section name="CleanDialogSettings">
 		<item value="500" key="DIALOG_WIDTH"/>
