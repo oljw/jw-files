@@ -1,0 +1,55 @@
+{
+  "me": "models/decision.json",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.DecisionFragment",
+  "layout": "@layout/fragment_decision",
+  "background": "@color/white",
+  "action": "models/gear_vr.json",
+  "actionBackKey": "models/attractor.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "title": [
+      "@string/decision_title1",
+      "@string/decision_title2"
+    ],
+    "subTitle": [
+      "@string/decision_subtitle"
+    ],
+    "menuItems": [
+      {
+        "title": "@string/gear_vr_title",
+        "icon": "@drawable/gear_vr_icon",
+        "action": "models/gear_vr.json"
+      },
+      {
+        "title": "@string/smart_tv_title",
+        "icon": "@drawable/smart_tv_icon",
+        "action": "models/smart_tv.json"
+      },
+      {
+        "title": "@string/samsung_pay_title",
+        "icon": "@drawable/samsung_pay_icon",
+        "action": "models/samsung_pay.json"
+      },
+      {
+        "title": "@string/smart_things_title",
+        "icon": "@drawable/smart_things_icon",
+        "action": "models/smart_things.json"
+      },
+      {
+        "title": "@string/tablet_title",
+        "icon": "@drawable/tablet_icon",
+        "action": "models/tablet.json"
+      },
+      {
+        "title": "@string/smart_watch_title",
+        "icon": "@drawable/smart_watch_icon",
+        "action": "models/smart_watch.json"
+      }
+    ]
+  }
+}

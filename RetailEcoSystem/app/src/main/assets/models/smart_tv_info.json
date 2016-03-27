@@ -1,0 +1,44 @@
+{
+  "me": "smart_tv_info.json",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.MenuFragment",
+  "layout": "@layout/fragment_product_info",
+  "background": "@color/white",
+  "imageBG": "@drawable/smarttv_phone_image",
+  "imageBGAlign": "@integer/ALIGN_PARENT_RIGHT",
+  "actionBackKey": "models/smart_tv.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "title": [
+      "NONE",
+      "@string/smart_tv_info_title"
+    ],
+    "subTitle": [
+      "@string/smart_tv_info_subtitle"
+    ],
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item_title_icon",
+        "title": "@string/product_specs",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/smart_tv_info_spec.json"
+      },
+      {
+        "layout": "@layout/menu_item_title_icon",
+        "title": "@string/product_compatibility",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/smart_tv_info_compatibility.json"
+      },
+      {
+        "layout": "@layout/menu_item_title_icon",
+        "title": "@string/product_features",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/smart_tv_info_features.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "me": "samsung_pay_info_compatibility.json",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.ListFragment",
+  "layout": "@layout/fragment_list",
+  "background": "@color/white",
+  "actionBackKey": "models/samsung_pay_info.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "listItems": [
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_close_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_close",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_image_center",
+        "layoutColor": "@color/white",
+        "image": "@drawable/phone_watch_image"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_desc_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_devices_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_devices",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_devices_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_devices_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_devices_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_devices_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_carriers_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_carriers",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_carriers_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_carriers_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_carriers_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_carriers_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_payment_cards_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_payment_cards",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_payment_cards_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_payment_cards_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_payment_cards_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_payment_cards_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_smartwatch_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_smartwatch",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_smartwatch_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_smartwatch_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_smartwatch_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_smartwatch_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_option_desc1_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_option_desc1",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_option_desc1_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_option_desc1_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_compatibility_option_desc2",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_option_desc2_font_size",
+        "textColor": "@color/black",
+        "textMarginBottom": "@integer/int_100"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_url_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_url",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_url_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_url_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_legal_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_legal_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_compatibility_legal_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_compatibility_legal_margin_bottom",
+        "layoutColor": "@color/black"
+      }
+    ]
+  }
+}

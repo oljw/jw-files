@@ -1,0 +1,21 @@
+{
+  "me": "models/gear_vr_demo.json",
+  "sibling": "models/gear_vr_info.json",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.VideoFragment",
+  "layout": "@layout/fragment_video_landscape",
+  "background": "@color/black",
+  "action": "models/legal.json",
+  "actionBackKey": "models/gear_vr.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "title": "@string/gear_vr_demo",
+    "orientation": "@integer/video_orientation_90",
+    "videoFile": "video/2.0_Gear_VR_R1.3.mp4",
+    "action": "models/legal.json"
+  }
+}

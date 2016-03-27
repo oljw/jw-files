@@ -1,0 +1,43 @@
+{
+  "me": "models/smart_things.json",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.MenuFragment",
+  "layout": "@layout/fragment_menu_bg",
+  "background": "@color/white",
+  "imageBG": "@drawable/smart_things_bg",
+  "imageBGMargin": [
+    "@integer/margin_zero",
+    "@integer/margin_zero",
+    "@integer/margin_zero",
+    "@integer/smart_things_bg_margin_bottom"
+  ],
+  "actionBackKey": "models/decision.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "title": [
+      "NONE",
+      "@string/smart_things_title"
+    ],
+    "subTitle": [
+      "@string/smart_things_subtitle"
+    ],
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/start_demo",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/smart_things_demo.json"
+      },
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/product_info",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/smart_things_info.json"
+      }
+    ]
+  }
+}

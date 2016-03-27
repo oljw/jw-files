@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomFontTextView">
+        <attr name="customFont" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomFontTheme">
+        <attr name="customFontStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="VideoTextureView">
+        <attr name="videoFile" format="string" />
+        <attr name="videoFrameFile" format="string" />
+        <attr name="chapterFile" format="string" />
+        <attr name="subtitleFile" format="string" />
+        <attr name="playlistResource" format="reference" />
+        <attr name="looped" format="boolean" />
+        <attr name="scaleToVideoSize" format="boolean" />
+        <attr name="autoPlay" format="boolean" />
+        <attr name="sizeMultiplier" format="float" />
+        <attr name="isShowVideoFrame" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleMenuItemView">
+        <attr name="useUpperTitle" format="boolean"/>
+        <attr name="itemTitle" format="string"/>
+        <attr name="itemIcon" format="integer"/>
+        <attr name="itemIconPressed" format="integer"/>
+    </declare-styleable>
+
+</resources>
