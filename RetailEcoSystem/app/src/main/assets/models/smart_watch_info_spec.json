@@ -137,7 +137,6 @@
         "layoutHeight": "@integer/smart_watch_info_spec_memory_margin_top",
         "layoutColor": "@color/white"
       },
-
       {
         "layout": "@layout/list_item_text",
         "layoutColor": "@color/white",
@@ -213,7 +212,7 @@
       },
       {
         "layout": "@layout/list_item_margin",
-        "layoutHeight": "@integer/smart_watch_info_features_url_margin_top",
+        "layoutHeight": "@integer/smart_watch_info_spec_url_margin_top",
         "layoutColor": "@color/white"
       },
       {
@@ -221,17 +220,17 @@
         "layoutColor": "@color/white",
         "text": "@string/smart_watch_info_url",
         "textFont": "fonts/SamsungSharpSans-Bold.ttf",
-        "textSize": "@integer/smart_watch_info_features_url_font_size",
+        "textSize": "@integer/smart_watch_info_spec_url_font_size",
         "textColor": "@color/black"
       },
       {
         "layout": "@layout/list_item_margin",
-        "layoutHeight": "@integer/smart_watch_info_features_url_margin_bottom",
+        "layoutHeight": "@integer/smart_watch_info_spec_url_margin_bottom",
         "layoutColor": "@color/white"
       },
       {
         "layout": "@layout/list_item_margin",
-        "layoutHeight": "@integer/smart_watch_info_features_legal_margin_top",
+        "layoutHeight": "@integer/smart_watch_info_spec_legal_margin_top",
         "layoutColor": "@color/black"
       },
       {
@@ -239,12 +238,12 @@
         "layoutColor": "@color/black",
         "text": "@string/smart_watch_info_legal",
         "textFont": "fonts/SamsungOne-400_v1.0.ttf",
-        "textSize": "@integer/smart_watch_info_features_legal_font_size",
+        "textSize": "@integer/smart_watch_info_spec_legal_font_size",
         "textColor": "@color/white"
       },
       {
         "layout": "@layout/list_item_margin",
-        "layoutHeight": "@integer/smart_watch_info_features_legal_margin_bottom",
+        "layoutHeight": "@integer/smart_watch_info_spec_legal_margin_bottom",
         "layoutColor": "@color/black"
       }
     ]
