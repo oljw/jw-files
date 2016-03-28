@@ -352,13 +352,62 @@
     <integer name="smart_things_info_spec_legal_margin_bottom">200</integer>
 
     <!--SmartThings Product Information Compatibility Json-->
-    <integer name="smart_things_info_compatibility"></integer>
-    <integer name="smart_things_info_compatibility_desc"></integer>
-    <integer name="smart_things_info_compatibility_app"></integer>
-    <integer name="smart_things_info_compatibility_app_desc"></integer>
+    <integer name="smart_things_info_compatibility_close_margin_top">100</integer>
+    <integer name="smart_things_info_compatibility_margin_top">130</integer>
+    <integer name="smart_things_info_compatibility_font_size">112</integer>
+    <integer name="smart_things_info_compatibility_margin_bottom">150</integer>
+    <integer name="smart_things_info_compatibility_desc_margin_top">150</integer>
+    <integer name="smart_things_info_compatibility_desc_font_size">48</integer>
+    <integer name="smart_things_info_compatibility_app_margin_top">150</integer>
+    <integer name="smart_things_info_compatibility_app_font_size">60</integer>
+    <integer name="smart_things_info_compatibility_app_margin_bottom">38</integer>
+    <integer name="smart_things_info_compatibility_app_desc_font_size">48</integer>
+    <integer name="smart_things_info_compatibility_url_margin_top">200</integer>
+    <integer name="smart_things_info_compatibility_url_font_size">60</integer>
+    <integer name="smart_things_info_compatibility_url_margin_bottom">200</integer>
+    <integer name="smart_things_info_compatibility_legal_margin_top">200</integer>
+    <integer name="smart_things_info_compatibility_legal_font_size">34</integer>
+    <integer name="smart_things_info_compatibility_legal_margin_bottom">200</integer>
 
-
-
+    <!--Smart Things Product Information Features Json-->
+    <integer name="smart_things_info_features_close_margin_top">100</integer>
+    <integer name="smart_things_info_features_margin_top">130</integer>
+    <integer name="smart_things_info_features_font_size">112</integer>
+    <integer name="smart_things_info_features_desc_margin_top">200</integer>
+    <integer name="smart_things_info_features_desc_font_size">80</integer>
+    <integer name="smart_things_info_features_app_margin_top">150</integer>
+    <integer name="smart_things_info_features_app_font_size">80</integer>
+    <integer name="smart_things_info_features_app_margin_bottom">38</integer>
+    <integer name="smart_things_info_features_app_desc_font_size">48</integer>
+    <integer name="smart_things_info_features_app_desc_margin_bottom">150</integer>
+    <integer name="smart_things_info_features_hub_margin_top">200</integer>
+    <integer name="smart_things_info_features_hub_font_size">62</integer>
+    <integer name="smart_things_info_features_hub_margin_bottom">38</integer>
+    <integer name="smart_things_info_features_hub_desc_font_size">48</integer>
+    <integer name="smart_things_info_features_hub_desc_margin_bottom">150</integer>
+    <integer name="smart_things_info_features_things_margin_top">200</integer>
+    <integer name="smart_things_info_features_things_font_size">62</integer>
+    <integer name="smart_things_info_features_things_margin_bottom">38</integer>
+    <integer name="smart_things_info_features_things_desc_font_size">48</integer>
+    <integer name="smart_things_info_features_things_desc_margin_bottom">150</integer>
+    <integer name="smart_things_info_features_things_image_margin_bottom">200</integer>
+    <integer name="smart_things_info_features_plays_margin_top">200</integer>
+    <integer name="smart_things_info_features_plays_font_size">80</integer>
+    <integer name="smart_things_info_features_plays_margin_bottom">100</integer>
+    <integer name="smart_things_info_features_plays_desc_font_size">48</integer>
+    <integer name="smart_things_info_features_plays_desc_margin_bottom">200</integer>
+    <integer name="smart_things_info_features_plays_image_margin_bottom">200</integer>
+    <integer name="smart_things_info_features_run_margin_top">200</integer>
+    <integer name="smart_things_info_features_run_font_size">80</integer>
+    <integer name="smart_things_info_features_run_margin_bottom">100</integer>
+    <integer name="smart_things_info_features_run_desc_font_size">48</integer>
+    <integer name="smart_things_info_features_run_desc_margin_bottom">200</integer>
+    <integer name="smart_things_info_features_url_margin_top">200</integer>
+    <integer name="smart_things_info_features_url_font_size">60</integer>
+    <integer name="smart_things_info_features_url_margin_bottom">200</integer>
+    <integer name="smart_things_info_features_legal_margin_top">200</integer>
+    <integer name="smart_things_info_features_legal_font_size">34</integer>
+    <integer name="smart_things_info_features_legal_margin_bottom">200</integer>
 
     <!--
     ###############################################################
@@ -375,8 +424,42 @@
         SmartWatch Product Information
     ###############################################################
     -->
-
-
+    <!--Smartwatch Product Information Spec Json-->
+    <integer name="smart_watch_info_spec_close_margin_top">100</integer>
+    <integer name="smart_watch_info_spec_margin_top">130</integer>
+    <integer name="smart_watch_info_spec_font_size">112</integer>
+    <integer name="smart_watch_info_spec_margin_bottom">150</integer>
+    <integer name="smart_watch_info_spec_text_image_margin_top">150</integer>
+    <integer name="smart_watch_info_spec_models_margin_top">150</integer>
+    <integer name="smart_watch_info_spec_models_font_size">60</integer>
+    <integer name="smart_watch_info_spec_models_margin_bottom">38</integer>
+    <integer name="smart_watch_info_spec_models_desc_font_size">48</integer>
+    <integer name="smart_watch_info_spec_dimension_margin_top">100</integer> //request
+    <integer name="smart_watch_info_spec_dimension_font_size">60</integer>
+    <integer name="smart_watch_info_spec_dimension_margin_bottom">38</integer> //request
+    <integer name="smart_watch_info_spec_dimension_desc_font_size">48</integer>
+    <integer name="smart_watch_info_spec_display_margin_top">100</integer>
+    <integer name="smart_watch_info_spec_display_font_size">60</integer>
+    <integer name="smart_watch_info_spec_display_margin_bottom">38</integer>
+    <integer name="smart_watch_info_spec_display_desc_font_size">48</integer>
+    <integer name="smart_watch_info_spec_memory_margin_top">100</integer>
+    <integer name="smart_watch_info_spec_memory_font_size">60</integer>
+    <integer name="smart_watch_info_spec_memory_margin_bottom">38</integer>
+    <integer name="smart_watch_info_spec_memory_desc_font_size">48</integer>
+    <integer name="smart_watch_info_spec_sensors_margin_top">100</integer>
+    <integer name="smart_watch_info_spec_sensors_font_size">60</integer>
+    <integer name="smart_watch_info_spec_sensors_margin_bottom">38</integer>
+    <integer name="smart_watch_info_spec_sensors_desc_font_size">48</integer>
+    <integer name="smart_watch_info_spec_water_margin_top">100</integer>
+    <integer name="smart_watch_info_spec_water_font_size">60</integer>
+    <integer name="smart_watch_info_spec_water_margin_bottom">38</integer>
+    <integer name="smart_watch_info_spec_water_desc_font_size">48</integer>
+    <integer name="smart_watch_info_features_url_margin_top">200</integer>
+    <integer name="smart_watch_info_features_url_font_size">60</integer>
+    <integer name="smart_watch_info_features_url_margin_bottom">200</integer>
+    <integer name="smart_watch_info_features_legal_margin_top">200</integer>
+    <integer name="smart_watch_info_features_legal_font_size">34</integer>
+    <integer name="smart_watch_info_features_legal_margin_bottom">200</integer>
 
 
 

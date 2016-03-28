@@ -149,6 +149,19 @@
     <string name="smart_things_info_compatibility_app">SmartThings app</string>
     <string name="smart_things_info_compatibility_app_desc">OS\niOS (8.1 or later),\nAndroid (4.0 or later)\nWindows Phone (8.1 or later)</string>
 
+    <!--Smart Things Product Information Features Json-->
+    <string name="smart_things_info_features">Product Features</string>
+    <string name="smart_things_info_features_desc">How It Works</string>
+    <string name="smart_things_info_features_app">App</string>
+    <string name="smart_things_info_features_app_desc">Download the free app to run your home\nfrom your Samsung Galaxy smartphone.</string>
+    <string name="smart_things_info_features_hub">Hub</string>
+    <string name="smart_things_info_features_hub_desc">Connect the SmartThings Hub to\nyour Internet router.</string>
+    <string name="smart_things_info_features_things">Things</string>
+    <string name="smart_things_info_features_things_desc">Add as many smart devices as you\'d like to\npersonalize your smart home.</string>
+    <string name="smart_things_info_features_plays">Plays Well with Others</string>
+    <string name="smart_things_info_features_plays_desc">Add as many or as few smart devices as you want,\nchoreograph them to work together in one free\napp, and create a smarter home that automatically\nreacts as life happens.</string>
+    <string name="smart_things_info_features_run">Run Your Home from\nYour Phone</string>
+    <string name="smart_things_info_features_run_desc">With the free SmartThings app, you can receive\nimportant notifications about what\'s happening at\nhome, control your smart devices with a simple\ntap, and automate your home to react to\nyour unique preferences.</string>
 
 
 
@@ -168,7 +181,22 @@
         SmartWatch Product Information
     ###############################################################
     -->
-
+    <!--Smartwatch Product Information Spec Json-->
+    <string name="smart_watch_info_url">For more information, visit\nwww.samsung.com/us.</string>
+    <string name="smart_watch_info_legal">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, and\nSamsung SmartThings are all trademarks of Samsung Electronics Co., Ltd. Use\nonly in accordance with law. Other company and product names mentioned may\nbe trademarks of their respective owners. Screen images simulated; actual\nappearance of devices may vary. Sequences shortened.\nSamsung SmartThings sold separately.</string>
+    <string name="smart_watch_info_spec">Product specs</string>
+    <string name="smart_watch_info_spec_models">Models</string>
+    <string name="smart_watch_info_spec_models_desc">Gear S2 classic 18k Rose Gold Plated\nGear S2 classic Platinum Plated\nBluetooth Gear S2 classic in blue black\nGear S2 classic Bluetooth\n3G Gear S2 in dark gray\n3G Gear S2 in silver</string>
+    <string name="smart_watch_info_spec_dimension">Dimension</string>
+    <string name="smart_watch_info_spec_dimension_desc">BT  42.3 x 49.8 x 11.4 mm\nBT classic  39.9 x 43.6 x 11.4 mm\n3G  44.0 x 51.8 x 13.4 mm</string>
+    <string name="smart_watch_info_spec_display">Display</string>
+    <string name="smart_watch_info_spec_display_desc">1.2" Full Circular Super AMOLED\n360 x 360 (302ppi)</string>
+    <string name="smart_watch_info_spec_memory">Memory</string>
+    <string name="smart_watch_info_spec_memory_desc">RAM: 512MB\nSTORAGE: 4GB</string>
+    <string name="smart_watch_info_spec_sensors">Sensors</string>
+    <string name="smart_watch_info_spec_sensors_desc">Acc, Gyro, HRM, Barometer,\nAmbient light, GPS(3G only)</string>
+    <string name="smart_watch_info_spec_water">Water resistant</string>
+    <string name="smart_watch_info_spec_water_desc">IP68</string>
 
 
 

@@ -36,7 +36,7 @@
         "layout": "@layout/menu_item",
         "title": "@string/product_info",
         "icon": "@drawable/chevron_blue",
-        "action": "UNDER_CONSTRUCTION"
+        "action": "models/smart_watch_info.json"
       }
     ]
   }
