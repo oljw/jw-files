@@ -30,9 +30,6 @@ var startTime = 0;
 var score = 0;
 var highScore = 0;
 
-
-var debug = false;
-
 var Game = {
     CANVAS_WIDTH: 360,
     CANVAS_HEIGHT: 360,
@@ -43,29 +40,25 @@ var Game = {
     END_X: 360,
     MAX_OBSTA_ON_SCREEN: 4,
     FPS: 60,
-    ACCELERATE: 0.0002,
-    ACCELERATE_INTERVAL_TIME: 10
-};
-Game.status = {
-    PLAYING: "PLAYING",
-    GAME_OVER: "GAMEOVER"
+    ACCELERATION: 0.0002,
+    ACCELERATION_INTERVAL_TIME: 10
 };
 
 var Dino = {
-    SPRITE_HEIGHT: 47,
-    SPRITE_WIDTH: 264,
+    SPRITE_HEIGHT: 53,
+    SPRITE_WIDTH: 263,
     FRAME_WIDTH: 44,
     RUNNING_FRAME_RATE: 100,
     RUNNING_POS: [88, 132],
     JUMP_POS: 0,
-    DEAD_POS: 220,
-    JUMP_LIMIT: 65,
+    DEAD_POS: 176,
+    JUMP_LIMIT: 59.04,
     JUMP_VELOCITY: jumpVelocity += 8,
     JUMP_INITIAL_VELOCITY: 8,
     JUMP_GRAVITY: 0.33,
-    INITIAL_POS_Y: 165,
+    INITIAL_POS_Y: 159,
     POS_X: 20,
-    POS_Y: 165
+    POS_Y: 159			
 };
 Dino.collisionBox = {
     POS_X: Dino.POS_X - dinoCut,
@@ -81,15 +74,6 @@ var Ground = {
     GROUND_NEW_HEIGHT: 0,
     POS_X: 360,
     POS_Y: 200
-};
-
-var Cloud = {
-    SPRITE_HEIGHT: 14,
-    SPRITE_WIDTH: 46,
-    CLOUD_NEW_WIDTH: 0,
-    CLOUD_NEW_HEIGHT: 0,
-    POS_X: 0,
-    INITIAL_POS_Y: 360
 };
 
 var Obstacle = {};
@@ -136,6 +120,17 @@ var Score = {
 	HIGHSCORE_VAL_KEY : "highScoreVal"
 };
 
+function DrawBox(x, y, w, h) {
+    ctx.strokeStyle = "transparent";
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+
+	box = ctx.strokeRect(x, y, w, h);
+    return box;
+}
+
 window.addEventListener('tizenhwkey', function(e) {
     if (e.keyName == "back") {
         $.mobile.back();
@@ -155,11 +150,9 @@ document.addEventListener("DOMContentLoaded", function() {
         resetGame();
     }
     
-    canvas.addEventListener('ontouchmove', function(e) {return;}, false);
     canvas.addEventListener("touchstart", function(e) {
     	console.log(Game.GAME_SPEED)
     	if (isPlaying && !isGameOver) {
-            //Jump
             if (inAir) {return;}
             jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
         } else if (isGameOver) {
@@ -169,30 +162,29 @@ document.addEventListener("DOMContentLoaded", function() {
     loadScore();
 });
 
-document.addEventListener("rotarydetent", function(ev) {
-    var direction = ev.detail.direction;
-    /* Add behavior for detent detected event with a direction value */
-
-	   if (isPlaying && !isGameOver) {
-		   if (direction == 'CW') {
-	            if (inAir) {return;}
-	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
-	            jumping.stop();
-		   } else {
-	            if (inAir) {return;}
-	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
-	            jumping.stop();
-		   }
-	   }
-});
+//document.addEventListener("rotarydetent", function(ev) {
+//    var direction = ev.detail.direction;
+//    /* Add behavior for detent detected event with a direction value */
+//
+//	   if (isPlaying && !isGameOver) {
+//		   if (direction == 'CW') {
+//	            if (inAir) {return;}
+//	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
+//	            jumping.stop();
+//		   } else {
+//	            if (inAir) {return;}
+//	            jumping = setInterval(dinoJump, 1000 / (Game.FPS * 1.65));
+//	            jumping.stop();
+//		   }
+//	   }
+//});
 
 function reDraw() {
     ctx.fillStyle = '#99ccff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     if (imageReady) {
-
-
+    	
         //Ground Movement
         if (Ground.POS_X < 0) {
             Ground.POS_X = Ground.GROUND_NEW_WIDTH;
@@ -202,22 +194,10 @@ function reDraw() {
         }
         ctx.drawImage(groundImg, Ground.POS_X, Ground.POS_Y, Ground.GROUND_NEW_WIDTH, Ground.GROUND_NEW_HEIGHT);
 
-        Ground.POS_X -= Game.GAME_SPEED;
-        
-        //Cloud
-        var cloud1 = new CloudObject(100, 100, 2);
-        
-        if(cloud1.x < 0) {
-        	cloud1.x = Cloud.INITIAL_POS_Y;
-        }
-        if(cloud1.x > 0) {
-        	cloud1.x -= cloud1.speed;
-        }
-        
-        
+        Ground.POS_X -= Game.GAME_SPEED;    
 
         //DINO
-        if (Dino.POS_Y >= 150) {
+        if (Dino.POS_Y >= Dino.INITIAL_POS_Y) {
             ctx.drawImage(dinoImg, Dino.RUNNING_POS[dinoRunningIndex], 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, Dino.POS_X, Dino.POS_Y, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT);
 
             var dinoBox = new DrawBox(Dino.POS_X + dinoCut, Dino.POS_Y + dinoCut, Dino.FRAME_WIDTH - dinoCut * 2, Dino.SPRITE_HEIGHT - dinoCut * 2);
@@ -267,8 +247,6 @@ function reDraw() {
                 }
             }
         }
-
-        
         drawScoreBoard();
     }
 }
@@ -351,8 +329,6 @@ function drawScoreBoard() {
         highScore = score;
     }
     
-
-// TODO score and highscore position X, Y
     drawScore(highScore, Score.HIGH_SCORE_X_POS, Score.HIGH_SCORE_Y_POS); 
     drawScore(score, Score.SCORE_X_POS, Score.SCORE_Y_POS); 
     
@@ -392,27 +368,6 @@ function drawScore(score, scorePositionX, scorePositionY) {
 		scorePositionX + 66, scorePositionY, Score.NUMBER_WIDTH, Score.SPRITE_HEIGHT);
 }
 
-function CloudObject(x, y, speed) {
-	this.x = x;
-	this.y = y;
-	this.speed = speed;
-	
-	cloud = ctx.drawImage(cloudImg, x, y, Cloud.CLOUD_NEW_WIDTH, Cloud.CLOUD_NEW_HEIGHT);
-	
-	return cloud;
-}
-
-function DrawBox(x, y, w, h) {
-    debug ? ctx.strokeStyle = "red" : ctx.strokeStyle = "transparent";
-    this.x = x;
-    this.y = y;
-    this.width = w;
-    this.height = h;
-
-	box = ctx.strokeRect(x, y, w, h);
-    return box;
-}
-
 function reSize() {
     canvas.width = Game.CANVAS_WIDTH;
     canvas.height = Game.CANVAS_HEIGHT;
@@ -433,6 +388,7 @@ function dinoJump() {
             goingDown = false;
             inAir = false;
             Dino.JUMP_VELOCITY = Dino.JUMP_INITIAL_VELOCITY;
+            Dino.POS_Y = Dino.INITIAL_POS_Y;
         }
     }
 }
@@ -449,8 +405,8 @@ function resetGame() {
     isGameOver = false;
     Game.GAME_SPEED = Game.BASE_GAME_SPEED;
     (function raiseSpeed() {
-        Game.GAME_SPEED += Game.ACCELERATE;
-        setTimeout(raiseSpeed, Game.ACCELERATE_INTERVAL_TIME);
+        Game.GAME_SPEED += Game.ACCELERATION;
+        setTimeout(raiseSpeed, Game.ACCELERATION_INTERVAL_TIME);
         return Game.GAME_SPEED;
     })();
 }
@@ -477,9 +433,6 @@ function loadAllImages() {
 
     scoreImg = new Image();
     scoreImg.src = "images/time.png";
-    
-    cloudImg = new Image();
-    cloudImg.src = "images/cloud.png";
 }
 
 function imagesOnload() {
@@ -491,14 +444,8 @@ function imagesOnload() {
     };
     
     dinoImg.onload = function() {
-        imageReady = true;
         setTimeout(update, 1000 / Game.FPS);
     };
-    
-    cloudImg.onload = function() {
-    	Cloud.CLOUD_NEW_WIDTH = cloudImg.width * scale;
-    	Cloud.CLOUD_NEW_HEIGHT = cloudImg.height * scale;
-    }
 
     smObstaImg.onload = function() {
         Obstacle.sm.OBSTACLE_NEW_WIDTH = smObstaImg.width * scale;
