@@ -145,7 +145,7 @@
 
     <!--SmartThings Product Information Compatibility Json-->
     <string name="smart_things_info_compatibility">Product compatibility</string>
-    <string name="smart_things_info_compatibility_desc">SmartThings works with products from Samsung, Bose,\nSchlage, Yale, Cree, Osram Lightify, Honeywell, First\nAlert and other brands.\n\nFor a full list of compatible products, visit\nwww.smartthings.com/compatible-products. </string>
+    <string name="smart_things_info_compatibility_desc">SmartThings works with products from Samsung, Bose,\nSchlage, Yale, Cree, Osram Lightify, Honeywell, First\nAlert and other brands.\n\nFor a full list of compatible products, visit\nwww.smartthings.com/compatible-products.</string>
     <string name="smart_things_info_compatibility_app">SmartThings app</string>
     <string name="smart_things_info_compatibility_app_desc">OS\niOS (8.1 or later),\nAndroid (4.0 or later)\nWindows Phone (8.1 or later)</string>
 
@@ -198,8 +198,38 @@
     <string name="smart_watch_info_spec_water">Water resistant</string>
     <string name="smart_watch_info_spec_water_desc">IP68</string>
 
+    <!--SmartWatch Product Information Compatibility Json-->
+    <string name="smart_watch_info_compatibility">Product compatibility</string>
+    <string name="smart_watch_info_compatibility_desc">See which features are compatible with your Android™\nphone running Android Version 4.4 and above,\nwith at least 1.5GB RAM.</string>
+    <string name="smart_watch_info_compatibility_health">S Health</string>
+    <string name="smart_watch_info_compatibility_health_phone">Phone compatibility</string>
+    <string name="smart_watch_info_compatibility_health_phone_desc">Samsung smartphones starting from Galaxy S III\nonwards. Non-Samsung Android smartphones are\ncompatible. Tablets and some mobile devices\nmay not be supported.</string>
+    <string name="smart_watch_info_compatibility_health_os">OS</string>
+    <string name="smart_watch_info_compatibility_health_os_desc">Requires Android 4.4 and up</string>
+    <string name="smart_watch_info_compatibility_pay">Samsung Pay</string>
+    <string name="smart_watch_info_compatibility_pay_desc">Currently, you must have each of the following\nto enjoy Samsung Pay:</string>
+    <string name="smart_watch_info_compatibility_pay_devices">Devices:</string>    //Needs update
+    <string name="smart_watch_info_compatibility_pay_devices_desc">Galaxy S7 edge, S7, S6 edge+, S6 edge,\nS6 active, S6, Note5</string>
+    <string name="smart_watch_info_compatibility_pay_devices_disclaimer">Over-the-air software update is required to download Samsung Pay.\nAvailability may vary by server provider. Learn how to update your device -\nvisit the Samsung Pay Support Page.</string>    //Needs update
+    <string name="smart_watch_info_compatibility_pay_carriers">Carriers:</string>
+    <string name="smart_watch_info_compatibility_pay_carriers_desc">AT&amp;T, T-Mobile, Sprint, US Cellular,\nVerizon, Cricket, Metro PCS</string>
+    <string name="smart_watch_info_compatibility_pay_cards">Payment cards:</string>
+    <string name="smart_watch_info_compatibility_pay_cards_desc">The credit or debit card must be qualifying Visa,\nMasterCard or American Express issued by one of these\nbanks*: American Express, Bank of America, Chase,\nCitiBank, PNC, Synchrony, US Bank, Wells Fargo</string>
+    <string name="smart_watch_info_compatibility_pay_cards_disclaimer">*Only compatible with selected Visa, MasterCard and American Express cards\nfrom participating banks. Check with your bank/issuer to ensure that your card\nis compatible; and check the Samsung Pay Support page for additional\ncompatibility information regarding devices, carriers and cards.</string>
+    <string name="smart_watch_info_compatibility_pay_smartwatch">Smartwatch</string>
+    <string name="smart_watch_info_compatibility_pay_smartwatch_desc">Payments with Samsung Pay on the Gear S2 are only\ncompatible with NFC payment terminals</string>
+    <string name="smart_watch_info_compatibility_disclaimers">Disclaimers:</string>
+    <string name="smart_watch_info_compatibility_disclaimers_desc">PHONES TESTED: HTC One(M8), HTc One(M9), LG G&#8211;FLEX, Motorola Nexus 6,\nLG OPTIMUS G2, LG OPTIMUS G3, LG OPTIMUS G4, Kyocera E6560, LG G Vista,\nMotorola Droid Turbo To find out more call 1&#8211;800&#8211;SAMSUNG.</string>
+    <string name="smart_watch_info_compatibility_disclaimers_desc_desc">1. Compatible with select devices using Android 4.4 and later with at least\n1.5GB RAM. Supported devices may vary by carrier and device. Some features\nmay not be available. For best results, connect with compatible Samsung\nGalaxy devices.\n\n2. Call experience may vary depending on manufacturer.\n\n3. Some Android phones limited on text reply, call back from text, and read\nnotification check from phone.\n\n4. No email sync capability for non-Samsung phones.\n\n5. Wi-Fi profile sharing from your phone automatically to your watch may not\nbe possible with your Android Phone.</string>
 
-
+    <!--SmartWatch Product Information Features Json-->
+    <string name="smart_watch_info_features">Product Features</string>
+    <string name="smart_watch_info_features_connectivity">Connectivity</string>
+    <string name="smart_watch_info_features_connectivity_desc">Easy to set up with an even-wider range of\nAndroid devices, your Gear S2 will give the\npower of a phone on your wrist.</string>
+    <string name="smart_watch_info_features_health">S Health</string>
+    <string name="smart_watch_info_features_health_desc">Taking charge of your health is easy with S Health\non your Gear S2 and Galaxy smartphone.\nS Health helps you stay fit by acting as a personal coach.\nThe various training programs help in improving\nyour overall fitness, health and lifestyle.</string>
+    <string name="smart_watch_info_features_pay">Samsung Pay</string>
+    <string name="smart_watch_info_features_pay_desc">Pay for your coffee or grab a quick bite with a wave\nof your arm. Hold your wrist near the NFC enabled\npayment terminal and you\'re done.</string>
 
 
 </resources>
