@@ -8,19 +8,19 @@
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>nGH5RkNun4WboWazYJDhgbtdYL+OkNtelx5Symf0dCI=</DigestValue>
+<DigestValue>wKhV8wJgK2AB2VHTbiUqJ1ouik6tlDgtnDlWYz3W2L8=</DigestValue>
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CQp2W1f4rb9B9BQqxIKnpPoE5XngphFbanh+4dL8MoA=</DigestValue>
+<DigestValue>UjdZBn6h+tPc33qO5+TqURLREkqtf0xa3Nrz97WuySs=</DigestValue>
 </Reference>
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>eXV/jK8m4rtpGGxo1XpefdFyeREs4QDN3VEzTR4dpnI=</DigestValue>
 </Reference>
-<Reference URI="images%2Fcloud.png">
+<Reference URI="images%2Fdino_main_menu.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>nC7WzynHEaGt9QzbvJ60U2DTC1rUgxeEVMXtSbRLN1s=</DigestValue>
+<DigestValue>sc/LJQ0SjR2LJyX7tigRuVPfYArVHa10GUtefJGK2Ys=</DigestValue>
 </Reference>
 <Reference URI="images%2Fdino_move.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -38,17 +38,13 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>harGJFoJTAyNYFDiak1GEvYM6i7cBk6Lo+CtkZKp8mA=</DigestValue>
 </Reference>
-<Reference URI="images%2Freplay.png">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>5qTh5Ng+/ZC8qkHYfSpbglp5sQ/TkvoLq59mTzkPNUs=</DigestValue>
-</Reference>
 <Reference URI="images%2Ftime.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>/xIQMbo6mmxECiEFzJbbETQ141imwG9Xuu8vv330Gic=</DigestValue>
+<DigestValue>RqoGKIQAzishbMPH5Y4QPd1TwUfLA6Pg501irVY0jrQ=</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Ph3ma9k3MLXGFf5IcwpnrQHJKTIINcHnK2v1YCYVJcE=</DigestValue>
+<DigestValue>sj+PBwLZwMfqyq2ITG+ip9LmYsIoJxjDrEiSOotAhi8=</DigestValue>
 </Reference>
 <Reference URI="js%2Fcircle-helper.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -56,7 +52,7 @@
 </Reference>
 <Reference URI="js%2Fscript.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>2WO1DFkdxa7wbVBmJI4I8yhLcQDQgOzTdUpjhip52ro=</DigestValue>
+<DigestValue>VNLnEzRwld7yfzgVjR2JursuAVkRSBwZkkrvPPAoWfo=</DigestValue>
 </Reference>
 <Reference URI="lib%2Ftau%2FLICENSE.Flora">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -1031,11 +1027,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-alomMv1ChYE4YVvEFidh12FcU+wkYDv3T83I7yL1ewcJ8gRDzYKKm9ib+ZOf/3eBziY7CzUNsHB/
-ZClgvUuRJJG0IBG3PKQEjWJ0I12d+yVAlrahNFdCI4qozroxbGNMHQ/ewoOqtZuz5drRXVwVTP+g
-XROx6PDu45gxwILwQT4XhesT/TphKx+LQpbYFUoQSxFKmmeaOiVu9j3sL/5mLYoVE3z4r/RseZ8R
-+OYDyllfl7FpDET7iLAm6wkK32xUbYjgx3Ac+MQss1IZCEko7rKel7GQ9KlhW2WQd4hwxmbLjm5l
-uEfTu1uAkDm3hROs0aJgrR2vNPpTXHY1HbiJLg==
+EMP8oJD14n/DAfPNFiBW9VqF4XJ4k+NM/tXCy/L19GVs7fh72KvhDaD8+ot1B+mACA4k1yc7/7Mt
+isYzj7Dz8xp/RA/TDcFI7BeAo/hUWGm2/Gi3jTVoLraOcxJBeZ0DJiOVL7bKLCoYSW+pA3hPlCo/
+EUTP5tScNfWCn/v58UCtUBTIuQUr7YV3Uvs4YbmoXJrwvefu9Y+WCMuce43ECVLdSgKo8uxJ5jJm
+24Hsprdw+EQsIRyHKRbrTz42d5ruV0e8Cnj3fz257g5hQHF7y0eXPYTqfVDmLv8XrMJy6ioPzBn4
+sQ19A8J6cgWCB+HnVRWEEN78YDlpOro8GrGG0w==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

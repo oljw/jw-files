@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="ui-page ui-page-active" id="main">
-		<img id="mainScreen" src="images/dino_main_menu.png" />
+		<img src="images/dino_main_menu.png" />
 		<footer class="ui-footer ui-bottom-button" id="startButton">
 			<a href="#secondpg" class="ui-btn">Play Game</a>
 		</footer>

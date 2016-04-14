@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/dinoRun" version="1.0.0" viewmodes="maximized">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://jwgame/mrDinoRun" version="1.0.0" height="360" width="360" viewmodes="maximized">
     <tizen:application id="Lr6aEj8uc5.dinoRun" package="Lr6aEj8uc5" required_version="2.3.1"/>
+    <author email="oljaewoo@gmail.com">Jaewoo Lee</author>
     <content src="index.html"/>
     <feature name="http://tizen.org/feature/screen.size.normal"/>
     <icon src="icon.png" height="117" width="117"/>
-    <name>dinoRun</name>
+    <name>Mr.Dino RUN</name>
     <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:profile name="wearable"/>
     <tizen:setting hwkey-event="enable"/>

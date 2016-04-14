@@ -120,14 +120,6 @@ var Score = {
 	HIGHSCORE_VAL_KEY : "highScoreVal"
 };
 
-var GameOverText = {
-	SPRITE_HEIGHT: 23,
-	SPRITE_WIDTH: 206,
-	GAME_OVER_TEXT_X_POS: 77,
-	GAME_OVER_TEXT_Y_POS: 168.5,
-	START_Y_ON_IMG: 24
-}
-
 function DrawBox(x, y, w, h) {
     ctx.strokeStyle = "transparent";
     this.x = x;
@@ -313,9 +305,8 @@ function gameOver() {
     window.cancelAnimationFrame(gameAnimation);
     
     //game over text TODO Change it smaller
-  //game over text TODO Change it smaller
-    ctx.drawImage(scoreImg, 0, GameOverText.START_Y_ON_IMG, GameOverText.SPRITE_WIDTH, GameOverText.SPRITE_HEIGHT,
-    		GameOverText.GAME_OVER_TEXT_X_POS, GameOverText.GAME_OVER_TEXT_Y_POS, GameOverText.SPRITE_WIDTH, GameOverText.SPRITE_HEIGHT);
+    ctx.drawImage(scoreImg, 0, 24, 206, Score.SPRITE_HEIGHT,
+    		80, 230, 206, Score.SPRITE_HEIGHT);
     
     //dead dino face
     ctx.drawImage(dinoImg, Dino.DEAD_POS, 0, Dino.FRAME_WIDTH, Dino.SPRITE_HEIGHT, 
