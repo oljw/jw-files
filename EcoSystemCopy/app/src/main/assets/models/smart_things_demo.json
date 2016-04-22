@@ -1,0 +1,22 @@
+{
+  "me": "models/smart_things_demo.json",
+  "name": "@string/smart_things_demo",
+  "sibling": "models/smart_things_info.json",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.VideoFragment",
+  "layout": "@layout/fragment_video",
+  "background": "@color/white",
+  "action": "models/legal.json",
+  "actionBackKey": "models/smart_things.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "title": "@string/smart_things_demo_title",
+    "videoFile": "video/5.0_SmartThings.mp4",
+    "frameFile": "frame/5.0_SmartThings_frame.jpg",
+    "action": "models/legal.json"
+  }
+}

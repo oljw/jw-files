@@ -1,0 +1,45 @@
+{
+  "me": "models/smart_watch.json",
+  "name": "@string/smart_watch",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.MenuFragment",
+  "layout": "@layout/fragment_menu_bg",
+  "background": "@color/white",
+  "imageBG": "@drawable/phone_smartwatch_image",
+  "imageBGMargin": [
+    "@integer/no_margin",
+    "@integer/fragment_menu_bg_smart_watch_bg_margin_top",
+    "@integer/no_margin",
+    "@integer/no_margin"
+  ],
+  "actionBackKey": "models/decision.json",
+  "forwardEnterAnim":"@animator/coded_circle_reveal",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/coded_circle_unreveal",
+  "addEnterAnim":"@animator/coded_circle_reveal",
+  "pivotX":"@integer/smart_watch_pivot_x",
+  "pivotY":"@integer/smart_watch_pivot_y",
+  "fragment": {
+    "title": [
+      "NONE",
+      "@string/smart_watch_title"
+    ],
+    "subTitle": [
+      "@string/smart_watch_subtitle"
+    ],
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/start_demo",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/smart_watch_demo.json"
+      },
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/product_info",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/smart_watch_info.json"
+      }
+    ]
+  }
+}

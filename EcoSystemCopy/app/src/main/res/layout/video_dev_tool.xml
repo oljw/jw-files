@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/chapterSeekButt"
+        android:layout_width="@dimen/demo_seek_button_layout"
+        android:layout_height="@dimen/demo_seek_button_layout"
+        android:layout_gravity="bottom|right"
+        android:clickable="true"
+        android:src="@drawable/seek_button" />
+
+    <ImageView
+        android:id="@+id/playPauseButt"
+        android:layout_width="@dimen/demo_play_pause_button_layout"
+        android:layout_height="@dimen/demo_play_pause_button_layout"
+        android:layout_gravity="bottom|left"
+        android:clickable="true"
+        android:src="@drawable/pause_button" />
+</FrameLayout>

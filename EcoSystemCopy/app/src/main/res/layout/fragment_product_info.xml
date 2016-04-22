@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/back_btn" android:id="@+id/back_button" />
+
+    <include layout="@layout/header_title2_desc"
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/back_button"
+        android:layout_marginTop="@dimen/fragment_product_info_title_layout_margin_top" />
+
+    <ImageView
+        android:id="@+id/image_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fragment_product_info_image_bg_margin_top"
+        android:layout_marginBottom="@dimen/fragment_product_info_image_bg_margin_bottom" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_bg"
+        android:overScrollMode="never"
+        android:divider="@null" />
+
+</RelativeLayout>

@@ -15,30 +15,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView character = (ImageView)findViewById(R.id.character);
-
-
-        Log.d(TAG, "Density: " + getDensityName(this)); //GS6Edge => xxxhdpi, Tablet => mdpi.
-
-    }
-
-    private static String getDensityName(Context context) {
-        float density = context.getResources().getDisplayMetrics().density;
-        if (density >= 4.0) {
-            return "xxxhdpi";
-        }
-        if (density >= 3.0) {
-            return "xxhdpi";
-        }
-        if (density >= 2.0) {
-            return "xhdpi";
-        }
-        if (density >= 1.5) {
-            return "hdpi";
-        }
-        if (density >= 1.0) {
-            return "mdpi";
-        }
-        return "ldpi";
+//        ImageView character = (ImageView)findViewById(R.id.character);
+//
+//
+//        Log.d(TAG, "Density: " + getDensityName(this)); //GS6Edge => xxxhdpi, Tablet => mdpi.
+//
+//    }
+//
+//    private static String getDensityName(Context context) {
+//        float density = context.getResources().getDisplayMetrics().density;
+//        if (density >= 4.0) {
+//            return "xxxhdpi";
+//        }
+//        if (density >= 3.0) {
+//            return "xxhdpi";
+//        }
+//        if (density >= 2.0) {
+//            return "xhdpi";
+//        }
+//        if (density >= 1.5) {
+//            return "hdpi";
+//        }
+//        if (density >= 1.0) {
+//            return "mdpi";
+//        }
+//        return "ldpi";
     }
 }

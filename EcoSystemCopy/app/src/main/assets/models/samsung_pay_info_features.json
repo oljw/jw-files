@@ -1,0 +1,250 @@
+{
+  "me": "samsung_pay_info_features.json",
+  "name": "@string/samsung_pay_info_features",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.ListFragment",
+  "layout": "@layout/fragment_list",
+  "background": "@color/white",
+  "actionBackKey": "models/samsung_pay_info.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "background":"@color/black",
+    "fabColor": "@color/metallic_gray",
+    "fabImage": "@drawable/close_white",
+    "listItems": [
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/black",
+        "text": "@string/product_features",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_features_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_desc_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_features_desc",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_features_desc_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_swipe_up_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_features_swipe_up",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_features_swipe_up_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_swipe_up_margin_bottom",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_features_swipe_up_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_features_swipe_up_desc_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_swipe_up_desc_margin_bottom",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_image_center",
+        "layoutColor": "@color/black",
+        "image": "@drawable/swipe_up_image"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_secure_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_features_secure",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_features_secure_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_secure_margin_bottom",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_features_secure_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_features_secure_desc_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_secure_desc_margin_bottom",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_image_right",
+        "layoutColor": "@color/black",
+        "image": "@drawable/secure_image"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_hover_and_pay_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_features_hover_and_pay",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_features_hover_and_pay_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_hover_and_pay_margin_bottom",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_features_hover_and_pay_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_features_hover_and_pay_desc_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_hover_and_pay_desc_margin_bottom",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_image_right",
+        "layoutColor": "@color/black",
+        "image": "@drawable/hover_image"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_designed_with_our_best_available_security_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_features_designed_with_our_best_available_security",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_features_designed_with_our_best_available_security_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_designed_with_our_best_available_security_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_features_designed_with_our_best_available_security_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_features_designed_with_our_best_available_security_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_designed_with_our_best_available_security_desc_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_image_center",
+        "layoutColor": "@color/white",
+        "image": "@drawable/available_security_image"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_google_play_desc_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_features_google_play_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_features_google_play_desc_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_google_play_desc_margin_bottom",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_image_center",
+        "layoutColor": "@color/black",
+        "image": "@drawable/google_play_store"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_url_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/black",
+        "text": "@string/samsung_pay_info_url",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/samsung_pay_info_features_url_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_url_margin_bottom",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_legal_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/samsung_pay_info_legal",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/samsung_pay_info_features_legal_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/samsung_pay_info_features_legal_margin_bottom",
+        "layoutColor": "@color/white"
+      }
+    ]
+  }
+}

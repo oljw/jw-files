@@ -1,0 +1,118 @@
+{
+  "me": "smart_things_info_compatibility.json",
+  "name": "@string/smart_things_info_compatibility",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.ListFragment",
+  "layout": "@layout/fragment_list",
+  "background": "@color/white",
+  "actionBackKey": "models/smart_things_info.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "fabColor": "@color/white",
+    "fabImage": "@drawable/close",
+    "listItems": [
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/white",
+        "text": "@string/product_compatibility",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/smart_things_info_compatibility_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_image_center",
+        "layoutColor": "@color/white",
+        "image": "@drawable/product_compatibility_image"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_desc_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/smart_things_info_compatibility_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/smart_things_info_compatibility_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_app_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/white",
+        "text": "@string/smart_things_info_compatibility_app",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/smart_things_info_compatibility_app_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_app_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/smart_things_info_compatibility_app_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/smart_things_info_compatibility_app_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_url_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/white",
+        "text": "@string/smart_things_info_url",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/smart_things_info_compatibility_url_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_url_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_legal_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/black",
+        "text": "@string/smart_things_info_legal",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/smart_things_info_compatibility_legal_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/smart_things_info_compatibility_legal_margin_bottom",
+        "layoutColor": "@color/black"
+      }
+    ]
+  }
+}

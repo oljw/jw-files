@@ -1,0 +1,22 @@
+{
+  "me": "models/smart_tv_demo.json",
+  "name": "@string/smart_tv_demo",
+  "sibling": "models/smart_tv_info.json",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.VideoFragment",
+  "layout": "@layout/fragment_video_landscape",
+  "background": "@color/black",
+  "action": "models/legal.json",
+  "actionBackKey": "models/smart_tv.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "title": "@string/smart_tv_demo_title",
+    "orientation": "@integer/video_orientation_90",
+    "videoFile": "video/6.0_Phone_To_TV.mp4",
+    "action": "models/legal.json"
+  }
+}

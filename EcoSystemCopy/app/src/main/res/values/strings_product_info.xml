@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    ###############################################################
+        Gear VR Product Information
+    ###############################################################
+    -->
+    <string name="gear_vr_info_url">For more information, visit\nwww.samsung.com/us.</string>
+    <string name="gear_vr_info_legal">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, Samsung\nGear VR, and Samsung Gear 360  are all trademarks of Samsung Electronics Co.,\nLtd. Use only in accordance with law. Other company and product names\nmentioned may be trademarks of their respective owners. Screen images\nsimulated; actual appearance of devices may vary. Sequences shortened. Gear VR\nand Gear 360 sold separately. Gear VR: Read and follow warnings and instructions\nwith the Headset before use. The Headset should be calibrated before each use.\nNot for use by children under 13. A virtual reality experience may trigger health\nreactions. See a doctor before use if you have a history of seizures. Stop use if you\nexperience health reactions. Compatible with select Samsung Galaxy devices.</string>
+
+    <!--Gear VR Product Information Spec Json-->
+    <!--<string name="gear_vr_info_spec">Product specs</string>-->
+    <string name="gear_vr_info_spec_dimension">Dimension</string>
+    <string name="gear_vr_info_spec_dimension_desc">201.9 x 116.4 x 92.6mm (318g)</string>
+    <string name="gear_vr_info_spec_field_of_view">Field of view</string>
+    <string name="gear_vr_info_spec_field_of_view_desc">96˚</string>
+    <string name="gear_vr_info_spec_pui_button">PUI / Button</string>
+    <string name="gear_vr_info_spec_pui_button_desc">Touchpad, Back key, Volume key,\nFocus adjustment wheel</string>
+    <string name="gear_vr_info_spec_sensors">Sensors</string>
+    <string name="gear_vr_info_spec_sensors_desc">Gyro, Accelerometer, Proximity</string>
+
+    <string name="gear_vr_info_spec_charging_port">Charging port</string>
+    <string name="gear_vr_info_spec_charging_port_desc">Micro USB (for phone)</string>
+    <string name="gear_vr_info_spec_360_camera">Camera</string>
+    <string name="gear_vr_info_spec_360_camera_desc">Dual CMOS 15MP Sensor\nDual F2.0 Fisheye Lens</string>
+    <string name="gear_vr_info_spec_360_resolution">Resolution</string>
+    <string name="gear_vr_info_spec_360_resolution_movie_recording">Movie recording</string>
+    <string name="gear_vr_info_spec_360_resolution_movie_recording_desc">Dual Cam: up to 3840 x 1920 (30fps)\nSingle Cam: up to 2560 x 1440 (30fps)</string>
+    <string name="gear_vr_info_spec_360_resolution_still_capturing">Still capturing</string>
+    <string name="gear_vr_info_spec_360_resolution_still_capturing_desc">Dual Cam: up to 7776 x 3888 (30fps)\nSingle Cam: 3072 x 1728 (5M)</string>
+    <string name="gear_vr_info_spec_360_camera_mode">Camera mode</string>
+    <string name="gear_vr_info_spec_360_camera_mode_dual_lens_mode">Dual lens mode</string>
+    <string name="gear_vr_info_spec_360_camera_mode_dual_lens_mode_desc">Video, Photo, Time-lapse Video, Looping Video</string>
+    <string name="gear_vr_info_spec_360_camera_mode_single_lens_mode">Single lens mode</string>
+    <string name="gear_vr_info_spec_360_camera_mode_single_lens_mode_desc">Video, Photo, Time-lapse Video, Looping Video</string>
+    <string name="gear_vr_info_spec_360_dimension">Dimension</string>
+    <string name="gear_vr_info_spec_360_dimension_desc">66.7 x 56.2 x 60mm (153g incl. battery)</string>
+    <string name="gear_vr_info_spec_360_memory">Memory</string>
+    <string name="gear_vr_info_spec_360_memory_desc">1GB RAM\nMicroSD Card (up to 128GB)</string>
+
+    <!--Gear VR Product Information Compatibility Json-->
+    <!--<string name="gear_vr_info_compatibility">Product compatibility</string>-->
+    <string name="gear_vr_info_compatibility_devices">Devices</string>
+    <string name="gear_vr_info_compatibility_devices_desc">Galaxy S7, S7 Edge, Note5, S6 edge+, S6, and S6 edge</string>
+    <string name="gear_vr_info_compatibility_360_devices">Devices</string>
+    <string name="gear_vr_info_compatibility_360_devices_desc">Galaxy S7, S7 Edge, Note5, S6 edge+, S6, and S6 edge</string>
+
+    <!--Gear VR Product Information Features Json-->
+    <!--<string name="gear_vr_info_features">Product features</string>-->
+    <string name="gear_vr_info_features_gear_vr">Gear VR</string>
+    <string name="gear_vr_info_features_gear_vr_desc">Put on the Gear VR, and you\'re there in the\nmoment. Experience true 360° virtual reality\nwith a Super AMOLED display, wide field of view,\nprecise head-tracking and low latency. All you\nneed to do is slip in your compatible Samsung\nGalaxy smartphone and you\'re free to take on\nthe world and beyond.</string>
+    <string name="gear_vr_info_features_adventures">Adventures</string>
+    <string name="gear_vr_info_features_adventures_desc">Anything is possible when you\'re inside Gear VR.\nWhether it\'s battling the undead or riding a flying\ncarpet, you won\'t run out of adventures with an\never-expanding vault of games and content.</string>
+    <string name="gear_vr_info_features_gear_360">Gear 360</string>
+    <string name="gear_vr_info_features_gear_360_desc">The front and rear lenses each capture 180 degrees\nhorizontally and vertically, creating a seamless and\ncomplete 360-degree field of view. Pair up your\ncompatible Galaxy smartphone via Bluetooth, then\nuse Wi-Fi Direct to transform its large screen into a\nvery handy remote viewfinder and transfer\nfiles in one simple move.</string>
+
+
+
+
+    <!--
+    ###############################################################
+        Smart TV Product Information
+    ###############################################################
+    -->
+    <string name="smart_tv_info_legal">©2016 Samsung Electronics America, Inc. Samsung, and Samsung Galaxy S are all\ntrademarks of Samsung Electronics Co., Ltd. Use only in accordance with law.\nOther company and product names mentioned may be trademarks of their\nrespective owners. Screen images simulated; actual appearance of devices may\nvary. Sequences shortened. Internet connection required for streaming, games\nand apps. Quick Connect: One step activation after initial setup requires device\nand TV to be on the same network. Currently available on Galaxy S6/S6 Edge and\nselect devices after firmware updates. Quick Connect is compatible with 2015 and\nlater Samsung Smart TVs. For more information, visit\nhttp://www.samsung.com/us/experience/smart-tv/.</string>
+
+    <!--Smart TV Product Information Spec-->
+    <!--<string name="smart_tv_info_spec">Product specs</string>-->
+    <string name="smart_tv_info_spec_url">To learn more about the full range\nof Samsung TV products, visit\nwww.samsung.com/us.</string>
+
+    <!--Smart TV Product Information Compatibility-->
+    <!--<string name="smart_tv_info_compatibility">Product compatibility</string>-->
+    <string name="smart_tv_info_compatibility_url">See the full listing of Samsung TVs\nthat are compatible with your\nSamsung Galaxy smartphone at\nwww.samsung.com/us.</string>
+
+    <!--Smart TV Product Information Features-->
+    <!--<string name="smart_tv_info_features">Product features</string>-->
+    <string name="smart_tv_info_features_sharing">Sharing made seamless</string>
+    <string name="smart_tv_info_features_sharing_desc">With Smart View, you can share screens between\nselect Samsung devices and your Smart TV in just\none step. And Quick Connect lets you easily send\ncontent to your TV from your mobile device.</string>
+    <string name="smart_tv_info_features_4k_suhd">4K SUHD</string>
+    <string name="smart_tv_info_features_4k_suhd_desc">Introducing a new category of TVs. With 4K SUHD TVs,\nnow you can experience stunning colors, deep contrast,\nincredible brightness, and 4K resolution that redefines\nyour TV viewing experience.</string>
+    <string name="smart_tv_info_features_more_entertainment">More entertainment</string>
+    <string name="smart_tv_info_features_more_entertainment_desc">Watch what you want, when you want. Even enjoy\nsome of your favorites in stunning 4K UHD\nresolution. Simply launch streaming apps like\nNetflix, Amazon Instant Video or M-GO for an\nenhanced viewing experience. You can also play\nsome of your favorite games and access apps like\nnews, weather, sports, music, and more,\nright on your Smart TV.</string>
+    <string name="smart_tv_info_features_url">For more information, visit\nwww.samsung.com/us.</string>
+
+
+
+
+    <!--
+    ###############################################################
+        Samsung Pay Product Information
+    ###############################################################
+    -->
+    <string name="samsung_pay_info_url">For more information, visit\nwww.samsung.com/pay</string>
+    <string name="samsung_pay_info_legal">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, Samsung\nPay, and Samsung Gear are all trademarks of Samsung Electronics Co., Ltd. Use\nonly in accordance with law. Other company and product names mentioned may\nbe trademarks of their respective owners. Screen images simulated; actual\nappearance of devices may vary. Sequences shortened. Samsung Pay: Samsung\nPay is only compatible with select cards, carriers and Samsung devices; see\nSamsung Pay Support (http://www.samsung.com/Pay) for compatibility\ninformation. Gear S2: Sold separately. Gear S2 is compatible with select devices\nusing Android 4.4 and later with at least 1.5GB RAM. Supported devices may vary\nby carrier and device. Some features may not be available. For best results,\nconnect with compatible Samsung Galaxy devices.</string>
+
+    <!--Samsung Pay Product Information Spec Json-->
+    <!--<string name="samsung_pay_info_spec">Product specs</string>-->
+    <string name="samsung_pay_info_spec_acceptance">Acceptance</string>
+    <string name="samsung_pay_info_spec_acceptance_desc">Samsung Pay is accepted virtually anywhere\nyou can swipe or tap your card.</string>
+    <string name="samsung_pay_info_spec_security">Security</string>
+    <string name="samsung_pay_info_spec_security_desc">Samsung Pay uses several layers of security.</string>
+    <string name="samsung_pay_info_spec_capacity">Capacity</string>
+    <string name="samsung_pay_info_spec_capacity_desc">Payment Cards - 10\nGift Cards - Unlimited</string>
+
+    <!--Samsung Pay Product Information Compatibility Json-->
+    <!--<string name="samsung_pay_info_compatibility">Product compatibility</string>-->
+    <string name="samsung_pay_info_compatibility_desc">Currently, you must have each of the following\nto enjoy Samsung Pay:</string>
+    <string name="samsung_pay_info_compatibility_devices">Devices†:</string>
+    <string name="samsung_pay_info_compatibility_devices_desc">Galaxy S7 edge, S7, S6 edge+, S6 edge,\nS6 active, S6, Note5</string>
+    <string name="samsung_pay_info_compatibility_carriers">Carriers</string>
+    <string name="samsung_pay_info_compatibility_carriers_desc">AT&amp;T, T-Mobile, Sprint, US Cellular, Verizon,\nCricket, Metro PCS</string>
+    <string name="samsung_pay_info_compatibility_payment_cards">Payment cards:</string>
+    <string name="samsung_pay_info_compatibility_payment_cards_desc">The credit or debit card must be a qualifying Visa,\nMasterCard or American Express issued by\none of these banks*:\n\nAmerican Express, Bank of America, Chase, CitiBank,\nPNC, Synchrony, US Bank, Wells Fargo</string>
+    <string name="samsung_pay_info_compatibility_smartwatch">Smartwatch</string>
+    <string name="samsung_pay_info_compatibility_smartwatch_desc">Payments with Samsung Pay on the Gear S2 are only\ncompatible with NFC-enabled payment terminals</string>
+    <string name="samsung_pay_info_compatibility_option_desc1">† Over-the-air software update is required to download Samsung Pay.\nAvailability may vary by service provider. Learn how to update your device –\nvisit the Samsung Pay Support Page.</string>
+    <string name="samsung_pay_info_compatibility_option_desc2">*Only compatible with select Visa, MasterCard and American Express cards\nfrom participating banks. Check with your bank/issuer to ensure that your card\nis compatible; and check the Samsung Pay Support page for additional\ncompatibility information regarding devices, carriers and cards.</string>
+
+    <!--Samsung Pay Product Information Features Json-->
+    <!--<string name="samsung_pay_info_features">Product features</string>-->
+    <string name="samsung_pay_info_features_desc">3 Simple steps to pay</string>
+    <string name="samsung_pay_info_features_swipe_up">Swipe up</string>
+    <string name="samsung_pay_info_features_swipe_up_desc">Swipe up from the home button. Or, select the\nSamsung Pay app icon from your\nhome screen or app tray.</string>
+    <string name="samsung_pay_info_features_secure">Secure</string>
+    <string name="samsung_pay_info_features_secure_desc">Authorize payments by simply scanning your\nfingerprint or entering your pin.</string>
+    <string name="samsung_pay_info_features_hover_and_pay">Hover &amp; pay</string>
+    <string name="samsung_pay_info_features_hover_and_pay_desc">Hover your phone over the in‑store card reader.\nCongratulations!</string>
+    <string name="samsung_pay_info_features_designed_with_our_best_available_security">Designed with our best\navailable security</string>
+    <string name="samsung_pay_info_features_designed_with_our_best_available_security_desc">Your purchases remain yours alone. Samsung Pay\nuses several layers of security. It keeps your\npayment information separate and doesn\'t store or\nshare it, so you can pay without worry.</string>
+    <string name="samsung_pay_info_features_google_play_desc">Samsung Pay is now available on Google Play™\nas a free download for compatible devices.</string>
+
+
+
+
+    <!--
+    ###############################################################
+        SmartThings Product Information
+    ###############################################################
+    -->
+    <!--SmartThings Product Information Spec Json-->
+    <string name="smart_things_info_url">For more information, visit\nwww.smartthings.com</string>
+    <string name="smart_things_info_legal">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, and\nSamsung SmartThings are all trademarks of Samsung Electronics Co., Ltd. Use\nonly in accordance with law. Other company and product names mentioned may\nbe trademarks of their respective owners. Screen images simulated; actual\nappearance of devices may vary. Sequences shortened.\nSamsung SmartThings sold separately.</string>
+    <!--<string name="smart_things_info_spec">Product specs</string>-->
+    <string name="smart_things_info_spec_contracts">Contracts</string>
+    <string name="smart_things_info_spec_contracts_desc">No Contracts</string>
+    <string name="smart_things_info_spec_monthly">Monthly fees</string>
+    <string name="smart_things_info_spec_monthly_desc">No Required Monthly Fees</string>
+    <string name="smart_things_info_spec_communication">Communication protocol</string>
+    <string name="smart_things_info_spec_communication_desc">ZigBee, Z-Wave, IP</string>
+    <string name="smart_things_info_spec_internet">Internet connection</string>
+    <string name="smart_things_info_spec_internet_desc">Requires an Internet-connected router with an\navailable Ethernet port</string>
+
+    <!--SmartThings Product Information Compatibility Json-->
+    <!--<string name="smart_things_info_compatibility">Product compatibility</string>-->
+    <string name="smart_things_info_compatibility_desc">SmartThings works with products from Samsung, Bose,\nSchlage, Yale, Cree, Osram Lightify, Honeywell, First\nAlert and other brands.\n\nFor a full list of compatible products, visit\nwww.smartthings.com/compatible-products.</string>
+    <string name="smart_things_info_compatibility_app">SmartThings app</string>
+    <string name="smart_things_info_compatibility_app_desc">OS\niOS (8.1 or later),\nAndroid (4.0 or later)\nWindows Phone (8.1 or later)</string>
+
+    <!--Smart Things Product Information Features Json-->
+    <!--<string name="smart_things_info_features">Product features</string>-->
+    <string name="smart_things_info_features_desc">How it works</string>
+    <string name="smart_things_info_features_app">App</string>
+    <string name="smart_things_info_features_app_desc">Download the free app to run your home\nfrom your Samsung Galaxy smartphone.</string>
+    <string name="smart_things_info_features_hub">Hub</string>
+    <string name="smart_things_info_features_hub_desc">Connect the SmartThings Hub to\nyour Internet router.</string>
+    <string name="smart_things_info_features_things">Things</string>
+    <string name="smart_things_info_features_things_desc">Add as many smart devices as you\'d like to\npersonalize your smart home.</string>
+    <string name="smart_things_info_features_plays">Plays well with others</string>
+    <string name="smart_things_info_features_plays_desc">Add as many or as few smart devices as you want,\nchoreograph them to work together in one free\napp, and create a smarter home that automatically\nreacts as life happens.</string>
+    <string name="smart_things_info_features_run">Run your home from\nyour phone</string>
+    <string name="smart_things_info_features_run_desc">With the free SmartThings app, you can receive\nimportant notifications about what\'s happening at\nhome, control your smart devices with a simple\ntap, and automate your home to react to\nyour unique preferences.</string>
+
+
+    <!--
+    ###############################################################
+        Tablet Product Information
+    ###############################################################
+    -->
+    <string name="tablet_info_url">For more information, visit\nwww.samsung.com/us.</string>
+    <string name="tablet_info_legal">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, Samsung\nSideSync, and Samsung Galaxy Tab are all trademarks of Samsung Electronics\nCo., Ltd. Use only in accordance with law. Other company and product names\nmentioned may be trademarks of their respective owners. Screen images\nsimulated; actual appearance of devices may vary. Sequences shortened. Side\nSync: Some Galaxy devices sold through certain channels may not have the\nGALAXY Apps widget. Please check the Apps and Widget folders on your device.\nFor information about devices supported by SideSync, please visit\nwww.samsung.com/us/sidesync.</string>
+
+    <!--Tablet Product Information Spec Json-->
+    <!--<string name="tablet_info_spec">Product specs</string>-->
+    <string name="tablet_info_spec_display">Display</string>
+    <string name="tablet_info_spec_display_desc">9.7\" 2048x1536 (QXGA) Super AMOLED\n8.0\" 2048x1536 (QXGA) Super AMOLED</string>
+    <string name="tablet_info_spec_ap">AP</string>
+    <string name="tablet_info_spec_ap_desc">Exynos 5433 (1.9GHz Quad + 1.3GHz Quad)</string>
+    <string name="tablet_info_spec_memory">Memory</string>
+    <string name="tablet_info_spec_memory_desc">3GB + 32/64GB\nMicroSD up to 128GB</string>
+    <string name="tablet_info_spec_camera">Camera</string>
+    <string name="tablet_info_spec_camera_desc">8MP AF + 2.1MP FF</string>
+    <string name="tablet_info_spec_os">OS</string>
+    <string name="tablet_info_spec_os_desc">Android Lollipop</string>
+    <string name="tablet_info_spec_pro_display">Display</string>
+    <string name="tablet_info_spec_pro_display_desc">12.0\" FHD+ (2160 x 1440)\nSuper AMOLED</string>
+    <string name="tablet_info_spec_pro_ap">AP</string>
+    <string name="tablet_info_spec_pro_ap_desc">Intel Core M (Dualcore 2.2GHz)</string>
+    <string name="tablet_info_spec_pro_memory">Memory</string>
+    <string name="tablet_info_spec_pro_memory_desc">4GB RAM + 128GB SSD\n4GB RAM + 256GB SSD</string>
+    <string name="tablet_info_spec_pro_camera">Camera</string>
+    <string name="tablet_info_spec_pro_camera_desc">8MP AF + 2.1MP FF</string>
+    <string name="tablet_info_spec_pro_os">OS</string>
+    <string name="tablet_info_spec_pro_os_desc">Windows 10 Home\nWindows 10 Pro</string>
+
+    <!--Tablet Product Information Compatibility Json-->
+    <!--<string name="tablet_info_compatibility">Product compatibility</string>-->
+    <string name="tablet_info_compatibility_smartphones">Smartphones</string>
+    <string name="tablet_info_compatibility_smartphones_desc">All Samsung Android phones Galaxy S III and later\nrunning Android KitKat 4.4 and above.</string>
+    <string name="tablet_info_compatibility_tablet_os">Tablet OS</string>
+    <string name="tablet_info_compatibility_tablet_os_desc">All Samsung Android tablets running Android\nLollipop 5.0 and above.</string>
+    <string name="tablet_info_compatibility_sidesync">SideSync</string>
+    <string name="tablet_info_compatibility_sidesync_desc">May not work in some device models.</string>
+
+    <!--Tablet Product Information Features Json-->
+    <!--<string name="tablet_info_features">Product features</string>-->
+    <string name="tablet_info_features_samsung_sidesync">Samsung SideSync</string>
+    <string name="tablet_info_features_samsung_sidesync_desc">Using SideSync, you can conveniently share the\nscreen and data between your Samsung Galaxy\nsmartphone and tablet. Now you can quickly\ntransfer files, as well as manage calls, texts and\nnotifications on one screen.</string>
+    <string name="tablet_info_features_design">Design</string>
+    <string name="tablet_info_features_design_desc">Elegantly slender and light, Samsung Galaxy\ntablets ensure ultimate portability and hours of\nreading, watching and surfing in comfort.</string>
+    <string name="tablet_info_features_brilliant_screen">A brilliant screen</string>
+    <string name="tablet_info_features_brilliant_screen_desc">Watch your world come to life on the high-quality\nscreens. With deep contrast, rich colors and crisp\ndetails, you won’t miss a thing when you’re\nwatching movies or playing games.</string>
+
+
+
+    <!--
+    ###############################################################
+        SmartWatch Product Information
+    ###############################################################
+    -->
+    <!--Smartwatch Product Information Spec Json-->
+    <string name="smart_watch_info_url">For more information, visit\nwww.samsung.com/us.</string>
+    <string name="smart_watch_info_legal">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, Samsung\nPay and Samsung Gear are all trademarks of Samsung Electronics Co., Ltd. Use\nonly in accordance with law. Other company and product names mentioned may\nbe trademarks of their respective owners. Screen images simulated; actual\nappearance of devices may vary. Sequences shortened. Gear S2: Sold separately.\nGear S2 is compatible with select devices using Android 4.4 and later with at least\n1.5GB RAM. Supported devices may vary by carrier and device. Some features may\nnot be available. For best results, connect with compatible Samsung Galaxy\ndevices. This device and related software are not intended for use in the diagnosis\nof disease or other conditions, or in the cure, mitigation, treatment or prevention\nof disease. Samsung Pay: Samsung Pay is only compatible with select cards,\ncarriers and Samsung Devices; see Samsung Pay Support\n(http://www.samsung.com/Pay) for compatibility information.</string>
+    <!--<string name="smart_watch_info_spec">Product specs</string>-->
+    <string name="smart_watch_info_spec_models">Models</string>
+    <string name="smart_watch_info_spec_models_desc">Gear S2 classic 18k Rose Gold Plated\nGear S2 classic Platinum Plated\nBluetooth Gear S2 classic in blue black\nGear S2 classic Bluetooth\n3G Gear S2 in dark gray\n3G Gear S2 in silver</string>
+    <string name="smart_watch_info_spec_dimension">Dimension</string>
+    <string name="smart_watch_info_spec_dimension_desc">BT  42.3 x 49.8 x 11.4mm\nBT classic  39.9 x 43.6 x 11.4 mm\n3G  44.0 x 51.8 x 13.4 mm</string>
+    <string name="smart_watch_info_spec_display">Display</string>
+    <string name="smart_watch_info_spec_display_desc">1.2\" Full Circular Super AMOLED\n360 x 360 (302ppi)</string>
+    <string name="smart_watch_info_spec_memory">Memory</string>
+    <string name="smart_watch_info_spec_memory_desc">RAM: 512MB\nSTORAGE: 4GB</string>
+    <string name="smart_watch_info_spec_sensors">Sensors</string>
+    <string name="smart_watch_info_spec_sensors_desc">Acc, Gyro, HRM, Barometer,\nAmbient light, GPS (3G only)</string>
+    <string name="smart_watch_info_spec_water">Water resistant</string>
+    <string name="smart_watch_info_spec_water_desc">IP68</string>
+
+    <!--SmartWatch Product Information Compatibility Json-->
+    <!--<string name="smart_watch_info_compatibility">Product compatibility</string>-->
+    <string name="smart_watch_info_compatibility_desc">See which features are compatible with your Android™\nphone running Android Version 4.4 and above,\nwith at least 1.5GB RAM.</string>
+    <string name="smart_watch_info_compatibility_health">S Health</string>
+    <string name="smart_watch_info_compatibility_health_phone">Phone compatibility</string>
+    <string name="smart_watch_info_compatibility_health_phone_desc">Samsung smartphones starting from Galaxy S III\nonwards. Non-Samsung Android smartphones are\ncompatible. Tablets and some mobile devices\nmay not be supported.</string>
+    <string name="smart_watch_info_compatibility_health_os">OS</string>
+    <string name="smart_watch_info_compatibility_health_os_desc">Requires Android 4.4 and up</string>
+    <string name="smart_watch_info_compatibility_pay">Samsung Pay</string>
+    <string name="smart_watch_info_compatibility_pay_desc">Currently, you must have each of the following\nto enjoy Samsung Pay:</string>
+    <string name="smart_watch_info_compatibility_pay_devices">Devices†:</string>
+    <string name="smart_watch_info_compatibility_pay_devices_desc">Galaxy S7 edge, S7, S6 edge+, S6 edge,\nS6 active,  S6, Note5</string>
+    <string name="smart_watch_info_compatibility_pay_devices_disclaimer">† Over-the-air software update is required to download Samsung Pay.\nAvailability may vary by service provider. Learn how to update your device –\nvisit the Samsung Pay Support Page.</string>
+    <string name="smart_watch_info_compatibility_pay_carriers">Carriers:</string>
+    <string name="smart_watch_info_compatibility_pay_carriers_desc">AT&amp;T, T-Mobile, Sprint, US Cellular,\nVerizon, Cricket, Metro PCS</string>
+    <string name="smart_watch_info_compatibility_pay_cards">Payment cards:</string>
+    <string name="smart_watch_info_compatibility_pay_cards_desc">The credit or debit card must be a qualifying Visa,\nMasterCard or American Express issued by one of these\nbanks*: American Express, Bank of America, Chase,\nCitiBank, PNC, Synchrony, US Bank, Wells Fargo</string>
+    <string name="smart_watch_info_compatibility_pay_cards_disclaimer">*Only compatible with select Visa, MasterCard and American Express cards\nfrom participating banks. Check with your bank/issuer to ensure that your card\nis compatible; and check the Samsung Pay Support page for additional\ncompatibility information regarding devices, carriers and cards.</string>
+    <string name="smart_watch_info_compatibility_pay_smartwatch">Smartwatch</string>
+    <string name="smart_watch_info_compatibility_pay_smartwatch_desc">Payments with Samsung Pay on the Gear S2 are only\ncompatible with NFC payment terminals</string>
+    <string name="smart_watch_info_compatibility_disclaimers">Disclaimers:</string>
+    <string name="smart_watch_info_compatibility_disclaimers_desc">PHONES TESTED: HTC One (M8), HTC One (M9), LG G-FLEX, Motorola Nexus 6,\nLG OPTIMUS G2, LG OPTIMUS G3LG OPTIMUS G4, Kyocera E6560, LG G Vista,\nMotorola Droid Turbo To find out more call 1‑800‑SAMSUNG.</string>
+    <string name="smart_watch_info_compatibility_disclaimers_desc_desc">1. Compatible with select devices using Android 4.4 and later with at least\n1.5GB RAM. Supported devices may vary by carrier and device. Some features\nmay not be available. For best results, connect with compatible Samsung\nGalaxy devices.\n\n2. Call experience may vary depending on manufacturer.\n\n3. Some Android phones limited on text reply, call back from text, and read\nnotification check from phone.\n\n4. No email sync capability for non-Samsung phones.\n\n5. Wi-Fi profile sharing from your phone automatically to your watch may not\nbe possible with your Android Phone. </string>
+
+    <!--SmartWatch Product Information Features Json-->
+    <!--<string name="smart_watch_info_features">Product features</string>-->
+    <string name="smart_watch_info_features_connectivity">Connectivity</string>
+    <string name="smart_watch_info_features_connectivity_desc">Easy to set up with an even-wider range of\nAndroid devices, your Gear S2 will give the\npower of a phone on your wrist.</string>
+    <string name="smart_watch_info_features_health">S Health</string>
+    <string name="smart_watch_info_features_health_desc">Taking charge of your health is easy with S Health\non your Gear S2 and Galaxy smartphone. S Health\nhelps you stay fit by acting as a personal coach.\nThe various training programs help in improving\nyour overall fitness, health and lifestyle.</string>
+    <string name="smart_watch_info_features_pay">Samsung Pay</string>
+    <string name="smart_watch_info_features_pay_desc">Pay for your coffee or grab a quick bite with a wave\nof your arm. Hold your wrist near the NFC enabled\npayment terminal and you\'re done.</string>
+
+
+</resources>

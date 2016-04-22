@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/fragment_legal_padding_top">
+
+    <include layout="@layout/header_title1_title2" android:id="@+id/title_layout" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_layout"
+        android:layout_marginTop="@dimen/fragment_legal_list_margin_top"
+        android:overScrollMode="never"
+        android:divider="@null" >
+    </ListView>
+
+    <com.samsung.retailexperience.retailecosystem.ui.view.CustomFontTextView
+        android:id="@+id/message"
+        android:layout_width="@dimen/fragment_legal_message_width"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/fragment_legal_message_margin_bottom"
+        android:paddingTop="@dimen/fragment_legal_message_padding_top"
+        android:paddingBottom="@dimen/fragment_legal_message_padding_bottom"
+        android:paddingRight="@dimen/fragment_legal_message_padding_right"
+        app:customFont="fonts/SamsungOne-400_v1.0.ttf"
+        android:textSize="@dimen/fragment_legal_message_font_size"
+        android:textIsSelectable="false"
+        android:textColor="@color/black" />
+
+</RelativeLayout>

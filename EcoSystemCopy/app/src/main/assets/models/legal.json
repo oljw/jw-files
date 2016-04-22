@@ -1,0 +1,34 @@
+{
+  "me": "models/legal.json",
+  "name": "@string/legal",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.LegalFragment",
+  "layout": "@layout/fragment_legal",
+  "background": "@color/white",
+  "actionBackKey": "models/decision.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX": "0",
+  "pivotY": "0",
+  "fragment": {
+    "title": [
+      "@string/legal_title1",
+      "@string/legal_title2"
+    ],
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/product_info",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/decision.json"
+      },
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/return_to_main_menu",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/decision.json"
+      }
+    ]
+  }
+}

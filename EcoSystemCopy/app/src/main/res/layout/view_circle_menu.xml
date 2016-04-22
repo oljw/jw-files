@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/view_circle_menu_height" >
+
+    <ImageView
+        android:id="@+id/circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/circle" />
+
+    <ImageView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/phone_icon"/>
+
+    <com.samsung.retailexperience.retailecosystem.ui.view.circlemenu.CircleMenuItemView
+        android:id="@+id/item_gear_vr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:useUpperTitle="true"
+        app:itemTitle="@string/gear_vr_title"
+        app:itemIcon="@drawable/gear_vr_icon"
+        app:itemIconPressed="@drawable/gear_vr_icon_blue"/>
+
+    <com.samsung.retailexperience.retailecosystem.ui.view.circlemenu.CircleMenuItemView
+        android:id="@+id/item_smart_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/view_circle_menu_item_smart_tv_margin_top"
+        android:layout_marginRight="@dimen/view_circle_menu_item_smart_tv_margin_right"
+        app:useUpperTitle="true"
+        app:itemTitle="@string/smart_tv_title"
+        app:itemIcon="@drawable/smart_tv_icon"
+        app:itemIconPressed="@drawable/smart_tv_icon_blue"/>
+
+    <com.samsung.retailexperience.retailecosystem.ui.view.circlemenu.CircleMenuItemView
+        android:id="@+id/item_samsung_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/view_circle_menu_item_samsung_pay_margin_top"
+        android:layout_marginRight="@dimen/view_circle_menu_item_samsung_pay_margin_right"
+        app:useUpperTitle="false"
+        app:itemTitle="@string/samsung_pay_title"
+        app:itemIcon="@drawable/samsung_pay_icon"
+        app:itemIconPressed="@drawable/samsung_pay_icon_blue"/>
+
+    <com.samsung.retailexperience.retailecosystem.ui.view.circlemenu.CircleMenuItemView
+        android:id="@+id/item_smart_things"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:useUpperTitle="false"
+        app:itemTitle="@string/smart_things_title"
+        app:itemIcon="@drawable/smart_things_icon"
+        app:itemIconPressed="@drawable/smart_things_icon_blue"/>
+
+    <com.samsung.retailexperience.retailecosystem.ui.view.circlemenu.CircleMenuItemView
+        android:id="@+id/item_tablet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/view_circle_menu_item_tablet_margin_top"
+        android:layout_marginLeft="@dimen/view_circle_menu_item_tablet_margin_left"
+        app:useUpperTitle="false"
+        app:itemTitle="@string/tablet_title"
+        app:itemIcon="@drawable/tablet_icon"
+        app:itemIconPressed="@drawable/tablet_icon_blue"/>
+
+    <com.samsung.retailexperience.retailecosystem.ui.view.circlemenu.CircleMenuItemView
+        android:id="@+id/item_smart_watch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/view_circle_menu_item_smart_watch_margin_top"
+        android:layout_marginLeft="@dimen/view_circle_menu_item_smart_watch_margin_left"
+        app:useUpperTitle="true"
+        app:itemTitle="@string/smart_watch_title"
+        app:itemIcon="@drawable/smart_watch_icon"
+        app:itemIconPressed="@drawable/smart_watch_icon_blue"/>
+</RelativeLayout>

@@ -1,0 +1,151 @@
+{
+  "me": "gear_vr_info_compatibility.json",
+  "name": "@string/gear_vr_info_compatibility",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.ListFragment",
+  "layout": "@layout/fragment_list",
+  "background": "@color/white",
+  "actionBackKey": "models/gear_vr_info.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "fabColor": "@color/white",
+    "fabImage": "@drawable/close",
+    "listItems": [
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/white",
+        "text": "@string/product_compatibility",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/gear_vr_info_compatibility_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_image_center",
+        "layoutColor": "@color/white",
+        "image": "@drawable/gear_vr_lockup"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_gear_vr_logo_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_image_center",
+        "layoutColor": "@color/white",
+        "image": "@drawable/gear_vr_logo"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_devices_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/white",
+        "text": "@string/gear_vr_info_compatibility_devices",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/gear_vr_info_compatibility_devices_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_devices_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/gear_vr_info_compatibility_devices_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/gear_vr_info_compatibility_devices_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_gear_360_logo_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_image_center",
+        "layoutColor": "@color/white",
+        "image": "@drawable/gear_360_logo"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_360_devices_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/white",
+        "text": "@string/gear_vr_info_compatibility_360_devices",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/gear_vr_info_compatibility_360_devices_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_360_devices_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/white",
+        "text": "@string/gear_vr_info_compatibility_360_devices_desc",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/gear_vr_info_compatibility_360_devices_desc_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_url_margin_top",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_text_bold",
+        "layoutColor": "@color/white",
+        "text": "@string/gear_vr_info_url",
+        "textFont": "fonts/SamsungSharpSans-Bold.ttf",
+        "textSize": "@integer/gear_vr_info_compatibility_url_font_size",
+        "textColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_url_margin_bottom",
+        "layoutColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_legal_margin_top",
+        "layoutColor": "@color/black"
+      },
+      {
+        "layout": "@layout/list_item_text",
+        "layoutColor": "@color/black",
+        "text": "@string/gear_vr_info_legal",
+        "textFont": "fonts/SamsungOne-400_v1.0.ttf",
+        "textSize": "@integer/gear_vr_info_compatibility_legal_font_size",
+        "textColor": "@color/white"
+      },
+      {
+        "layout": "@layout/list_item_margin",
+        "layoutHeight": "@integer/gear_vr_info_compatibility_legal_margin_bottom",
+        "layoutColor": "@color/black"
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "me": "models/samsung_pay.json",
+  "name": "@string/samsung_pay",
+  "className": "com.samsung.retailexperience.retailecosystem.ui.fragment.MenuFragment",
+  "layout": "@layout/fragment_menu_bg",
+  "background": "@color/white",
+  "imageBG": "@drawable/phone_watch_paystation_image",
+  "imageBGMargin": [
+    "@integer/no_margin",
+    "@integer/fragment_menu_bg_samsung_pay_bg_margin_top",
+    "@integer/no_margin",
+    "@integer/no_margin"
+  ],
+  "actionBackKey": "models/decision.json",
+  "forwardEnterAnim":"@animator/coded_circle_reveal",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/coded_circle_unreveal",
+  "addEnterAnim":"@animator/coded_circle_reveal",
+  "pivotX":"@integer/samsung_pay_pivot_x",
+  "pivotY":"@integer/samsung_pay_pivot_y",
+  "fragment": {
+    "title": [
+      "NONE",
+      "@string/samsung_pay_title"
+    ],
+    "subTitle": [
+      "@string/samsung_pay_subtitle"
+    ],
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/start_demo",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/samsung_pay_demo.json"
+      },
+      {
+        "layout": "@layout/menu_item",
+        "title": "@string/product_info",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/samsung_pay_info.json"
+      }
+    ]
+  }
+}

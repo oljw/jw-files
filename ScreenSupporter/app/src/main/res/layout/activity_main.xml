@@ -1,26 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.percent.PercentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context="com.example.jw.screensupporter.MainActivity">
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/trex_char"
-        android:id="@+id/character"/>
+    <android.support.percent.PercentFrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:background="#ff44aacc"
+        app:layout_heightPercent="50%"
+        app:layout_widthPercent="50%">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size"
-        android:text="@string/test" />
+        <android.support.percent.PercentFrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:background="#ffcc5ec7"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#ff7ecc16"
+                android:gravity="center"
+                android:text="margin 15% of w"
+                />
+
+        </android.support.percent.PercentFrameLayout>
+
+    </android.support.percent.PercentFrameLayout>
+
+    <TextView android:layout_width="0dp"
+              android:layout_height="0dp"
+              android:layout_gravity="bottom|right"
+              android:background="#44ff0000"
+              android:gravity="center"
+              android:text="15%w,15%w"
+              app:layout_heightPercent="15%"
+              app:layout_marginPercent="5%"
+              app:layout_widthPercent="15%"/>
 
 
-</LinearLayout>
+</android.support.percent.PercentFrameLayout>

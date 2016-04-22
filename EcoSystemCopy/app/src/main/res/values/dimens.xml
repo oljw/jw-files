@@ -1,0 +1,90 @@
+<resources>
+    <!--screen_size-->
+    <dimen name="screen_width">2560px</dimen>
+    <dimen name="screen_height">1440px</dimen>
+    <dimen name="screen_width_half">1280px</dimen>
+    <dimen name="screen_height_half">720px</dimen>
+
+    <!--back_btn-->
+    <dimen name="back_btn_layout_width">140px</dimen>
+    <dimen name="back_btn_layout_height">140px</dimen>
+    <dimen name="back_btn_layout_margin_top">65px</dimen>
+    <dimen name="back_btn_layout_margin_left">65px</dimen>
+    <dimen name="back_btn_layout_padding_left">35px</dimen>
+    <dimen name="back_btn_image_margin_top">35px</dimen>
+
+    <!--header_title1_title2-->
+    <dimen name="header_title1_title2_title1_font_size">80px</dimen>
+    <dimen name="header_title1_title2_title2_font_size">112px</dimen>
+    <dimen name="header_title1_title2_title2_margin_top">15px</dimen>
+    <!--header_title1_title2_desc-->
+    <dimen name="header_title1_title2_desc_subtitle_font_size">48px</dimen>
+    <dimen name="header_title1_title2_desc_subtitle_margin_top">80px</dimen>
+    <!--header_title2_desc-->
+    <dimen name="header_title2_desc_title2_font_size">112px</dimen>
+    <dimen name="header_title2_desc_subtitle_font_size">48px</dimen>
+    <dimen name="header_title2_desc_subtitle_margin_top">80px</dimen>
+
+
+    <!--menu_item-->
+    <dimen name="menu_item_height">190px</dimen>
+    <dimen name="menu_item_title_font_size">80px</dimen>
+    <dimen name="menu_item_icon_margin_left">50px</dimen>
+
+    <!--view_circle_menu_item-->
+    <dimen name="view_circle_menu_item_title_font_size">42px</dimen>
+    <dimen name="view_circle_menu_item_lower_title_margin_top">-25px</dimen>
+    <dimen name="view_circle_menu_item_upper_title_margin_bottom">-25px</dimen>
+
+    <!--view_circle_menu-->
+    <dimen name="view_circle_menu_height">1520px</dimen>
+    <dimen name="view_circle_menu_item_smart_tv_margin_top">286px</dimen>
+    <dimen name="view_circle_menu_item_smart_tv_margin_right">64px</dimen>
+    <dimen name="view_circle_menu_item_samsung_pay_margin_top">868px</dimen>
+    <dimen name="view_circle_menu_item_samsung_pay_margin_right">64px</dimen>
+    <dimen name="view_circle_menu_item_tablet_margin_top">868px</dimen>
+    <dimen name="view_circle_menu_item_tablet_margin_left">64px</dimen>
+    <dimen name="view_circle_menu_item_smart_watch_margin_top">286px</dimen>
+    <dimen name="view_circle_menu_item_smart_watch_margin_left">64px</dimen>
+
+    <!--fragment_decision-->
+    <dimen name="fragment_decision_padding_top">160px</dimen>
+    <dimen name="fragment_decision_circle_menu_view_margin_top">160px</dimen>
+
+    <!--fragment_menu-->
+    <dimen name="fragment_menu_header_title2_desc_margin_top">81px</dimen>
+    <dimen name="fragment_menu_header_list_margin_top">100px</dimen>
+
+    <!--fragment_product_info-->
+    <dimen name="fragment_product_info_title_layout_margin_top">81px</dimen>
+    <dimen name="fragment_product_info_image_bg_margin_top">150px</dimen>
+    <dimen name="fragment_product_info_image_bg_margin_bottom">150px</dimen>
+
+    <!--fragment_list-->
+    <dimen name="fragment_list_fab_size">180px</dimen>
+    <dimen name="fragment_list_fab_margin_top">44px</dimen>
+    <dimen name="fragment_list_fab_margin_right">44px</dimen>
+    <dimen name="fragment_list_fab_arrow_down_margin_bottom">44px</dimen>
+
+    <!--fragment_video_landscape-->
+    <dimen name="fragment_video_landscape_rotate_title_margin_top">684px</dimen>
+    <dimen name="fragment_video_landscape_rotate_device_image_margin_top">846px</dimen>
+
+    <!--fragment_legal-->
+    <dimen name="fragment_legal_padding_top">200px</dimen>
+    <dimen name="fragment_legal_list_margin_top">200px</dimen>
+    <dimen name="fragment_legal_message_margin_bottom">200px</dimen>
+    <dimen name="fragment_legal_message_width">1240px</dimen>
+    <dimen name="fragment_legal_message_padding_top">10px</dimen>
+    <dimen name="fragment_legal_message_padding_bottom">10px</dimen>
+    <dimen name="fragment_legal_message_padding_right">5px</dimen>
+    <dimen name="fragment_legal_message_font_size">34px</dimen>
+
+    <!-- Video play and pause button for development -->
+    <dimen name="demo_play_pause_button_layout">60dp</dimen>
+    <dimen name="demo_seek_button_layout">53dp</dimen>
+
+    <!--Product Information pages-->
+    <dimen name="list_item_close_image_margin_right">100px</dimen>
+
+</resources>
