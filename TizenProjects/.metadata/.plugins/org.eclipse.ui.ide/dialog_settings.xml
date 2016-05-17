@@ -73,19 +73,18 @@
 		<item value="org.tizen.base.feature:2.0.0"/>
 		<item value="org.tizen.base.native.feature:2.0.0"/>
 		<item value="org.tizen.base.web.feature:2.0.0"/>
-		<item value="org.tizen.common.feature:2.0.0.201602221115"/>
-		<item value="org.tizen.dynamicanalysis.ide.eplugin.feature:2.1.0.201601140452"/>
-		<item value="org.tizen.dynamicanalysis.ide.web.eplugin.feature:2.1.0.201511130700"/>
-		<item value="org.tizen.efluibuilder.feature:1.0.0.201602151428"/>
-		<item value="org.tizen.nativeappcommon.feature:2.0.0.201512301751"/>
-		<item value="org.tizen.nativecommon.feature:2.0.0.201602191803"/>
+		<item value="org.tizen.common.feature:2.0.0.201603251314"/>
+		<item value="org.tizen.dynamicanalysis.ide.eplugin.feature:2.1.0.201603081454"/>
+		<item value="org.tizen.dynamicanalysis.ide.web.eplugin.feature:2.1.0.201603081457"/>
+		<item value="org.tizen.efluibuilder.feature:1.0.0.201603311737"/>
+		<item value="org.tizen.nativeappcommon.feature:2.0.0.201603081638"/>
+		<item value="org.tizen.nativecommon.feature:2.0.0.201603171046"/>
 		<item value="org.tizen.nativecore.ext.feature:1.0.0.201601081435"/>
-		<item value="org.tizen.nativecore.feature:2.0.0.201602191804"/>
-		<item value="org.tizen.profiler.feature:1.0.0.201601140452"/>
-		<item value="org.tizen.unittest.feature:2.0.0.201602191916"/>
-		<item value="org.tizen.web.feature:2.0.0.201602221227"/>
-		<item value="org.tizen.web.simulator.feature:1.0.0.201509101132"/>
-		<item value="org.tizen.web.tv.sec.feature:1.0.0.201602221401"/>
+		<item value="org.tizen.nativecore.feature:2.0.0.201603171623"/>
+		<item value="org.tizen.profiler.feature:1.0.0.201603101629"/>
+		<item value="org.tizen.unittest.feature:2.0.0.201603281341"/>
+		<item value="org.tizen.web.feature:2.0.0.201603281300"/>
+		<item value="org.tizen.web.simulator.feature:1.0.0.201603211023"/>
 	</list>
 	<section name="CleanDialogSettings">
 		<item value="500" key="DIALOG_WIDTH"/>
