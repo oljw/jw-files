@@ -6,10 +6,10 @@
     android:id="@+id/fragment_test"
     android:layout_height="match_parent">
 
-    <jw.developer.com.camera2project.CameraView
+    <jw.developer.com.camera2project.CameraPreviewLayout
         android:id="@+id/camera_view_testing"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </jw.developer.com.camera2project.CameraView>
+    </jw.developer.com.camera2project.CameraPreviewLayout>
 
 </RelativeLayout>

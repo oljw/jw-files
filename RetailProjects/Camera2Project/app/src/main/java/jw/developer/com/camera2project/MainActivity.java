@@ -7,11 +7,13 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
+    static MainActivity myActivity;
     private Button openCamBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myActivity = this;
         setContentView(R.layout.activity_main);
 
         openCamBtn = (Button) findViewById(R.id.camera_opener);

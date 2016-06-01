@@ -12,7 +12,8 @@ import android.widget.Button;
  */
 public class CameraFragment extends Fragment {
 
-    private CameraView mCameraView;
+//    private CameraView mCameraView;
+    private CameraPreviewLayout mCameraPreviewLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,10 @@ public class CameraFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mCameraView = (CameraView) view.findViewById(R.id.camera_view_testing);
+//        mCameraView = (CameraView) view.findViewById(R.id.camera_view_testing);
+        mCameraPreviewLayout = (CameraPreviewLayout) view.findViewById(R.id.camera_view_testing);
+        mCameraPreviewLayout.startBackgroundThread();
+
     }
 
     public static CameraFragment newInstance() {
@@ -38,7 +42,18 @@ public class CameraFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mCameraView != null)
-            mCameraView.closeCamera();
+        if (mCameraPreviewLayout != null)
+            mCameraPreviewLayout.closeCamera();
+            mCameraPreviewLayout.stopBackgroundThread();
+
+//        if (mOrientationListener != null) {
+//            mOrientationListener.disable();
+//            }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }
