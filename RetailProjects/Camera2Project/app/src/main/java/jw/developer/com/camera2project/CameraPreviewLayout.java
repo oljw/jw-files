@@ -18,7 +18,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
-import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -28,7 +27,6 @@ import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureFailure;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
-import android.hardware.camera2.DngCreator;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.MeteringRectangle;
 import android.hardware.camera2.params.StreamConfigurationMap;
@@ -45,7 +43,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
@@ -80,7 +77,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -88,9 +84,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class CameraPreviewLayout extends RelativeLayout {
 
-
-
     public MainActivity myActivity = (MainActivity) getContext();
+
     public static ImageView mOutputImage;
 
     private Context mContext;
@@ -283,13 +278,6 @@ public class CameraPreviewLayout extends RelativeLayout {
     private RefCountedAutoCloseable<ImageReader> mJpegImageReader;
 
     /**
-     * A reference counted holder wrapping the {@link ImageReader} that handles RAW image captures.
-     * This is used to allow us to clean up the {@link ImageReader} when all background tasks using
-     * its {@link Image}s have completed.
-     */
-//        private RefCountedAutoCloseable<ImageReader> mRawImageReader;
-
-    /**
      * Whether or not the currently configured camera device is fixed-focus.
      */
     private boolean mNoAFRun = false;
@@ -303,11 +291,6 @@ public class CameraPreviewLayout extends RelativeLayout {
      * Request ID to {@link ImageSaver.ImageSaverBuilder} mapping for in-progress JPEG captures.
      */
     private final TreeMap<Integer, ImageSaver.ImageSaverBuilder> mJpegResultQueue = new TreeMap<>();
-
-    /**
-     * Request ID to {@link ImageSaver.ImageSaverBuilder} mapping for in-progress RAW captures.
-     */
-//        private final TreeMap<Integer, ImageSaver.ImageSaverBuilder> mRawResultQueue = new TreeMap<>();
 
     /**
      * {@link CaptureRequest.Builder} for the camera preview
@@ -360,9 +343,7 @@ public class CameraPreviewLayout extends RelativeLayout {
         mTextureView = (AutoFitTextureView) findViewById(R.id.camera_texture_view);
         mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
 
-
         mFocusIcon = (ImageView) findViewById(R.id.draw_focus_icon);
-
 
 //        mOrientationListener = new OrientationEventListener(myActivity,
 //                SensorManager.SENSOR_DELAY_NORMAL) {
@@ -391,7 +372,6 @@ public class CameraPreviewLayout extends RelativeLayout {
         });
 
         startBackgroundThread();
-
     }
 
 
@@ -457,22 +437,7 @@ public class CameraPreviewLayout extends RelativeLayout {
         public void onImageAvailable(ImageReader reader) {
             dequeueAndSaveImage(mJpegResultQueue, mJpegImageReader);
         }
-
     };
-
-//        /**
-//         * This a callback object for the {@link ImageReader}. "onImageAvailable" will be called when a
-//         * RAW image is ready to be saved.
-//         */
-//        private final ImageReader.OnImageAvailableListener mOnRawImageAvailableListener
-//                = new ImageReader.OnImageAvailableListener() {
-//
-//            @Override
-//            public void onImageAvailable(ImageReader reader) {
-//                dequeueAndSaveImage(mRawResultQueue, mRawImageReader);
-//            }
-//
-//        };
 
     /**
      * Convert touch position x:y to {@link Camera.Area} position -1000:-1000 to 1000:1000.
@@ -773,24 +738,8 @@ public class CameraPreviewLayout extends RelativeLayout {
         }
     }
 
-
-    private void configureManualFocus(CaptureRequest.Builder builder, Rect rect) {
-        Log.d(TAG, "#### configureManualFocus called");
-
-        // If there is a "continuous picture" mode available, use it, otherwise default to AUTO.
-//        if (contains(mCharacteristics.get(
-//                CameraCharacteristics.CONTROL_AF_AVAILABLE_MODES),
-//                CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE)) {
-//            builder.set(CaptureRequest.CONTROL_AF_MODE,
-//                    CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-//        } else {
-//            builder.set(CaptureRequest.CONTROL_AF_MODE,
-//                    CaptureRequest.CONTROL_AF_MODE_AUTO);
-//        }
-    }
-
     /**
-     * A {@link CameraCaptureSession.CaptureCallback} that handles the still JPEG and RAW capture
+     * A {@link CameraCaptureSession.CaptureCallback} that handles the still JPEG capture
      * request.
      */
     private final CameraCaptureSession.CaptureCallback mCaptureCallback
@@ -799,9 +748,6 @@ public class CameraPreviewLayout extends RelativeLayout {
         public void onCaptureStarted(CameraCaptureSession session, CaptureRequest request,
                                      long timestamp, long frameNumber) {
             String currentDateTime = generateTimestamp();
-//                File rawFile = new File(Environment.
-//                        getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
-//                        "RAW_" + currentDateTime + ".dng");
             File jpegFile = new File(Environment.
                     getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
                     "JPEG_" + currentDateTime + ".jpg");
@@ -809,15 +755,12 @@ public class CameraPreviewLayout extends RelativeLayout {
             // Look up the ImageSaverBuilder for this request and update it with the file name
             // based on the capture start time.
             ImageSaver.ImageSaverBuilder jpegBuilder;
-//            ImageSaver.ImageSaverBuilder rawBuilder;
             int requestId = (int) request.getTag();
             synchronized (mCameraStateLock) {
                 jpegBuilder = mJpegResultQueue.get(requestId);
-//                    rawBuilder = mRawResultQueue.get(requestId);
             }
 
             if (jpegBuilder != null) jpegBuilder.setFile(jpegFile);
-//                if (rawBuilder != null) rawBuilder.setFile(rawFile);
         }
 
         @Override
@@ -825,29 +768,20 @@ public class CameraPreviewLayout extends RelativeLayout {
                                        TotalCaptureResult result) {
             int requestId = (int) request.getTag();
             ImageSaver.ImageSaverBuilder jpegBuilder;
-//                ImageSaver.ImageSaverBuilder rawBuilder;
             StringBuilder sb = new StringBuilder();
 
             // Look up the ImageSaverBuilder for this request and update it with the CaptureResult
             synchronized (mCameraStateLock) {
                 jpegBuilder = mJpegResultQueue.get(requestId);
-//                    rawBuilder = mRawResultQueue.get(requestId);
 
                 // If we have all the results necessary, save the image to a file in the background.
                 handleCompletionLocked(requestId, jpegBuilder, mJpegResultQueue);
-//                    handleCompletionLocked(requestId, rawBuilder, mRawResultQueue);
 
                 if (jpegBuilder != null) {
                     jpegBuilder.setResult(result);
                     sb.append("Saving JPEG as: ");
                     sb.append(jpegBuilder.getSaveLocation());
                 }
-//                    if (rawBuilder != null) {
-//                        rawBuilder.setResult(result);
-//                        if (jpegBuilder != null) sb.append(", ");
-//                        sb.append("Saving RAW as: ");
-//                        sb.append(rawBuilder.getSaveLocation());
-//
                 finishedCaptureLocked();
             }
             showToast(sb.toString());
@@ -859,7 +793,6 @@ public class CameraPreviewLayout extends RelativeLayout {
             int requestId = (int) request.getTag();
             synchronized (mCameraStateLock) {
                 mJpegResultQueue.remove(requestId);
-//                    mRawResultQueue.remove(requestId);
                 finishedCaptureLocked();
             }
             showToast("Capture failed!");
@@ -990,13 +923,6 @@ public class CameraPreviewLayout extends RelativeLayout {
                 CameraCharacteristics characteristics
                         = manager.getCameraCharacteristics(cameraId);
 
-                // We only use a camera that supports RAW in this sample.
-                if (!contains(characteristics.get(
-                        CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES),
-                        CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_RAW)) {
-                    continue;
-                }
-
                 StreamConfigurationMap map = characteristics.get(
                         CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
 
@@ -1004,13 +930,9 @@ public class CameraPreviewLayout extends RelativeLayout {
                 Size largestJpeg = Collections.max(
                         Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
                         new CompareSizesByArea());
-//
-//                    Size largestRaw = Collections.max(
-//                            Arrays.asList(map.getOutputSizes(ImageFormat.RAW_SENSOR)),
-//                            new CompareSizesByArea());
 
                 synchronized (mCameraStateLock) {
-                    // Set up ImageReaders for JPEG and RAW outputs.  Place these in a reference
+                    // Set up ImageReaders for JPEG outputs.  Place these in a reference
                     // counted wrapper to ensure they are only closed when all background tasks
                     // using them are finished.
                     if (mJpegImageReader == null || mJpegImageReader.getAndRetain() == null) {
@@ -1020,14 +942,6 @@ public class CameraPreviewLayout extends RelativeLayout {
                     }
                     mJpegImageReader.get().setOnImageAvailableListener(
                             mOnJpegImageAvailableListener, mBackgroundHandler);
-
-//                        if (mRawImageReader == null || mRawImageReader.getAndRetain() == null) {
-//                            mRawImageReader = new RefCountedAutoCloseable<>(
-//                                    ImageReader.newInstance(largestRaw.getWidth(),
-//                                            largestRaw.getHeight(), ImageFormat.RAW_SENSOR, /*maxImages*/ 5));
-//                        }
-//                        mRawImageReader.get().setOnImageAvailableListener(
-//                                mOnRawImageAvailableListener, mBackgroundHandler);
 
                     mCharacteristics = characteristics;
                     mCameraId = cameraId;
@@ -1039,10 +953,6 @@ public class CameraPreviewLayout extends RelativeLayout {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-
-//            // If we found no suitable cameras for capturing RAW, warn the user.
-//            ErrorDialog.buildErrorDialog("This device doesn't support capturing RAW photos").
-//                    show(getFragmentManager(), "dialog");
         return false;
     }
 
@@ -1053,10 +963,10 @@ public class CameraPreviewLayout extends RelativeLayout {
         if (!setUpCameraOutputs()) {
             return;
         }
-        if (!hasAllPermissionsGranted()) {
+//        if (!hasAllPermissionsGranted()) {
 //                requestCameraPermissions();
-            return;
-        }
+//            return;
+//        }
 
         CameraManager manager = (CameraManager) myActivity.getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -1104,20 +1014,20 @@ public class CameraPreviewLayout extends RelativeLayout {
 //            }
 //        }
 
-        /**
-         * Tells whether all the necessary permissions are granted to this app.
-         *
-         * @return True if all the required permissions are granted.
-         */
-        private boolean hasAllPermissionsGranted() {
-            for (String permission : CAMERA_PERMISSIONS) {
-                if (ActivityCompat.checkSelfPermission(myActivity, permission)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-            return true;
-        }
+//        /**
+//         * Tells whether all the necessary permissions are granted to this app.
+//         *
+//         * @return True if all the required permissions are granted.
+//         */
+//        private boolean hasAllPermissionsGranted() {
+//            for (String permission : CAMERA_PERMISSIONS) {
+//                if (ActivityCompat.checkSelfPermission(myActivity, permission)
+//                        != PackageManager.PERMISSION_GRANTED) {
+//                    return false;
+//                }
+//            }
+//            return true;
+//        }
 
 //        /**
 //         * Gets whether you should show UI with rationale for requesting the permissions.
@@ -1133,16 +1043,16 @@ public class CameraPreviewLayout extends RelativeLayout {
 //            return false;
 //        }
 
-        /**
-         * Shows that this app really needs the permission and finishes the app.
-         */
-        private void showMissingPermissionError() {
-            Activity activity = myActivity;
-            if (activity != null) {
-                Toast.makeText(activity, R.string.request_permission, Toast.LENGTH_SHORT).show();
-                activity.finish();
-            }
-        }
+//        /**
+//         * Shows that this app really needs the permission and finishes the app.
+//         */
+//        private void showMissingPermissionError() {
+//            Activity activity = myActivity;
+//            if (activity != null) {
+//                Toast.makeText(activity, R.string.request_permission, Toast.LENGTH_SHORT).show();
+//                activity.finish();
+//            }
+//        }
 
         /**
          * Closes the current {@link CameraDevice}.
@@ -1169,10 +1079,6 @@ public class CameraPreviewLayout extends RelativeLayout {
                         mJpegImageReader.close();
                         mJpegImageReader = null;
                     }
-//                    if (null != mRawImageReader) {
-//                        mRawImageReader.close();
-//                        mRawImageReader = null;
-//                    }
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException("Interrupted while trying to lock camera closing.", e);
@@ -1232,7 +1138,6 @@ public class CameraPreviewLayout extends RelativeLayout {
                 // Here, we create a CameraCaptureSession for camera preview.
                 mCameraDevice.createCaptureSession(Arrays.asList(surface,
                         mJpegImageReader.get().getSurface()),
-//                        mRawImageReader.get().getSurface()),
                         new CameraCaptureSession.StateCallback() {
                             @Override
                             public void onConfigured(CameraCaptureSession cameraCaptureSession) {
@@ -1510,8 +1415,7 @@ public class CameraPreviewLayout extends RelativeLayout {
         }
 
         /**
-         * Send a capture request to the camera device that initiates a capture targeting the JPEG and
-         * RAW outputs.
+         * Send a capture request to the camera device that initiates a capture targeting the JPEG
          * <p/>
          * Call this only with {@link #mCameraStateLock} held.
          */
@@ -1525,7 +1429,6 @@ public class CameraPreviewLayout extends RelativeLayout {
                         mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
 
                 captureBuilder.addTarget(mJpegImageReader.get().getSurface());
-//                captureBuilder.addTarget(mRawImageReader.get().getSurface());
 
                 // Use the same AE and AF modes as the preview.
                 setup3AControlsLocked(captureBuilder);
@@ -1557,7 +1460,7 @@ public class CameraPreviewLayout extends RelativeLayout {
         }
 
         /**
-         * Called after a RAW/JPEG capture has completed; resets the AF trigger state for the
+         * Called after a JPEG capture has completed; resets the AF trigger state for the
          * pre-capture sequence.
          * <p/>
          * Call this only with {@link #mCameraStateLock} held.
@@ -1579,16 +1482,6 @@ public class CameraPreviewLayout extends RelativeLayout {
             } catch (CameraAccessException e) {
                 e.printStackTrace();
             }
-
-//
-//            final BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inSampleSize = 1;
-//
-//            Log.d(TAG, "#### bytes: " + ImageSaver.bytes);
-//            realImage = BitmapFactory.decodeByteArray(ImageSaver.bytes, 0, ImageSaver.bytes.length, options);
-//            Log.d(TAG, "#### bytes2: " + ImageSaver.bytes);
-//
-//            mOutputImage.setImageBitmap(realImage);
         }
 
         /**
@@ -1687,9 +1580,6 @@ public class CameraPreviewLayout extends RelativeLayout {
                 mReader = reader;
             }
 
-            protected Bitmap realImage = null;
-//            protected ImageView mOutputImage = null;
-
             @Override
             public void run() {
                 boolean success = false;
@@ -1707,9 +1597,8 @@ public class CameraPreviewLayout extends RelativeLayout {
                             output.write(bytes);
                             success = true;
 
-
+                            //Method to show output image
                             showOutputImage();
-
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -1719,21 +1608,6 @@ public class CameraPreviewLayout extends RelativeLayout {
                         }
                         break;
                     }
-//                    case ImageFormat.RAW_SENSOR: {
-//                        DngCreator dngCreator = new DngCreator(mCharacteristics, mCaptureResult);
-//                        FileOutputStream output = null;
-//                        try {
-//                            output = new FileOutputStream(mFile);
-//                            dngCreator.writeImage(output, mImage);
-//                            success = true;
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        } finally {
-//                            mImage.close();
-//                            closeOutput(output);
-//                        }
-//                        break;
-//                    }
                     default: {
                         Log.e(TAG, "Cannot save image, unexpected image format:" + format);
                         break;
@@ -1761,17 +1635,15 @@ public class CameraPreviewLayout extends RelativeLayout {
                 }
             }
 
-            protected String path = "/sdcard/TecAce";
+            protected Bitmap realImage;
             private void showOutputImage() {
                 MainActivity.myActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         final BitmapFactory.Options options = new BitmapFactory.Options();
                         options.inSampleSize = 1;
-                        options.inPurgeable = true;                   //Tell to gc that whether it needs free memory, the Bitmap can be cleared
-                        options.inInputShareable = true;              //Which kind of reference will be used to recover the Bitmap data after being clear, when it will be used in the future
 
-
+                        realImage = BitmapFactory.decodeByteArray(bytes,0,bytes.length,options);
                         ExifInterface exif = null;
                             try {
                                 exif = new ExifInterface(mFile.getPath());
@@ -1779,29 +1651,25 @@ public class CameraPreviewLayout extends RelativeLayout {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
-
                             try {
                                 Log.d("EXIF value",
                                         exif.getAttribute(ExifInterface.TAG_ORIENTATION));
                                 if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
                                         .equalsIgnoreCase("1")) {
-                                    realImage = rotate(realImage, 90);
-                                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
+                                    realImage = rotateOutputImage(realImage, 90);
+                                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION) //this one is used for back facing camera. others might not be necessary
                                         .equalsIgnoreCase("6")) {
-                                    realImage = rotate(realImage, 90);
+                                    realImage = rotateOutputImage(realImage, 90);
                                 } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
                                         .equalsIgnoreCase("3")) {
-                                    realImage = rotate(realImage, 90);
+                                    realImage = rotateOutputImage(realImage, 90);
                                 } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
                                         .equalsIgnoreCase("0")) {
-                                    realImage = rotate(realImage, 90);
+                                    realImage = rotateOutputImage(realImage, 90);
                                 }
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
-
-                        realImage = BitmapFactory.decodeByteArray(bytes,0,bytes.length,options);
-
                         Log.d(TAG, "#### realImage height: " + realImage.getHeight() + " realImage width: " + realImage.getWidth());
 
                         CameraPreviewLayout.mOutputImage.setImageBitmap(realImage);
@@ -1809,9 +1677,9 @@ public class CameraPreviewLayout extends RelativeLayout {
                 });
             }
 
-            public Bitmap rotate(Bitmap source, float angle) {
+            public Bitmap rotateOutputImage(Bitmap source, float angle) {
                 Matrix matrix = new Matrix();
-                matrix.postRotate(180);
+                matrix.postRotate(angle);
                 return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
                         source.getHeight(), matrix, false);
             }

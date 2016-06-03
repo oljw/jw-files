@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
                 public void onClick(View v) {
                   openCamBtn.setVisibility(View.GONE);
                   getFragmentManager().beginTransaction()
-                      .replace(R.id.container, CameraFragment.newInstance())
+                      .replace(R.id.container, BaseCameraFragment.newInstance())
                       .commit();
                 }
             }

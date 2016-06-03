@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.samsung.retailexperience.retailtmo"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <!--amazon analytics-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+    <!--Camera Permissions-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+    <uses-feature android:name="android.hardware.camera2.full" />
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:name="RetailTMOApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.MainActivity"
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleInstance"
+                  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".video.ui.activity.MissingContentActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="com.samsung.sea.retail.missingfile"/>
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".receiver.ReBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.SyncContentReceiver">
+            <intent-filter>
+                <action android:name="com.samsung.retailcloud.content.sync.STARTED"/>
+                <action android:name="com.samsung.retailcloud.content.sync.ABORTED"/>
+                <action android:name="com.samsung.retailcloud.content.sync.COMPLETED"/>
+                <action android:name="com.samsung.retailcloud.content.UPDATE"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

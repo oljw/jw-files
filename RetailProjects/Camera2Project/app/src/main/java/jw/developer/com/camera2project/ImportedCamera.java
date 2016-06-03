@@ -41,6 +41,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+
+
+
+/**
+ * NOT USED. JUST AN EXAMPLE.
+ * */
+
+
+
+
+
 public class ImportedCamera extends AppCompatActivity {
     private static final String TAG = "ImportedCamera";
     private Button takePictureButton;

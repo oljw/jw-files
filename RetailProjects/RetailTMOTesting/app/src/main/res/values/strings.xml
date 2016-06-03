@@ -1,0 +1,127 @@
+<resources>
+    <string name="app_name">T-Mobile Table</string>
+    <string name="model_name">RetailTMO</string>
+
+
+    <!--FRAGMENT NAME, ANALYTICS-->
+    <string name="attractor">ATTRACTOR</string>
+    <string name="decision">DECISION</string>
+    <string name="gear_vr">GEAR_VR_AND_GEAR_360</string>
+    <string name="gear_vr_demo">GEAR_VR_AND_GEAR_360_DEMO</string>
+    <string name="gear_vr_info">GEAR_VR_AND_GEAR_360_PRODUCT_INFO</string>
+    <string name="gear_vr_info_spec">GEAR_VR_AND_GEAR_360_SPECS</string>
+    <string name="gear_vr_info_compatibility">GEAR_VR_AND_GEAR_360_COMPATIBILITY</string>
+    <string name="gear_vr_info_features">GEAR_VR_AND_GEAR_360_FEATURES</string>
+    <string name="gear_vr_legal">GEAR_VR_AND_GEAR_360_LEGAL</string>
+    <string name="smart_tv">SMART_TV</string>
+    <string name="smart_tv_demo">SMART_TV_DEMO</string>
+    <string name="smart_tv_info">SMART_TV_PRODUCT_INFO</string>
+    <string name="smart_tv_info_spec">SMART_TV_SPECS</string>
+    <string name="smart_tv_info_compatibility">SMART_TV_COMPATIBILITY</string>
+    <string name="smart_tv_info_features">SMART_TV_FEATURES</string>
+    <string name="smart_tv_legal">SMART_TV_LEGAL</string>
+    <string name="samsung_pay">SAMSUNG_PAY</string>
+    <string name="samsung_pay_demo">SAMSUNG_PAY_DEMO</string>
+    <string name="samsung_pay_info">SAMSUNG_PAY_PRODUCT_INFO</string>
+    <string name="samsung_pay_info_spec">SAMSUNG_PAY_SPECS</string>
+    <string name="samsung_pay_info_compatibility">SAMSUNG_PAY_COMPATIBILITY</string>
+    <string name="samsung_pay_info_features">SAMSUNG_PAY_FEATURES</string>
+    <string name="samsung_pay_legal">SAMSUNG_PAY_LEGAL</string>
+    <string name="smart_things">SMARTTHINGS</string>
+    <string name="smart_things_demo">SMARTTHINGS_DEMO</string>
+    <string name="smart_things_info">SMARTTHINGS_PRODUCT_INFO</string>
+    <string name="smart_things_info_spec">SMARTTHINGS_SPECS</string>
+    <string name="smart_things_info_compatibility">SMARTTHINGS_COMPATIBILITY</string>
+    <string name="smart_things_info_features">SMARTTHINGS_FEATURES</string>
+    <string name="smart_things_legal">SMARTTHINGS_LEGAL</string>
+    <string name="tablet">TABLET</string>
+    <string name="tablet_demo">TABLET_DEMO</string>
+    <string name="tablet_info">TABLET_PRODUCT_INFO</string>
+    <string name="tablet_info_spec">TABLET_SPECS</string>
+    <string name="tablet_info_compatibility">TABLET_COMPATIBILITY</string>
+    <string name="tablet_info_features">TABLET_FEATURES</string>
+    <string name="tablet_legal">TABLET_LEGAL</string>
+    <string name="smart_watch">SMARTWATCH</string>
+    <string name="smart_watch_demo">SMARTWATCH_DEMO</string>
+    <string name="smart_watch_info">SMARTWATCH_PRODUCT_INFO</string>
+    <string name="smart_watch_info_spec">SMARTWATCH_SPECS</string>
+    <string name="smart_watch_info_compatibility">SMARTWATCH_COMPATIBILITY</string>
+    <string name="smart_watch_info_features">SMARTWATCH_FEATURES</string>
+    <string name="smart_watch_legal">SMARTWATCH_LEGAL</string>
+    <string name="legal">LEGAL</string>
+
+
+    <string name="attractor_title">Attractor</string>
+
+    <string name="decision_title1">Experience</string>
+    <string name="decision_title2">A Galaxy of Possibility</string>
+    <string name="decision_subtitle">Tap a category below to explore how the Samsung Galaxy\nsmartphone unlocks a whole new world of possibilities.</string>
+
+    <string name="gear_vr_title">Gear VR &amp; Gear 360</string>
+    <string name="gear_vr_subtitle">With your compatible Galaxy smartphone,\nexperience a whole new reality that takes your\nentertainment to the next level.</string>
+    <string name="gear_vr_demo_title">Gear VR Demo</string>
+    <string name="gear_vr_info_title">Gear VR &amp; Gear 360</string>
+    <string name="gear_vr_info_subtitle">Now you can explore a whole new reality.\nCapture some of the best times of your life with Gear\n360 and relive the moments through your Gear VR and\ncompatible Samsung Galaxy smartphone.</string>
+
+
+    <string name="smart_tv_title">Smart TV</string>
+    <string name="smart_tv_subtitle">With a Samsung Galaxy smartphone and compatible\nSamsung TV, you have more ways to share screens and\nmaximize your entertainment.</string>
+    <string name="smart_tv_demo_title">Smart TV Demo</string>
+    <string name="smart_tv_info_title">Smart TV</string>
+    <string name="smart_tv_info_subtitle">Samsung has completely redesigned its Smart TV\nexperience. With a new intuitive menu, enhanced\nrecommendations and the ability to share screens\nbetween select Samsung devices, your TV\nis now a whole lot smarter.</string>
+
+
+    <string name="samsung_pay_title">Samsung Pay</string>
+    <string name="samsung_pay_subtitle">Your Samsung Galaxy smartphone lets you securely\npay just about anywhere with a quick tap or swipe.\nYou can even use your Samsung smartwatch\nto pay on NFC-enabled payment systems.</string>
+    <string name="samsung_pay_demo_title">Samsung Pay Demo</string>
+    <string name="samsung_pay_info_title">Samsung Pay</string>
+    <string name="samsung_pay_info_subtitle">Introducing Samsung Pay, the new way to pay with your\nSamsung Galaxy smartphone. It\'s simple and secure.\nYour Samsung smartwatch lets you pay on\nNFC-enabled payment systems.</string>
+
+    <string name="smart_things_title">SmartThings</string>
+    <string name="smart_things_subtitle">Pair your Samsung Galaxy smartphone with\nSmartThings to easily secure, control and monitor\nthe whole house from your phone.</string>
+    <string name="smart_things_demo_title">SmartThings Demo</string>
+    <string name="smart_things_info_title">SmartThings</string>
+    <string name="smart_things_info_subtitle">Smart Home. Intelligent Living. SmartThings lets\nyou easily monitor, control, and secure your\nhome from anywhere.</string>
+
+    <string name="tablet_title">Tablet</string>
+    <string name="tablet_subtitle">See how simple and easy it is to transfer documents\nand files, watch your favorite entertainment, and\nmanage your communications between your  Samsung\nGalaxy smartphone and Samsung Galaxy tablet.</string>
+    <string name="tablet_demo_title">Tablet Demo</string>
+    <string name="tablet_info_title">Tablet</string>
+    <string name="tablet_info_subtitle">With vivid high-quality screens, Samsung Galaxy\ntablets are ready for work, play, and\neverything in between.</string>
+
+    <string name="smart_watch_title">Smartwatch</string>
+    <string name="smart_watch_subtitle">With a Samsung Galaxy smartphone and Samsung\nsmartwatch, you stay connected with calls, emails\nand notifications — all on your wrist.</string>
+    <string name="smart_watch_demo_title">Smart Watch Demo</string>
+    <string name="smart_watch_info_title">Smartwatch</string>
+    <string name="smart_watch_info_subtitle">With sleek designs and notifications at‑a‑glance,\nSamsung smartwatches keep you dialed in. Keep\nthings simple and stay connected with your Samsung\nGalaxy smartphone and Samsung smartwatch.</string>
+
+    <!--decision pages-->
+    <string name="start_demo">Start Demo</string>
+    <string name="product_info">Product Information</string>
+
+    <!--Production Information-->
+    <string name="product_specs">Product specs</string>
+    <string name="product_compatibility">Product compatibility</string>
+    <string name="product_features">Product features</string>
+
+    <!--legal page-->
+    <string name="legal_title1">Experience</string>
+    <string name="legal_title2">A Galaxy of Possibility</string>
+    <string name="return_to_main_menu">Return to Main Menu</string>
+
+    <!--Legal Description-->
+    <string name="legal_desc">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, Super AMOLED, Samsung Pay, Samsung Smart Switch, Samsung Gear and Samsung+ are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Dust and water-resistant based on IP68 rating, which tests submersion in up to 5 feet of water for up to 30 minutes. Fast Charging requires an AFC-compatible charger to work. Wireless phone charging pad sold separately. Battery power consumption depends on factors such as network configuration, carrier network, signal strength, operating temperature, features selected, vibrate mode, backlight settings, browser use, frequency of calls, and voice, data and other application-usage patterns. Portion of memory occupied by existing content. Memory card sold separately. Memory may be expanded up to 2TB. Gear VR: Read and follow warnings and instructions with the Headset before use. The Headset should be calibrated before each use. Not for use by children under 13. A virtual reality experience may trigger health reactions. See a doctor before use if you have a history of seizures. Stop use if you experience health reactions. Gear S2: Sold separately. Gear S2 is compatible with select devices using Android 4.4 and later with at least 1.5GB RAM. Supported devices may vary by carrier and device. Some features may not be available. For best results, connect with compatible Samsung Galaxy devices. Samsung Pay: Samsung Pay is only compatible with select cards, carriers and Samsung devices; see Samsung Pay Support (http://www.samsung.com/Pay) for compatibility information. Smart Switch: Visit www.samsungsmartswitch.com for a list of compatible systems, platforms, devices and terms of use. Certain content (such as DRM-protected content) may not be compatible. Consult any applicable terms and conditions with your content providers to ensure that you have rights to transfer content off your previous device. App matching and recommendation system not available on all devices. Samsung+ app is available via Galaxy Essentials.</string>
+    <string name="gear_vr_legal_desc">© 2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S and Gear VR, are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Gear VR and Gear 360 sold separately. Gear VR: Read and follow warnings and instructions with the Headset before use. The Headset should be calibrated before each use. Not for use by children under 13. A virtual reality experience may trigger health reactions. See a doctor before use if you have a history of seizures. Stop use if you experience health reactions. Compatible with select Samsung Galaxy devices.</string>
+    <string name="smart_tv_legal_desc">© 2016 Samsung Electronics America, Inc. Samsung, Galaxy S and Quick Connect are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Internet connection required for streaming, games and apps. Quick Connect: One-step activation after initial setup requires device and TV to be on the same network. Currently available on Galaxy S6/S6 edge and select devices after firmware updates. Quick Connect is compatible with 2015 and later Samsung Smart TVs. For more information, visit http://www.samsung.com/us/experience/smart-tv/.</string>
+    <string name="samsung_pay_legal_desc">© 2016 Samsung Electronics America, Inc. Samsung, Galaxy S, Samsung Pay and Gear S are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Samsung Pay: Samsung Pay is only compatible with select cards, carriers and Samsung devices; see the Samsung Pay Support (http://www.samsung.com/Pay) page for compatibility information. Gear S2: Sold separately. Gear S2 is compatible with select devices using Android 4.4 and later with at least 1.5GB RAM. Supported devices may vary by carrier and device. Some features may not be available. For best results, connect with compatible Samsung Galaxy devices. </string>
+    <string name="smart_things_legal_desc">© 2016 Samsung Electronics America, Inc. Samsung, Galaxy S and SmartThings are registered trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Samsung SmartThings sold separately.</string>
+    <string name="tablet_legal_desc">© 2016 Samsung Electronics America, Inc. Samsung, Galaxy S, SideSync and Galaxy Tab are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. SideSync: For information about devices supported by SideSync, please visit www.samsung.com/us/sidesync.</string>
+    <string name="smart_watch_legal_desc">© 2016 Samsung Electronics America, Inc. Samsung, Galaxy S, Samsung Pay, S Health and Gear S are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Gear S2: Sold separately. Gear S2 is compatible with select devices using Android 4.4 and later with at least 1.5GB RAM. Supported devices may vary by carrier and device. Some features may not be available. For best results, connect with compatible Samsung Galaxy devices. S Health:  This device, S Health, and related software are not intended for use in the diagnosis of disease or other conditions, or in the cure, mitigation, treatment or prevention of disease. Samsung Pay: Samsung Pay is only compatible with select cards, carriers and Samsung devices; see the Samsung Pay Support (http://www.samsung.com/Pay) for compatibility information. </string>
+
+
+
+    <!-- Amazon Analytics -->
+    <string name="amazon_app_id">4f76865b79024c00a42d4e744162e07c</string> <!--Amazon Mobile Analytics App ID-->
+    <string name="amazon_cognito_id">us-east-1:933dcd01-8e7e-4d8d-ac8f-3f119a77c958</string> <!--Amazon Cognito Identity Pool ID-->
+
+</resources>
