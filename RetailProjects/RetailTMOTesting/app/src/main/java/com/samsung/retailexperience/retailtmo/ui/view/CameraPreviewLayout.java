@@ -85,9 +85,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class CameraPreviewLayout extends RelativeLayout {
 
-    public MainActivity myActivity = (MainActivity) getContext();
+
 
     public static ImageView mOutputImage;
+    public MainActivity myActivity = (MainActivity) getContext();
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -166,6 +167,12 @@ public class CameraPreviewLayout extends RelativeLayout {
      * Camera state: Waiting for 3A convergence before capturing a photo.
      */
     private static final int STATE_WAITING_FOR_3A_CONVERGENCE = 3;
+
+    /**
+     * Camera State: Initializing
+     */
+    private static final int STATE_INITIALIZE = 4;
+
 
     /**
      * {@link TextureView.SurfaceTextureListener} handles several lifecycle events of a
@@ -294,13 +301,16 @@ public class CameraPreviewLayout extends RelativeLayout {
      *
      * @see #mPreCaptureCallback
      */
-    private int mState = STATE_CLOSED;
+    public static int mState = STATE_CLOSED;
 
     /**
      * Timer to use with pre-capture sequence to ensure a timely capture if 3A convergence is
      * taking too long.
      */
     private long mCaptureTimer;
+
+    public static boolean mEnableManualFocus;
+    public static String mCameraIdNum;
 
     //**********************************************************************************************
     public CameraPreviewLayout(Context context) {
@@ -310,21 +320,25 @@ public class CameraPreviewLayout extends RelativeLayout {
 
     public CameraPreviewLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Log.d(TAG, "##### CameraPreviewLayout NO PARAMETERS created +, mEnableManualFocus: " + mEnableManualFocus+ " mState: " + mState);
+
         init(context, attrs);
+        Log.d(TAG, "##### CameraPreviewLayout NO PARAMETERS created -, mEnableManualFocus: " + mEnableManualFocus+ " mState: " + mState);
+
     }
 
-    public CameraPreviewLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context, attrs);
-    }
+    public CameraPreviewLayout(Context context, String cameraSideId, boolean enableManualFocus) {
+        super(context);
+        Log.d(TAG, "##### CameraPreviewLayout created +, mEnableManualFocus: " + mEnableManualFocus + " mState: " + mState);
 
-//    public CameraPreviewLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-//        super(context, attrs, defStyleAttr);
-//        init(context, attrs);
-//    }
+        this.mCameraIdNum = cameraSideId;
+        this.mEnableManualFocus = enableManualFocus;
+        init(context, null);
+        Log.d(TAG, "##### CameraPreviewLayout created -, mEnableManualFocus: " + mEnableManualFocus+ " mState: " + mState);
+    }
 
     private void init(Context context, AttributeSet attrs) {
-        Log.d(TAG, "#### CameraView init() Called");
+        Log.d(TAG, "##### CameraView init() Called +, mEnableManualFocus: " + mEnableManualFocus+ " mState: " + mState);
 
         mContext = context;
         mInflater = LayoutInflater.from(context);
@@ -334,10 +348,9 @@ public class CameraPreviewLayout extends RelativeLayout {
         mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
 
         mFocusIcon = (ImageView) findViewById(R.id.draw_focus_icon);
-
         mOutputImage = (ImageView) findViewById(R.id.output_image);
 
-        startBackgroundThread();
+        Log.d(TAG, "##### CameraView init() Called -, mEnableManualFocus: " + mEnableManualFocus+ " mState: " + mState);
     }
 
 
@@ -346,7 +359,6 @@ public class CameraPreviewLayout extends RelativeLayout {
      * changes its state.
      */
     private final CameraDevice.StateCallback mStateCallback = new CameraDevice.StateCallback() {
-
         @Override
         public void onOpened(CameraDevice cameraDevice) {
             // This method is called when the camera is opened.  We start camera preview here if
@@ -572,12 +584,15 @@ public class CameraPreviewLayout extends RelativeLayout {
                         mTextureView.setOnTouchListener(new OnTouchListener() {
                             @Override
                             public boolean onTouch(View v, MotionEvent event) {
+                                Log.d(TAG, "##### mEnableManualFocus: " + mEnableManualFocus);
+                                Log.d(TAG, "##### ORIENTATION: " + ORIENTATIONS);
+
+                                if (!mEnableManualFocus){return false;}
                                 if (event.getAction() == MotionEvent.ACTION_UP && mTextureView != null) {
                                     focusRect = calculateTapArea(event.getX(), event.getY(), 1f);
                                     Log.d(TAG, "##### (X, Y) = (" + event.getX() + ", " + event.getY());
                                     Log.d(TAG, "##### (" + focusRect.left + ", " + focusRect.top + ", " + focusRect.right + ", " + focusRect.bottom + ")");
                                     drawFocusIcon(event.getX(), event.getY());
-
 
                                     MeteringRectangle[] focusArea = new MeteringRectangle[1];
                                     focusArea[0] = new MeteringRectangle((int)event.getX(), (int)event.getY(), 100, 100, 300);
@@ -602,6 +617,7 @@ public class CameraPreviewLayout extends RelativeLayout {
                     }
 
                     case STATE_WAITING_FOR_3A_CONVERGENCE: {
+                        Log.d(TAG, "##### STATE_WAITING_FOR_3A_CONVERGENCE on");
                         boolean readyToCapture = true;
                         if (!mNoAFRun) {
                             int afState = result.get(CaptureResult.CONTROL_AF_STATE);
@@ -875,7 +891,6 @@ public class CameraPreviewLayout extends RelativeLayout {
                     mCharacteristics = characteristics;
                     mCameraId = cameraId;
                     Log.d(TAG, "##### setUpCameraOutputs(): mCameraId: " + mCameraId);
-                    Log.d(TAG, "##### setUpCameraOutputs(): cameraId: " + cameraId);
                 }
                 return true;
             }
@@ -905,13 +920,13 @@ public class CameraPreviewLayout extends RelativeLayout {
 //                throw new RuntimeException("Time out waiting to lock camera opening.");
 //            }
 
-            String cameraId;
+//            String cameraId;
             Handler backgroundHandler;
             synchronized (mCameraStateLock) {
                 //TODO: SWITCHING BETWEEN FRONT AND BACK FACING CAMERAS 1 = FRONT, 0 = BACK.
 
 
-                cameraId = cameraIdNum;
+                mCameraIdNum = cameraIdNum;
 
 
                 backgroundHandler = mBackgroundHandler;
@@ -923,13 +938,13 @@ public class CameraPreviewLayout extends RelativeLayout {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
+//                   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            manager.openCamera(cameraId, mStateCallback, backgroundHandler);
+            manager.openCamera(mCameraIdNum, mStateCallback, backgroundHandler);
             } catch (CameraAccessException e) {
                 e.printStackTrace();
 //        } catch (InterruptedException e) {
@@ -1028,6 +1043,8 @@ public class CameraPreviewLayout extends RelativeLayout {
          * Starts a background thread and its {@link Handler}. JW changed into public
          */
         public void startBackgroundThread() {
+            Log.d(TAG, "##### startBackgroundThread called");
+
             mBackgroundThread = new HandlerThread("CameraBackground");
             mBackgroundThread.start();
             synchronized (mCameraStateLock) {
@@ -1039,6 +1056,8 @@ public class CameraPreviewLayout extends RelativeLayout {
          * Stops the background thread and its {@link Handler}. JW changed into public
          */
         public void stopBackgroundThread() {
+            Log.d(TAG, "##### stopBackgroundThread called");
+
             if(mBackgroundHandler == null) return;
             mBackgroundThread.quitSafely();
             try {
@@ -1591,16 +1610,10 @@ public class CameraPreviewLayout extends RelativeLayout {
                                 Log.d("EXIF value",
                                         exif.getAttribute(ExifInterface.TAG_ORIENTATION));
                                 if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-                                        .equalsIgnoreCase("1")) {
-                                    realImage = rotateOutputImage(realImage, 90);
-                                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION) //this one is used for back facing camera. others might not be necessary
+                                        .equalsIgnoreCase("6") && mCameraIdNum == "1") {    //TODO: MAKE THIS MORE REASONABLE.
+                                    realImage = rotateOutputImage(realImage, 270);          //this one is used for front-facing camera.
+                                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION) //this one is used for back facing camera.
                                         .equalsIgnoreCase("6")) {
-                                    realImage = rotateOutputImage(realImage, 90);
-                                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-                                        .equalsIgnoreCase("3")) {
-                                    realImage = rotateOutputImage(realImage, 90);
-                                } else if (exif.getAttribute(ExifInterface.TAG_ORIENTATION)
-                                        .equalsIgnoreCase("0")) {
                                     realImage = rotateOutputImage(realImage, 90);
                                 }
                             } catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.samsung.retailexperience.retailtmo.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,10 @@ import android.view.ViewGroup;
 import com.samsung.retailexperience.retailtmo.analytics.FragmentChangeCause;
 import com.samsung.retailexperience.retailtmo.animator.PageTransformer;
 import com.samsung.retailexperience.retailtmo.gson.models.ArgumentsModel;
+import com.samsung.retailexperience.retailtmo.ui.activity.MainActivity;
+import com.samsung.retailexperience.retailtmo.ui.view.CameraPreviewLayout;
 import com.samsung.retailexperience.retailtmo.util.AppConst;
+import com.samsung.retailexperience.retailtmo.video.annotation.OnChapter;
 
 /**
  * Created by JW on 2016-06-02.
@@ -17,8 +21,6 @@ public class CameraFragment extends BaseCameraFragment {
     private static final String TAG = CameraFragment.class.getSimpleName();
 
     boolean mTransitionEnter = false;
-    private String mCameraIdNum = FRONT_FACING_CAMERA_ID;
-
 
     @Override
     public void onFragmentCreated(ArgumentsModel args) {
@@ -27,8 +29,9 @@ public class CameraFragment extends BaseCameraFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
 
+        initializeCameraDemo(FRONT_FACING_CAMERA_ID, MANUAL_FOCUS_ENABLED);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -72,9 +75,5 @@ public class CameraFragment extends BaseCameraFragment {
     public void onResume() {
         super.onResume();
 
-        if (mCameraPreviewLayout != null) {
-            mCameraPreviewLayout.startBackgroundThread();
-            mCameraPreviewLayout.openCamera(mCameraIdNum);
-        }
     }
 }

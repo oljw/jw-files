@@ -15,6 +15,7 @@ import com.samsung.retailexperience.retailtmo.gson.models.ArgumentsModel;
 import com.samsung.retailexperience.retailtmo.gson.models.FragmentModel;
 import com.samsung.retailexperience.retailtmo.gson.models.ListModel;
 import com.samsung.retailexperience.retailtmo.gson.models.MenuModel;
+import com.samsung.retailexperience.retailtmo.ui.activity.MainActivity;
 import com.samsung.retailexperience.retailtmo.ui.view.CameraPreviewLayout;
 import com.samsung.retailexperience.retailtmo.util.AppConst;
 import com.samsung.retailexperience.retailtmo.util.JsonUtil;
@@ -24,18 +25,25 @@ import com.samsung.retailexperience.retailtmo.util.JsonUtil;
  */
 public abstract class BaseCameraFragment extends BaseFragment {
     public static final String TAG = BaseCameraFragment.class.getSimpleName();
+
     protected static final String FRONT_FACING_CAMERA_ID = "1";
     protected static final String BACK_FACING_CAMERA_ID = "0";
+
+    protected static final boolean MANUAL_FOCUS_ENABLED = true;
+    protected static final boolean MANUAL_FOCUS_DISABLED = false;
+
+    protected CameraPreviewLayout mCameraPreviewLayout = new CameraPreviewLayout(MainActivity.myActivity,
+            CameraPreviewLayout.mCameraIdNum, CameraPreviewLayout.mEnableManualFocus);
 
     private FragmentModel<MenuModel> mFragmentModel;
     private AppConst.TransactionDir mTransactionDir;
 
-    protected CameraPreviewLayout mCameraPreviewLayout;
     private Button mCaptureBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             ArgumentsModel args = (ArgumentsModel) getArguments().getSerializable(AppConst.ARGUMENTS_MODEL);
             mFragmentModel = JsonUtil.loadJsonModel(getActivity().getApplicationContext(),
@@ -59,12 +67,6 @@ public abstract class BaseCameraFragment extends BaseFragment {
         if (getFragmentModel().getPivotYValue() != 0)
             mView.setPivotY(getResources().getInteger(getFragmentModel().getPivotYValue()));
 
-        initiateCameraDemo();
-
-        return mView;
-    }
-
-    public CameraPreviewLayout initiateCameraDemo(String cameraIdNum) {
         mCameraPreviewLayout = (CameraPreviewLayout) mView.findViewById(R.id.camera_preview);
 
         mCaptureBtn = (Button) mView.findViewById(R.id.capture_btn);
@@ -76,8 +78,7 @@ public abstract class BaseCameraFragment extends BaseFragment {
                 CameraPreviewLayout.mOutputImage.setVisibility(View.VISIBLE);
             }
         });
-
-        return mCameraPreviewLayout;
+        return mView;
     }
 
     @Override
@@ -109,6 +110,10 @@ public abstract class BaseCameraFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
+        if (mCameraPreviewLayout != null) {
+            mCameraPreviewLayout.startBackgroundThread();
+            mCameraPreviewLayout.openCamera(CameraPreviewLayout.mCameraIdNum);
+        }
     }
 
     @Override
@@ -139,4 +144,38 @@ public abstract class BaseCameraFragment extends BaseFragment {
     abstract public void onPageTransitionStart(boolean enter, int nextAnim, AppConst.TransactionDir dir);
     abstract public void onPageTransitionEnd(boolean enter, int nextAnim, AppConst.TransactionDir dir);
     abstract public void onPageTransitionCancel(boolean enter, int nextAnim, AppConst.TransactionDir dir);
+
+    /**
+     * Camera Demo Controllers.
+     */
+
+    protected void initializeCameraDemo(String cameraId, boolean enableManualFocus) {
+        this.mCameraPreviewLayout.mCameraIdNum = cameraId;
+        this.mCameraPreviewLayout.mEnableManualFocus = enableManualFocus;
+    }
+
+    protected void turnCameraOn() {
+        if (mCameraPreviewLayout != null) {
+            mCameraPreviewLayout.startBackgroundThread();
+            mCameraPreviewLayout.openCamera(CameraPreviewLayout.mCameraIdNum);
+        }
+    }
+
+    protected void turnCameraOff() {
+        if (mCameraPreviewLayout != null) {
+            mCameraPreviewLayout.closeCamera();
+            mCameraPreviewLayout.stopBackgroundThread();
+
+            if (mCameraPreviewLayout.mOutputImage != null &&
+                    mCameraPreviewLayout.mOutputImage.getDrawable() != null) {
+                BitmapDrawable b = (BitmapDrawable) mCameraPreviewLayout.mOutputImage.getDrawable();
+                if (b != null && b.getBitmap() != null) {
+                    b.getBitmap().recycle();
+                    Log.d(TAG, "##### mOutputImage bitmap recycled");
+                }
+                mCameraPreviewLayout.mOutputImage.setImageBitmap(null);
+            }
+        }
+    }
+
 }
