@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity
 
 
     //JW
-    public static MainActivity myActivity;
+//    public static MainActivity myActivity;
 
 
 
@@ -40,7 +40,12 @@ public class MainActivity extends BaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myActivity = this;
+
+
+
+//        myActivity = this;
+
+
         setContentView(R.layout.activity_main);
 
         // LockerView for exit application

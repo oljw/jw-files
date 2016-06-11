@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">RetailGrace</string>
+
+    <!--fragments-->
+    <string name="attractor">ATTRACTOR</string>
+    <string name="gear_vr">GEAR_VR_AND_GEAR_360</string>
+    <string name="gear_vr_info_spec">GEAR_VR_INFO_SPEC</string>
+
+    <!--attractor fragment-->
+    <string name="attractor_title">Attractor</string>
+
+    <!--gear_vr fragment-->
+    <string name="gear_vr_title">Gear VR &amp; Gear 360</string>
+    <string name="gear_vr_subtitle">With your compatible Galaxy smartphone,\nexperience a whole new reality that takes your\nentertainment to the next level.</string>
+    <string name="start_demo">Start Demo</string>
+    <string name="product_info">Product Information</string>
+
+    <!-- Amazon Analytics -->
+    <string name="amazon_app_id">4f76865b79024c00a42d4e744162e07c</string> <!--Amazon Mobile Analytics App ID-->
+    <string name="amazon_cognito_id">us-east-1:933dcd01-8e7e-4d8d-ac8f-3f119a77c958</string> <!--Amazon Cognito Identity Pool ID-->
+    <string name="amazon_test_app_id">8f26428ad04e4040a02c0ff0c51c42e6</string>
+    <string name="amazon_test_cognito_id">us-east-1:8acc1e0d-9b82-4a04-a991-78f833194bde</string>
+
+</resources>

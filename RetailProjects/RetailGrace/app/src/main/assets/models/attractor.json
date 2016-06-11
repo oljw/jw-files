@@ -1,0 +1,24 @@
+{
+  "me": "models/attractor.json",
+  "name": "@string/attractor",
+  "className": "com.samsung.retailexperience.retailgrace.ui.fragment.VideoFragment",
+  "layout": "@layout/fragment_video",
+  "background": "@color/white",
+  "action": "models/menu_fragment.json",
+  "actionBackKey": "NONE",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"@integer/animStartOffset",
+  "pivotY":"@integer/animYOffset",
+  "fragment": {
+    "title": "@string/attractor_title",
+    "videoFile": "video/ECO_AttractLoop.mp4",
+    "frameFile": "frame/ECO_AttractLoop_frame.jpg",
+    "looped": "true",
+    "autoPlay": "true",
+    "action": "models/menu_fragment.json",
+    "actionClick": "models/menu_fragment.json"
+  }
+}

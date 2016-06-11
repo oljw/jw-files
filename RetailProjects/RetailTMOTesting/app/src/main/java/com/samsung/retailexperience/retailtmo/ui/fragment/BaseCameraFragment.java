@@ -29,10 +29,15 @@ public abstract class BaseCameraFragment extends BaseFragment {
     protected static final String FRONT_FACING_CAMERA_ID = "1";
     protected static final String BACK_FACING_CAMERA_ID = "0";
 
+
+//    public MainActivity myActivity = (MainActivity) getContext();
+
+
+
     protected static final boolean MANUAL_FOCUS_ENABLED = true;
     protected static final boolean MANUAL_FOCUS_DISABLED = false;
 
-    protected CameraPreviewLayout mCameraPreviewLayout = new CameraPreviewLayout(MainActivity.myActivity,
+    protected CameraPreviewLayout mCameraPreviewLayout = new CameraPreviewLayout(getActivity(),
             CameraPreviewLayout.mCameraIdNum, CameraPreviewLayout.mEnableManualFocus);
 
     private FragmentModel<MenuModel> mFragmentModel;

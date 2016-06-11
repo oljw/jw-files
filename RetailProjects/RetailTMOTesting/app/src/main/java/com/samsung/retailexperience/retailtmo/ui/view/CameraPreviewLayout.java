@@ -88,7 +88,7 @@ public class CameraPreviewLayout extends RelativeLayout {
 
 
     public static ImageView mOutputImage;
-    public MainActivity myActivity = (MainActivity) getContext();
+    public static MainActivity myActivity; // = (MainActivity) getContext();
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -341,6 +341,7 @@ public class CameraPreviewLayout extends RelativeLayout {
         Log.d(TAG, "##### CameraView init() Called +, mEnableManualFocus: " + mEnableManualFocus+ " mState: " + mState);
 
         mContext = context;
+        myActivity = (MainActivity) mContext;
         mInflater = LayoutInflater.from(context);
         mInflater.inflate(R.layout.layout_camera_view, this, true);
 
@@ -1592,7 +1593,7 @@ public class CameraPreviewLayout extends RelativeLayout {
 
             protected Bitmap realImage;
             private void showOutputImage() {
-                MainActivity.myActivity.runOnUiThread(new Runnable() {
+                CameraPreviewLayout.myActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         final BitmapFactory.Options options = new BitmapFactory.Options();
