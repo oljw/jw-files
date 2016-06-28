@@ -1,0 +1,46 @@
+{
+  "me": "models/legal.json",
+  "name": "@string/legal",
+  "className": "com.samsung.retailexperience.retailgrace.ui.fragment.LegalFragment",
+  "layout": "@layout/fragment_legal",
+  "background": "@color/white",
+  "actionBackKey": "models/decision.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX": "0",
+  "pivotY": "0",
+  "fragment": {
+    "title": [
+      "@string/legal_title1",
+      "@string/legal_title2"
+    ],
+    "menuItems": [
+      {
+        "layout": "@layout/menu_item_title_icon",
+        "title": "@string/play_demo_again",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/decision.json"
+      },
+      {
+        "layout": "@layout/menu_item_title_icon",
+        "title": "@string/play_sub_demo_again",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/decision.json"
+      },
+      {
+        "layout": "@layout/menu_item_title_icon",
+        "title": "@string/back_to_whats_new",
+        "icon": "@drawable/chevron_blue",
+        "action": "models/decision.json"
+      },
+      {
+        "layout": "@layout/menu_item_title_icon",
+        "title": "@string/explore_the_phone",
+        "icon": "@drawable/chevron_blue",
+        "action": "NONE"
+      }
+    ]
+  }
+}

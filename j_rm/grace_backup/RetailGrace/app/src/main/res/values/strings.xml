@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">RetailGrace</string>
+
+    <!--fragments-->
+    <string name="attractor">ATTRACTOR</string>
+    <string name="gear_vr">GEAR_VR_AND_GEAR_360</string>
+    <string name="gear_vr_info_spec">GEAR_VR_INFO_SPEC</string>
+
+    <!--attractor fragment-->
+    <string name="attractor_title">Attractor</string>
+
+    <!--gear_vr fragment-->
+    <string name="gear_vr_title">Gear VR &amp; Gear 360</string>
+    <string name="gear_vr_subtitle">With your compatible Galaxy smartphone,\nexperience a whole new reality that takes your\nentertainment to the next level.</string>
+    <string name="start_demo">Start Demo</string>
+    <string name="product_info">Product Information</string>
+
+    <!--video fragment-->
+    <string name="video">Video</string>
+
+
+    <!--legal fragment-->
+    <string name="legal">Legal</string>
+    <string name="legal_title1">Experience</string>
+    <string name="legal_title2">A Galaxy of Possibility</string>
+    <string name="play_demo_again">PLAY DEMO AGAIN?</string>
+    <string name="play_sub_demo_again">PLAY SUB DEMO AGAIN?</string>
+    <string name="back_to_whats_new">BACK TO WHAT\'S NEW</string>
+    <string name="explore_the_phone">EXPLORE THE PHONE</string>
+    <string name="legal_desc">©2016 Samsung Electronics America, Inc. Samsung, Samsung Galaxy S, Super AMOLED, Samsung Pay, Samsung Smart Switch, Samsung Gear and Samsung+ are all trademarks of Samsung Electronics Co., Ltd. Use only in accordance with law. Other company and product names mentioned may be trademarks of their respective owners. Screen images simulated; actual appearance of devices may vary. Sequences shortened. Dust and water-resistant based on IP68 rating, which tests submersion in up to 5 feet of water for up to 30 minutes. Fast Charging requires an AFC-compatible charger to work. Wireless phone charging pad sold separately. Battery power consumption depends on factors such as network configuration, carrier network, signal strength, operating temperature, features selected, vibrate mode, backlight settings, browser use, frequency of calls, and voice, data and other application-usage patterns. Portion of memory occupied by existing content. Memory card sold separately. Memory may be expanded up to 2TB. Gear VR: Read and follow warnings and instructions with the Headset before use. The Headset should be calibrated before each use. Not for use by children under 13. A virtual reality experience may trigger health reactions. See a doctor before use if you have a history of seizures. Stop use if you experience health reactions. Gear S2: Sold separately. Gear S2 is compatible with select devices using Android 4.4 and later with at least 1.5GB RAM. Supported devices may vary by carrier and device. Some features may not be available. For best results, connect with compatible Samsung Galaxy devices. Samsung Pay: Samsung Pay is only compatible with select cards, carriers and Samsung devices; see Samsung Pay Support (http://www.samsung.com/Pay) for compatibility information. Smart Switch: Visit www.samsungsmartswitch.com for a list of compatible systems, platforms, devices and terms of use. Certain content (such as DRM-protected content) may not be compatible.</string>
+
+
+    <!-- Amazon Analytics -->
+    <string name="amazon_app_id">4f76865b79024c00a42d4e744162e07c</string> <!--Amazon Mobile Analytics App ID-->
+    <string name="amazon_cognito_id">us-east-1:933dcd01-8e7e-4d8d-ac8f-3f119a77c958</string> <!--Amazon Cognito Identity Pool ID-->
+    <string name="amazon_test_app_id">8f26428ad04e4040a02c0ff0c51c42e6</string>
+    <string name="amazon_test_cognito_id">us-east-1:8acc1e0d-9b82-4a04-a991-78f833194bde</string>
+
+</resources>

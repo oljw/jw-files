@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">app.manager.ext</string>
+
+    <string name="gear_vr_title">Gear VR &amp; Gear 360</string>
+    <string name="smart_tv_title">Smart TV</string>
+    <string name="samsung_pay_title">Samsung Pay</string>
+    <string name="smart_things_title">SmartThings</string>
+    <string name="tablet_title">Tablet</string>
+    <string name="smart_watch_title">Smartwatch</string>
+</resources>

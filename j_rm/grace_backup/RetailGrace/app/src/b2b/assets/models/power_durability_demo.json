@@ -1,0 +1,21 @@
+{
+  "me": "models/power_demo.json",
+  "name": "@string/gear_vr",
+  "className": "com.samsung.retailexperience.retailgrace.ui.fragment.VideoFragment",
+  "layout": "@layout/fragment_video",
+  "background": "@color/black",
+  "action": "models/legal.json",
+  "actionBackKey": "models/decision.json",
+  "forwardEnterAnim":"@animator/right_in",
+  "forwardExitAnim":"@animator/left_out",
+  "backwardEnterAnim":"@animator/left_in",
+  "backwardExitAnim":"@animator/right_out",
+  "pivotX":"0",
+  "pivotY":"0",
+  "fragment": {
+    "videoFile": "video/0_Hero_Attractor.mp4",
+    "frameFile": "frame/0_Hero_Attractor_frame.jpg",
+    "chapterFile": "chapter/power_chapter.json",
+    "action": "models/legal.json"
+  }
+}

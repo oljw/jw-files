@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RetailGrace.iml" filepath="$PROJECT_DIR$/RetailGrace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Retail_Common/modules/android/app.manager/app.manager.iml" filepath="$PROJECT_DIR$/../../Retail_Common/modules/android/app.manager/app.manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/app.manager/app.manager.iml" filepath="$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/app.manager/app.manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Retail_Common/modules/android/app.manager.ext/app.manager.ext.iml" filepath="$PROJECT_DIR$/../../Retail_Common/modules/android/app.manager.ext/app.manager.ext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/app.manager.ext/app.manager.ext.iml" filepath="$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/app.manager.ext/app.manager.ext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Retail_Common/modules/android/retail.analyticsmanager/retail.analyticsmanager.iml" filepath="$PROJECT_DIR$/../../Retail_Common/modules/android/retail.analyticsmanager/retail.analyticsmanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/retail.analyticsmanager/retail.analyticsmanager.iml" filepath="$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/retail.analyticsmanager/retail.analyticsmanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Retail_Common/modules/android/retail.appmanager/retail.appmanager.iml" filepath="$PROJECT_DIR$/../../Retail_Common/modules/android/retail.appmanager/retail.appmanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/retail.appmanager/retail.appmanager.iml" filepath="$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/retail.appmanager/retail.appmanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Retail_Common/modules/android/retail.videomanager/retail.videomanager.iml" filepath="$PROJECT_DIR$/../../Retail_Common/modules/android/retail.videomanager/retail.videomanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/retail.videomanager/retail.videomanager.iml" filepath="$PROJECT_DIR$/../../../../retail_mode_proj/programs/GIT_RM_COMMON/modules/android/retail.videomanager/retail.videomanager.iml" />
+    </modules>
+  </component>
+</project>

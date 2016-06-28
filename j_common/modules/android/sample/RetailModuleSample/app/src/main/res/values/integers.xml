@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    ###############################################################
+        Gear VR Product Information
+    ###############################################################
+    -->
+    <integer name="gear_vr_info_spec_next_scroll_position">18</integer>
+    <!--Gear VR Product Information Spec Json-->
+    <integer name="gear_vr_info_spec_close_margin_top">100</integer>
+    <integer name="gear_vr_info_spec_margin_top">300</integer>
+    <integer name="gear_vr_info_spec_font_size">112</integer>
+    <integer name="gear_vr_info_spec_margin_bottom">200</integer>
+    <integer name="gear_vr_info_spec_gear_vr_logo_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_dimension_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_dimension_font_size">60</integer>
+    <integer name="gear_vr_info_spec_dimension_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_dimension_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_field_of_view_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_field_of_view_font_size">60</integer>
+    <integer name="gear_vr_info_spec_field_of_view_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_field_of_view_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_pui_button_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_pui_button_font_size">60</integer>
+    <integer name="gear_vr_info_spec_pui_button_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_pui_button_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_sensors_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_sensors_font_size">60</integer>
+    <integer name="gear_vr_info_spec_sensors_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_sensors_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_charging_port_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_charging_port_font_size">60</integer>
+    <integer name="gear_vr_info_spec_charging_port_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_charging_port_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_charging_port_desc_margin_bottom">200</integer>
+    <integer name="gear_vr_info_spec_gear_360_logo_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_360_camera_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_360_camera_font_size">60</integer>
+    <integer name="gear_vr_info_spec_360_camera_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_360_camera_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_resolution_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_360_resolution_font_size">60</integer>
+    <integer name="gear_vr_info_spec_360_resolution_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_360_resolution_movie_recording_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_resolution_movie_recording_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_resolution_still_capturing_margin_top">38</integer>
+    <integer name="gear_vr_info_spec_360_resolution_still_capturing_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_resolution_still_capturing_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_camera_mode_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_360_camera_mode_font_size">60</integer>
+    <integer name="gear_vr_info_spec_360_camera_mode_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_360_camera_mode_dual_lens_mode_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_camera_mode_dual_lens_mode_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_camera_mode_single_lens_mode_margin_top">38</integer>
+    <integer name="gear_vr_info_spec_360_camera_mode_single_lens_mode_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_camera_mode_single_lens_mode_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_dimension_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_360_dimension_font_size">60</integer>
+    <integer name="gear_vr_info_spec_360_dimension_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_360_dimension_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_360_memory_margin_top">150</integer>
+    <integer name="gear_vr_info_spec_360_memory_font_size">60</integer>
+    <integer name="gear_vr_info_spec_360_memory_margin_bottom">38</integer>
+    <integer name="gear_vr_info_spec_360_memory_desc_font_size">48</integer>
+    <integer name="gear_vr_info_spec_url_margin_top">200</integer>
+    <integer name="gear_vr_info_spec_url_font_size">60</integer>
+    <integer name="gear_vr_info_spec_url_margin_bottom">200</integer>
+    <integer name="gear_vr_info_spec_legal_margin_top">200</integer>
+    <integer name="gear_vr_info_spec_legal_font_size">34</integer>
+    <integer name="gear_vr_info_spec_legal_margin_bottom">200</integer>
+
+</resources>

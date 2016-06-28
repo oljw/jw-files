@@ -1,0 +1,1 @@
+include ':app', ':app.manager', ':app.manager.ext', ':retail.analyticsmanager', ':retail.appmanager', ':retail.videomanager'

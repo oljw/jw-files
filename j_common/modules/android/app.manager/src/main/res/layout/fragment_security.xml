@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/video_container"
+    android:layout_height="match_parent">
+
+    <com.tecace.retail.videomanager.ui.view.VideoTextureView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:looped="false"
+        app:autoPlay="true"
+        app:isShowVideoFrame="true"
+        app:scaleToVideoSize="true"/>
+
+    <com.tecace.retail.appmanager.ui.view.camera.CameraPreviewLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:layout_width="480px"
+        android:layout_height="480px"
+        android:id="@+id/white_circle_left"
+        android:src="@drawable/camera_white_circle"
+        android:layout_gravity="start"
+        android:visibility="gone"
+        android:layout_marginTop="165px"
+        android:layout_marginLeft="130px"/>
+
+    <ImageView
+        android:layout_width="480px"
+        android:layout_height="480px"
+        android:id="@+id/white_circle_right"
+        android:src="@drawable/camera_white_circle"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:layout_marginTop="165px"
+        android:layout_marginRight="130px"/>
+
+    <com.tecace.retail.appmanager.ui.view.camera.DrawingView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/overlayView"
+        android:background="@android:color/transparent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eye_count"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="900px"/>
+
+</FrameLayout>

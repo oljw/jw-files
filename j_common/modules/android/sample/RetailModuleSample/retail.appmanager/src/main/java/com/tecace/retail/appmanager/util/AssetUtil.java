@@ -1,0 +1,40 @@
+package com.tecace.retail.appmanager.util;
+
+import android.content.Context;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+/**
+ * Created by icanmobile on 3/1/16.
+ */
+public class AssetUtil {
+    private static final String TAG = AssetUtil.class.getSimpleName();
+
+    private static AssetUtil sInstance = null;
+    public static AssetUtil getInstance() {
+        if (sInstance == null)
+            sInstance = new AssetUtil();
+        return sInstance;
+    }
+
+    public static String GetTextFromAsset(Context context, String filename) {
+        StringBuilder ret = new StringBuilder();
+
+        try {
+            InputStream is = context.getAssets().open(filename);
+            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            BufferedReader f = new BufferedReader(inputStreamReader);
+            String line = f.readLine();
+            while (line != null) {
+                ret.append(line);
+                line = f.readLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret.toString();
+    }
+}
