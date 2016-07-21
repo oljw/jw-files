@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="378px"
-              android:layout_height="672px"
-              android:id="@+id/vr_item_layout_container">
-
-</LinearLayout>

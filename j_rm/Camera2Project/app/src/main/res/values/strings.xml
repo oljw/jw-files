@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">Camera2Project</string>
-    <string name="take_picture">Take Picture</string>
-    <string name="open_camera">Open the Camera</string>
-    <string name="capture">CAPTURE</string>
-    <string name="request_permission">This app needs camera permission.</string>
-</resources>
