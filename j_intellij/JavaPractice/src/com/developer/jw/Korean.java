@@ -10,15 +10,15 @@ public class Korean {
     public String bloodType;
 
     public Korean() {
-
-    }
-
-    public static void main(String[] args) {
         Korean boy = new Korean();
-
+        
         boy.firstName = "Jae";
         boy.lastName = "Lee";
         boy.personality = "nice";
         boy.bloodType = "AB";
+    }
+
+    public static void main(String[] args) {
+
     }
 }
