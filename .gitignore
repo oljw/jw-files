@@ -2,3 +2,6 @@ j_intellij/JavaPractice/out/
 j_intellij/JavaPractice/.idea/
 j_tizen/.metadata/*
 .idea/
+j_android/EmptyTestApp/gradlew
+j_android/TestApp/gradlew
+j_android/TestApp/gradle/
