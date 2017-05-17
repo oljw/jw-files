@@ -1,6 +1,7 @@
 import sys
 import os
 import csv
+import xlrd
 
 if len(sys.argv) != 2:
     os._exit(1)
@@ -9,18 +10,22 @@ path = sys.argv[1]  # get folder as a command line argument
 
 os.chdir(path)
 
-csvFiles = []
-for f in os.listdir('.'):
-    if f.endswith('.csv') or f.endswith('.CSV'):
-        csvFiles.append(f)
+workbook = xlrd.open_workbook(r'C:\Users\JW\Desktop\JW\git\my_git\j_python\myData.xls')
+sheets = workbook.sheet_names()
 
-# csvFiles = [f for f in os.listdir('.') if f.endswith('.csv') or f.endswith('.CSV')]
+print(sheets)
+
+# csvFiles = []
+# for f in os.listdir('.'):
+#     if f.endswith('.csv') or f.endswith('.CSV'):
+#         csvFiles.append(f)
+
+csvFiles = [files for files in os.listdir('.') if files.endswith('.csv') or files.endswith('.CSV')]
 
 for csvFile in csvFiles:
     xmlFile = csvFile[:-4] + '.xml'
     csvData = csv.reader(open(csvFile))
     xmlData = open(xmlFile, 'w')
-    # xmlData.write('<?xml version="1.0"?>' + "\n") # Commented out
     # there must be only one top-level tag
     xmlData.write('<resources>' + "\n")
     rowNum = 0
@@ -33,7 +38,6 @@ for csvFile in csvFiles:
             for i in range(len(tags)):
                 tags[i] = tags[i].replace(' ', '_')
         else:
-            print(row)
             xmlData.write('    <string name=',)
             # for i in range(len(tags)):
             for i in range(1):
