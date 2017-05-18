@@ -1,0 +1,9 @@
+<resources>
+    <string name="Key">Value</string>
+    <string name="decision_str_1">Main Menu</string>
+    <string name="decision_str_2">What's new</string>
+    <string name="decision_str_3">See more</string>
+    <string name="infinity_demo_str_1">Seee this</string>
+    <string name="infinity_demo_str_2">What's that</string>
+    <string name="device_spec_str_1">Hello World</string>
+</resources>
