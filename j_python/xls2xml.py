@@ -1,10 +1,12 @@
-import sys
 import os
 import xlrd
-import tkinter as Tk
-import tkinter.filedialog as fd
+import Tkinter as tk
+import tkFileDialog
+import tkMessageBox
 
-path = fd.askdirectory()
+root = tk.Tk()
+root.withdraw()
+path = tkFileDialog.askdirectory()
 
 os.chdir(path)
 
@@ -32,7 +34,7 @@ def main():
                 if row_num == 0:
                     continue
                 key = sheet.row_values(row_num)[0]
-                value = sheet.row_values(row_num)[1].replace(r"'", r"\'")
+                value = sheet.row_values(row_num)[1].replace(r"'", r"\'").replace("\n", r"\n").encode('utf-8')
 
                 xmlData.write('    <string name=',)
                 xmlData.write("\"" + str(key) + "\">" + str(value) + '</string>' + "\n") 
@@ -42,11 +44,13 @@ def main():
                 for i in range(len(keys)):
                     if keys[i] == prevKey:
                         xmlData.write("ERROR")
-                        raise SystemExit("Duplicated key value: " + str(keys[i]) + "; aborting app.")
+                        tkMessageBox.showerror("Error", "Duplicated key value: '" + str(keys[i]) + "'. Aborting app.")
+                        raise SystemExit("Duplicated key value: '" + str(keys[i]) + "'. Aborting app.")
 
                 keys.append(key)
 
-            keys.clear()
+            # keys.clear()
+            del keys[:]
 
             xmlData.write('</resources>' + "\n")
             xmlData.close()
