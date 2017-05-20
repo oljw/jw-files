@@ -1,3 +1,0 @@
-([('xls2xml',
-   '/Users/jw/Documents/git/j_git/j_python/dist/xls2xml',
-   'EXECUTABLE')],)

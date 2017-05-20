@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    task runPython(type:Exec) {
+        workingDir '/Users/jw/documents/git/j_git/j_python/'
+
+        commandLine 'python', 'xls2xml.py', '/Users/jw/documents/git/j_git/j_python/myData.xls', projectDir
+    }
+    preBuild.dependsOn runPython
 }
 
 dependencies {

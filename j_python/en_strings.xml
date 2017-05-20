@@ -1,8 +1,0 @@
-<resources>
-    <string name="decision_str_1">|*|Available via download from Google Play. Supported features may vary by device.</string>
-    <string name="decision_str_2">Switch from Android™, iOS,</string>
-    <string name="decision_str_3">and BlackBerry®.</string>
-    <string name="infinity_demo_str_1">English See this? Haha</string>
-    <string name="infinity_demo_str_2">English What\'s that</string>
-    <string name="device_spec_str_1">English \nHello \nWorld</string>
-</resources>
