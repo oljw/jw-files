@@ -12,14 +12,17 @@ dialogEnabled = False
 root = tk.Tk()
 root.withdraw()
 
-file = sys.argv[1]
-project_path = sys.argv[2]
+print("length: ", len(sys.argv))
+if len(sys.argv) <= 3:
+    file = sys.argv[1]
+    project_path = sys.argv[2]
 
 if len(sys.argv) > 3:
-    if sys.argv[3] == "dialog":
-        dialogEnabled = True
+    for param in sys.argv[3:]:
+        if param == "dialog":
+            dialogEnabled = True
     else:
-        raise SystemExit("Wrong parameter: '" + sys.argv[3] + "'. Aborting app.")
+        raise SystemExit("Wrong parameter: '" + param + "'. Aborting app.")
 
 if dialogEnabled:
         file = tkFileDialog.askopenfilename(title="Specify the target .xls file")
@@ -30,7 +33,6 @@ os.chdir(project_path)
 
 def main():
     print("main() called")
-    # for xlsFile in xlsFiles:
     workbook = xlrd.open_workbook(file)
     sheets = workbook.sheet_names()
     prevKey = ""
@@ -68,7 +70,6 @@ def main():
 
             keys.append(key)
 
-        # keys.clear()
         del keys[:]
 
         xmlData.write('</resources>' + "\n")
