@@ -12,23 +12,18 @@ dialogEnabled = False
 root = tk.Tk()
 root.withdraw()
 
-print("length: ", len(sys.argv))
-if len(sys.argv) <= 3:
-    file = sys.argv[1]
-    project_path = sys.argv[2]
-
-if len(sys.argv) > 3:
-    for param in sys.argv[3:]:
-        if param == "dialog":
-            dialogEnabled = True
-    else:
-        raise SystemExit("Wrong parameter: '" + param + "'. Aborting app.")
+if len(sys.argv) == 3:
+	file = sys.argv[1]
+	project_path = sys.argv[2]
+else:
+	dialogEnabled = True
 
 if dialogEnabled:
-        file = tkFileDialog.askopenfilename(title="Specify the target .xls file")
-        project_path = tkFileDialog.askdirectory(title="Specify the path of the project", mustexist=1)
+        file = tkFileDialog.askopenfilename(title="Choose the target .xls file.")
+        project_path = tkFileDialog.askdirectory(title="Specify the path of the project.", mustexist=1)
 
-os.chdir(project_path)
+print("file: ", file)
+print("project_path: ", project_path)
 
 
 def main():
@@ -40,8 +35,10 @@ def main():
     for langs in range(len(sheets)):
         sheet = workbook.sheet_by_index(langs)
         name = sheet.name
-
-        save_dir = project_path + "/src/main/res/values-" + name
+        if dialogEnabled:
+        	save_dir = project_path + "/app/src/main/res/values-" + name
+        else:
+        	save_dir = project_path + "/src/main/res/values-" + name
 
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
