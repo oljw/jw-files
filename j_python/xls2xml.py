@@ -13,21 +13,21 @@ root = tk.Tk()
 root.withdraw()
 
 if len(sys.argv) == 3:
-	file = sys.argv[1]
-	project_path = sys.argv[2]
+    file = sys.argv[1]
+    project_path = sys.argv[2]
 else:
-	dialogEnabled = True
-
-if dialogEnabled:
-        file = tkFileDialog.askopenfilename(title="Choose the target .xls file.")
-        project_path = tkFileDialog.askdirectory(title="Specify the path of the project.", mustexist=1)
-
-print("file: ", file)
-print("project_path: ", project_path)
+    file = tkFileDialog.askopenfilename(title="Choose the target .xls file.")
+    project_path = tkFileDialog.askdirectory(title="Specify the path of the project.", mustexist=1)
+    dialogEnabled = True
 
 
 def main():
     print("main() called")
+    if file == "" or project_path == "":
+        if dialogEnabled:
+            tkMessageBox.showerror("Error", "No file/directory chosen. Aborting app.")
+        raise SystemExit("No file/directory chosen. Aborting app.")
+
     workbook = xlrd.open_workbook(file)
     sheets = workbook.sheet_names()
     prevKey = ""
@@ -36,14 +36,14 @@ def main():
         sheet = workbook.sheet_by_index(langs)
         name = sheet.name
         if dialogEnabled:
-        	save_dir = project_path + "/app/src/main/res/values-" + name
+            save_dir = project_path + "/app/src/main/res/values-" + name
         else:
-        	save_dir = project_path + "/src/main/res/values-" + name
+            save_dir = project_path + "/src/main/res/values-" + name
 
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
 
-        xmlFile = os.path.join(save_dir, "strings.xml")
+        xmlFile = os.path.join(save_dir, "strings_excel.xml")
         xmlData = open(xmlFile, 'w')
         xmlData.write('<resources>' + "\n")
 
