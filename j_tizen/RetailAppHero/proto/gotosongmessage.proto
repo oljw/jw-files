@@ -1,7 +1,0 @@
-option java_package = "com.samsung.retailexperience.generated";
-option java_outer_classname = "GotoSongMessageWrapper";
-
-message GotoSongMessage {
-	required int32 genreIndex = 1;
-	required int32 songIndex = 2;
-}

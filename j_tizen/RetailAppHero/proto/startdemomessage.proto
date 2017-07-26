@@ -1,8 +1,0 @@
-import "demo.proto";
-
-option java_package = "com.samsung.retailmodecommonmessaging.lib.generated";
-option java_outer_classname = "StartDemoMessageWrapper";
-
-message StartDemoMessage {
-    required Demo demo = 1;
-}

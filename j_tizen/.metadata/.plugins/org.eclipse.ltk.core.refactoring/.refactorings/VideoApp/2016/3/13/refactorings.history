@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Move &apos;battery_charge.mp4&apos; to &apos;raw&apos;" description="Move &apos;battery_charge.mp4&apos; to &apos;raw&apos;" destination="raw" element1="battery_charge.mp4" element2="rotate.mp4" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="2" stamp="1458672245569" updateReferences="true"/>&#x0A;<refactoring comment="Move 1 resources to &apos;js&apos;" description="Move 1 resources to &apos;js&apos;" destination="js" element1="util" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1458690399582" updateReferences="true"/>
-</session>

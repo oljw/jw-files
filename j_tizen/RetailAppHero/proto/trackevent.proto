@@ -1,7 +1,0 @@
-option java_package = "com.samsung.retailexperience.generated";
-option java_outer_classname = "TrackEventWrapper";
-
-message TrackEventMessage {
-    optional string action = 3;
-    optional string label = 4;
-}

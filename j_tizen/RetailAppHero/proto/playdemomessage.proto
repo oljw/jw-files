@@ -1,5 +1,0 @@
-option java_package = "com.samsung.retailmodecommonmessaging.lib.generated";
-option java_outer_classname = "PlayDemoMessageWrapper";
-
-message PlayDemoMessage {
-}

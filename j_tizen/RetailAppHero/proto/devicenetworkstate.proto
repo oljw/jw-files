@@ -1,7 +1,0 @@
-import "device.proto";
-option java_package = "com.samsung.retailexperience.commonmessaging.generated";
-option java_outer_classname = "DeviceNetworkStateWrapper";
-
-message DeviceNetworkStateMessage {
-    repeated Device devices = 1;
-}
