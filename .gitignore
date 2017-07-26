@@ -5,3 +5,4 @@ j_tizen/.metadata/*
 j_android/EmptyTestApp/gradlew
 j_android/TestApp/gradlew
 j_android/TestApp/gradle/
+*.class
