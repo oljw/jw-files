@@ -1,0 +1,18 @@
+Printing the list of students..
+	Student ID: 1	First Name: John	Last Name: Smith	Age: 20	Email Address: John1989@gmail.com	Grades: [88, 79, 59]
+	Student ID: 2	First Name: Suzan	Last Name: Erickson	Age: 19	Email Address: Erickson_1990@gmailcom	Grades: [91, 72, 85]
+	Student ID: 3	First Name: Jack	Last Name: Napoli	Age: 19	Email Address: The_lawyer99yahoo.com	Grades: [85, 84, 87]
+	Student ID: 4	First Name: Erin	Last Name: Black	Age: 22	Email Address: Erin.black@comcast.net	Grades: [91, 98, 82]
+	Student ID: 5	First Name: Jaewoo	Last Name: Lee	Age: 27	Email Address: jlee188@wgu.com	Grades: [90, 95, 85]
+Invalid E-mails:
+Erickson_1990@gmailcom
+The_lawyer99yahoo.com
+Student with student ID: 1 has average grade of : 75
+Student with student ID: 2 has average grade of : 82
+Student with student ID: 3 has average grade of : 85
+Student with student ID: 4 has average grade of : 90
+Student with student ID: 5 has average grade of : 90
+Attempting to remove student with student ID: 3 from the roster..
+Student with student ID: 3 removed successfully.
+Attempting to remove student with student ID: 3 from the roster..
+Student with student ID: 3 does not exist!

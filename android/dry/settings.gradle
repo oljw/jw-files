@@ -1,0 +1,9 @@
+include ':app'
+
+def retailLibDir = file('../rm_common/modules/android')
+
+//include ':retail.camera'
+//project(':retail.camera').projectDir = new File(retailLibDir, 'retail.camera')
+//
+//include ':retail.face'
+//project(':retail.face').projectDir = new File(retailLibDir, 'retail.face')

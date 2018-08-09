@@ -1,1 +1,58 @@
+gradle.ext.officialRelease = false
+gradle.ext.versionCode = 210
+gradle.ext.versionName = "2.1.0"
+
+// Get the prodBuild property from the command line
+if (gradle.getStartParameter().projectProperties.get('prodBuild') != null) {
+    gradle.ext.officialRelease = gradle.getStartParameter().projectProperties.get('prodBuild').toBoolean()
+}
+
+println("-> Is this a offical release? ${gradle.ext.officialRelease}")
+
+// Define the name and path of modules
+//def RmSdkRootDir = "${rootDir.path}/../../git/rm_common/modules/android"
+//def RmSdkRootDir = "/Users/jw/Documents/git/rm_common/modules/android"
+def RmSdkRootDir = "/Users/jw/Documents/git/rm_common/modules/android/"
+println("RmSdkRootDir: " + RmSdkRootDir)
+
+include ':retail.base'
+project(':retail.base').projectDir = new File(RmSdkRootDir + 'retail.base')
+
+include ':retail.res'
+project(':retail.res').projectDir = new File(RmSdkRootDir + 'retail.res')
+
+include ':retail.util'
+project(':retail.util').projectDir = new File(RmSdkRootDir + 'retail.util')
+
+include ':retail.video'
+project(':retail.video').projectDir = new File(RmSdkRootDir + 'retail.video')
+
+include ':retail.ui'
+project(':retail.ui').projectDir = new File(RmSdkRootDir + 'retail.ui')
+
+include ':retail.analytics'
+project(':retail.analytics').projectDir = new File(RmSdkRootDir + 'retail.analytics')
+
+include ':retail.remoteservice'
+project(':retail.remoteservice').projectDir = new File(RmSdkRootDir + 'retail.remoteservice')
+
+include ':retail.thirdparty.facedetector'
+project(':retail.thirdparty.facedetector').projectDir = new File(RmSdkRootDir + 'retail.thirdparty.facedetector')
+
+include ':retail.thirdparty.gif'
+project(':retail.thirdparty.gif').projectDir = new File(RmSdkRootDir + 'retail.thirdparty.gif')
+
+include ':retail.vr'
+project(':retail.vr').projectDir = new File(RmSdkRootDir + 'retail.vr')
+
+gradle.ext.RmSdkModuleNames = [
+        ['retail.base', RmSdkRootDir],
+        ['retail.res', RmSdkRootDir],
+        ['retail.util', RmSdkRootDir],
+        ['retail.video', RmSdkRootDir],
+        ['retail.ui', RmSdkRootDir],
+        ['retail.analytics', RmSdkRootDir]
+]
+
+// Set the main application(main module)
 include ':app'

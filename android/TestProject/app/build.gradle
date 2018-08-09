@@ -1,29 +1,97 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
         applicationId "com.jw.testproject"
-        minSdkVersion 23
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode gradle.ext.versionCode
+        versionName gradle.ext.versionName
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:' + rootProject.junitVersion
+    androidTestImplementation 'com.android.support.test:runner:' + rootProject.runnerVersion
+    androidTestImplementation ('com.android.support.test.espresso:espresso-core:' + rootProject.espressoVersion) {
+        exclude group: 'com.google.code.findbugs'
+    }
+    androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+
+    implementation 'com.android.support:appcompat-v7:' + rootProject.supportLibVersion
+    implementation 'com.android.support:design:' + rootProject.supportLibVersion
+    implementation 'com.android.support:support-v13:' + rootProject.supportLibVersion
+    implementation 'com.android.support:support-v4:' + rootProject.supportLibVersion
+    implementation 'com.android.support:multidex:' + rootProject.multidexVersion
+
+    // google vr
+    implementation "com.google.vr:sdk-base:$rootProject.googleVRVersion"
+    implementation "com.google.vr:sdk-common:$rootProject.googleVRVersion"
+
+    // guava
+    implementation 'com.google.guava:guava:' + rootProject.guavaVersion
+
+    // parser
+    implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
+
+    // exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer:' + rootProject.exoplayerVersion
+
+    // universal image loader
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:' + rootProject.universalimageloaderVersion
+
+    // amazon analytics
+    implementation 'com.amazonaws:aws-android-sdk-mobileanalytics:' + rootProject.amazonAnalyticsVersion
+
+    implementation 'com.jakewharton:butterknife:' + rootProject.butterKnifeVersion
+    annotationProcessor 'com.jakewharton:butterknife-compiler:' + rootProject.butterKnifeVersion
+
+    // reactive
+    implementation 'io.reactivex.rxjava2:rxjava:' + rootProject.rxjava2Version
+    implementation 'io.reactivex.rxjava2:rxandroid:' + rootProject.rxandroidVersion
+
+    // SET MODULES
+    if (gradle.ext.officialRelease) {
+        gradle.ext.RmSdkModuleNames.each { moduleArray ->
+            implementation (name: "${moduleArray[0]}", ext: 'aar')
+        }
+    }
+    else {
+//        gradle.ext.RmSdkModuleNames.each { moduleArray ->
+//            implementation project (":${moduleArray[0]}")
+//        }
+        implementation project (':retail.base')
+        implementation project (':retail.res')
+        implementation project (':retail.util')
+        implementation project (':retail.video')
+        implementation project (':retail.ui')
+        implementation project (':retail.analytics')
+        implementation project (':retail.remoteservice')
+        implementation project (':retail.thirdparty.facedetector')
+        implementation project (':retail.thirdparty.gif')
+        implementation project (':retail.vr')
+    }
 }

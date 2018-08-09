@@ -1,12 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.1'
+        
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -15,8 +17,8 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 }
 
@@ -24,21 +26,11 @@ ext {
     allFlavors = []
     allBuildTypes = []
 
-    compileSdkVersion   = 26
-    buildToolsVersion   = "26.0.2"
+    compileSdkVersion   = 27
+    buildToolsVersion   = "27.0.3"
     minSdkVersion       = 23
-    targetSdkVersion    = 26
-    supportLibVersion   = "26.+"
-
-    keystoreProperties = null
-    keyStoreInfoFilePath = "key/keystore.properties"
-    modelDirectoryPath = "assets/model"
-    appEnvFilePath = "${rootProject.modelDirectoryPath}/app_environment.json"
-    cmsDirectory = "${rootDir.path}/CMS"
-
-    defaultCopyModelDirList = [
-            "src/main/${rootProject.modelDirectoryPath}"
-    ]
+    targetSdkVersion    = 27
+    supportLibVersion   = "27.+"
 
     // App dependencies
     multidexVersion = '1.0.0'
@@ -48,11 +40,14 @@ ext {
     universalimageloaderVersion = '1.9.4'
     amazonAnalyticsVersion = '2.2.9'
     guavaVersion = '24.0-android'
-    googleVRVersion = '1.80.0'
+    glideVersion = '4.6.1'
 
+    googleVRVersion = '1.80.0'
+    dagger2Version = '2.15'
     rxjava2Version = '2.0.6'
     rxandroidVersion = '2.0.1'
     butterKnifeVersion = '8.6.0'
+    retrofit2Version = '2.4.0'
 
     //Test dependencies
     junitVersion = '4.12'
@@ -63,5 +58,4 @@ ext {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-    delete new File(rootProject.cmsDirectory)
 }
