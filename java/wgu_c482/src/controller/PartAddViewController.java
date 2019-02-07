@@ -96,7 +96,7 @@ public class PartAddViewController implements Initializable {
             part.setMax(Integer.parseInt(tf_max_inventory.getText()));
 
             Inventory.addPart(part);
-            launchMainView(event);
+            Util.launchView(FXMLLoader.load(getClass().getResource("/view/MainView.fxml")), event);
         } catch (NumberFormatException e) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setContentText("Form contains invalid fields.");
@@ -106,17 +106,8 @@ public class PartAddViewController implements Initializable {
 
     @FXML
     private void onCancelClick(ActionEvent event) throws IOException {
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to cancel?", ButtonType.YES, ButtonType.NO);
-        alert.showAndWait();
-
-        if (alert.getResult() == ButtonType.YES) launchMainView(event);
-    }
-    
-    private void launchMainView(ActionEvent event) throws IOException {
-        Parent view = FXMLLoader.load(getClass().getResource("/view/MainView.fxml"));
-        Scene scene = new Scene(view);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+        if (Util.askCancel()) {
+            Util.launchView(FXMLLoader.load(getClass().getResource("/view/MainView.fxml")), event);
+        }
     }
 }

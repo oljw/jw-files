@@ -70,45 +70,37 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void onAddPartClick(ActionEvent event) throws IOException {
-        launchViewOnClick(event, "/view/PartAddView.fxml");
+        Util.launchView(FXMLLoader.load(getClass().getResource("/view/PartAddView.fxml")), event);
     }
     
     @FXML
     private void onModifyPartClick(ActionEvent event) throws IOException {
-        Part part = tableview_part.getSelectionModel().getSelectedItem();
-        if (part == null) {
-            showError("Please select a part from table.");
-            return;
+        Part part = Util.getSelectedPart(tableview_part);
+        if (part != null) {
+            Inventory.setSelectedPartIndex(Inventory.getParts().indexOf(part));
+            Util.launchView(FXMLLoader.load(getClass().getResource("/view/PartModifyView.fxml")), event);
         }
-        Inventory.setSelectedPartIndex(Inventory.getParts().indexOf(part));
-        launchViewOnClick(event, "/view/PartModifyView.fxml");
     }
 
     @FXML
     private void onDeletePartClick(ActionEvent event) {
-        Part part = tableview_part.getSelectionModel().getSelectedItem();
-        if (part == null) {
-            showError("Please select a part from table.");
-            return;
+        Part part = Util.getSelectedPart(tableview_part);
+        if(part != null) {
+            Inventory.deletePart(part);
+            updatePartTableview();
         }
-        Inventory.deletePart(part);
-        updatePartTableview();
     }
 
     @FXML
     private void onSearchPartClick(ActionEvent event) {
-        Part part = Inventory.lookupPart(tf_part_search.getText());
-        if (part == null) {
-            showError("Result not found.");
-            return;
-        }
-        tableview_part.requestFocus();
-        tableview_part.getSelectionModel().select(part);
+        if (tf_part_search.getText().isEmpty()) return;
+        Util.searchPart(tf_part_search, tableview_part);
     }
 
     @FXML
     private void onAddProductClick(ActionEvent event) throws IOException {
-        launchViewOnClick(event, "/view/ProductAddView.fxml");
+        Util.launchView(FXMLLoader.load(getClass().getResource("/view/ProductAddView.fxml")), event);
+
     }
 
     @FXML
@@ -117,32 +109,34 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void onDeleteProductClick(ActionEvent event) {
+        Product product = tableview_product.getSelectionModel().getSelectedItem();
+        if (product == null) {
+            Util.showError("Please select a part from table.");
+            return;
+        }
+        Inventory.removeProduct(Inventory.getProducts().indexOf(product));
+        updateProductTableview();
     }
 
     @FXML
     private void onSearchProductClick(ActionEvent event) {
+        try {
+            if (tf_product_search.getText().isEmpty()) return;
+            Product product = Inventory.lookupProduct(Integer.parseInt(tf_product_search.getText()));
+            if (product == null) {
+                Util.showError("Result not found.");
+                return;
+            }
+            tableview_product.requestFocus();
+            tableview_product.getSelectionModel().select(product);
+        } catch(NumberFormatException e) {
+            Util.showError("Result not found. Search by Part ID.");
+        }
     }
 
     @FXML
     private void onExitButtonClick(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?", ButtonType.YES, ButtonType.NO);
-        alert.showAndWait();
-
-        if (alert.getResult() == ButtonType.YES) System.exit(0);
-    }
-    
-    private void launchViewOnClick(ActionEvent event, String fxml) throws IOException {
-        Parent view = FXMLLoader.load(getClass().getResource(fxml));
-        Scene scene = new Scene(view);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-    }
-    
-    private void showError(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText(msg);
-        alert.showAndWait(); 
+        Util.askExit();
     }
     
     private void updatePartTableview() {

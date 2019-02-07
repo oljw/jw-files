@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -18,20 +23,22 @@ import javafx.beans.property.StringProperty;
 public class Product {
     private static final String TAG = "Product.java";
 
-    private List<Part> parts = new ArrayList<>();
-    private IntegerProperty productId;
-    private StringProperty name;
-    private DoubleProperty price;
-    private IntegerProperty inventory;
-    private IntegerProperty min;
-    private IntegerProperty max;
+    private ObservableList<Part> parts = FXCollections.observableArrayList();
+    private IntegerProperty productId = new SimpleIntegerProperty();;
+    private StringProperty name = new SimpleStringProperty();
+    private DoubleProperty price = new SimpleDoubleProperty();
+    private IntegerProperty inventory = new SimpleIntegerProperty();
+    private IntegerProperty min = new SimpleIntegerProperty();
+    private IntegerProperty max = new SimpleIntegerProperty();
 
-    public Product(IntegerProperty productId, StringProperty name, DoubleProperty price, IntegerProperty min, IntegerProperty max) {
-        this.productId = productId;
-        this.name = name;
-        this.price = price;
-        this.min = min;
-        this.max = max;
+    public Product(int productId, String name, double price, int inventory, int min, int max, ObservableList<Part> parts) {
+        this.productId.set(productId);
+        this.name.set(name);
+        this.price.set(price);
+        this.inventory.set(inventory);
+        this.min.set(min);
+        this.max.set(max);
+        this.parts = parts;
     }
     
     public void addPart(Part part) {
@@ -43,14 +50,19 @@ public class Product {
     }
     
     public Part lookupPart(int id) {
+        for (Part part : parts) {
+            if (part.getPartId() == id) {
+                return part;
+            }
+        }
         return null;
     }
     
-    public List<Part> getParts() {
+    public ObservableList<Part> getParts() {
         return parts;
     }
 
-    public void setParts(List<Part> parts) {
+    public void setParts(ObservableList<Part> parts) {
         this.parts = parts;
     }
     

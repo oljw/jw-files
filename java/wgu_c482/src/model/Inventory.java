@@ -5,6 +5,7 @@
  */
 package model;
 
+import controller.Util;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -47,9 +48,9 @@ public final class Inventory {
         return true;
     }
     
-    public static Part lookupPart(String search) {
+    public static Part lookupPart(int id) {
         for (Part part : Inventory.parts) {
-            if (part.getName().contains(search)) {
+            if (part.getPartId() == id) {
                 return part;
             }
         }
@@ -70,7 +71,12 @@ public final class Inventory {
     }
     
     public static Product lookupProduct(int id) {
-        return null;
+            for (Product product : Inventory.products) {
+                if (product.getProductId() == id) {
+                    return product;
+                }
+            }
+        return null;    
     }
     
     public static void updateProduct(int id, Product product) {
