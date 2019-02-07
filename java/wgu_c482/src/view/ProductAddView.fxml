@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="586.0" prefWidth="846.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductAddViewController">
+ <children>
+      <Label layoutX="14.0" layoutY="13.0" text="Add Product">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="15.0" layoutY="71.0" text="ID" />
+      <Label layoutX="15.0" layoutY="107.0" text="Name" />
+      <Label layoutX="15.0" layoutY="143.0" text="Inv" />
+      <Label layoutX="15.0" layoutY="179.0" text="Price" />
+      <Label layoutX="15.0" layoutY="215.0" text="Min" />
+      <Label layoutX="15.0" layoutY="251.0" text="Max" />
+      <TextField fx:id="tf_id" disable="true" editable="false" layoutX="118.0" layoutY="67.0" promptText="ID" />
+      <TextField fx:id="tf_name" layoutX="118.0" layoutY="103.0" promptText="Name" />
+      <TextField fx:id="tf_inventory" layoutX="118.0" layoutY="139.0" promptText="Inventory" />
+      <TextField fx:id="tf_price" layoutX="118.0" layoutY="175.0" promptText="Price" />
+      <TextField fx:id="tf_min_inventory" layoutX="118.0" layoutY="211.0" promptText="Minimum Inventory" />
+      <TextField fx:id="tf_max_inventory" layoutX="118.0" layoutY="247.0" promptText="Maximum Inventory" />
+      <Pane layoutX="330.0" layoutY="47.0" prefHeight="230.0" prefWidth="500.0">
+         <children>
+            <Button layoutX="240.0" layoutY="2.0" onAction="#onPartSearchBtnClick" text="Search" />
+            <TextField fx:id="tf_search_part" layoutX="300.0" layoutY="2.0" promptText="Search part to add" />
+            <TableView fx:id="tableview_add" layoutY="30.0" prefHeight="150.0" prefWidth="500.0">
+               <columns>
+                  <TableColumn fx:id="col_add_part_id" prefWidth="125.0" text="Part ID" />
+                  <TableColumn fx:id="col_add_part_name" prefWidth="125.0" text="Part Name" />
+                  <TableColumn fx:id="col_add_part_inventory" prefWidth="125.0" text="Inv Level" />
+                  <TableColumn fx:id="col_add_part_price" prefWidth="125.0" text="Price Per Unit" />
+               </columns>
+            </TableView>
+            <Button layoutX="453.0" layoutY="190.0" onAction="#onAddPartClick" text="Add" />
+         </children>
+      </Pane>
+      <Pane layoutX="330.0" layoutY="300.0" prefHeight="230.0" prefWidth="500.0">
+         <children>
+            <TableView fx:id="tableview_del" layoutY="30.0" prefHeight="150.0" prefWidth="500.0">
+               <columns>
+                  <TableColumn fx:id="col_del_part_id" prefWidth="125.0" text="PartID" />
+                  <TableColumn fx:id="col_del_part_name" prefWidth="125.0" text="Part Name" />
+                  <TableColumn fx:id="col_del_part_inventory" prefWidth="125.0" text="Inv Level" />
+                  <TableColumn fx:id="col_del_part_price" prefWidth="125.0" text="Price Per Unit" />
+               </columns>
+            </TableView>
+            <Button layoutX="441.0" layoutY="190.0" onAction="#onDeletePartClick" text="Delete" />
+         </children>
+      </Pane>
+      <Button layoutX="769.0" layoutY="538.0" onAction="#onCancelClick" prefHeight="30.0" prefWidth="60.0" text="Cancel" />
+      <Button layoutX="694.0" layoutY="538.0" onAction="#onSaveClick" prefHeight="30.0" prefWidth="60.0" text="Save" />
+   </children>
+</AnchorPane>

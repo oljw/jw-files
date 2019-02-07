@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="322.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PartAddViewController">
+    <children>
+        <Label layoutX="14.0" layoutY="13.0" text="Add Part">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <RadioButton fx:id="rb_inhouse" layoutX="122.0" layoutY="18.0" onAction="#onInHouseRadioBtnClick" text="In-House">
+            <toggleGroup>
+                <ToggleGroup fx:id="rb_group" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="rb_oursourced" layoutX="216.0" layoutY="18.0" onAction="#onOutSourcedRadioBtnClick" text="Outsourced" toggleGroup="$rb_group"/>
+        <Label layoutX="15.0" layoutY="71.0" text="ID" />
+        <Label layoutX="15.0" layoutY="107.0" text="Name" />
+        <Label layoutX="15.0" layoutY="143.0" text="Inv" />
+        <Label layoutX="15.0" layoutY="179.0" text="Price/Cost" />
+        <Label layoutX="15.0" layoutY="215.0" text="Min" />
+        <Label layoutX="15.0" layoutY="251.0" text="Max" />
+        <Label fx:id="label_extra" layoutX="15.0" layoutY="287.0" text="Machine ID" />
+        <TextField fx:id="tf_id" disable="true" editable="false" layoutX="118.0" layoutY="67.0" promptText="ID" />
+        <TextField fx:id="tf_name" layoutX="118.0" layoutY="103.0" promptText="Name" />
+        <TextField fx:id="tf_inventory" layoutX="118.0" layoutY="139.0" promptText="Inventory" />
+        <TextField fx:id="tf_price" layoutX="118.0" layoutY="175.0" promptText="Price/Cost" />
+        <TextField fx:id="tf_min_inventory" layoutX="118.0" layoutY="211.0" promptText="Minimum Inventory" />
+        <TextField fx:id="tf_max_inventory" layoutX="118.0" layoutY="247.0" promptText="Maximum Inventory" />
+        <TextField fx:id="tf_extra" layoutX="118.0" layoutY="283.0" />
+        <Button layoutX="202.0" layoutY="322.0" onAction="#onSaveClick" text="Save" />
+        <Button layoutX="258.0" layoutY="322.0" onAction="#onCancelClick" text="Cancel" />
+   </children>
+</AnchorPane>

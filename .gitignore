@@ -6,3 +6,7 @@ j_android/EmptyTestApp/gradlew
 j_android/TestApp/gradlew
 j_android/TestApp/gradle/
 *.class
+/java/C482/nbproject/private/
+/java/C482/build/
+/java/C482/dist/
+java/wgu_c482/build
