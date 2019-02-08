@@ -75,7 +75,7 @@ public class PartModifyViewController implements Initializable {
             rb_outsourced.setSelected(true);
             isInhouse = false;
         }
-    }    
+    }
 
     @FXML
     private void onInHouseRadioBtnClick(ActionEvent event) {

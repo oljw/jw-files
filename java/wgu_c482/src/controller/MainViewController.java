@@ -104,7 +104,15 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    private void onModifyProductClick(ActionEvent event) {
+    private void onModifyProductClick(ActionEvent event) throws IOException {
+        Product product =  tableview_product.getSelectionModel().getSelectedItem();
+        
+        if (product == null) {
+            Util.showError("Please select a product from table.");
+        }
+        
+        Inventory.setSelectedPartIndex(Inventory.getProducts().indexOf(product));
+        Util.launchView(FXMLLoader.load(getClass().getResource("/view/ProductModifyView.fxml")), event);
     }
 
     @FXML
