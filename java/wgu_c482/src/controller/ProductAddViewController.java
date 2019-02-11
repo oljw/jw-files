@@ -107,20 +107,20 @@ public class ProductAddViewController implements Initializable {
     private void onSaveClick(ActionEvent event) throws IOException {
         try {
             Product product = new Product(
-                    Integer.parseInt(tf_id.getText()),
-                    tf_name.getText(),
-                    Double.parseDouble(tf_price.getText()),
-                    Integer.parseInt(tf_inventory.getText()),
-                    Integer.parseInt(tf_min_inventory.getText()),
-                    Integer.parseInt(tf_max_inventory.getText()),
-                    chosenParts
+                Integer.parseInt(tf_id.getText()),
+                tf_name.getText(),
+                Double.parseDouble(tf_price.getText()),
+                Integer.parseInt(tf_inventory.getText()),
+                Integer.parseInt(tf_min_inventory.getText()),
+                Integer.parseInt(tf_max_inventory.getText())
             );
+            product.setParts(chosenParts);
             
             Inventory.addProduct(product);
             Util.launchView(FXMLLoader.load(getClass().getResource("/view/MainView.fxml")), event);
         } catch (NumberFormatException e) {
             Alert alert = new Alert(AlertType.ERROR);
-            alert.setContentText("Form contains invalid fields.");
+            alert.setContentText("Form contains invalid field(s).");
             alert.showAndWait();
         }
     }

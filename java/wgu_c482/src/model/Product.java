@@ -31,14 +31,13 @@ public class Product {
     private IntegerProperty min = new SimpleIntegerProperty();
     private IntegerProperty max = new SimpleIntegerProperty();
 
-    public Product(int productId, String name, double price, int inventory, int min, int max, ObservableList<Part> parts) {
+    public Product(int productId, String name, double price, int inventory, int min, int max) {
         this.productId.set(productId);
         this.name.set(name);
         this.price.set(price);
         this.inventory.set(inventory);
         this.min.set(min);
         this.max.set(max);
-        this.parts = parts;
     }
     
     public void addPart(Part part) {

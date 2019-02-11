@@ -10,7 +10,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -87,10 +89,22 @@ public class ProductModifyViewController implements Initializable {
 
     @FXML
     private void onAddPartClick(ActionEvent event) {
+        Part part = Util.getSelectedPart(tableview_add);
+        if (part != null) {
+            Product product = Inventory.getProducts().get(Inventory.getSelectedProductIndex());
+            product.getParts().add(part);
+            updateDelTableview();
+        }
     }
 
     @FXML
     private void onDeletePartClick(ActionEvent event) {
+        Part part = Util.getSelectedPart(tableview_del);
+        if (part != null) {
+            Product product = Inventory.getProducts().get(Inventory.getSelectedProductIndex());
+            product.getParts().remove(part);
+            updateDelTableview();
+        }
     }
 
     @FXML
@@ -99,8 +113,25 @@ public class ProductModifyViewController implements Initializable {
     }
 
     @FXML
-    private void onSaveClick(ActionEvent event) {
-        
+    private void onSaveClick(ActionEvent event) throws IOException {
+        try {
+            Product product = new Product(
+                Integer.parseInt(tf_id.getText()),
+                tf_name.getText(),
+                Double.parseDouble(tf_price.getText()),
+                Integer.parseInt(tf_inventory.getText()),
+                Integer.parseInt(tf_min_inventory.getText()),
+                Integer.parseInt(tf_max_inventory.getText())
+            );
+            product.setParts(Inventory.getProducts().get(Inventory.getSelectedProductIndex()).getParts());
+
+            Inventory.updateProduct(Inventory.getSelectedPartIndex(), product);
+            Util.launchView(FXMLLoader.load(getClass().getResource("/view/MainView.fxml")), event);
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Form contains invalid field(s).");
+            alert.showAndWait();
+        }
     }
     
     private void updateAddTableview() {

@@ -99,7 +99,7 @@ public class PartAddViewController implements Initializable {
             Util.launchView(FXMLLoader.load(getClass().getResource("/view/MainView.fxml")), event);
         } catch (NumberFormatException e) {
             Alert alert = new Alert(AlertType.ERROR);
-            alert.setContentText("Form contains invalid fields.");
+            alert.setContentText("Form contains invalid field(s).");
             alert.showAndWait();
         }
     }
