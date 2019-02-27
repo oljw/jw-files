@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Tizen Wearable Application"/>
+    <title>Hello Tizen</title>
+    
+    <!-- tau library -->
+    <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.css">
+	<link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="lib/tau/wearable/theme/default/tau.circle.min.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+	<script src="lib/tau/wearable/js/tau.js"></script>
+	<!-- retail SDK for Tizen platform -->
+    <script src="retailsdk/retail.thirdparty.util/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="tizen_placeholder"></div>
+    <script src="js/tizen.js"></script>
+
+
+	<div class="ui-page-active">
+		<div class="ui-content">
+			<div id="ui-container"></div>
+		</div>
+	</div>
+
+    <!-- retail SDK for Tizen platform -->
+    <script src="retailsdk/retail.appmanager/util/FuncUtil.js"></script>
+    <script src="retailsdk/retail.appmanager/EventBus.js"></script>
+    <script src="retailsdk/retail.sapmanager/packet/Packet.js"></script>
+    <script src="retailsdk/retail.sapmanager/packet/PacketBuilder.js"></script>
+    <script src="retailsdk/retail.sapmanager/packet/PacketParser.js"></script>
+    <script src="retailsdk/retail.sapmanager/SAP.js"></script>
+    <script src="retailsdk/retail.servicemanager/RetailService.js"></script>
+
+    <script src="retailsdk/retail.videomanager/Chapter.js"></script>
+    <script src="retailsdk/retail.videomanager/ImageControl.js"></script>
+	<script src="retailsdk/retail.videomanager/MediaPlayer.js"></script>
+	<script src="retailsdk/retail.videomanager/VideoTextureView.js"></script>
+
+    <script src="retailsdk/app.manager/ui/BasePage.js"></script>
+
+    <!-- RetailSolis -->
+    <script src="js/constants.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

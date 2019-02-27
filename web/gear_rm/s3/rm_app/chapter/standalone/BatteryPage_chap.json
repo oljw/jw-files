@@ -1,0 +1,9 @@
+[
+	{
+	    "chapterIndex":1,
+		"chapterStart": 20256,
+		"chapterEnd": 26255,
+		"chapterAction": "Tap",
+		"chapterActionMessage": "Tap checkmark"
+	}
+]

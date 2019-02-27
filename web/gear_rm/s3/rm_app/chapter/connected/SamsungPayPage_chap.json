@@ -1,0 +1,23 @@
+[
+	{
+	    "chapterIndex":1,
+		"chapterStart": 7448,
+		"chapterEnd": 20952,
+		"chapterAction": "Super",
+		"chapterActionMessage": "Tap and Hold"
+	},
+	{
+	    "chapterIndex":2,
+		"chapterStart": 13000,
+		"chapterEnd": 18400,
+		"chapterAction": "Disclaimer",
+		"chapterActionMessage": "Tap animation"
+	},
+	{
+	    "chapterIndex":3,
+		"chapterStart": 18400,
+		"chapterEnd": 20952,
+		"chapterAction": "Disclaimer",
+		"chapterActionMessage": "Card approval animation"
+	}
+]

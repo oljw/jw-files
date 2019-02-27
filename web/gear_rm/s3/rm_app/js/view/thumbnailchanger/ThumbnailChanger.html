@@ -1,0 +1,64 @@
+<div id="pageIndicatorCirclePage" data-enable-page-scroll="false" style="background-color: transparent;">
+	<style>
+		section {
+			padding: 0 10px 0 10px;
+			height: 100%;
+			background-color: transparent;
+		}
+		.thumbnail {
+			height: 300px;
+			width: 200px;
+			/* background-color: #80482f; */
+			background-color: transparent; 
+			top: 50%;
+			transform: translate3d(0, -50%, 0);
+			position: relative;
+			text-align: center;
+			line-height: 300px;
+		}
+		.ui-section-active .thumbnail{
+			/* background-color: #000000; */
+			background-color: transparent;
+		}
+
+		@media all and (-tizen-geometric-shape: circle) {
+			section {
+				/* padding: 0; */
+				padding: 0 10px 0 10px;
+			}
+			.thumbnail {
+				border-radius: 50%;
+				background-color: transparent;
+				text-indent: 999px;
+				top: 50%;
+				position: relative;
+				text-align: center;
+				line-height: 200px;
+				transform: scale(1) translate3d(0, -50%, 0);
+				transition: transform 300ms;
+			}
+			.ui-section-active .thumbnail{
+				transform: scale(1) translate3d(0, -50%, 0);
+				background-color: transparent;
+				border: none;
+			}
+		}
+	</style>
+
+	<link rel="stylesheet"  href="css/pageindicator.css"> 
+
+	<div id="sectionChanger" class="ui-content">
+		<div id="thumbnailContainer"></div>
+	</div>
+	<span id="thumbnail-text" class="common-text-properites"></span>
+	<div id="pageIndicator" class="ui-page-indicator" data-layout="circular"></div>
+	<img id="pageIndicatorMark" src="images/thumbnailchanger/selected_dot.png" class="ui-section-mark" style="width:26px; height:26px; z-index:100; position:absolute; top:-3px; left:167px;">
+	
+	<div id="dummyBg" style="background-color: #282828; display:none; width:360px; height:360px; z-index:-100; position:absolute; top:0; left:0;"></div>
+	
+<!-- 	<footer class="ui-footer ui-bottom-button" style="display:none;">
+      <a href="#" class="ui-btn">Stylize</a>
+   	</footer> -->
+	
+	<script src="js/view/thumbnailchanger/ThumbnailChanger.js"></script>
+</div>

@@ -1,0 +1,27 @@
+# ninja log v5
+1	129	0	src/retailnativeservice.o	6d25efedb672ef41
+130	449	0	retailnativeservice	5c336e5e5154af74
+0	87	0	src/retailnativeservice.o	6d25efedb672ef41
+87	238	0	retailnativeservice	5c336e5e5154af74
+1	7	0	clean_sa	aa342d2188baf8f5
+7	12	0	clean	d59b6dac04fa9b5d
+1	76	0	src/retailnativeservice.o	6d25efedb672ef41
+77	253	0	retailnativeservice	5c336e5e5154af74
+0	78	0	src/retailnativeservice.o	6d25efedb672ef41
+78	233	0	retailnativeservice	5c336e5e5154af74
+0	76	0	src/retailnativeservice.o	6d25efedb672ef41
+76	234	0	retailnativeservice	5c336e5e5154af74
+0	84	0	src/retailnativeservice.o	6d25efedb672ef41
+85	250	0	retailnativeservice	5c336e5e5154af74
+0	81	0	src/retailnativeservice.o	6d25efedb672ef41
+81	247	0	retailnativeservice	5c336e5e5154af74
+1	5	0	clean_sa	aa342d2188baf8f5
+5	10	0	clean	d59b6dac04fa9b5d
+0	74	0	src/retailnativeservice.o	6d25efedb672ef41
+74	212	0	retailnativeservice	5c336e5e5154af74
+0	72	0	src/retailnativeservice.o	6d25efedb672ef41
+72	227	0	retailnativeservice	5c336e5e5154af74
+0	87	0	src/retailnativeservice.o	6d25efedb672ef41
+87	317	0	retailnativeservice	5c336e5e5154af74
+0	4	0	clean_sa	aa342d2188baf8f5
+4	11	0	clean	d59b6dac04fa9b5d

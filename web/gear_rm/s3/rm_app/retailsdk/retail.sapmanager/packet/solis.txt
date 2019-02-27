@@ -1,0 +1,146 @@
+The Structure of Packet
+The kinds of packet are four which are for changing user interface, user interaction, and chapter.
+
+1. "Change Page" packet (mobile <-> wearable)
+When wearable application gets this packet from connected mobile application, the wearable application changes it's UI page such as attractor, decision, demo, and legal.
+When mobile applicaiton gets this packet from connected wearable applicaiton, the mobile application chnages it's UI fragment such as attractor, decision, demo, and legal.
+//json structure of "User Interface" packet
+{
+	header: {
+		type: "CHANGE_PAGE"
+	},
+	data: {
+		"nextPage": "NEXT PAGE",
+		"transactionDir": "TRANSACTION DIR"
+	}
+}
+
+2. "Ready to Demo" (mobile <- wearable)
+When wearable application ready to demo, the wearable application sends this packet to mobile application.
+//json structure of "Ready to Demo" packet
+{
+	header: {
+		type: "READY_TO_DEMO_TO_MOBILE"
+	},
+	data: {
+		"currentPage": "CURRENT PAGE"
+	}
+}
+
+3. "Start Demo" (mobile -> wearable)
+When wearable application ready to demo and mobile application get "Ready to Demo" pacekt from wearable application, mobile application sends this packet to start video demo.
+//json structure of "Start Demo" packet
+{
+	header: {
+		type: "START_DEMO_FROM_MOBILE"
+	},
+	data: {
+		"currentPage": "CURRENT PAGE"
+	}
+}
+
+4. "Notify Interaction to Mobile" packet (mobile <- wearable)
+When wearable application gets user interaction, the wearable application send the interaction information to connected mobile application.
+//json structure of "User Interface" packet
+{
+	header: {
+		type: "NOTIFY_INTERACTION_TO_MOBILE"
+	},
+	data: {
+		"currentPage": "CURRENT PAGE",
+		"interaction": "USER INTERACTION TYPE"
+		"chapterIndex": "CHAPTER INDEX"
+		"extra": "EXTRA INFORMATION"
+	}
+}
+
+5. "Chapter Item from Mobile" packet (mobile -> wearable)
+When wearable application gets this packet from connected mobile application, the wearable application changes the chapter of current page.
+The connected mobile application send this packet per one event real time.
+//json structure of "Chapter Event" packet
+{
+	header: {
+		type: "CHAPTER_ITEM_FROM_MOBILE"
+	},
+	data: {
+		chapter {
+			"chapterIndex": "CHAPTER INDEX"
+			"chapterStart": "CHAPTER START",
+			"chapterEnd": "CHAPTER END",
+			"chapterAction": "CHAPTER ACTION",
+			"chapterActionMessage": "CHAPTER ACTION MESSAGE"
+		}
+	}
+}
+
+6. "Change Page Analytics to Mobile" packet (mobile <- wearable)
+: When page changed, wearable sends this packet to mobile in order to upload change page analytics data.
+{
+	header: {
+		type: "CHANGE_PAGE_ANALYTICS_TO_MOBILE"
+	},
+	data: {
+		"currentPage": "CURRENT PAGE",
+		"nextPage": "NEXT PAGE",
+		"interaction": "USER INTERACTION TYPE",
+		"duration": "DURATION"
+	}
+}
+
+7. "Notify Interaction Analytics to Mobile" packet (mobile <- wearable)
+: When demo page gets user interaction, wearable sends this packet to mobile in order to upload user interaction analytics data.
+{
+	header: {
+		type: "NOTIFY_INTERACTION_ANALYTICS_TO_MOBILE"
+	},
+	data: {
+		"currentPage": "CURRENT PAGE",
+		"interaction": "USER INTERACTION TYPE",
+		"extra": "EXTRA INFORMATION"
+	}
+}
+
+8. "Notify Chapter Change to Mobile" packet (mobile <- wearable)
+: Notify when chapter changes.
+{
+	header: {
+		type: "NOTIFY_CHAPTER_CHANGE_TO_MOBILE"
+	},
+	data: {
+		"chapterChange": "CHAPTER CHANGE",
+		"chapterIndex": "CHAPTER INDEX"
+	}
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+.__ .__..__ .___ __.
+[__)[__][ __[__ (__ 
+|   |  |[_./[___.__)
+--------------------
+
+ATTRACTOR PAGE
+--------------
+GS3_ATTRACTORPAGE 			=> Attractor loop used in both standalone mode and connected mode.
+
+
+
+DECISION PAGES
+--------------
+GS3_PAIREDDECISIONPAGE 		=> A watchface video loop that replaces the original decision page in connected mode. (NOT USED IN SOLIS) 
+GS3_STANDALONEDECISIONPAGE 	=> Selector style decision page. Currently used in standalone mode of Solis. (NOT USED IN SOLIS)
+GS3_DECISIONPAGE 			=> Currently using decision page. 
+OldDecisionPage.js, OldDecisionPage.html not used for now. SectionChanger style of decision page.
+
+
+
+DEMO PAGES
+----------
+GS3_CALLSANDTEXTSPAGE
+GS3_ONBOARDGPSPAGE
+GS3_BATTERYPAGE
+GS3_PERSONALIZATIONPAGE
+GS3_DESIGNPAGE
+GS3_DURABILITYPAGE
+GS3_SAMSUNGPAYPAGE
+GS3_SHEALTHPAGE
+

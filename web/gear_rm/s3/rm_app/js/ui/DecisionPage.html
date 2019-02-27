@@ -1,0 +1,46 @@
+<div id="decisionPage" data-enable-page-scroll="false">
+
+
+	<style>
+		.ui-selector .ui-layer.ui-layer-active .ui-item {
+		  visibility: visible;
+		  -webkit-transition: transform 500ms ease-out;
+		  -moz-transition: transform 500ms ease-out;
+		  -o-transition: transform 500ms ease-out;
+		  -ms-transition: transform 500ms ease-out;
+		  transition: transform 500ms ease-out;
+		}
+		.ui-selector .ui-layer.ui-layer-hide .ui-item {
+		  visibility: visible;
+		  -webkit-transition: transform 100ms ease-out;
+		  -moz-transition: transform 100ms ease-out;
+		  -o-transition: transform 100ms ease-out;
+		  -ms-transition: transform 100ms ease-out;
+		  transition: transform 100ms ease-out;
+		}
+	</style>
+
+    <div id="selector" class="ui-selector" style="background-color:#000;">
+        <div class="ui-item design-icon decision-common" data-title="Design" style="z-index:20000;"></div>
+        <div class="ui-item call-icon decision-common" data-title="Calls and text"></div>
+        <div class="ui-item pay-icon decision-common" data-title="Samsung Pay"></div>
+        <div class="ui-item gps-icon decision-common" data-title="Onboard GPS"></div>
+        <div class="ui-item durability-icon decision-common" data-title="Durability"></div>
+        <div class="ui-item battery-icon decision-common" data-title="Battery"></div>
+        <div class="ui-item personalization-icon decision-common" data-title="Personalization"></div>
+        <div class="ui-item s-health-icon decision-common" data-title="S Health"></div>
+        
+        <span id="decision-secondary-text" class="common-text-properites">Access apps with steel bezel</span>
+        
+    </div>
+    
+ <!--    <div id="decision-container" 
+        style="background-image: url('images/decisionpage/rotate.png'); width: 360px; 
+        height: 360px; position:absolute; top:0; left:0; z-index:15000;"></div> -->
+        
+        
+    <div id="image-container"></div>
+    <span id="overlay-container"></span>
+        
+    <script src="js/ui/DecisionPage.js"></script>
+</div>

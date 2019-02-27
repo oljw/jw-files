@@ -1,0 +1,16 @@
+[
+	{
+	    "chapterIndex":1,
+		"chapterStart": 18064,
+		"chapterEnd": 24063,
+		"chapterAction": "Super",
+		"chapterActionMessage": "Tap"
+	},
+	{
+	    "chapterIndex":2,
+		"chapterStart": 29464,
+		"chapterEnd": 35463,
+		"chapterAction": "Disclaimer",
+		"chapterActionMessage": "Tap"
+	}
+]

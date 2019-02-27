@@ -1,0 +1,16 @@
+[
+	{
+	    "chapterIndex":1,
+		"chapterStart": 13112,
+		"chapterEnd": 19112,
+		"chapterAction": "Super",
+		"chapterActionMessage": "Tap and Hold"
+	},
+	{
+	    "chapterIndex":2,
+		"chapterStart": 32160,
+		"chapterEnd": 41448,
+		"chapterAction": "Disclaimer",
+		"chapterActionMessage": "Rotate Overlay"
+	}
+]

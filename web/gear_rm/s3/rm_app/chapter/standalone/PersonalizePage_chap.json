@@ -1,0 +1,16 @@
+[
+	{
+	    "chapterIndex":1,
+		"chapterStart": 12804,
+		"chapterEnd": 18303,
+		"chapterAction": "Super",
+		"chapterActionMessage": "Tap and Hold"
+	},
+	{
+	    "chapterIndex":2,
+		"chapterStart": 24352,
+		"chapterEnd": 30351,
+		"chapterAction": "Super",
+		"chapterActionMessage": "Thumbnail Changer"
+	}
+]

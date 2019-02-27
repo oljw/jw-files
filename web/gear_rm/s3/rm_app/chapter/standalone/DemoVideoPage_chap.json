@@ -1,0 +1,23 @@
+[
+	{
+	    "chapterIndex":1,
+		"chapterStart": 1000,
+		"chapterEnd": 1500,
+		"chapterAction": "Super",
+		"chapterActionMessage": "Tap and Hold"
+	},
+	{
+	    "chapterIndex":2,
+		"chapterStart": 2000,
+		"chapterEnd": 2500,
+		"chapterAction": "Disclaimer",
+		"chapterActionMessage": "Rotate Overlay"
+	},
+	{
+	    "chapterIndex":3,
+		"chapterStart": 3000,
+		"chapterEnd": 34000,
+		"chapterAction": "Super",
+		"chapterActionMessage": "Thumbnail Changer"
+	}
+]
