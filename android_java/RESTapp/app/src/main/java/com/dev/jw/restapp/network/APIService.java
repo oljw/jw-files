@@ -4,14 +4,11 @@ import com.dev.jw.restapp.model.Video;
 import com.dev.jw.restapp.model.VideoList;
 
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /***************************
  * Created by jw on 2/28/19.

@@ -1,10 +1,11 @@
 package com.dev.jw.restapp.activity;
 
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -24,49 +25,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final TextView textViewButton = findViewById(R.id.text_view_btn);
+        final TextView textViewButton2 = findViewById(R.id.text_view_btn2);
 
-        final VideoView vidView = findViewById(R.id.myVideo);
-        final MediaController vidControl = new MediaController(this);
+        final APIService service = RetrofitInstance.getRetrofitInstance().create(APIService.class);
 
-        /*Create handle for the RetrofitInstance interface*/
-        APIService service = RetrofitInstance.getRetrofitInstance().create(APIService.class);
-
-        // getting video url
-        Call<Video> call = service.getVideo(1);
-        Log.d("------> JW: request().url(): ", call.request().url() + "");
-        call.enqueue(new Callback<Video>() {
+        textViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<Video> call, Response<Video> response) {
-                Log.d("------> JW: body().getPath(): ", response.body().getPath());
-                String vidAddress = response.body().getPath();
-                Uri vidUri = Uri.parse(vidAddress);
-                vidView.setVideoURI(vidUri);
+            public void onClick(View v) {
+                // putting boolean value
+                Call<Video> call = service.putBoolean(1, true);
+                call.enqueue(new Callback<Video>() {
+                    @Override
+                    public void onResponse(Call<Video> call, Response<Video> response) {
+                        Log.d("-----> JW: 1", "PUT: to RESTful API successful.");
+                    }
 
-
-            }
-
-            @Override
-            public void onFailure(Call<Video> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Something went wrong..", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Call<Video> call, Throwable t) {
+                        Toast.makeText(MainActivity.this, "Something went wrong..", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
-        // putting boolean value
-        Call<Video> call2 = service.putBoolean(1, true);
-        call2.enqueue(new Callback<Video>() {
+        textViewButton2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<Video> call, Response<Video> response) {
-                Log.d("----------> JW: ", "yeah baby");
-            }
+            public void onClick(View v) {
+                // putting boolean value
+                Call<Video> call = service.putBoolean(2, true);
+                call.enqueue(new Callback<Video>() {
+                    @Override
+                    public void onResponse(Call<Video> call, Response<Video> response) {
+                        Log.d("-----> JW: 2", "PUT: to RESTful API successful.");
+                    }
 
-            @Override
-            public void onFailure(Call<Video> call, Throwable t) {
-
+                    @Override
+                    public void onFailure(Call<Video> call, Throwable t) {
+                        Toast.makeText(MainActivity.this, "Something went wrong..", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-
-        vidControl.setAnchorView(vidView);
-        vidView.setMediaController(vidControl);
-        vidView.start();
     }
 }
