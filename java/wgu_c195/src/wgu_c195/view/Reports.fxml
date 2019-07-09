@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane fx:id="tabPane" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wgu_c195.view.ReportsController">
+  <tabs>
+    <Tab fx:id="schedTab" text="Your Schedule">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="schedTableView" layoutX="178.0" layoutY="86.0" prefHeight="371.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="startSchedColumn" prefWidth="120.0" text="Start" />
+                      <TableColumn fx:id="endSchedColumn" prefWidth="120.0" text="End" />
+                        <TableColumn fx:id="titleSchedColumn" prefWidth="120.0" text="Title" />
+                        <TableColumn fx:id="typeSchedColumn" minWidth="75.0" prefWidth="120.0" text="Type" />
+                        <TableColumn fx:id="customerSchedColumn" prefWidth="120.0" text="Customer" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="apptTab" text="Appointments Types By Month">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="apptTableView" prefHeight="371.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="monthColumn" prefWidth="96.0" text="Month" />
+                      <TableColumn fx:id="typeColumn" prefWidth="83.0" text="Types" />
+                      <TableColumn fx:id="typeAmount" prefWidth="136.0" text="Amount Per Type" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="custTab" text="Customers By Location">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <BarChart fx:id="barChart" layoutX="44.0" layoutY="-29.0" legendVisible="false" prefHeight="371.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <xAxis>
+                      <CategoryAxis label="Cities" side="BOTTOM" fx:id="xAxis" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="yAxis" label="Customers" minorTickLength="0.0" side="LEFT" tickLabelRotation="-93.5" tickUnit="1.0" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
