@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wgu_c195.view;
 
 import java.io.IOException;
@@ -28,11 +23,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import wgu_c195.util.DBConnection;
-import wgu_c195.app.App;
+import wgu_c195.util.DBUtil;
 import wgu_c195.model.Appointment;
 import wgu_c195.model.Customer;
 import wgu_c195.model.User;
+import wgu_c195.util.PageUtil;
 
 /**
  * FXML Controller class
@@ -71,21 +66,11 @@ public class AppointmentScreenController {
     @FXML
     private ToggleGroup apptToggleGroup;
     
-    private App mainApp;
-    private User currentUser;
     private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final ZoneId newzid = ZoneId.systemDefault();
     ObservableList<Appointment> apptList;
     
-    /**
-     * Initializes Appointment Screen 
-     * @param mainApp
-     * @param currentUser 
-     */    
-    public void setAppointmentScreen(App mainApp, User currentUser) {
-	this.mainApp = mainApp;
-        this.currentUser = currentUser;
-        
+    public void setAppointmentScreen() {
         apptToggleGroup = new ToggleGroup();
         this.weekRadioButton.setToggleGroup(apptToggleGroup);
         this.monthRadioButton.setToggleGroup(apptToggleGroup);
@@ -155,7 +140,7 @@ public class AppointmentScreenController {
             .filter(response -> response == ButtonType.OK)
             .ifPresent(response -> {
                 deleteAppointment(selectedAppointment);
-                mainApp.showAppointmentScreen(currentUser);
+                PageUtil.getInstance().showAppointmentScreen();
                 }
             );
         } else {
@@ -173,8 +158,8 @@ public class AppointmentScreenController {
         Appointment selectedAppointment = apptTableView.getSelectionModel().getSelectedItem();
         
         if (selectedAppointment != null) {
-            boolean okClicked = mainApp.showEditApptScreen(selectedAppointment, currentUser);
-            mainApp.showAppointmentScreen(currentUser);
+            boolean okClicked = PageUtil.getInstance().showEditApptScreen(selectedAppointment);
+            PageUtil.getInstance().showAppointmentScreen();
             
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -188,15 +173,15 @@ public class AppointmentScreenController {
 
     @FXML
     void handleNewAppt(ActionEvent event) throws IOException{
-        boolean okClicked = mainApp.showNewApptScreen(currentUser);
-        mainApp.showAppointmentScreen(currentUser);
+        boolean okClicked = PageUtil.getInstance().showNewApptScreen();
+        PageUtil.getInstance().showAppointmentScreen();
     }
     
     private void populateAppointmentList() {
       
         try{            
             
-        PreparedStatement statement = DBConnection.getConn().prepareStatement(
+        PreparedStatement statement = DBUtil.getConnection().prepareStatement(
         "SELECT appointment.appointmentId, appointment.customerId, appointment.title, appointment.description, "
                 + "appointment.`start`, appointment.`end`, customer.customerId, customer.customerName, appointment.createdBy "
                 + "FROM appointment, customer "
@@ -240,10 +225,9 @@ public class AppointmentScreenController {
     
     private void deleteAppointment(Appointment appointment) {
         try{           
-            PreparedStatement pst = DBConnection.getConn().prepareStatement("DELETE appointment.* FROM appointment WHERE appointment.appointmentId = ?");
-            pst.setString(1, appointment.getAppointmentId()); 
-            pst.executeUpdate();  
-                
+            PreparedStatement statement = DBUtil.getConnection().prepareStatement("DELETE appointment.* FROM appointment WHERE appointment.appointmentId = ?");
+            statement.setString(1, appointment.getAppointmentId());
+            statement.executeUpdate();
         } catch(SQLException e){
             e.printStackTrace();
         }       

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wgu_c195.view;
 
 import java.sql.PreparedStatement;
@@ -35,7 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import wgu_c195.util.DBConnection;
+import wgu_c195.util.DBUtil;
 import wgu_c195.app.App;
 import wgu_c195.model.Appointment;
 import wgu_c195.model.Customer;
@@ -83,12 +78,10 @@ public class AppointmentEditScreenController {
 
 
     private Stage dialogStage;
-    private App mainApp;
     private boolean okClicked = false;
     private final ZoneId zid = ZoneId.systemDefault();
     private Appointment selectedAppt;
-    private User currentUser;
-    
+
     private ObservableList<Customer> masterData = FXCollections.observableArrayList();
     private final ObservableList<String> startTimes = FXCollections.observableArrayList();
     private final ObservableList<String> endTimes = FXCollections.observableArrayList();
@@ -132,15 +125,9 @@ public class AppointmentEditScreenController {
         
     }
     
-    /**
-     * Initializes AppointmentEditScreen
-     * @param dialogStage
-     * @param currentUser 
-     */
-    public void setDialogStage(Stage dialogStage, User currentUser) {
+    public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
-        this.currentUser = currentUser;
-        
+
         populateTypeList();
         customerNameApptColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         masterData = populateCustomerList();
@@ -245,21 +232,21 @@ public class AppointmentEditScreenController {
         
         try {
 
-                PreparedStatement pst = DBConnection.getConn().prepareStatement("INSERT INTO appointment "
+                PreparedStatement statement = DBUtil.getConnection().prepareStatement("INSERT INTO appointment "
                 + "(customerId, title, description, location, contact, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)");
             
-                pst.setString(1, customerSelectTableView.getSelectionModel().getSelectedItem().getCustomerId());
-                pst.setString(2, titleField.getText());
-                pst.setString(3, typeComboBox.getValue());
-                pst.setString(4, "");
-                pst.setString(5, "");
-                pst.setString(6, "");
-                pst.setTimestamp(7, startsqlts);
-                pst.setTimestamp(8, endsqlts);
-                pst.setString(9, currentUser.getUsername());
-                pst.setString(10, currentUser.getUsername());
-                int result = pst.executeUpdate();
+                statement.setString(1, customerSelectTableView.getSelectionModel().getSelectedItem().getCustomerId());
+                statement.setString(2, titleField.getText());
+                statement.setString(3, typeComboBox.getValue());
+                statement.setString(4, "");
+                statement.setString(5, "");
+                statement.setString(6, "");
+                statement.setTimestamp(7, startsqlts);
+                statement.setTimestamp(8, endsqlts);
+                statement.setString(9, App.sInstance.getUser().getUsername());
+                statement.setString(10, App.sInstance.getUser().getUsername());
+                int result = statement.executeUpdate();
                 if (result == 1) {//one row was affected; namely the one that was inserted!
                     System.out.println("YAY! New Appointment Save");
                 } else {
@@ -291,18 +278,18 @@ public class AppointmentEditScreenController {
         
         try {
 
-                PreparedStatement pst = DBConnection.getConn().prepareStatement("UPDATE appointment "
+                PreparedStatement statement = DBUtil.getConnection().prepareStatement("UPDATE appointment "
                         + "SET customerId = ?, title = ?, description = ?, start = ?, end = ?, lastUpdate = CURRENT_TIMESTAMP, lastUpdateBy = ? "
                         + "WHERE appointmentId = ?");
             
-                pst.setString(1, customerSelectTableView.getSelectionModel().getSelectedItem().getCustomerId());
-                pst.setString(2, titleField.getText());
-                pst.setString(3, typeComboBox.getValue());
-                pst.setTimestamp(4, startsqlts);
-                pst.setTimestamp(5, endsqlts);
-                pst.setString(6, currentUser.getUsername());
-                pst.setString(7, selectedAppt.getAppointmentId());
-                int result = pst.executeUpdate();
+                statement.setString(1, customerSelectTableView.getSelectionModel().getSelectedItem().getCustomerId());
+                statement.setString(2, titleField.getText());
+                statement.setString(3, typeComboBox.getValue());
+                statement.setTimestamp(4, startsqlts);
+                statement.setTimestamp(5, endsqlts);
+                statement.setString(6, App.sInstance.getUser().getUsername());
+                statement.setString(7, selectedAppt.getAppointmentId());
+                int result = statement.executeUpdate();
                 if (result == 1) {//one row was affected; namely the one that was inserted!
                     System.out.println("YAY! Update Appointment Save");
                 } else {
@@ -335,7 +322,7 @@ public class AppointmentEditScreenController {
         try(
             
             
-        PreparedStatement statement = DBConnection.getConn().prepareStatement(
+        PreparedStatement statement = DBUtil.getConnection().prepareStatement(
         "SELECT customer.customerId, customer.customerName " +
         "FROM customer, address, city, country " +
         "WHERE customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId");
@@ -441,24 +428,24 @@ public class AppointmentEditScreenController {
         } else {
             //new appointment
             apptID = "0";
-            consultant = currentUser.getUsername();
+            consultant = App.sInstance.getUser().getUsername();
         }
         System.out.println("ApptID: " + apptID);
         
         try{
             
             
-        PreparedStatement pst = DBConnection.getConn().prepareStatement(
+        PreparedStatement statement = DBUtil.getConnection().prepareStatement(
         "SELECT * FROM appointment "
 	+ "WHERE (? BETWEEN start AND end OR ? BETWEEN start AND end OR ? < start AND ? > end) "
 	+ "AND (createdBy = ? AND appointmentID != ?)");
-        pst.setTimestamp(1, Timestamp.valueOf(newStart.toLocalDateTime()));
-	pst.setTimestamp(2, Timestamp.valueOf(newEnd.toLocalDateTime()));
-        pst.setTimestamp(3, Timestamp.valueOf(newStart.toLocalDateTime()));
-	pst.setTimestamp(4, Timestamp.valueOf(newEnd.toLocalDateTime()));
-        pst.setString(5, consultant);
-        pst.setString(6, apptID);
-        ResultSet rs = pst.executeQuery();
+        statement.setTimestamp(1, Timestamp.valueOf(newStart.toLocalDateTime()));
+	statement.setTimestamp(2, Timestamp.valueOf(newEnd.toLocalDateTime()));
+        statement.setTimestamp(3, Timestamp.valueOf(newStart.toLocalDateTime()));
+	statement.setTimestamp(4, Timestamp.valueOf(newEnd.toLocalDateTime()));
+        statement.setString(5, consultant);
+        statement.setString(6, apptID);
+        ResultSet rs = statement.executeQuery();
            
         if(rs.next()) {
             return true;

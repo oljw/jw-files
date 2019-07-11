@@ -1,6 +1,5 @@
 package wgu_c195.view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -15,24 +14,23 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.text.Text;
-import wgu_c195.util.DBConnection;
 import wgu_c195.app.App;
+import wgu_c195.util.DBUtil;
 import wgu_c195.model.Appointment;
 import wgu_c195.model.Customer;
 import wgu_c195.model.User;
 import wgu_c195.util.LoggerUtil;
+import wgu_c195.util.PageUtil;
 
 public class LoginScreenController {
-    
-            
+
     @FXML
     private Label errorMessage;
 
@@ -57,106 +55,67 @@ public class LoginScreenController {
     @FXML
     private Button cancelText;
     
-    // Reference to the main application.
-    private App mainApp;
-    ResourceBundle rb = ResourceBundle.getBundle("login", Locale.getDefault());
+    private ResourceBundle rb = ResourceBundle.getBundle("login", Locale.getDefault());
+
     private final ZoneId newzid = ZoneId.systemDefault();
+
     private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-    User user = new User();
+
+    private User user;
     ObservableList<Appointment> reminderList;
     private final static Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());
 
-    /**
-     * The constructor.
-     * The constructor is called before the initialize() method.
-     */
-    public LoginScreenController() {
-    }
-    
     @FXML
-    void handleSignInAction(ActionEvent event) {
-        String userN = usernameField.getText();   // Collecting the input
-        String pass = passwordField.getText(); // Collecting the input
-        
-        if(userN.length()==0 || pass.length()==0)  // Checking for empty field
+    void signIn() {
+        if(usernameField.getText().length() == 0 || passwordField.getText().length() == 0) {
             errorMessage.setText(rb.getString("empty"));
-        else{
-            
-            User validUser = validateLogin(userN,pass); 
-            if (validUser == null) {
+        } else {
+            validateUser(usernameField.getText(), passwordField.getText());
+            if (this.user == null) {
                 errorMessage.setText(rb.getString("incorrect"));
                 return;
             }
-            populateReminderList();
-            reminder();
-            mainApp.showMenu(validUser);
-            mainApp.showAppointmentScreen(validUser);
-            //logs successful logins
-            LOGGER.log(Level.INFO, "{0} logged in", validUser.getUsername());
-            
-            
+            populateReminders();
+            filterReminders();
+            PageUtil.getInstance().showMenu();
+            PageUtil.getInstance().showAppointmentScreen();
+            LOGGER.log(Level.INFO, "{0} logged in", this.user.getUsername());
         }
     }
-    
-    /**
-     * Searches for matching username and password in database
-     * @param username
-     * @param password
-     * @return user if match found
-     */
-    User validateLogin(String username,String password) {
+
+    private User validateUser(String username, String password) {
         try{           
-            PreparedStatement pst = DBConnection.getConn().prepareStatement("SELECT * FROM user WHERE userName=? AND password=?");
-            pst.setString(1, username); 
-            pst.setString(2, password);
-            ResultSet rs = pst.executeQuery();                        
-            if(rs.next()){
+            PreparedStatement statement = DBUtil.getConnection().prepareStatement("SELECT * FROM user WHERE userName=? AND password=?");
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                user = new User();
                 user.setUsername(rs.getString("userName"));
                 user.setPassword(rs.getString("password"));
                 user.setUserID(rs.getInt("userId"));
+                App.sInstance.setUser(this.user);
             } else {
                 return null;    
-            }            
-                
+            }
         } catch(SQLException e){
             e.printStackTrace();
         }       
         return user;
-}
-    
-    @FXML
-    void handleCancelAction(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm Cancel");
-            alert.setHeaderText("Are you sure you want close the program?");
-            alert.showAndWait()
-            .filter(response -> response == ButtonType.OK)
-            .ifPresent((ButtonType response) -> {
-                Platform.exit();
-                System.exit(0);
-                }
-            );
     }
-    
-    /**
-     * Initializes LoginScreen
-     * @param mainApp 
-     */
-    public void setLogin(App mainApp) {
-	this.mainApp = mainApp;
+
+    public void setTexts() {
         reminderList = FXCollections.observableArrayList();
-        
+
         titleText.setText(rb.getString("title"));
         usernameText.setText(rb.getString("username"));
         passwordText.setText(rb.getString("password"));
         signinText.setText(rb.getString("signin"));
         cancelText.setText(rb.getString("cancel"));
     }
-    
-    /**
-     * Filters reminder list and launches alert if filteredData is not empty
-     */
-    private void reminder() {
+
+    private void filterReminders() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nowPlus15Min = now.plusMinutes(15);
         
@@ -168,7 +127,7 @@ public class LoginScreenController {
             }
         );
         if (filteredData.isEmpty()) {
-            System.out.println("No reminders");
+            System.out.println("----> No reminders");
         } else {
             String type = filteredData.get(0).getDescription();
             String customer =  filteredData.get(0).getCustomer().getCustomerName();
@@ -183,19 +142,17 @@ public class LoginScreenController {
         
     }
     
-    private void populateReminderList() {
-        System.out.println(user.getUsername());
-        try{           
-        PreparedStatement pst = DBConnection.getConn().prepareStatement(
+    private void populateReminders() {
+        try {
+            PreparedStatement statement = DBUtil.getConnection().prepareStatement(
         "SELECT appointment.appointmentId, appointment.customerId, appointment.title, appointment.description, "
                 + "appointment.`start`, appointment.`end`, customer.customerId, customer.customerName, appointment.createdBy "
                 + "FROM appointment, customer "
                 + "WHERE appointment.customerId = customer.customerId AND appointment.createdBy = ? "
                 + "ORDER BY `start`");
-            pst.setString(1, user.getUsername());
-            ResultSet rs = pst.executeQuery();
-           
-            
+            statement.setString(1, this.user.getUsername());
+            ResultSet rs = statement.executeQuery();
+
             while (rs.next()) {
                 
                 String tAppointmentId = rs.getString("appointment.appointmentId");
@@ -217,8 +174,7 @@ public class LoginScreenController {
                       
                 reminderList.add(new Appointment(tAppointmentId, newLocalStart.format(timeDTF), newLocalEnd.format(timeDTF), tTitle, tType, tCustomer, tUser));   
 
-            }   
-            
+            }
         } catch (SQLException sqe) {
             System.out.println("Check your SQL");
             sqe.printStackTrace();

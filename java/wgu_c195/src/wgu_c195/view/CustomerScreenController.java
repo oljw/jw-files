@@ -19,11 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import wgu_c195.util.DBConnection;
 import wgu_c195.app.App;
+import wgu_c195.util.DBUtil;
 import wgu_c195.model.City;
 import wgu_c195.model.Customer;
 import wgu_c195.model.User;
+import wgu_c195.util.PageUtil;
 
 public class CustomerScreenController {
 
@@ -66,11 +67,9 @@ public class CustomerScreenController {
     @FXML
     private ButtonBar saveCancelButtonBar;
     
-    private App mainApp;
     private boolean editClicked = false;
     private Stage dialogStage;
-    private User currentUser;
-    
+
     public CustomerScreenController() {
     }
     
@@ -118,7 +117,7 @@ public class CustomerScreenController {
             .filter(response -> response == ButtonType.OK)
             .ifPresent(response -> {
                 deleteCustomer(selectedCustomer);
-                mainApp.showCustomerScreen(currentUser);
+                PageUtil.getInstance().showCustomerScreen();
                 }
             );
         } else {
@@ -143,7 +142,7 @@ public class CustomerScreenController {
                 //inserts new customer record
                 saveCustomer();
         }
-        mainApp.showCustomerScreen(currentUser);
+        PageUtil.getInstance().showCustomerScreen();
         } 
     }
     
@@ -164,15 +163,7 @@ public class CustomerScreenController {
         );
     }
     
-    /**
-     * Initializes Customer Screen
-     * @param mainApp
-     * @param currentUser 
-     */
-    public void setCustomerScreen(App mainApp, User currentUser) {
-	this.mainApp = mainApp;
-        this.currentUser = currentUser;
-        
+    public void setCustomerScreen() {
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         disableCustomerFields();
@@ -275,7 +266,7 @@ public class CustomerScreenController {
         try(
             
             
-        PreparedStatement statement = DBConnection.getConn().prepareStatement(
+        PreparedStatement statement = DBUtil.getConnection().prepareStatement(
         "SELECT customer.customerId, customer.customerName, address.address, address.address2, address.postalCode, city.cityId, city.city, country.country, address.phone " +
         "FROM customer, address, city, country " +
         "WHERE customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId " +
@@ -326,8 +317,8 @@ public class CustomerScreenController {
     
     try(
 
-    PreparedStatement statement = DBConnection.getConn().prepareStatement("SELECT cityId, city FROM city LIMIT 100;");
-    ResultSet rs = statement.executeQuery();){
+            PreparedStatement statement = DBUtil.getConnection().prepareStatement("SELECT cityId, city FROM city LIMIT 100;");
+            ResultSet rs = statement.executeQuery();){
     
     while (rs.next()) {
         cities.add(new City(rs.getInt("city.cityId"),rs.getString("city.city")));
@@ -370,7 +361,7 @@ public class CustomerScreenController {
 
             try {
 
-                PreparedStatement ps = DBConnection.getConn().prepareStatement("INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) "
+                PreparedStatement ps = DBUtil.getConnection().prepareStatement("INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) "
                         + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)",Statement.RETURN_GENERATED_KEYS);
 
                 ps.setString(1, addressField.getText());
@@ -378,8 +369,8 @@ public class CustomerScreenController {
                 ps.setInt(3, cityComboBox.getValue().getCityId());
                 ps.setString(4, postalCodeField.getText());
                 ps.setString(5, phoneField.getText());
-                ps.setString(6, currentUser.getUsername());
-                ps.setString(7, currentUser.getUsername());
+                ps.setString(6, App.sInstance.getUser().getUsername());
+                ps.setString(7, App.sInstance.getUser().getUsername());
                 boolean res = ps.execute();
                 int newAddressId = -1;
                 ResultSet rs = ps.getGeneratedKeys();
@@ -390,7 +381,7 @@ public class CustomerScreenController {
                 }
             
             
-                PreparedStatement psc = DBConnection.getConn().prepareStatement("INSERT INTO customer "
+                PreparedStatement psc = DBUtil.getConnection().prepareStatement("INSERT INTO customer "
                 + "(customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)"
                 + "VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)");
             
@@ -398,9 +389,9 @@ public class CustomerScreenController {
                 psc.setInt(2, newAddressId);
                 psc.setInt(3, 1);
                 //psc.setString(4, LocalDateTime.now().toString());
-                psc.setString(4, currentUser.getUsername());
+                psc.setString(4, App.sInstance.getUser().getUsername());
                 //psc.setString(6, LocalDateTime.now().toString());
-                psc.setString(5, currentUser.getUsername());
+                psc.setString(5, App.sInstance.getUser().getUsername());
                 int result = psc.executeUpdate();
                
             } catch (SQLException ex) {
@@ -415,9 +406,9 @@ public class CustomerScreenController {
     private void deleteCustomer(Customer customer) {
         
         try{           
-            PreparedStatement pst = DBConnection.getConn().prepareStatement("DELETE customer.*, address.* from customer, address WHERE customer.customerId = ? AND customer.addressId = address.addressId");
-            pst.setString(1, customer.getCustomerId()); 
-            pst.executeUpdate();   
+            PreparedStatement statement = DBUtil.getConnection().prepareStatement("DELETE customer.*, address.* from customer, address WHERE customer.customerId = ? AND customer.addressId = address.addressId");
+            statement.setString(1, customer.getCustomerId());
+            statement.executeUpdate();
                 
         } catch(SQLException e){
             e.printStackTrace();
@@ -430,7 +421,7 @@ public class CustomerScreenController {
     private void updateCustomer() {
         try {
 
-                PreparedStatement ps = DBConnection.getConn().prepareStatement("UPDATE address, customer, city, country "
+                PreparedStatement ps = DBUtil.getConnection().prepareStatement("UPDATE address, customer, city, country "
                         + "SET address = ?, address2 = ?, address.cityId = ?, postalCode = ?, phone = ?, address.lastUpdate = CURRENT_TIMESTAMP, address.lastUpdateBy = ? "
                         + "WHERE customer.customerId = ? AND customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId");
 
@@ -439,19 +430,19 @@ public class CustomerScreenController {
                 ps.setInt(3, cityComboBox.getValue().getCityId());
                 ps.setString(4, postalCodeField.getText());
                 ps.setString(5, phoneField.getText());
-                ps.setString(6, currentUser.getUsername());
+                ps.setString(6, App.sInstance.getUser().getUsername());
                 ps.setString(7, customerIdField.getText());
                 
                 int result = ps.executeUpdate();
                              
             
             
-                PreparedStatement psc = DBConnection.getConn().prepareStatement("UPDATE customer, address, city "
+                PreparedStatement psc = DBUtil.getConnection().prepareStatement("UPDATE customer, address, city "
                 + "SET customerName = ?, customer.lastUpdate = CURRENT_TIMESTAMP, customer.lastUpdateBy = ? "
                 + "WHERE customer.customerId = ? AND customer.addressId = address.addressId AND address.cityId = city.cityId");
             
                 psc.setString(1, nameField.getText());
-                psc.setString(2, currentUser.getUsername());
+                psc.setString(2, App.sInstance.getUser().getUsername());
                 psc.setString(3, customerIdField.getText());
                 int results = psc.executeUpdate();
                 

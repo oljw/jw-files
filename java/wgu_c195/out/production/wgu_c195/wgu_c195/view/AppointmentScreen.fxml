@@ -22,15 +22,15 @@
       </TableView>
       <ButtonBar layoutX="327.0" layoutY="23.0" prefHeight="40.0" prefWidth="261.0">
         <buttons>
-          <Button onAction="#handleNewAppt" text="New" />
-            <Button onAction="#handleEditAppt" text="Edit" />
-            <Button onAction="#handleDeleteAppt" text="Delete" />
+          <Button mnemonicParsing="false" onAction="#handleNewAppt" text="New" />
+            <Button mnemonicParsing="false" onAction="#handleEditAppt" text="Edit" />
+            <Button mnemonicParsing="false" onAction="#handleDeleteAppt" text="Delete" />
         </buttons>
          <padding>
             <Insets right="6.0" />
          </padding>
       </ButtonBar>
-      <RadioButton fx:id="weekRadioButton" layoutX="32.0" layoutY="23.0" onAction="#handleApptWeek" text="Appointments for Upcoming Week" />
-      <RadioButton fx:id="monthRadioButton" layoutX="32.0" layoutY="43.0" onAction="#handleApptMonth" text="Appointments for Upcoming Month" />
+      <RadioButton fx:id="weekRadioButton" layoutX="32.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleApptWeek" text="Appointments for Upcoming Week" />
+      <RadioButton fx:id="monthRadioButton" layoutX="32.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleApptMonth" text="Appointments for Upcoming Month" />
    </children>
 </AnchorPane>

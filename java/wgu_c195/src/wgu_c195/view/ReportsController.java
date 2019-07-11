@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wgu_c195.view;
 
 import java.sql.PreparedStatement;
@@ -28,12 +23,11 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import wgu_c195.util.DBConnection;
+import wgu_c195.util.DBUtil;
 import wgu_c195.app.App;
 import wgu_c195.model.Appointment;
 import wgu_c195.model.AppointmentReport;
 import wgu_c195.model.Customer;
-import wgu_c195.model.User;
 
 /**
  * FXML Controller class
@@ -93,23 +87,18 @@ public class ReportsController {
     @FXML
     private NumberAxis yAxis;
     
-    private App mainApp;
     private ObservableList<AppointmentReport> apptList;
     private ObservableList<Appointment> schedule;
     private ObservableList<PieChart.Data> pieChartData;
     private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final ZoneId newzid = ZoneId.systemDefault();
-    private User currentUser;
-    
+
     public ReportsController() {
         
     }
     
-    public void setReports(App mainApp, User currentUser) {
-        this.mainApp = mainApp;
-        this.currentUser = currentUser;
-        
-        //methods called to populate data on each tab        
+    public void setReports() {
+        //methods called to populate data on each tab
         populateApptTypeList();
         populateCustBarChart();
         populateSchedule();      
@@ -135,7 +124,7 @@ public class ReportsController {
         try{
             
             
-        PreparedStatement statement = DBConnection.getConn().prepareStatement(
+        PreparedStatement statement = DBUtil.getConnection().prepareStatement(
             "SELECT MONTHNAME(`start`) AS \"Month\", description AS \"Type\", COUNT(*) as \"Amount\" "
             + "FROM appointment "
             + "GROUP BY MONTHNAME(`start`), description");
@@ -171,13 +160,13 @@ public class ReportsController {
         ObservableList<XYChart.Data<String, Integer>> data = FXCollections.observableArrayList();
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
-            try { PreparedStatement pst = DBConnection.getConn().prepareStatement(
+            try { PreparedStatement statement = DBUtil.getConnection().prepareStatement(
                   "SELECT city.city, COUNT(city) "
                 + "FROM customer, address, city "
                 + "WHERE customer.addressId = address.addressId "
                 + "AND address.cityId = city.cityId "
                 + "GROUP BY city"); 
-                ResultSet rs = pst.executeQuery();
+                ResultSet rs = statement.executeQuery();
 
 
                 while (rs.next()) {
@@ -203,14 +192,14 @@ public class ReportsController {
         
         try{
             
-        PreparedStatement pst = DBConnection.getConn().prepareStatement(
+        PreparedStatement statement = DBUtil.getConnection().prepareStatement(
         "SELECT appointment.appointmentId, appointment.customerId, appointment.title, appointment.description, "
                 + "appointment.`start`, appointment.`end`, customer.customerId, customer.customerName, appointment.createdBy "
                 + "FROM appointment, customer "
                 + "WHERE appointment.customerId = customer.customerId AND appointment.`start` >= CURRENT_DATE AND appointment.createdBy = ?"
                 + "ORDER BY `start`");
-            pst.setString(1, currentUser.getUsername());
-            ResultSet rs = pst.executeQuery();
+            statement.setString(1, App.sInstance.getUser().getUsername());
+            ResultSet rs = statement.executeQuery();
            
             
             while (rs.next()) {

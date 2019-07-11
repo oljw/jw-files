@@ -69,15 +69,15 @@
                   </GridPane>
                   <ButtonBar fx:id="newEditDeleteButtonBar" buttonMinWidth="45.0" layoutX="90.0" layoutY="248.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="235.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <buttons>
-                        <Button onAction="#handleNewCustomer" text="New" />
-                        <Button onAction="#handleEditCustomer" text="Edit" />
-                        <Button minWidth="57.0" onAction="#handleDeleteCustomer" prefHeight="25.0" text="Delete" />
+                        <Button mnemonicParsing="false" onAction="#handleNewCustomer" text="New" />
+                        <Button mnemonicParsing="false" onAction="#handleEditCustomer" text="Edit" />
+                        <Button minWidth="57.0" mnemonicParsing="false" onAction="#handleDeleteCustomer" prefHeight="25.0" text="Delete" />
                      </buttons>
                   </ButtonBar>
                   <ButtonBar fx:id="saveCancelButtonBar" buttonMinWidth="45.0" disable="true" layoutX="104.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="226.0">
                      <buttons>
-                        <Button minWidth="57.0" onAction="#handleSaveCustomer" prefHeight="25.0" text="Save" />
-                        <Button onAction="#handleCancelCustomer" text="Cancel" />
+                        <Button minWidth="57.0" mnemonicParsing="false" onAction="#handleSaveCustomer" prefHeight="25.0" text="Save" />
+                        <Button mnemonicParsing="false" onAction="#handleCancelCustomer" text="Cancel" />
                      </buttons>
                   </ButtonBar>
                </children>
