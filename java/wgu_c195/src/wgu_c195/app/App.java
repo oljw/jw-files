@@ -1,18 +1,15 @@
 package wgu_c195.app;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import wgu_c195.model.User;
 import wgu_c195.util.DBUtil;
-
-import java.util.Locale;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
-
-import javafx.stage.Stage;
 import wgu_c195.util.LoggerUtil;
 import wgu_c195.util.PageUtil;
 
+import java.util.Locale;
+
 /**
- *
  * @author JW
  */
 public class App extends Application {

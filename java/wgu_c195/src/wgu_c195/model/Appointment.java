@@ -1,11 +1,10 @@
 package wgu_c195.model;
 
 /**
- *
  * @author JW
  */
 public class Appointment {
-    
+
     private String appointmentId;
     private Customer customer;
     private String title;
@@ -13,16 +12,16 @@ public class Appointment {
     private String start;
     private String end;
     private String user;
-    
+
     public Appointment() {
     }
 
     public Appointment(String appointmentId) {
         this.appointmentId = appointmentId;
     }
-    
+
     public Appointment(String appointmentId, String start, String end, String title, String description, Customer customer, String user) {
-        this.appointmentId = appointmentId;    
+        this.appointmentId = appointmentId;
         this.start = start;
         this.end = end;
         this.title = title;
@@ -30,7 +29,7 @@ public class Appointment {
         this.customer = customer;
         this.user = user;
     }
-    
+
     public Appointment(String start, String end, String user) {
         this.start = start;
         this.end = end;
@@ -76,8 +75,8 @@ public class Appointment {
     public void setEnd(String end) {
         this.end = end;
     }
-    
-    
+
+
     //toString Override only used in troubleshooting during development
     @Override
     public String toString() {
@@ -87,7 +86,7 @@ public class Appointment {
                 " Title: " + this.title +
                 " Type: " + this.description +
                 " Customer: " + this.customer.getCustomerName() +
-                " Consultant: " + this.user + ".\n" ;
+                " Consultant: " + this.user + ".\n";
     }
 
     public Customer getCustomer() {

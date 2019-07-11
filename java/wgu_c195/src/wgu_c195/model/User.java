@@ -1,7 +1,6 @@
 package wgu_c195.model;
 
 /**
- *
  * @author JW
  */
 public class User {
@@ -16,7 +15,7 @@ public class User {
     }
 
     public User() {
-        
+
     }
 
     public int getUserID() {
@@ -41,6 +40,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }   
-    
+    }
+
 }

@@ -1,11 +1,10 @@
 package wgu_c195.model;
 
 /**
- *
  * @author JW
  */
 public class Country {
-    
+
     private Integer countryId;
     private String country;
 
@@ -52,15 +51,12 @@ public class Country {
             return false;
         }
         Country other = (Country) object;
-        if ((this.countryId == null && other.countryId != null) || (this.countryId != null && !this.countryId.equals(other.countryId))) {
-            return false;
-        }
-        return true;
+        return (this.countryId != null || other.countryId == null) && (this.countryId == null || this.countryId.equals(other.countryId));
     }
 
     @Override
     public String toString() {
         return "model.Country[ countryId=" + countryId + " ]";
     }
-    
+
 }

@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
- *
  * @author JW
  * Handles initialization of Logger class and gets called in main method
  * FileHandler is set to create a log file in in the base of the project folder
@@ -18,20 +17,20 @@ import java.util.logging.SimpleFormatter;
  * Logger will rotate back to first file and overwrite.
  */
 public class LoggerUtil {
-    
- private final static Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());
- private static FileHandler handler = null;
- 
- public static void init(){
-    try {
-    handler = new FileHandler("App-Userlog.%u.%g.txt", 1024 * 1024, 10, true);
-    } catch (SecurityException | IOException e) {
-        e.printStackTrace();
+
+    private final static Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());
+    private static FileHandler handler = null;
+
+    public static void init() {
+        try {
+            handler = new FileHandler("App-Userlog.%u.%g.txt", 1024 * 1024, 10, true);
+        } catch (SecurityException | IOException e) {
+            e.printStackTrace();
         }
-    Logger logger = Logger.getLogger("");
-    handler.setFormatter(new SimpleFormatter());
-    logger.addHandler(handler);
-    logger.setLevel(Level.INFO);
- }
-    
+        Logger logger = Logger.getLogger("");
+        handler.setFormatter(new SimpleFormatter());
+        logger.addHandler(handler);
+        logger.setLevel(Level.INFO);
+    }
+
 }

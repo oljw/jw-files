@@ -1,11 +1,10 @@
 package wgu_c195.model;
 
 /**
- *
  * @author JW
  */
 public class Customer {
-    
+
     private String customerId;
     private String customerName;
     private String address;
@@ -14,12 +13,7 @@ public class Customer {
     private String country;
     private String postalCode;
     private String phone;
-    
-    
-    public Customer(){
-        
-    }
-    
+
     public Customer(String customerId, String customerName, String address, String address2, City city, String country, String postalCode, String phone) {
         this.customerId = customerId;
         this.customerName = customerName;
@@ -30,8 +24,8 @@ public class Customer {
         this.postalCode = postalCode;
         this.phone = phone;
     }
-    
-    public Customer (String customerId, String customerName){
+
+    public Customer(String customerId, String customerName) {
         this.customerId = customerId;
         this.customerName = customerName;
     }
@@ -51,7 +45,7 @@ public class Customer {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
-    
+
     public String getAddress() {
         return address;
     }
@@ -71,10 +65,10 @@ public class Customer {
     public void setCity(City city) {
         this.city = city;
     }
-    
+
     public int getCityId(City object) {
-            return object.getCityId();
-        }
+        return object.getCityId();
+    }
 
     public String getCountry() {
         return country;
@@ -96,7 +90,6 @@ public class Customer {
     public String toString() {
         return customerName;
     }
-    
-    
-    
+
+
 }

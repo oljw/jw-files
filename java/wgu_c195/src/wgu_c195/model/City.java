@@ -1,11 +1,10 @@
 package wgu_c195.model;
 
 /**
- *
  * @author JW
  */
 public class City {
-    
+
     private int cityId;
     private String city;
     private int countryId;
@@ -22,7 +21,7 @@ public class City {
         this.city = city;
         this.countryId = countryId;
     }
-    
+
     public City(int cityId, String city) {
         this.cityId = cityId;
         this.city = city;
@@ -56,5 +55,5 @@ public class City {
     public String toString() {
         return city;
     }
-    
+
 }

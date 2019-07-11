@@ -16,9 +16,11 @@ import java.io.IOException;
 public class PageUtil {
     private BorderPane menu;
 
-    private PageUtil() {}
+    private PageUtil() {
+    }
 
     private static volatile PageUtil sInstance = null;
+
     public static PageUtil getInstance() {
         if (sInstance == null) {
             synchronized (PageUtil.class) {
@@ -34,7 +36,7 @@ public class PageUtil {
             // Load Login Screen.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/LoginScreen.fxml"));
-            AnchorPane loginScreen = (AnchorPane) loader.load();
+            AnchorPane loginScreen = loader.load();
 
             // Give the controller access to the main app.
             LoginScreenController controller = loader.getController();
@@ -56,7 +58,7 @@ public class PageUtil {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/NavBar.fxml"));
-            menu = (BorderPane) loader.load();
+            menu = loader.load();
 
             Scene scene = new Scene(menu);
             App.sInstance.getStage().setScene(scene);
@@ -72,7 +74,7 @@ public class PageUtil {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/AppointmentScreen.fxml"));
-            AnchorPane appointmentScreen = (AnchorPane) loader.load();
+            AnchorPane appointmentScreen = loader.load();
 
             // Set person overview into the center of root layout.
             menu.setCenter(appointmentScreen);
@@ -91,7 +93,7 @@ public class PageUtil {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/CustomerScreen.fxml"));
-            AnchorPane customerScreen = (AnchorPane) loader.load();
+            AnchorPane customerScreen = loader.load();
 
             // Set person overview into the center of root layout.
             menu.setCenter(customerScreen);
@@ -110,7 +112,7 @@ public class PageUtil {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/Reports.fxml"));
-            TabPane tabPane = (TabPane) loader.load();
+            TabPane tabPane = loader.load();
 
             // Set person overview into the center of root layout.
             menu.setCenter(tabPane);
@@ -129,7 +131,7 @@ public class PageUtil {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/AppointmentEditScreen.fxml"));
-            AnchorPane newApptScreen = (AnchorPane) loader.load();
+            AnchorPane newApptScreen = loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
@@ -158,7 +160,7 @@ public class PageUtil {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/AppointmentEditScreen.fxml"));
-            AnchorPane editApptScreen = (AnchorPane) loader.load();
+            AnchorPane editApptScreen = loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();

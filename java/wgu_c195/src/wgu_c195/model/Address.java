@@ -1,12 +1,10 @@
-
 package wgu_c195.model;
 
 /**
- *
  * @author JW
  */
 public class Address {
-    
+
     private Integer addressId;
     private String address;
     private String address2;
@@ -92,10 +90,7 @@ public class Address {
             return false;
         }
         Address other = (Address) object;
-        if ((this.addressId == null && other.addressId != null) || (this.addressId != null && !this.addressId.equals(other.addressId))) {
-            return false;
-        }
-        return true;
+        return (this.addressId != null || other.addressId == null) && (this.addressId == null || this.addressId.equals(other.addressId));
     }
 
     @Override

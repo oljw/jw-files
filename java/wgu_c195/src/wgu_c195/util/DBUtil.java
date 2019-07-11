@@ -5,15 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
  * @author JW
  */
 public class DBUtil {
 
     private static Connection connection;
 
-    public static void init(){
-        try{
+    public static void init() {
+        try {
             System.out.println("----> Trying to connect to the db..");
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(Const.SERVER_URL, Const.SERVER_USER_ID, Const.SERVER_PASSWORD);
@@ -25,13 +24,13 @@ public class DBUtil {
             e.printStackTrace();
         }
     }
-    
-    public static Connection getConnection(){
+
+    public static Connection getConnection() {
         return connection;
     }
-    
-    public static void disconnect(){
-        try{
+
+    public static void disconnect() {
+        try {
             connection.close();
             System.out.println("----> Connection closed.");
         } catch (Exception e) {
@@ -39,5 +38,5 @@ public class DBUtil {
             e.printStackTrace();
         }
     }
-    
+
 }
