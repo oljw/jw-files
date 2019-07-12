@@ -16,3 +16,4 @@ react_native/StarWarsProj/node_modules
 /java/wgu_c195/nbproject/private/
 /java/wgu_c195/build/
 /java/wgu_c195/dist/
+*.iml

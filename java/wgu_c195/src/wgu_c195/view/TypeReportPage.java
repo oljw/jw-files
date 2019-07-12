@@ -30,7 +30,6 @@ public class TypeReportPage {
 
     public void init() {
         showAppointmentType();
-
         monthColumn.setCellValueFactory(new PropertyValueFactory<>("Month"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
         typeAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));

@@ -17,8 +17,7 @@ public class PageUtil {
     private static volatile PageUtil sInstance = null;
     private BorderPane navBar;
 
-    private PageUtil() {
-    }
+    private PageUtil() {}
 
     public static PageUtil getInstance() {
         if (sInstance == null) {

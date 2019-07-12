@@ -26,9 +26,6 @@ public class App extends Application {
         this.stage = primaryStage;
         this.stage.setTitle("C195");
 
-//        Locale.setDefault(new Locale("fr", "FR"));
-//        System.out.println(Locale.getDefault());
-
         DBUtil.init();
         LogUtil.init();
 

@@ -86,7 +86,6 @@ public class CustomerPage {
             alert.setContentText("Select a Customer");
             alert.showAndWait();
         }
-
     }
 
     @FXML
@@ -138,7 +137,7 @@ public class CustomerPage {
 
         comboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null)
-                showCountry(newval.toString());
+                selectCountry(newval.toString());
         });
 
         customerTable.getItems().setAll(populateCustomerList());
@@ -225,11 +224,19 @@ public class CustomerPage {
     }
 
     @FXML
-    private void showCountry(String citySelection) {
-        if (citySelection.equals("London")) {
-            country.setText("England");
-        } else if (citySelection.equals("Phoenix") || citySelection.equals("New York")) {
-            country.setText("United States");
+    private void selectCountry(String city) {
+        switch (city) {
+            case "Phoenix":
+                country.setText("United States");
+                break;
+            case "New York":
+                country.setText("United States");
+                break;
+            case "London":
+                country.setText("England");
+                break;
+            default:
+                break;
         }
     }
 

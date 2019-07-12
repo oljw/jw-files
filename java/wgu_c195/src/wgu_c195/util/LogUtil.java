@@ -12,7 +12,7 @@ public class LogUtil {
 
     public static void init() {
         try {
-            handler = new FileHandler("c195_log.txt", 512 * 512, 1, true);
+            handler = new FileHandler("c195_log.txt", 2048 * 512, 5, true);
             Logger logger = Logger.getLogger("");
             handler.setFormatter(new SimpleFormatter());
             logger.addHandler(handler);

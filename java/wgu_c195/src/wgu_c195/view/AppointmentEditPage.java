@@ -32,7 +32,7 @@ public class AppointmentEditPage {
     private final DateTimeFormatter dateDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
 
     private ObservableList<Customer> masterData = FXCollections.observableArrayList();
-    private Appointment selectedAppt;
+    private Appointment currentAppointment;
     private Stage dialogStage;
     private boolean isOk;
 
@@ -66,8 +66,8 @@ public class AppointmentEditPage {
                 .ifPresent(response -> dialogStage.close());
     }
 
-    public void init(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    public void init(Stage stage) {
+        this.dialogStage = stage;
 
         showTypeList();
         customerNameApptColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -97,7 +97,7 @@ public class AppointmentEditPage {
 
     public void setAppointment(Appointment appointment) {
         isOk = true;
-        selectedAppt = appointment;
+        currentAppointment = appointment;
 
         String start = appointment.getStart();
         LocalDateTime startLDT = LocalDateTime.parse(start, dateDTF);
@@ -171,7 +171,7 @@ public class AppointmentEditPage {
             statement.setTimestamp(4, startsqlts);
             statement.setTimestamp(5, endsqlts);
             statement.setString(6, App.sInstance.getUser().getUsername());
-            statement.setString(7, selectedAppt.getAppointmentId());
+            statement.setString(7, currentAppointment.getAppointmentId());
             int result = statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -231,7 +231,7 @@ public class AppointmentEditPage {
         if (endUTC == null) {
             errorMessage += "Select an End time.";
         } else if (endUTC.equals(startUTC) || endUTC.isBefore(startUTC)) {
-            errorMessage += "End time cannot be before start time.\n";
+            errorMessage += "End time cannot be before start time.";
         } else try {
             if (checkConflict(startUTC, endUTC)) {
                 errorMessage += "Time conflicts with existing appointment. Please select a different time.";
@@ -257,8 +257,8 @@ public class AppointmentEditPage {
         String apptID;
         String consultant;
         if (isOk) {
-            apptID = selectedAppt.getAppointmentId();
-            consultant = selectedAppt.getUser();
+            apptID = currentAppointment.getAppointmentId();
+            consultant = currentAppointment.getUser();
         } else {
             apptID = "0";
             consultant = App.sInstance.getUser().getUsername();
