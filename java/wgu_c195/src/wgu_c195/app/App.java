@@ -7,12 +7,9 @@ import wgu_c195.util.DBUtil;
 import wgu_c195.util.LogUtil;
 import wgu_c195.util.PageUtil;
 
-import java.util.Locale;
-
 public class App extends Application {
 
     public static App sInstance;
-    Locale locale = Locale.getDefault();
     private Stage stage;
     private User user;
 
@@ -29,13 +26,13 @@ public class App extends Application {
         this.stage = primaryStage;
         this.stage.setTitle("C195");
 
-        //Locale.setDefault(new Locale("fr", "FR"));
-        //System.out.println(Locale.getDefault());
+//        Locale.setDefault(new Locale("fr", "FR"));
+//        System.out.println(Locale.getDefault());
 
         DBUtil.init();
         LogUtil.init();
 
-        PageUtil.getInstance().showLoginScreen();
+        PageUtil.getInstance().launchLoginPage();
     }
 
     @Override

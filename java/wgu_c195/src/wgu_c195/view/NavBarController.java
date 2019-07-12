@@ -7,16 +7,16 @@ import wgu_c195.util.PageUtil;
 public class NavBarController {
     @FXML
     void openAppointmentPage() {
-        PageUtil.getInstance().showAppointmentScreen();
+        PageUtil.getInstance().launchAppointmentPage();
     }
 
     @FXML
     void openCustomerPage() {
-        PageUtil.getInstance().showCustomerScreen();
+        PageUtil.getInstance().launchCustomerPage();
     }
 
     @FXML
     void openReportPage() {
-        PageUtil.getInstance().showReports();
+        PageUtil.getInstance().launchCalendarPage();
     }
 }

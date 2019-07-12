@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import wgu_c195.app.App;
 import wgu_c195.model.City;
@@ -20,64 +19,39 @@ import java.sql.Statement;
 import java.util.List;
 
 public class CustomerScreenController {
-
-    @FXML
-    private TableView<Customer> customerTable;
-
-    @FXML
-    private TableColumn<Customer, String> customerNameColumn;
-
-    @FXML
-    private TextField customerIdField;
-
-    @FXML
-    private TextField nameField;
-
-    @FXML
-    private TextField addressField;
-
-    @FXML
-    private TextField address2Field;
-
-    @FXML
-    private ComboBox<City> cityComboBox;
-
-    @FXML
-    private TextField postalCodeField;
-
-    @FXML
-    private TextField phoneField;
-
-    @FXML
-    private TextField countryField;
-
-    @FXML
-    private ButtonBar modifyButtonBar;
-
-    @FXML
-    private ButtonBar saveExitButtonBar;
-
     private boolean isEdit = false;
-    private Stage dialogStage;
+
+    @FXML private TableView<Customer> customerTable;
+    @FXML private TableColumn<Customer, String> customerColumn;
+    @FXML private TextField customerId;
+    @FXML private TextField name;
+    @FXML private TextField address;
+    @FXML private TextField address2;
+    @FXML private ComboBox<City> comboBox;
+    @FXML private TextField postalCode;
+    @FXML private TextField phone;
+    @FXML private TextField country;
+    @FXML private ButtonBar modifyButtonBar;
+    @FXML private ButtonBar saveExitButtonBar;
 
     @FXML
-    void handleNewCustomer() {
+    void onNewClicked() {
         isEdit = false;
-        enableCustomerFields();
+        enableCustomerFields(true);
         saveExitButtonBar.setDisable(false);
         customerTable.setDisable(true);
         clearCustomerDetails();
-        customerIdField.setText("Auto-Generated");
+        customerId.setText("Auto-Generated");
         modifyButtonBar.setDisable(true);
     }
 
     @FXML
-    void handleEditCustomer() {
+    void onEditClick() {
         Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
 
         if (selectedCustomer != null) {
             isEdit = true;
-            enableCustomerFields();
+            enableCustomerFields(true);
             saveExitButtonBar.setDisable(false);
             customerTable.setDisable(true);
             modifyButtonBar.setDisable(true);
@@ -88,12 +62,10 @@ public class CustomerScreenController {
             alert.setContentText("Please select a Customer in the Table");
             alert.showAndWait();
         }
-
-
     }
 
     @FXML
-    void handleDeleteCustomer() {
+    void onDeleteClick() {
         Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
 
         if (selectedCustomer != null) {
@@ -104,7 +76,7 @@ public class CustomerScreenController {
                     .filter(response -> response == ButtonType.OK)
                     .ifPresent(response -> {
                                 deleteCustomer(selectedCustomer);
-                                PageUtil.getInstance().showCustomerScreen();
+                                PageUtil.getInstance().launchCustomerPage();
                             }
                     );
         } else {
@@ -118,19 +90,18 @@ public class CustomerScreenController {
     }
 
     @FXML
-    void handleSaveCustomer() {
+    void onSaveClick() {
         saveExitButtonBar.setDisable(true);
         customerTable.setDisable(false);
-        if (isEdit == true) {
-            updateCustomer();
-        } else if (isEdit == false) {
-            saveCustomer();
-        }
-        PageUtil.getInstance().showCustomerScreen();
+
+        if (isEdit) updateCustomer();
+        else saveCustomer();
+
+        PageUtil.getInstance().launchCustomerPage();
     }
 
     @FXML
-    void handleCancelCustomer() {
+    void onCancelClicked() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Cancel");
         alert.setHeaderText("Are you sure you want to Cancel?");
@@ -146,14 +117,13 @@ public class CustomerScreenController {
                 );
     }
 
-    public void setCustomerScreen() {
-        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        disableCustomerFields();
+    public void init() {
+        customerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        enableCustomerFields(false);
 
-        populateCityList();
+        showCityList();
 
-        cityComboBox.setConverter(new StringConverter<City>() {
-
+        comboBox.setConverter(new StringConverter<City>() {
             @Override
             public String toString(City object) {
                 return object.getCity();
@@ -161,12 +131,12 @@ public class CustomerScreenController {
 
             @Override
             public City fromString(String string) {
-                return cityComboBox.getItems().stream().filter(ap ->
+                return comboBox.getItems().stream().filter(ap ->
                         ap.getCity().equals(string)).findFirst().orElse(null);
             }
         });
 
-        cityComboBox.valueProperty().addListener((obs, oldval, newval) -> {
+        comboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null)
                 showCountry(newval.toString());
         });
@@ -179,57 +149,46 @@ public class CustomerScreenController {
 
     @FXML
     private void showCustomerDetails(Customer selectedCustomer) {
+        customerId.setText(selectedCustomer.getCustomerId());
+        name.setText(selectedCustomer.getCustomerName());
+        address.setText(selectedCustomer.getAddress());
+        address2.setText(selectedCustomer.getAddress2());
+        comboBox.setValue(selectedCustomer.getCity());
+        country.setText(selectedCustomer.getCountry());
+        postalCode.setText(selectedCustomer.getPostalCode());
+        phone.setText(selectedCustomer.getPhone());
 
-        customerIdField.setText(selectedCustomer.getCustomerId());
-        nameField.setText(selectedCustomer.getCustomerName());
-        addressField.setText(selectedCustomer.getAddress());
-        address2Field.setText(selectedCustomer.getAddress2());
-        cityComboBox.setValue(selectedCustomer.getCity());
-        countryField.setText(selectedCustomer.getCountry());
-        postalCodeField.setText(selectedCustomer.getPostalCode());
-        phoneField.setText(selectedCustomer.getPhone());
-
-    }
-
-    private void disableCustomerFields() {
-
-        nameField.setEditable(false);
-        addressField.setEditable(false);
-        address2Field.setEditable(false);
-        postalCodeField.setEditable(false);
-        phoneField.setEditable(false);
-    }
-
-    private void enableCustomerFields() {
-
-        nameField.setEditable(true);
-        addressField.setEditable(true);
-        address2Field.setEditable(true);
-        postalCodeField.setEditable(true);
-        phoneField.setEditable(true);
     }
 
     @FXML
     private void clearCustomerDetails() {
-        customerIdField.clear();
-        nameField.clear();
-        addressField.clear();
-        address2Field.clear();
-        countryField.clear();
-        postalCodeField.clear();
-        phoneField.clear();
+        customerId.clear();
+        name.clear();
+        address.clear();
+        address2.clear();
+        country.clear();
+        postalCode.clear();
+        phone.clear();
     }
 
-    protected List<Customer> populateCustomerList() {
+    private void enableCustomerFields(boolean enable) {
+        name.setEditable(enable);
+        address.setEditable(enable);
+        address2.setEditable(enable);
+        postalCode.setEditable(enable);
+        phone.setEditable(enable);
+    }
+
+    private List<Customer> populateCustomerList() {
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
-        try (
-                PreparedStatement statement = DBUtil.getConnection().prepareStatement(
-                        "SELECT customer.customerId, customer.customerName, address.address, address.address2, address.postalCode, city.cityId, city.city, country.country, address.phone " +
-                                "FROM customer, address, city, country " +
-                                "WHERE customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId " +
-                                "ORDER BY customer.customerName"
-                );
-                ResultSet rs = statement.executeQuery()) {
+        try {
+            PreparedStatement statement = DBUtil.getConnection().prepareStatement(
+                    "SELECT customer.customerId, customer.customerName, address.address, address.address2, address.postalCode, city.cityId, city.city, country.country, address.phone " +
+                            "FROM customer, address, city, country " +
+                            "WHERE customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId " +
+                            "ORDER BY customer.customerName"
+            );
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 customerList.add(new Customer(
                                 rs.getString("customer.customerId"),
@@ -243,41 +202,34 @@ public class CustomerScreenController {
                         )
                 );
             }
-        } catch (SQLException sqe) {
-            System.out.println("Check your SQL");
-            sqe.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return customerList;
 
     }
 
-    protected void populateCityList() {
+    private void showCityList() {
         ObservableList<City> cities = FXCollections.observableArrayList();
-
-        try (
-                PreparedStatement statement = DBUtil.getConnection().prepareStatement("SELECT cityId, city FROM city LIMIT 100;");
-                ResultSet rs = statement.executeQuery()) {
+        try {
+            PreparedStatement statement = DBUtil.getConnection().prepareStatement("SELECT cityId, city FROM city LIMIT 100;");
+            ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
                 cities.add(new City(rs.getInt("city.cityId"), rs.getString("city.city")));
             }
-        } catch (SQLException sqe) {
-            System.out.println("Check your SQL");
-            sqe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Something besides the SQL went wrong.");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        cityComboBox.setItems(cities);
-
+        comboBox.setItems(cities);
     }
 
     @FXML
     private void showCountry(String citySelection) {
         if (citySelection.equals("London")) {
-            countryField.setText("England");
+            country.setText("England");
         } else if (citySelection.equals("Phoenix") || citySelection.equals("New York")) {
-            countryField.setText("United States");
+            country.setText("United States");
         }
     }
 
@@ -286,45 +238,39 @@ public class CustomerScreenController {
             PreparedStatement ps = DBUtil.getConnection().prepareStatement("INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) "
                     + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)", Statement.RETURN_GENERATED_KEYS);
 
-            ps.setString(1, addressField.getText());
-            ps.setString(2, address2Field.getText());
-            ps.setInt(3, cityComboBox.getValue().getCityId());
-            ps.setString(4, postalCodeField.getText());
-            ps.setString(5, phoneField.getText());
+            ps.setString(1, address.getText());
+            ps.setString(2, address2.getText());
+            ps.setInt(3, comboBox.getValue().getCityId());
+            ps.setString(4, postalCode.getText());
+            ps.setString(5, phone.getText());
             ps.setString(6, App.sInstance.getUser().getUsername());
             ps.setString(7, App.sInstance.getUser().getUsername());
             boolean res = ps.execute();
             int newAddressId = -1;
             ResultSet rs = ps.getGeneratedKeys();
 
-            if (rs.next()) {
-                newAddressId = rs.getInt(1);
-            }
-
+            if (rs.next()) newAddressId = rs.getInt(1);
 
             PreparedStatement psc = DBUtil.getConnection().prepareStatement("INSERT INTO customer "
                     + "(customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)"
                     + "VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)");
 
-            psc.setString(1, nameField.getText());
+            psc.setString(1, name.getText());
             psc.setInt(2, newAddressId);
             psc.setInt(3, 1);
             psc.setString(4, App.sInstance.getUser().getUsername());
             psc.setString(5, App.sInstance.getUser().getUsername());
-            int result = psc.executeUpdate();
-
+            psc.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
     private void deleteCustomer(Customer customer) {
-
         try {
             PreparedStatement statement = DBUtil.getConnection().prepareStatement("DELETE customer.*, address.* from customer, address WHERE customer.customerId = ? AND customer.addressId = address.addressId");
             statement.setString(1, customer.getCustomerId());
             statement.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -332,31 +278,25 @@ public class CustomerScreenController {
 
     private void updateCustomer() {
         try {
-
             PreparedStatement ps = DBUtil.getConnection().prepareStatement("UPDATE address, customer, city, country "
                     + "SET address = ?, address2 = ?, address.cityId = ?, postalCode = ?, phone = ?, address.lastUpdate = CURRENT_TIMESTAMP, address.lastUpdateBy = ? "
                     + "WHERE customer.customerId = ? AND customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId");
-
-            ps.setString(1, addressField.getText());
-            ps.setString(2, address2Field.getText());
-            ps.setInt(3, cityComboBox.getValue().getCityId());
-            ps.setString(4, postalCodeField.getText());
-            ps.setString(5, phoneField.getText());
+            ps.setString(1, address.getText());
+            ps.setString(2, address2.getText());
+            ps.setInt(3, comboBox.getValue().getCityId());
+            ps.setString(4, postalCode.getText());
+            ps.setString(5, phone.getText());
             ps.setString(6, App.sInstance.getUser().getUsername());
-            ps.setString(7, customerIdField.getText());
-
-            int result = ps.executeUpdate();
-
+            ps.setString(7, customerId.getText());
+            ps.executeUpdate();
 
             PreparedStatement psc = DBUtil.getConnection().prepareStatement("UPDATE customer, address, city "
                     + "SET customerName = ?, customer.lastUpdate = CURRENT_TIMESTAMP, customer.lastUpdateBy = ? "
                     + "WHERE customer.customerId = ? AND customer.addressId = address.addressId AND address.cityId = city.cityId");
-
-            psc.setString(1, nameField.getText());
+            psc.setString(1, name.getText());
             psc.setString(2, App.sInstance.getUser().getUsername());
-            psc.setString(3, customerIdField.getText());
-            int results = psc.executeUpdate();
-
+            psc.setString(3, customerId.getText());
+            psc.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

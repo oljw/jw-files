@@ -23,147 +23,108 @@ import java.time.format.FormatStyle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * FXML Controller class
- *
- * @author JW
- */
 public class AppointmentEditScreenController {
 
     private final ZoneId zid = ZoneId.systemDefault();
     private final ObservableList<String> startTimes = FXCollections.observableArrayList();
     private final ObservableList<String> endTimes = FXCollections.observableArrayList();
-    private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private final DateTimeFormatter dateDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-    ObservableList<Appointment> apptTimeList;
-    @FXML
-    private Label apptLabel;
-    @FXML
-    private TextField titleField;
-    @FXML
-    private ComboBox<String> startComboBox;
-    @FXML
-    private ComboBox<String> endComboBox;
-    @FXML
-    private DatePicker datePicker;
-    @FXML
-    private ComboBox<String> typeComboBox;
-    @FXML
-    private Button apptSaveButton;
-    @FXML
-    private Button apptCancelButton;
-    @FXML
-    private TableView<Customer> customerSelectTableView;
-    @FXML
-    private TableColumn<Customer, String> customerNameApptColumn;
-    @FXML
-    private TextField customerSearchField;
-    private Stage dialogStage;
-    private boolean okClicked = false;
-    private Appointment selectedAppt;
+
     private ObservableList<Customer> masterData = FXCollections.observableArrayList();
+    private ObservableList<Appointment> apptTimeList;
+    private Appointment selectedAppt;
+    private Stage dialogStage;
+    private boolean isOk;
 
-    public boolean isOkClicked() {
-        return okClicked;
-    }
+    @FXML private Label label;
+    @FXML private TextField title;
+    @FXML private ComboBox<String> startComboBox;
+    @FXML private ComboBox<String> endComboBox;
+    @FXML private ComboBox<String> typeComboBox;
+    @FXML private DatePicker datePicker;
+    @FXML private Button saveButton;
+    @FXML private Button cancelButton;
+    @FXML private TableView<Customer> customerSelectTableView;
+    @FXML private TableColumn<Customer, String> customerNameApptColumn;
 
     @FXML
-    private void handleSave() {
+    private void onSaveClicked() {
         if (validateAppointment()) {
-            if (isOkClicked()) {
-                updateAppt();
-            } else {
-                saveAppt();
-            }
+            if (isOk) updateAppt();
+            else saveAppt();
             dialogStage.close();
         }
-
     }
 
     @FXML
-    private void handleCancel() {
+    private void onCancelClicked() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Cancel");
         alert.setHeaderText("Are you sure you want to Cancel?");
         alert.showAndWait()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> dialogStage.close());
-
     }
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
 
-        populateTypeList();
+        showTypeList();
         customerNameApptColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         masterData = populateCustomerList();
 
         FilteredList<Customer> filteredData = new FilteredList<>(masterData, p -> true);
-
-        customerSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(customer -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                return customer.getCustomerName().toLowerCase().contains(lowerCaseFilter);
-            });
-        });
+//        customerSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+//            filteredData.setPredicate(customer -> {
+//                if (newValue == null || newValue.isEmpty()) {
+//                    return true;
+//                }
+//                String lowerCaseFilter = newValue.toLowerCase();
+//                return customer.getCustomerName().toLowerCase().contains(lowerCaseFilter);
+//            });
+//        });
 
         SortedList<Customer> sortedData = new SortedList<>(filteredData);
-
         sortedData.comparatorProperty().bind(customerSelectTableView.comparatorProperty());
-
         customerSelectTableView.setItems(sortedData);
-
         LocalTime time = LocalTime.of(8, 0);
-        do {
-            startTimes.add(time.format(timeDTF));
-            endTimes.add(time.format(timeDTF));
+
+        while (!time.equals(LocalTime.of(17, 15))) {
+            startTimes.add(time.format(dateTimeFormatter));
+            endTimes.add(time.format(dateTimeFormatter));
             time = time.plusMinutes(15);
-        } while (!time.equals(LocalTime.of(17, 15)));
+        }
+
         startTimes.remove(startTimes.size() - 1);
         endTimes.remove(0);
-
         datePicker.setValue(LocalDate.now());
-
         startComboBox.setItems(startTimes);
         endComboBox.setItems(endTimes);
-        startComboBox.getSelectionModel().select(LocalTime.of(8, 0).format(timeDTF));
-        endComboBox.getSelectionModel().select(LocalTime.of(8, 15).format(timeDTF));
-
+        startComboBox.getSelectionModel().select(LocalTime.of(8, 0).format(dateTimeFormatter));
+        endComboBox.getSelectionModel().select(LocalTime.of(8, 15).format(dateTimeFormatter));
     }
 
     public void setAppointment(Appointment appointment) {
-
-
-        okClicked = true;
+        isOk = true;
         selectedAppt = appointment;
 
         String start = appointment.getStart();
-
         LocalDateTime startLDT = LocalDateTime.parse(start, dateDTF);
         String end = appointment.getEnd();
         LocalDateTime endLDT = LocalDateTime.parse(end, dateDTF);
-
-        apptLabel.setText("Edit Appointment");
-        titleField.setText(appointment.getTitle());
+        title.setText(appointment.getTitle());
         typeComboBox.setValue(appointment.getDescription());
         customerSelectTableView.getSelectionModel().select(appointment.getCustomer());
         datePicker.setValue(LocalDate.parse(appointment.getStart(), dateDTF));
-        startComboBox.getSelectionModel().select(startLDT.toLocalTime().format(timeDTF));
-        endComboBox.getSelectionModel().select(endLDT.toLocalTime().format(timeDTF));
-
-
+        startComboBox.getSelectionModel().select(startLDT.toLocalTime().format(dateTimeFormatter));
+        endComboBox.getSelectionModel().select(endLDT.toLocalTime().format(dateTimeFormatter));
     }
 
     private void saveAppt() {
-
         LocalDate localDate = datePicker.getValue();
-        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeDTF);
-        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeDTF);
+        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
+        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
 
         LocalDateTime startDT = LocalDateTime.of(localDate, startTime);
         LocalDateTime endDT = LocalDateTime.of(localDate, endTime);
@@ -175,13 +136,12 @@ public class AppointmentEditScreenController {
         Timestamp endsqlts = Timestamp.valueOf(endUTC.toLocalDateTime());
 
         try {
-
             PreparedStatement statement = DBUtil.getConnection().prepareStatement("INSERT INTO appointment "
                     + "(customerId, title, description, location, contact, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)"
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)");
 
             statement.setString(1, customerSelectTableView.getSelectionModel().getSelectedItem().getCustomerId());
-            statement.setString(2, titleField.getText());
+            statement.setString(2, title.getText());
             statement.setString(3, typeComboBox.getValue());
             statement.setString(4, "");
             statement.setString(5, "");
@@ -191,22 +151,15 @@ public class AppointmentEditScreenController {
             statement.setString(9, App.sInstance.getUser().getUsername());
             statement.setString(10, App.sInstance.getUser().getUsername());
             int result = statement.executeUpdate();
-            if (result == 1) {
-                System.out.println("YAY! New Appointment Save");
-            } else {
-                System.out.println("BOO! New Appointment Save");
-            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
     private void updateAppt() {
-
         LocalDate localDate = datePicker.getValue();
-        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeDTF);
-        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeDTF);
+        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
+        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
 
         LocalDateTime startDT = LocalDateTime.of(localDate, startTime);
         LocalDateTime endDT = LocalDateTime.of(localDate, endTime);
@@ -218,79 +171,53 @@ public class AppointmentEditScreenController {
         Timestamp endsqlts = Timestamp.valueOf(endUTC.toLocalDateTime());
 
         try {
-
             PreparedStatement statement = DBUtil.getConnection().prepareStatement("UPDATE appointment "
                     + "SET customerId = ?, title = ?, description = ?, start = ?, end = ?, lastUpdate = CURRENT_TIMESTAMP, lastUpdateBy = ? "
                     + "WHERE appointmentId = ?");
 
             statement.setString(1, customerSelectTableView.getSelectionModel().getSelectedItem().getCustomerId());
-            statement.setString(2, titleField.getText());
+            statement.setString(2, title.getText());
             statement.setString(3, typeComboBox.getValue());
             statement.setTimestamp(4, startsqlts);
             statement.setTimestamp(5, endsqlts);
             statement.setString(6, App.sInstance.getUser().getUsername());
             statement.setString(7, selectedAppt.getAppointmentId());
             int result = statement.executeUpdate();
-            if (result == 1) {
-                System.out.println("YAY! Update Appointment Save");
-            } else {
-                System.out.println("BOO! Update Appointment Save");
-            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    private void populateTypeList() {
+    private void showTypeList() {
         ObservableList<String> typeList = FXCollections.observableArrayList();
         typeList.addAll("Consultation", "New Account", "Follow Up", "Close Account");
         typeComboBox.setItems(typeList);
     }
 
-    protected ObservableList<Customer> populateCustomerList() {
-
-        String tCustomerId;
-        String tCustomerName;
-
+    private ObservableList<Customer> populateCustomerList() {
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
-        try (
-
-
-                PreparedStatement statement = DBUtil.getConnection().prepareStatement(
-                        "SELECT customer.customerId, customer.customerName " +
-                                "FROM customer, address, city, country " +
-                                "WHERE customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId");
-                ResultSet rs = statement.executeQuery()) {
-
-
+        try {
+            PreparedStatement statement = DBUtil.getConnection().prepareStatement(
+                    "SELECT customer.customerId, customer.customerName " +
+                            "FROM customer, address, city, country " +
+                            "WHERE customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId");
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                tCustomerId = rs.getString("customer.customerId");
-
-                tCustomerName = rs.getString("customer.customerName");
-
-                customerList.add(new Customer(tCustomerId, tCustomerName));
-
+                customerList.add(new Customer(rs.getString("customer.customerId"), rs.getString("customer.customerName")));
             }
-
-        } catch (SQLException sqe) {
-            System.out.println("Check your SQL");
-            sqe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Something besides the SQL went wrong.");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-
         return customerList;
-
     }
 
     private boolean validateAppointment() {
-        String title = titleField.getText();
+        String title = this.title.getText();
         String type = typeComboBox.getValue();
         Customer customer = customerSelectTableView.getSelectionModel().getSelectedItem();
         LocalDate localDate = datePicker.getValue();
-        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeDTF);
-        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeDTF);
+        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
+        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
 
         LocalDateTime startDT = LocalDateTime.of(localDate, startTime);
         LocalDateTime endDT = LocalDateTime.of(localDate, endTime);
@@ -330,7 +257,6 @@ public class AppointmentEditScreenController {
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid Appointment fields");
             alert.setContentText(errorMessage);
-
             alert.showAndWait();
 
             return false;
@@ -340,7 +266,7 @@ public class AppointmentEditScreenController {
     private boolean hasApptConflict(ZonedDateTime newStart, ZonedDateTime newEnd) throws SQLException {
         String apptID;
         String consultant;
-        if (isOkClicked()) {
+        if (isOk) {
             apptID = selectedAppt.getAppointmentId();
             consultant = selectedAppt.getUser();
         } else {
@@ -350,8 +276,6 @@ public class AppointmentEditScreenController {
         System.out.println("ApptID: " + apptID);
 
         try {
-
-
             PreparedStatement statement = DBUtil.getConnection().prepareStatement(
                     "SELECT * FROM appointment "
                             + "WHERE (? BETWEEN start AND end OR ? BETWEEN start AND end OR ? < start AND ? > end) "
@@ -367,15 +291,9 @@ public class AppointmentEditScreenController {
             if (rs.next()) {
                 return true;
             }
-
-        } catch (SQLException sqe) {
-            System.out.println("Check your SQL");
-            sqe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Something besides the SQL went wrong.");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-
 }

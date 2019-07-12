@@ -17,7 +17,6 @@ import wgu_c195.util.PageUtil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -32,46 +31,40 @@ public class LoginScreenController {
 
     private final static Logger LOGGER = Logger.getLogger(LogUtil.class.getName());
     private final ZoneId newzid = ZoneId.systemDefault();
-    private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-    ObservableList<Appointment> reminderList;
-    @FXML
-    private Label errorMessage;
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Text usernameText;
-    @FXML
-    private Text passwordText;
-    @FXML
-    private Text titleText;
-    @FXML
-    private Button signinText;
-    @FXML
-    private Button cancelText;
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+
     private ResourceBundle rb = ResourceBundle.getBundle("login", Locale.getDefault());
     private User user;
+
+    private ObservableList<Appointment> reminderList;
+
+    @FXML private Label errorMessage;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private Text usernameText;
+    @FXML private Text passwordText;
+    @FXML private Text titleText;
+    @FXML private Button signInButton;
 
     @FXML
     void signIn() {
         if (usernameField.getText().length() == 0 || passwordField.getText().length() == 0) {
             errorMessage.setText(rb.getString("empty"));
         } else {
-            validateUser(usernameField.getText(), passwordField.getText());
+            validate(usernameField.getText(), passwordField.getText());
             if (this.user == null) {
                 errorMessage.setText(rb.getString("incorrect"));
                 return;
             }
             populateReminders();
             filterReminders();
-            PageUtil.getInstance().showMenu();
-            PageUtil.getInstance().showAppointmentScreen();
+            PageUtil.getInstance().showNavBar();
+            PageUtil.getInstance().launchAppointmentPage();
             LOGGER.log(Level.INFO, "{0} logged in", this.user.getUsername());
         }
     }
 
-    private User validateUser(String username, String password) {
+    private void validate(String username, String password) {
         try {
             PreparedStatement statement = DBUtil.getConnection().prepareStatement("SELECT * FROM user WHERE userName=? AND password=?");
             statement.setString(1, username);
@@ -85,22 +78,19 @@ public class LoginScreenController {
                 user.setUserID(rs.getInt("userId"));
                 App.sInstance.setUser(this.user);
             } else {
-                return null;
+                user = null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
     }
 
     public void setTexts() {
         reminderList = FXCollections.observableArrayList();
-
         titleText.setText(rb.getString("title"));
         usernameText.setText(rb.getString("username"));
         passwordText.setText(rb.getString("password"));
-        signinText.setText(rb.getString("signin"));
-//        cancelText.setText(rb.getString("cancel"));
+        signInButton.setText(rb.getString("signin"));
     }
 
     private void filterReminders() {
@@ -110,7 +100,7 @@ public class LoginScreenController {
         FilteredList<Appointment> filteredData = new FilteredList<>(reminderList);
 
         filteredData.setPredicate(row -> {
-                    LocalDateTime rowDate = LocalDateTime.parse(row.getStart(), timeDTF);
+                    LocalDateTime rowDate = LocalDateTime.parse(row.getStart(), dateTimeFormatter);
                     return rowDate.isAfter(now.minusMinutes(1)) && rowDate.isBefore(nowPlus15Min);
                 }
         );
@@ -142,32 +132,23 @@ public class LoginScreenController {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
+                ZonedDateTime zdtStart = rs.getTimestamp("appointment.start").toLocalDateTime().atZone(ZoneId.of("UTC"));
+                ZonedDateTime localStart = zdtStart.withZoneSameInstant(newzid);
 
-                String tAppointmentId = rs.getString("appointment.appointmentId");
-                Timestamp tsStart = rs.getTimestamp("appointment.start");
-                ZonedDateTime newzdtStart = tsStart.toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime newLocalStart = newzdtStart.withZoneSameInstant(newzid);
+                ZonedDateTime zdtEnd = rs.getTimestamp("appointment.end").toLocalDateTime().atZone(ZoneId.of("UTC"));
+                ZonedDateTime localEnd = zdtEnd.withZoneSameInstant(newzid);
 
-                Timestamp tsEnd = rs.getTimestamp("appointment.end");
-                ZonedDateTime newzdtEnd = tsEnd.toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime newLocalEnd = newzdtEnd.withZoneSameInstant(newzid);
-
-                String tTitle = rs.getString("appointment.title");
-
-                String tType = rs.getString("appointment.description");
-
-                Customer tCustomer = new Customer(rs.getString("appointment.customerId"), rs.getString("customer.customerName"));
-
-                String tUser = rs.getString("appointment.createdBy");
-
-                reminderList.add(new Appointment(tAppointmentId, newLocalStart.format(timeDTF), newLocalEnd.format(timeDTF), tTitle, tType, tCustomer, tUser));
+                reminderList.add(new Appointment(
+                        rs.getString("appointment.appointmentId"),
+                        localStart.format(dateTimeFormatter),
+                        localEnd.format(dateTimeFormatter),
+                        rs.getString("appointment.title"),
+                        rs.getString("appointment.description"),
+                        new Customer(rs.getString("appointment.customerId"), rs.getString("customer.customerName")),
+                        rs.getString("appointment.createdBy")));
 
             }
-        } catch (SQLException sqe) {
-            System.out.println("Check your SQL");
-            sqe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Something besides the SQL went wrong.");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
