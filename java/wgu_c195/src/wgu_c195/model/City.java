@@ -1,16 +1,10 @@
 package wgu_c195.model;
 
-/**
- * @author JW
- */
 public class City {
 
     private int cityId;
     private String city;
     private int countryId;
-
-    public City() {
-    }
 
     public City(int cityId) {
         this.cityId = cityId;
@@ -50,10 +44,4 @@ public class City {
     public void setCountryId(int countryId) {
         this.countryId = countryId;
     }
-
-    @Override
-    public String toString() {
-        return city;
-    }
-
 }

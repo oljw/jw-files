@@ -33,69 +33,47 @@ import java.time.format.FormatStyle;
  */
 public class ReportsController {
 
+    private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+    private final ZoneId newzid = ZoneId.systemDefault();
     @FXML
     private TabPane tabPane;
-
     @FXML
     private Tab schedTab;
-
     @FXML
     private TableView<Appointment> schedTableView;
-
     @FXML
     private TableColumn<Appointment, ZonedDateTime> startSchedColumn;
-
     @FXML
     private TableColumn<Appointment, LocalDateTime> endSchedColumn;
-
     @FXML
     private TableColumn<Appointment, String> titleSchedColumn;
-
     @FXML
     private TableColumn<Appointment, String> typeSchedColumn;
-
     @FXML
     private TableColumn<Appointment, Customer> customerSchedColumn;
-
     @FXML
     private Tab apptTab;
-
     @FXML
     private TableView<AppointmentReport> apptTableView;
-
     @FXML
     private TableColumn<AppointmentReport, String> monthColumn;
-
     @FXML
     private TableColumn<AppointmentReport, String> typeColumn;
-
     @FXML
     private TableColumn<AppointmentReport, String> typeAmount;
-
     @FXML
     private Tab custTab;
-
     @FXML
     private BarChart barChart;
-
     @FXML
     private CategoryAxis xAxis;
-
     @FXML
     private NumberAxis yAxis;
-
     private ObservableList<AppointmentReport> apptList;
     private ObservableList<Appointment> schedule;
     private ObservableList<PieChart.Data> pieChartData;
-    private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-    private final ZoneId newzid = ZoneId.systemDefault();
-
-    public ReportsController() {
-
-    }
 
     public void setReports() {
-        //methods called to populate data on each tab
         populateApptTypeList();
         populateCustBarChart();
         populateSchedule();
@@ -109,23 +87,17 @@ public class ReportsController {
         monthColumn.setCellValueFactory(new PropertyValueFactory<>("Month"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("Type"));
         typeAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
-
-
     }
-
 
     private void populateApptTypeList() {
         apptList = FXCollections.observableArrayList();
 
         try {
-
-
             PreparedStatement statement = DBUtil.getConnection().prepareStatement(
                     "SELECT MONTHNAME(`start`) AS \"Month\", description AS \"Type\", COUNT(*) as \"Amount\" "
                             + "FROM appointment "
                             + "GROUP BY MONTHNAME(`start`), description");
             ResultSet rs = statement.executeQuery();
-
 
             while (rs.next()) {
 
@@ -136,15 +108,9 @@ public class ReportsController {
                 String amount = rs.getString("Amount");
 
                 apptList.add(new AppointmentReport(month, type, amount));
-
-
             }
-
-        } catch (SQLException sqe) {
-            System.out.println("Check your SQL");
-            sqe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Something besides the SQL went wrong.");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         apptTableView.getItems().setAll(apptList);
@@ -183,11 +149,9 @@ public class ReportsController {
     }
 
     private void populateSchedule() {
-
         schedule = FXCollections.observableArrayList();
 
         try {
-
             PreparedStatement statement = DBUtil.getConnection().prepareStatement(
                     "SELECT appointment.appointmentId, appointment.customerId, appointment.title, appointment.description, "
                             + "appointment.`start`, appointment.`end`, customer.customerId, customer.customerName, appointment.createdBy "
@@ -197,9 +161,7 @@ public class ReportsController {
             statement.setString(1, App.sInstance.getUser().getUsername());
             ResultSet rs = statement.executeQuery();
 
-
             while (rs.next()) {
-
                 String tAppointmentId = rs.getString("appointment.appointmentId");
                 Timestamp tsStart = rs.getTimestamp("appointment.start");
                 ZonedDateTime newzdtStart = tsStart.toLocalDateTime().atZone(ZoneId.of("UTC"));
@@ -218,15 +180,10 @@ public class ReportsController {
                 String tUser = rs.getString("appointment.createdBy");
 
                 schedule.add(new Appointment(tAppointmentId, newLocalStart.format(timeDTF), newLocalEnd.format(timeDTF), tTitle, tType, tCustomer, tUser));
-
-
             }
 
-        } catch (SQLException sqe) {
-            System.out.println("Check your SQL");
-            sqe.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Something besides the SQL went wrong.");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         schedTableView.getItems().setAll(schedule);
     }

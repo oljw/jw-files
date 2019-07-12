@@ -1,8 +1,5 @@
 package wgu_c195.model;
 
-/**
- * @author JW
- */
 public class Address {
 
     private Integer addressId;
@@ -11,9 +8,6 @@ public class Address {
     private int cityId;
     private String postalCode;
     private String phone;
-
-    public Address() {
-    }
 
     public Address(Integer addressId) {
         this.addressId = addressId;
@@ -74,27 +68,5 @@ public class Address {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (addressId != null ? addressId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Address)) {
-            return false;
-        }
-        Address other = (Address) object;
-        return (this.addressId != null || other.addressId == null) && (this.addressId == null || this.addressId.equals(other.addressId));
-    }
-
-    @Override
-    public String toString() {
-        return "model.Address[ addressId=" + addressId + " ]";
     }
 }

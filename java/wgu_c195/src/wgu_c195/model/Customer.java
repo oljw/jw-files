@@ -1,8 +1,5 @@
 package wgu_c195.model;
 
-/**
- * @author JW
- */
 public class Customer {
 
     private String customerId;
@@ -85,11 +82,4 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    @Override
-    public String toString() {
-        return customerName;
-    }
-
-
 }

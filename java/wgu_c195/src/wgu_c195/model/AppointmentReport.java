@@ -1,21 +1,11 @@
 package wgu_c195.model;
 
-/**
- * @author JW
- */
-
-//Class created to have object to place in list for Appointment Types by Month Report
 public class AppointmentReport {
 
     private String month;
     private String amount;
     private String type;
 
-    /**
-     * @param month
-     * @param type
-     * @param amount
-     */
     public AppointmentReport(String month, String type, String amount) {
         this.month = month;
         this.type = type;
@@ -45,14 +35,4 @@ public class AppointmentReport {
     public void setAmount(String amount) {
         this.amount = amount;
     }
-
-    //for troubleshooting during development
-    @Override
-    public String toString() {
-        return "Month: " + this.month +
-                " Type: " + this.type +
-                " Amt: " + this.amount + ".\n";
-    }
-
-
 }

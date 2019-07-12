@@ -1,8 +1,5 @@
 package wgu_c195.model;
 
-/**
- * @author JW
- */
 public class Appointment {
 
     private String appointmentId;
@@ -12,9 +9,6 @@ public class Appointment {
     private String start;
     private String end;
     private String user;
-
-    public Appointment() {
-    }
 
     public Appointment(String appointmentId) {
         this.appointmentId = appointmentId;
@@ -74,19 +68,6 @@ public class Appointment {
 
     public void setEnd(String end) {
         this.end = end;
-    }
-
-
-    //toString Override only used in troubleshooting during development
-    @Override
-    public String toString() {
-        return "ID: " + this.appointmentId +
-                " Start: " + this.start +
-                " End: " + this.end +
-                " Title: " + this.title +
-                " Type: " + this.description +
-                " Customer: " + this.customer.getCustomerName() +
-                " Consultant: " + this.user + ".\n";
     }
 
     public Customer getCustomer() {

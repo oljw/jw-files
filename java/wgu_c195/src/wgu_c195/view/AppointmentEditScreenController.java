@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,65 +30,45 @@ import java.util.logging.Logger;
  */
 public class AppointmentEditScreenController {
 
-    @FXML
-    private Label apptLabel;
-
-    @FXML
-    private TextField titleField;
-
-    @FXML
-    private ComboBox<String> startComboBox;
-
-    @FXML
-    private ComboBox<String> endComboBox;
-
-    @FXML
-    private DatePicker datePicker;
-
-    @FXML
-    private ComboBox<String> typeComboBox;
-
-    @FXML
-    private Button apptSaveButton;
-
-    @FXML
-    private Button apptCancelButton;
-
-    @FXML
-    private TableView<Customer> customerSelectTableView;
-
-    @FXML
-    private TableColumn<Customer, String> customerNameApptColumn;
-
-    @FXML
-    private TextField customerSearchField;
-
-
-    private Stage dialogStage;
-    private boolean okClicked = false;
     private final ZoneId zid = ZoneId.systemDefault();
-    private Appointment selectedAppt;
-
-    private ObservableList<Customer> masterData = FXCollections.observableArrayList();
     private final ObservableList<String> startTimes = FXCollections.observableArrayList();
     private final ObservableList<String> endTimes = FXCollections.observableArrayList();
     private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private final DateTimeFormatter dateDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     ObservableList<Appointment> apptTimeList;
+    @FXML
+    private Label apptLabel;
+    @FXML
+    private TextField titleField;
+    @FXML
+    private ComboBox<String> startComboBox;
+    @FXML
+    private ComboBox<String> endComboBox;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private ComboBox<String> typeComboBox;
+    @FXML
+    private Button apptSaveButton;
+    @FXML
+    private Button apptCancelButton;
+    @FXML
+    private TableView<Customer> customerSelectTableView;
+    @FXML
+    private TableColumn<Customer, String> customerNameApptColumn;
+    @FXML
+    private TextField customerSearchField;
+    private Stage dialogStage;
+    private boolean okClicked = false;
+    private Appointment selectedAppt;
+    private ObservableList<Customer> masterData = FXCollections.observableArrayList();
 
-
-    /**
-     * Returns true if the user clicked OK, false otherwise.
-     * Which allows application to decide whether to insert or update a record
-     *
-     * @return
-     */
     public boolean isOkClicked() {
         return okClicked;
     }
 
     @FXML
-    private void handleSave(ActionEvent event) {
+    private void handleSave() {
         if (validateAppointment()) {
             if (isOkClicked()) {
                 updateAppt();
@@ -102,7 +81,7 @@ public class AppointmentEditScreenController {
     }
 
     @FXML
-    private void handleCancel(ActionEvent event) {
+    private void handleCancel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Cancel");
         alert.setHeaderText("Are you sure you want to Cancel?");
@@ -119,38 +98,26 @@ public class AppointmentEditScreenController {
         customerNameApptColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         masterData = populateCustomerList();
 
-        // Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<Customer> filteredData = new FilteredList<>(masterData, p -> true);
 
-        // Set the filter Predicate whenever the filter changes.
         customerSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(customer -> {
-                // If filter text is empty, display all persons.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
 
-                // Compare  name of every customer with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                // Filter matches first name.
                 return customer.getCustomerName().toLowerCase().contains(lowerCaseFilter);
             });
         });
 
-        // Wrap the FilteredList in a SortedList. 
         SortedList<Customer> sortedData = new SortedList<>(filteredData);
 
-        // Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(customerSelectTableView.comparatorProperty());
 
-        // Add sorted (and filtered) data to the table.
         customerSelectTableView.setItems(sortedData);
 
-        /**
-         * Sets time based on assumption of Business Hours being 8am - 5pm
-         * So does not allow time selection outside of Business Hours
-         */
         LocalTime time = LocalTime.of(8, 0);
         do {
             startTimes.add(time.format(timeDTF));
@@ -169,12 +136,6 @@ public class AppointmentEditScreenController {
 
     }
 
-    /**
-     * Sets appointment details from selected Appointment in Appointment Screen
-     * into Appointment Edit Screen
-     *
-     * @param appointment
-     */
     public void setAppointment(Appointment appointment) {
 
 
@@ -198,9 +159,6 @@ public class AppointmentEditScreenController {
 
     }
 
-    /**
-     * Inserts new appointment record
-     */
     private void saveAppt() {
 
         LocalDate localDate = datePicker.getValue();
@@ -213,8 +171,8 @@ public class AppointmentEditScreenController {
         ZonedDateTime startUTC = startDT.atZone(zid).withZoneSameInstant(ZoneId.of("UTC"));
         ZonedDateTime endUTC = endDT.atZone(zid).withZoneSameInstant(ZoneId.of("UTC"));
 
-        Timestamp startsqlts = Timestamp.valueOf(startUTC.toLocalDateTime()); //this value can be inserted into database
-        Timestamp endsqlts = Timestamp.valueOf(endUTC.toLocalDateTime()); //this value can be inserted into database        
+        Timestamp startsqlts = Timestamp.valueOf(startUTC.toLocalDateTime());
+        Timestamp endsqlts = Timestamp.valueOf(endUTC.toLocalDateTime());
 
         try {
 
@@ -233,7 +191,7 @@ public class AppointmentEditScreenController {
             statement.setString(9, App.sInstance.getUser().getUsername());
             statement.setString(10, App.sInstance.getUser().getUsername());
             int result = statement.executeUpdate();
-            if (result == 1) {//one row was affected; namely the one that was inserted!
+            if (result == 1) {
                 System.out.println("YAY! New Appointment Save");
             } else {
                 System.out.println("BOO! New Appointment Save");
@@ -244,9 +202,6 @@ public class AppointmentEditScreenController {
 
     }
 
-    /**
-     * Updates edited Appointment record in database
-     */
     private void updateAppt() {
 
         LocalDate localDate = datePicker.getValue();
@@ -259,8 +214,8 @@ public class AppointmentEditScreenController {
         ZonedDateTime startUTC = startDT.atZone(zid).withZoneSameInstant(ZoneId.of("UTC"));
         ZonedDateTime endUTC = endDT.atZone(zid).withZoneSameInstant(ZoneId.of("UTC"));
 
-        Timestamp startsqlts = Timestamp.valueOf(startUTC.toLocalDateTime()); //this value can be inserted into database
-        Timestamp endsqlts = Timestamp.valueOf(endUTC.toLocalDateTime()); //this value can be inserted into database        
+        Timestamp startsqlts = Timestamp.valueOf(startUTC.toLocalDateTime());
+        Timestamp endsqlts = Timestamp.valueOf(endUTC.toLocalDateTime());
 
         try {
 
@@ -276,7 +231,7 @@ public class AppointmentEditScreenController {
             statement.setString(6, App.sInstance.getUser().getUsername());
             statement.setString(7, selectedAppt.getAppointmentId());
             int result = statement.executeUpdate();
-            if (result == 1) {//one row was affected; namely the one that was inserted!
+            if (result == 1) {
                 System.out.println("YAY! Update Appointment Save");
             } else {
                 System.out.println("BOO! Update Appointment Save");
@@ -286,20 +241,12 @@ public class AppointmentEditScreenController {
         }
     }
 
-    /**
-     * Populates type list with predefined types
-     */
     private void populateTypeList() {
         ObservableList<String> typeList = FXCollections.observableArrayList();
         typeList.addAll("Consultation", "New Account", "Follow Up", "Close Account");
         typeComboBox.setItems(typeList);
     }
 
-    /**
-     * populates List of Customer Names
-     *
-     * @return customerList
-     */
     protected ObservableList<Customer> populateCustomerList() {
 
         String tCustomerId;
@@ -337,11 +284,6 @@ public class AppointmentEditScreenController {
 
     }
 
-    /**
-     * Validates Appointment information before inserting or updating records
-     *
-     * @return true if valid, false if there is an error in fields
-     */
     private boolean validateAppointment() {
         String title = titleField.getText();
         String type = typeComboBox.getValue();
@@ -357,7 +299,6 @@ public class AppointmentEditScreenController {
         ZonedDateTime endUTC = endDT.atZone(zid).withZoneSameInstant(ZoneId.of("UTC"));
 
         String errorMessage = "";
-        //first checks to see if inputs are null
         if (title == null || title.length() == 0) {
             errorMessage += "Please enter an Appointment title.\n";
         }
@@ -372,11 +313,9 @@ public class AppointmentEditScreenController {
         }
         if (endUTC == null) {
             errorMessage += "Please select an End time.\n";
-            //checks to make sure Start and End times are not the same
         } else if (endUTC.equals(startUTC) || endUTC.isBefore(startUTC)) {
             errorMessage += "End time must be after Start time.\n";
         } else try {
-            //checks user's existing appointments for time conflicts
             if (hasApptConflict(startUTC, endUTC)) {
                 errorMessage += "Appointment times conflict with Consultant's existing appointments. Please select a new time.\n";
             }
@@ -386,7 +325,6 @@ public class AppointmentEditScreenController {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
@@ -399,23 +337,13 @@ public class AppointmentEditScreenController {
         }
     }
 
-    /**
-     * SELECT statement searches database against proposed times
-     *
-     * @param newStart
-     * @param newEnd
-     * @return true if result set contains any matching appointments
-     * @throws SQLException
-     */
     private boolean hasApptConflict(ZonedDateTime newStart, ZonedDateTime newEnd) throws SQLException {
         String apptID;
         String consultant;
         if (isOkClicked()) {
-            //edited appointment
             apptID = selectedAppt.getAppointmentId();
             consultant = selectedAppt.getUser();
         } else {
-            //new appointment
             apptID = "0";
             consultant = App.sInstance.getUser().getUsername();
         }

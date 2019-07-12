@@ -3,7 +3,6 @@ package wgu_c195.view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,39 +30,29 @@ import java.time.format.FormatStyle;
  */
 public class AppointmentScreenController {
 
-    @FXML
-    private TableView<Appointment> apptTableView;
-
-    @FXML
-    private TableColumn<Appointment, ZonedDateTime> startApptColumn;
-
-    @FXML
-    private TableColumn<Appointment, LocalDateTime> endApptColumn;
-
-    @FXML
-    private TableColumn<Appointment, String> titleApptColumn;
-
-    @FXML
-    private TableColumn<Appointment, String> typeApptColumn;
-
-    @FXML
-    private TableColumn<Appointment, Customer> customerApptColumn;
-
-    @FXML
-    private TableColumn<Appointment, String> consultantApptColumn;
-
-    @FXML
-    private RadioButton weekRadioButton;
-
-    @FXML
-    private RadioButton monthRadioButton;
-
-    @FXML
-    private ToggleGroup apptToggleGroup;
-
     private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final ZoneId newzid = ZoneId.systemDefault();
     ObservableList<Appointment> apptList;
+    @FXML
+    private TableView<Appointment> apptTableView;
+    @FXML
+    private TableColumn<Appointment, ZonedDateTime> startApptColumn;
+    @FXML
+    private TableColumn<Appointment, LocalDateTime> endApptColumn;
+    @FXML
+    private TableColumn<Appointment, String> titleApptColumn;
+    @FXML
+    private TableColumn<Appointment, String> typeApptColumn;
+    @FXML
+    private TableColumn<Appointment, Customer> customerApptColumn;
+    @FXML
+    private TableColumn<Appointment, String> consultantApptColumn;
+    @FXML
+    private RadioButton weekRadioButton;
+    @FXML
+    private RadioButton monthRadioButton;
+    @FXML
+    private ToggleGroup apptToggleGroup;
 
     public void setAppointmentScreen() {
         apptToggleGroup = new ToggleGroup();
@@ -82,13 +71,8 @@ public class AppointmentScreenController {
         apptTableView.getItems().setAll(apptList);
     }
 
-    /**
-     * Filters to show appointments from current date to a month out
-     *
-     * @param event
-     */
     @FXML
-    void handleApptMonth(ActionEvent event) {
+    void handleApptMonth() {
 
         LocalDate now = LocalDate.now();
         LocalDate nowPlus1Month = now.plusMonths(1);
@@ -104,13 +88,8 @@ public class AppointmentScreenController {
 
     }
 
-    /**
-     * Filters to show appointments from current date to a week out
-     *
-     * @param event
-     */
     @FXML
-    void handleApptWeek(ActionEvent event) {
+    void handleApptWeek() {
 
         LocalDate now = LocalDate.now();
         LocalDate nowPlus7 = now.plusDays(7);
@@ -126,7 +105,7 @@ public class AppointmentScreenController {
 
 
     @FXML
-    void handleDeleteAppt(ActionEvent event) {
+    void handleDeleteAppt() {
         Appointment selectedAppointment = apptTableView.getSelectionModel().getSelectedItem();
 
         if (selectedAppointment != null) {
@@ -151,7 +130,7 @@ public class AppointmentScreenController {
     }
 
     @FXML
-    void handleEditAppt(ActionEvent event) {
+    void handleEditAppt() {
         Appointment selectedAppointment = apptTableView.getSelectionModel().getSelectedItem();
 
         if (selectedAppointment != null) {
@@ -169,7 +148,7 @@ public class AppointmentScreenController {
     }
 
     @FXML
-    void handleNewAppt(ActionEvent event) throws IOException {
+    void handleNewAppt() throws IOException {
         boolean okClicked = PageUtil.getInstance().showNewApptScreen();
         PageUtil.getInstance().showAppointmentScreen();
     }
@@ -188,7 +167,6 @@ public class AppointmentScreenController {
 
 
             while (rs.next()) {
-
                 String tAppointmentId = rs.getString("appointment.appointmentId");
                 Timestamp tsStart = rs.getTimestamp("appointment.start");
                 ZonedDateTime newzdtStart = tsStart.toLocalDateTime().atZone(ZoneId.of("UTC"));
@@ -207,8 +185,6 @@ public class AppointmentScreenController {
                 String tUser = rs.getString("appointment.createdBy");
 
                 apptList.add(new Appointment(tAppointmentId, newLocalStart.format(timeDTF), newLocalEnd.format(timeDTF), tTitle, tType, tCustomer, tUser));
-
-
             }
 
         } catch (SQLException sqe) {

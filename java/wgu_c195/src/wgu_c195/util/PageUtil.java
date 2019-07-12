@@ -14,12 +14,8 @@ import wgu_c195.view.*;
 import java.io.IOException;
 
 public class PageUtil {
-    private BorderPane menu;
-
-    private PageUtil() {
-    }
-
     private static volatile PageUtil sInstance = null;
+    private BorderPane menu;
 
     public static PageUtil getInstance() {
         if (sInstance == null) {
@@ -33,7 +29,6 @@ public class PageUtil {
 
     public void showLoginScreen() {
         try {
-            // Load Login Screen.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/LoginScreen.fxml"));
             AnchorPane loginScreen = loader.load();

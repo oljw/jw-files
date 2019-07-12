@@ -11,7 +11,7 @@ import wgu_c195.model.Appointment;
 import wgu_c195.model.Customer;
 import wgu_c195.model.User;
 import wgu_c195.util.DBUtil;
-import wgu_c195.util.LoggerUtil;
+import wgu_c195.util.LogUtil;
 import wgu_c195.util.PageUtil;
 
 import java.sql.PreparedStatement;
@@ -30,39 +30,28 @@ import java.util.logging.Logger;
 
 public class LoginScreenController {
 
+    private final static Logger LOGGER = Logger.getLogger(LogUtil.class.getName());
+    private final ZoneId newzid = ZoneId.systemDefault();
+    private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+    ObservableList<Appointment> reminderList;
     @FXML
     private Label errorMessage;
-
     @FXML
     private TextField usernameField;
-
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private Text usernameText;
-
     @FXML
     private Text passwordText;
-
     @FXML
     private Text titleText;
-
     @FXML
     private Button signinText;
-
     @FXML
     private Button cancelText;
-
     private ResourceBundle rb = ResourceBundle.getBundle("login", Locale.getDefault());
-
-    private final ZoneId newzid = ZoneId.systemDefault();
-
-    private final DateTimeFormatter timeDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-
     private User user;
-    ObservableList<Appointment> reminderList;
-    private final static Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());
 
     @FXML
     void signIn() {
@@ -111,7 +100,7 @@ public class LoginScreenController {
         usernameText.setText(rb.getString("username"));
         passwordText.setText(rb.getString("password"));
         signinText.setText(rb.getString("signin"));
-        cancelText.setText(rb.getString("cancel"));
+//        cancelText.setText(rb.getString("cancel"));
     }
 
     private void filterReminders() {

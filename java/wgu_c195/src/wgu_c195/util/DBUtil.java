@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * @author JW
- */
 public class DBUtil {
 
     private static Connection connection;

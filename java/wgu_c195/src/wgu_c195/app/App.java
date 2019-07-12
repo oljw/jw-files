@@ -4,23 +4,24 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import wgu_c195.model.User;
 import wgu_c195.util.DBUtil;
-import wgu_c195.util.LoggerUtil;
+import wgu_c195.util.LogUtil;
 import wgu_c195.util.PageUtil;
 
 import java.util.Locale;
 
-/**
- * @author JW
- */
 public class App extends Application {
 
     public static App sInstance;
+    Locale locale = Locale.getDefault();
     private Stage stage;
     private User user;
-    Locale locale = Locale.getDefault();
 
     public App() {
         sInstance = this;
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
@@ -32,13 +33,9 @@ public class App extends Application {
         //System.out.println(Locale.getDefault());
 
         DBUtil.init();
-        LoggerUtil.init();
+        LogUtil.init();
 
         PageUtil.getInstance().showLoginScreen();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     @Override
@@ -51,11 +48,11 @@ public class App extends Application {
         return this.stage;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public User getUser() {
         return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
