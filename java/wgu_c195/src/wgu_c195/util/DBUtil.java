@@ -15,7 +15,7 @@ public class DBUtil {
             connection = DriverManager.getConnection(Const.SERVER_URL, Const.SERVER_USER_ID, Const.SERVER_PASSWORD);
             System.out.println("----> Connected to db.");
         } catch (ClassNotFoundException e) {
-            System.out.println("----> Please check the driver file.");
+            System.out.println("----> Check the driver file.");
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class AppointmentScreenController {
+public class AppointmentPageController {
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final ZoneId zoneId = ZoneId.systemDefault();
@@ -68,7 +68,7 @@ public class AppointmentScreenController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Appointment selected for Deletion");
-            alert.setContentText("Please select an Appointment in the Table to delete");
+            alert.setContentText("Select an Appointment");
             alert.showAndWait();
         }
     }
@@ -84,7 +84,7 @@ public class AppointmentScreenController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Appointment selected");
-            alert.setContentText("Please select an Appointment in the Table");
+            alert.setContentText("Select an Appointment");
             alert.showAndWait();
         }
     }

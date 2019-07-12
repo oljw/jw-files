@@ -23,7 +23,7 @@ import java.time.format.FormatStyle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AppointmentEditScreenController {
+public class AppointmentEditPageController {
 
     private final ZoneId zid = ZoneId.systemDefault();
     private final ObservableList<String> startTimes = FXCollections.observableArrayList();
@@ -50,9 +50,9 @@ public class AppointmentEditScreenController {
 
     @FXML
     private void onSaveClicked() {
-        if (validateAppointment()) {
-            if (isOk) updateAppt();
-            else saveAppt();
+        if (validate()) {
+            if (isOk) update();
+            else save();
             dialogStage.close();
         }
     }
@@ -60,30 +60,21 @@ public class AppointmentEditScreenController {
     @FXML
     private void onCancelClicked() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirm Cancel");
+        alert.setTitle("Cancel");
         alert.setHeaderText("Are you sure you want to Cancel?");
         alert.showAndWait()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> dialogStage.close());
     }
 
-    public void setDialogStage(Stage dialogStage) {
+    public void init(Stage dialogStage) {
         this.dialogStage = dialogStage;
 
         showTypeList();
         customerNameApptColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        masterData = populateCustomerList();
+        masterData = showCustomerList();
 
         FilteredList<Customer> filteredData = new FilteredList<>(masterData, p -> true);
-//        customerSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
-//            filteredData.setPredicate(customer -> {
-//                if (newValue == null || newValue.isEmpty()) {
-//                    return true;
-//                }
-//                String lowerCaseFilter = newValue.toLowerCase();
-//                return customer.getCustomerName().toLowerCase().contains(lowerCaseFilter);
-//            });
-//        });
 
         SortedList<Customer> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(customerSelectTableView.comparatorProperty());
@@ -121,7 +112,7 @@ public class AppointmentEditScreenController {
         endComboBox.getSelectionModel().select(endLDT.toLocalTime().format(dateTimeFormatter));
     }
 
-    private void saveAppt() {
+    private void save() {
         LocalDate localDate = datePicker.getValue();
         LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
         LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
@@ -156,7 +147,7 @@ public class AppointmentEditScreenController {
         }
     }
 
-    private void updateAppt() {
+    private void update() {
         LocalDate localDate = datePicker.getValue();
         LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
         LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
@@ -194,7 +185,7 @@ public class AppointmentEditScreenController {
         typeComboBox.setItems(typeList);
     }
 
-    private ObservableList<Customer> populateCustomerList() {
+    private ObservableList<Customer> showCustomerList() {
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
         try {
             PreparedStatement statement = DBUtil.getConnection().prepareStatement(
@@ -211,7 +202,7 @@ public class AppointmentEditScreenController {
         return customerList;
     }
 
-    private boolean validateAppointment() {
+    private boolean validate() {
         String title = this.title.getText();
         String type = typeComboBox.getValue();
         Customer customer = customerSelectTableView.getSelectionModel().getSelectedItem();
@@ -227,27 +218,27 @@ public class AppointmentEditScreenController {
 
         String errorMessage = "";
         if (title == null || title.length() == 0) {
-            errorMessage += "Please enter an Appointment title.\n";
+            errorMessage += "Enter appointment title.";
         }
         if (type == null || type.length() == 0) {
-            errorMessage += "Please select an Appointment type.\n";
+            errorMessage += "Select appointment type.";
         }
         if (customer == null) {
-            errorMessage += "Please Select a Customer.\n";
+            errorMessage += "Select a Customer.";
         }
         if (startUTC == null) {
-            errorMessage += "Please select a Start time";
+            errorMessage += "Select a Start time";
         }
         if (endUTC == null) {
-            errorMessage += "Please select an End time.\n";
+            errorMessage += "Select an End time.";
         } else if (endUTC.equals(startUTC) || endUTC.isBefore(startUTC)) {
-            errorMessage += "End time must be after Start time.\n";
+            errorMessage += "End time cannot be before start time.\n";
         } else try {
-            if (hasApptConflict(startUTC, endUTC)) {
-                errorMessage += "Appointment times conflict with Consultant's existing appointments. Please select a new time.\n";
+            if (checkConflict(startUTC, endUTC)) {
+                errorMessage += "Time conflicts with existing appointment. Please select a different time.";
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AppointmentEditScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AppointmentEditPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (errorMessage.length() == 0) {
             return true;
@@ -255,7 +246,7 @@ public class AppointmentEditScreenController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid Appointment fields");
+            alert.setHeaderText("Correct invalid fields");
             alert.setContentText(errorMessage);
             alert.showAndWait();
 
@@ -263,7 +254,7 @@ public class AppointmentEditScreenController {
         }
     }
 
-    private boolean hasApptConflict(ZonedDateTime newStart, ZonedDateTime newEnd) throws SQLException {
+    private boolean checkConflict(ZonedDateTime newStart, ZonedDateTime newEnd) throws SQLException {
         String apptID;
         String consultant;
         if (isOk) {

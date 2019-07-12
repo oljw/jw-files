@@ -27,13 +27,13 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class LoginScreenController {
+public class LoginPageController {
 
     private final static Logger LOGGER = Logger.getLogger(LogUtil.class.getName());
     private final ZoneId newzid = ZoneId.systemDefault();
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
 
-    private ResourceBundle rb = ResourceBundle.getBundle("login", Locale.getDefault());
+    private ResourceBundle rb = ResourceBundle.getBundle("string", Locale.getDefault());
     private User user;
 
     private ObservableList<Appointment> reminderList;

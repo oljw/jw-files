@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class CustomerScreenController {
+public class CustomerPageController {
     private boolean isEdit = false;
 
     @FXML private TableView<Customer> customerTable;
@@ -59,7 +59,7 @@ public class CustomerScreenController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Customer selected");
-            alert.setContentText("Please select a Customer in the Table");
+            alert.setContentText("Select a Customer");
             alert.showAndWait();
         }
     }
@@ -83,7 +83,7 @@ public class CustomerScreenController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Customer selected for Deletion");
-            alert.setContentText("Please select a Customer in the Table to delete");
+            alert.setContentText("Select a Customer");
             alert.showAndWait();
         }
 
@@ -103,7 +103,7 @@ public class CustomerScreenController {
     @FXML
     void onCancelClicked() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirm Cancel");
+        alert.setTitle("Cancel");
         alert.setHeaderText("Are you sure you want to Cancel?");
         alert.showAndWait()
                 .filter(response -> response == ButtonType.OK)
