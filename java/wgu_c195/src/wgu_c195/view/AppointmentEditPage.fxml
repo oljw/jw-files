@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="311.0" prefWidth="470.0"
-            xmlns="http://javafx.com/javafx/8.0.141" fx:controller="wgu_c195.view.AppointmentEditPageController"
+            xmlns="http://javafx.com/javafx/8.0.141" fx:controller="wgu_c195.view.AppointmentEditPage"
             style="-fx-background-color: #c7dcff;">
     <children>
         <TableView fx:id="customerSelectTableView" layoutX="10.0" layoutY="10.0" maxWidth="180.0" prefHeight="250.0"

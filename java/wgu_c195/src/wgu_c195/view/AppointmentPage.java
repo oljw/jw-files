@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class AppointmentPageController {
+public class AppointmentPage {
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
     private final ZoneId zoneId = ZoneId.systemDefault();

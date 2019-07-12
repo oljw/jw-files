@@ -2,6 +2,7 @@ package wgu_c195.util;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -16,7 +17,9 @@ public class PageUtil {
     private static volatile PageUtil sInstance = null;
     private BorderPane navBar;
 
-    private PageUtil() {}
+    private PageUtil() {
+    }
+
     public static PageUtil getInstance() {
         if (sInstance == null) {
             synchronized (PageUtil.class) {
@@ -32,10 +35,8 @@ public class PageUtil {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/NavBar.fxml"));
             navBar = loader.load();
-
             Scene scene = new Scene(navBar);
             App.sInstance.getStage().setScene(scene);
-
             App.sInstance.getStage().show();
         } catch (IOException e) {
             e.getCause().printStackTrace();
@@ -47,14 +48,11 @@ public class PageUtil {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/LoginPage.fxml"));
             AnchorPane loginScreen = loader.load();
-
-            LoginPageController controller = loader.getController();
+            LoginPage controller = loader.getController();
             controller.setTexts();
-
             Scene scene = new Scene(loginScreen);
             App.sInstance.getStage().setScene(scene);
             App.sInstance.getStage().show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,12 +63,9 @@ public class PageUtil {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/AppointmentPage.fxml"));
             AnchorPane appointmentScreen = loader.load();
-
             navBar.setCenter(appointmentScreen);
-
-            AppointmentPageController controller = loader.getController();
+            AppointmentPage controller = loader.getController();
             controller.init();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,12 +76,9 @@ public class PageUtil {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/CustomerPage.fxml"));
             AnchorPane customerScreen = loader.load();
-
             navBar.setCenter(customerScreen);
-
-            CustomerPageController controller = loader.getController();
+            CustomerPage controller = loader.getController();
             controller.init();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,17 +89,14 @@ public class PageUtil {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/AppointmentEditPage.fxml"));
             AnchorPane newApptScreen = loader.load();
-
             Stage dialogStage = new Stage();
             dialogStage.setTitle("New Appointment");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(App.sInstance.getStage());
             Scene scene = new Scene(newApptScreen);
             dialogStage.setScene(scene);
-
-            AppointmentEditPageController controller = loader.getController();
+            AppointmentEditPage controller = loader.getController();
             controller.init(dialogStage);
-
             dialogStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -119,18 +108,15 @@ public class PageUtil {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/AppointmentEditPage.fxml"));
             AnchorPane editApptScreen = loader.load();
-
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Appointment");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(App.sInstance.getStage());
             Scene scene = new Scene(editApptScreen);
             dialogStage.setScene(scene);
-
-            AppointmentEditPageController controller = loader.getController();
+            AppointmentEditPage controller = loader.getController();
             controller.init(dialogStage);
             controller.setAppointment(appointment);
-
             dialogStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,10 +128,47 @@ public class PageUtil {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource("/wgu_c195/view/CalendarPage.fxml"));
             AnchorPane pane = loader.load();
-
             navBar.setCenter(pane);
+            CalendarPage controller = loader.getController();
+            controller.init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-            CalendarPageController controller = loader.getController();
+    public void launchSchedulePage() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/wgu_c195/view/SchedulePage.fxml"));
+            AnchorPane pane = loader.load();
+            navBar.setCenter(pane);
+            SchedulePage controller = loader.getController();
+            controller.init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void launchTypeReportPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/wgu_c195/view/TypeReportPage.fxml"));
+            AnchorPane pane = loader.load();
+            navBar.setCenter(pane);
+            TypeReportPage controller = loader.getController();
+            controller.init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void launchOfficesPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/wgu_c195/view/OfficesPage.fxml"));
+            AnchorPane pane = loader.load();
+            navBar.setCenter(pane);
+            OfficesPage controller = loader.getController();
             controller.init();
         } catch (IOException e) {
             e.printStackTrace();

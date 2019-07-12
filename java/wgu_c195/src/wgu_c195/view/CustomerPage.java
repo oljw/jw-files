@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class CustomerPageController {
+public class CustomerPage {
     private boolean isEdit = false;
 
     @FXML private TableView<Customer> customerTable;

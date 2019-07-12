@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.141" fx:controller="wgu_c195.view.SchedulePage"
+            style="-fx-background-color: #c7dcff;">
+
+    <children>
+        <TableView fx:id="scheduleTableView" layoutY="3" prefHeight="317.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="customerColumn" prefWidth="120.0" text="Customer"/>
+                <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Title"/>
+                <TableColumn fx:id="startColumn" prefWidth="120.0" text="Start"/>
+                <TableColumn fx:id="endColumn" prefWidth="120.0" text="End"/>
+                <TableColumn fx:id="typeColumn" minWidth="75.0" prefWidth="120.0" text="Type"/>
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

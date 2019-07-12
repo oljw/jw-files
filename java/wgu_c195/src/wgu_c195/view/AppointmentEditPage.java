@@ -23,7 +23,7 @@ import java.time.format.FormatStyle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AppointmentEditPageController {
+public class AppointmentEditPage {
 
     private final ZoneId zid = ZoneId.systemDefault();
     private final ObservableList<String> startTimes = FXCollections.observableArrayList();
@@ -32,7 +32,6 @@ public class AppointmentEditPageController {
     private final DateTimeFormatter dateDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
 
     private ObservableList<Customer> masterData = FXCollections.observableArrayList();
-    private ObservableList<Appointment> apptTimeList;
     private Appointment selectedAppt;
     private Stage dialogStage;
     private boolean isOk;
@@ -238,7 +237,7 @@ public class AppointmentEditPageController {
                 errorMessage += "Time conflicts with existing appointment. Please select a different time.";
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AppointmentEditPageController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AppointmentEditPage.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (errorMessage.length() == 0) {
             return true;

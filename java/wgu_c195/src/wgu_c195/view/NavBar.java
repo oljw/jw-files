@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import wgu_c195.util.PageUtil;
 
 
-public class NavBarController {
+public class NavBar {
     @FXML
     void openAppointmentPage() {
         PageUtil.getInstance().launchAppointmentPage();
@@ -16,7 +16,22 @@ public class NavBarController {
     }
 
     @FXML
-    void openReportPage() {
+    void openCalendarPage() {
         PageUtil.getInstance().launchCalendarPage();
+    }
+
+    @FXML
+    void openSchedulePage() {
+        PageUtil.getInstance().launchSchedulePage();
+    }
+
+    @FXML
+    void openTypeReportPage() {
+        PageUtil.getInstance().launchTypeReportPage();
+    }
+
+    @FXML
+    void openOfficesPage() {
+        PageUtil.getInstance().launchOfficesPage();
     }
 }

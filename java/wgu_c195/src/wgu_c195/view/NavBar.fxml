@@ -5,14 +5,17 @@
 <?import javafx.scene.layout.HBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141"
-            fx:controller="wgu_c195.view.NavBarController"
+            fx:controller="wgu_c195.view.NavBar"
             style="-fx-background-color: #c7dcff;">
     <top>
         <HBox spacing="5">
             <children>
                 <Button text="Appointments" textAlignment="CENTER" onAction="#openAppointmentPage"/>
                 <Button text="Customers" textAlignment="CENTER" onAction="#openCustomerPage"/>
-                <Button text="Reports" textAlignment="CENTER" onAction="#openReportPage"/>
+                <Button text="Caldendar" textAlignment="CENTER" onAction="#openCalendarPage"/>
+                <Button text="Remaining Schedule" textAlignment="CENTER" onAction="#openSchedulePage"/>
+                <Button text="Type Report" textAlignment="CENTER" onAction="#openTypeReportPage"/>
+                <Button text="Offices" textAlignment="CENTER" onAction="#openOfficesPage"/>
             </children>
         </HBox>
     </top>

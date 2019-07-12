@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class LoginPageController {
+public class LoginPage {
 
     private final static Logger LOGGER = Logger.getLogger(LogUtil.class.getName());
     private final ZoneId newzid = ZoneId.systemDefault();

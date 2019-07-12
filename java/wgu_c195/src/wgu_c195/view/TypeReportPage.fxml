@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.141" fx:controller="wgu_c195.view.TypeReportPage"
+            style="-fx-background-color: #c7dcff;">
+
+    <children>
+        <TableView fx:id="typeReportTableView" layoutY="3" prefHeight="317.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="monthColumn" prefWidth="200" text="Month"/>
+                <TableColumn fx:id="typeColumn" prefWidth="200" text="Types"/>
+                <TableColumn fx:id="typeAmount" prefWidth="200" text="Amount Per Type"/>
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
