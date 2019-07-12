@@ -17,33 +17,44 @@
                   AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="19.0">
             <children>
                 <Label text="Title">
-                    <padding><Insets right="5.0"/></padding>
+                    <padding>
+                        <Insets right="5.0"/>
+                    </padding>
                 </Label>
                 <TextField fx:id="title" GridPane.columnIndex="1"/>
 
                 <Label text="Type" GridPane.rowIndex="1">
-                    <padding><Insets right="5.0"/></padding>
+                    <padding>
+                        <Insets right="5.0"/>
+                    </padding>
                 </Label>
                 <ComboBox fx:id="typeComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
                 <Label text="Date" GridPane.rowIndex="2">
-                    <padding><Insets right="5.0"/></padding>
+                    <padding>
+                        <Insets right="5.0"/>
+                    </padding>
                 </Label>
                 <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
                 <Label text="Start" GridPane.rowIndex="3">
-                    <padding><Insets right="5.0"/></padding>
+                    <padding>
+                        <Insets right="5.0"/>
+                    </padding>
                 </Label>
                 <ComboBox fx:id="startComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
                 <Label text="End" GridPane.rowIndex="4">
-                    <padding><Insets right="5.0"/></padding>
+                    <padding>
+                        <Insets right="5.0"/>
+                    </padding>
                 </Label>
                 <ComboBox fx:id="endComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
             </children>
         </GridPane>
 
         <Button fx:id="saveButton" layoutX="316.0" layoutY="264.0" onAction="#onSaveClicked" text="Save"/>
-        <Button fx:id="cancelButton" cancelButton="true" layoutX="370.0" layoutY="264.0" onAction="#onCancelClicked" text="Cancel"/>
+        <Button fx:id="cancelButton" cancelButton="true" layoutX="370.0" layoutY="264.0" onAction="#onCancelClicked"
+                text="Cancel"/>
     </children>
 </AnchorPane>

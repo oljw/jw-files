@@ -13,7 +13,9 @@
             style="-fx-background-color: #c7dcff;">
     <children>
         <Text fx:id="titleText" layoutX="40.0" layoutY="50.0" text="Log In">
-            <font><Font size="20.0"/></font>
+            <font>
+                <Font size="20.0"/>
+            </font>
         </Text>
 
         <HBox layoutX="40.0" layoutY="91.0" prefHeight="38.0" prefWidth="250.0" spacing="4.0">
