@@ -15,15 +15,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+
+import static wgu_c195.util.TimeUtil.convertTimeZone;
 
 public class SchedulePage {
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-    private final ZoneId zoneId = ZoneId.systemDefault();
-
     private ObservableList<Appointment> schedule;
 
     @FXML private TableView<Appointment> scheduleTableView;
@@ -57,16 +53,10 @@ public class SchedulePage {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                ZonedDateTime zdtStart = rs.getTimestamp("appointment.start").toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime localStart = zdtStart.withZoneSameInstant(zoneId);
-
-                ZonedDateTime zdtEnd = rs.getTimestamp("appointment.end").toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime localEnd = zdtEnd.withZoneSameInstant(zoneId);
-
                 schedule.add(new Appointment(
                         rs.getString("appointment.appointmentId"),
-                        localStart.format(dateTimeFormatter),
-                        localEnd.format(dateTimeFormatter),
+                        convertTimeZone(rs.getTimestamp("appointment.start")),
+                        convertTimeZone(rs.getTimestamp("appointment.end")),
                         rs.getString("appointment.title"),
                         rs.getString("appointment.description"),
                         new Customer(rs.getString("appointment.customerId"), rs.getString("customer.customerName")),

@@ -3,7 +3,6 @@ package wgu_c195.view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,14 +12,8 @@ import wgu_c195.util.DBUtil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class TypeReportPage {
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-    private final ZoneId zoneId = ZoneId.systemDefault();
-
     private ObservableList<AppointmentReport> appointmentReports;
 
     @FXML private TableView<AppointmentReport> typeReportTableView;

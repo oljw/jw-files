@@ -52,7 +52,7 @@
                                 <Label layoutX="10.0" layoutY="47.0" text="Customer ID"/>
                                 <TextField fx:id="customerId" editable="false" layoutX="108.0" layoutY="43.0"
                                            GridPane.columnIndex="1"/>
-                                <ComboBox fx:id="comboBox" prefHeight="25.0" prefWidth="229.0"
+                                <ComboBox fx:id="cityComboBox" prefHeight="25.0" prefWidth="229.0"
                                           GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                             </children>
                         </GridPane>

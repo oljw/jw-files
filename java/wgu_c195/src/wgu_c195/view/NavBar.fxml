@@ -13,7 +13,7 @@
             <children>
                 <Button text="Appointments" textAlignment="CENTER" onAction="#openAppointmentPage"/>
                 <Button text="Customers" textAlignment="CENTER" onAction="#openCustomerPage"/>
-                <Button text="Caldendar" textAlignment="CENTER" onAction="#openCalendarPage"/>
+                <Button text="Calendar" textAlignment="CENTER" onAction="#openCalendarPage"/>
                 <Button text="Remaining Schedule" textAlignment="CENTER" onAction="#openSchedulePage"/>
                 <Button text="Type Report" textAlignment="CENTER" onAction="#openTypeReportPage"/>
                 <Button text="Offices" textAlignment="CENTER" onAction="#openOfficesPage"/>

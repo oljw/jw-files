@@ -18,20 +18,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static wgu_c195.util.TimeUtil.convertTimeZone;
+import static wgu_c195.util.TimeUtil.dateTimeFormatter;
+
 public class LoginPage {
 
     private final static Logger LOGGER = Logger.getLogger(LogUtil.class.getName());
-    private final ZoneId newzid = ZoneId.systemDefault();
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
 
     private ResourceBundle rb = ResourceBundle.getBundle("string", Locale.getDefault());
     private User user;
@@ -99,11 +96,25 @@ public class LoginPage {
 
         FilteredList<Appointment> filteredData = new FilteredList<>(reminderList);
 
-        filteredData.setPredicate(row -> {
-                    LocalDateTime rowDate = LocalDateTime.parse(row.getStart(), dateTimeFormatter);
-                    return rowDate.isAfter(now.minusMinutes(1)) && rowDate.isBefore(nowPlus15Min);
-                }
-        );
+        /*  Usage of lambda expression to simplify the source code complexity.
+            Since the parameter of setPredicate function requires an anonymous class, using lambda expression is much
+            easier to read and write. Check the below usage without lambda expression */
+        filteredData.setPredicate(row -> { // Retrieving data using lambda expression with just 'row'.
+            LocalDateTime rowDate = LocalDateTime.parse(row.getStart(), dateTimeFormatter); // Check the current time.
+            return rowDate.isAfter(now.minusMinutes(1)) && rowDate.isBefore(nowPlus15Min); // Return if data of 'row' fits the need we are looking for.
+        });
+
+        // This code below is 6 lines of code. Using lambda expression as above cuts down two lines at least.
+        /*
+        filteredData.setPredicate(new Predicate<Appointment>() {
+            @Override
+            public boolean test(Appointment appointment) {
+                LocalDateTime rowDate = LocalDateTime.parse(appointment.getStart(), dateTimeFormatter);
+                return rowDate.isAfter(now.minusMinutes(1)) && rowDate.isBefore(nowPlus15Min);
+            }
+        });
+        */
+
         if (filteredData.isEmpty()) {
             System.out.println("----> No reminders");
         } else {
@@ -117,7 +128,6 @@ public class LoginPage {
                     " is currently set for " + start + ".");
             alert.showAndWait();
         }
-
     }
 
     private void populateReminders() {
@@ -132,25 +142,17 @@ public class LoginPage {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                ZonedDateTime zdtStart = rs.getTimestamp("appointment.start").toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime localStart = zdtStart.withZoneSameInstant(newzid);
-
-                ZonedDateTime zdtEnd = rs.getTimestamp("appointment.end").toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime localEnd = zdtEnd.withZoneSameInstant(newzid);
-
                 reminderList.add(new Appointment(
                         rs.getString("appointment.appointmentId"),
-                        localStart.format(dateTimeFormatter),
-                        localEnd.format(dateTimeFormatter),
+                        convertTimeZone(rs.getTimestamp("appointment.start")),
+                        convertTimeZone(rs.getTimestamp("appointment.end")),
                         rs.getString("appointment.title"),
                         rs.getString("appointment.description"),
                         new Customer(rs.getString("appointment.customerId"), rs.getString("customer.customerName")),
                         rs.getString("appointment.createdBy")));
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 }

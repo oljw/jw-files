@@ -18,18 +18,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static wgu_c195.util.TimeUtil.dateTimeFormatter;
+import static wgu_c195.util.TimeUtil.timeFormatter;
 
 public class AppointmentEditPage {
 
     private final ZoneId zid = ZoneId.systemDefault();
     private final ObservableList<String> startTimes = FXCollections.observableArrayList();
     private final ObservableList<String> endTimes = FXCollections.observableArrayList();
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
-    private final DateTimeFormatter dateDTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
 
     private ObservableList<Customer> masterData = FXCollections.observableArrayList();
     private Appointment currentAppointment;
@@ -81,8 +80,8 @@ public class AppointmentEditPage {
         LocalTime time = LocalTime.of(8, 0);
 
         while (!time.equals(LocalTime.of(17, 15))) {
-            startTimes.add(time.format(dateTimeFormatter));
-            endTimes.add(time.format(dateTimeFormatter));
+            startTimes.add(time.format(timeFormatter));
+            endTimes.add(time.format(timeFormatter));
             time = time.plusMinutes(15);
         }
 
@@ -91,8 +90,8 @@ public class AppointmentEditPage {
         datePicker.setValue(LocalDate.now());
         startComboBox.setItems(startTimes);
         endComboBox.setItems(endTimes);
-        startComboBox.getSelectionModel().select(LocalTime.of(8, 0).format(dateTimeFormatter));
-        endComboBox.getSelectionModel().select(LocalTime.of(8, 15).format(dateTimeFormatter));
+        startComboBox.getSelectionModel().select(LocalTime.of(8, 0).format(timeFormatter));
+        endComboBox.getSelectionModel().select(LocalTime.of(8, 15).format(timeFormatter));
     }
 
     public void setAppointment(Appointment appointment) {
@@ -100,21 +99,21 @@ public class AppointmentEditPage {
         currentAppointment = appointment;
 
         String start = appointment.getStart();
-        LocalDateTime startLDT = LocalDateTime.parse(start, dateDTF);
+        LocalDateTime startLDT = LocalDateTime.parse(start, dateTimeFormatter);
         String end = appointment.getEnd();
-        LocalDateTime endLDT = LocalDateTime.parse(end, dateDTF);
+        LocalDateTime endLDT = LocalDateTime.parse(end, dateTimeFormatter);
         title.setText(appointment.getTitle());
         typeComboBox.setValue(appointment.getDescription());
         customerSelectTableView.getSelectionModel().select(appointment.getCustomer());
-        datePicker.setValue(LocalDate.parse(appointment.getStart(), dateDTF));
-        startComboBox.getSelectionModel().select(startLDT.toLocalTime().format(dateTimeFormatter));
-        endComboBox.getSelectionModel().select(endLDT.toLocalTime().format(dateTimeFormatter));
+        datePicker.setValue(LocalDate.parse(appointment.getStart(), dateTimeFormatter));
+        startComboBox.getSelectionModel().select(startLDT.toLocalTime().format(timeFormatter));
+        endComboBox.getSelectionModel().select(endLDT.toLocalTime().format(timeFormatter));
     }
 
     private void save() {
         LocalDate localDate = datePicker.getValue();
-        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
-        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
+        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
 
         LocalDateTime startDT = LocalDateTime.of(localDate, startTime);
         LocalDateTime endDT = LocalDateTime.of(localDate, endTime);
@@ -148,8 +147,8 @@ public class AppointmentEditPage {
 
     private void update() {
         LocalDate localDate = datePicker.getValue();
-        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
-        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
+        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
 
         LocalDateTime startDT = LocalDateTime.of(localDate, startTime);
         LocalDateTime endDT = LocalDateTime.of(localDate, endTime);
@@ -206,8 +205,8 @@ public class AppointmentEditPage {
         String type = typeComboBox.getValue();
         Customer customer = customerSelectTableView.getSelectionModel().getSelectedItem();
         LocalDate localDate = datePicker.getValue();
-        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
-        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), dateTimeFormatter);
+        LocalTime startTime = LocalTime.parse(startComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
+        LocalTime endTime = LocalTime.parse(endComboBox.getSelectionModel().getSelectedItem(), timeFormatter);
 
         LocalDateTime startDT = LocalDateTime.of(localDate, startTime);
         LocalDateTime endDT = LocalDateTime.of(localDate, endTime);
@@ -215,40 +214,33 @@ public class AppointmentEditPage {
         ZonedDateTime startUTC = startDT.atZone(zid).withZoneSameInstant(ZoneId.of("UTC"));
         ZonedDateTime endUTC = endDT.atZone(zid).withZoneSameInstant(ZoneId.of("UTC"));
 
-        String errorMessage = "";
-        if (title == null || title.length() == 0) {
-            errorMessage += "Enter appointment title.";
-        }
-        if (type == null || type.length() == 0) {
-            errorMessage += "Select appointment type.";
-        }
-        if (customer == null) {
-            errorMessage += "Select a Customer.";
-        }
-        if (startUTC == null) {
-            errorMessage += "Select a Start time";
-        }
-        if (endUTC == null) {
-            errorMessage += "Select an End time.";
-        } else if (endUTC.equals(startUTC) || endUTC.isBefore(startUTC)) {
-            errorMessage += "End time cannot be before start time.";
-        } else try {
+        String msg = "";
+        if (title.length() == 0) msg += "Enter appointment title.\n";
+        if (type.length() == 0) msg += "Select appointment type.\n";
+
+        if (customer == null) msg += "Select a Customer.\n";
+
+        if (startUTC == null) msg += "Select a Start time\n";
+
+        if (endUTC == null) msg += "Select an End time.\n";
+        else if (endUTC.equals(startUTC) || endUTC.isBefore(startUTC))
+            msg += "End time cannot be before start time.\n";
+        else try {
             if (checkConflict(startUTC, endUTC)) {
-                errorMessage += "Time conflicts with existing appointment. Please select a different time.";
+                msg += "Time conflicts with existing appointment. Please select a different time.\n";
             }
         } catch (SQLException ex) {
             Logger.getLogger(AppointmentEditPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (errorMessage.length() == 0) {
-            return true;
-        } else {
+        if (msg.length() == 0) return true;
+
+        else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Correct invalid fields");
-            alert.setContentText(errorMessage);
+            alert.setTitle("Wrong Fields");
+            alert.setHeaderText("Fix wrong fields.");
+            alert.setContentText(msg);
             alert.showAndWait();
-
             return false;
         }
     }

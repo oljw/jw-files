@@ -16,15 +16,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+
+import static wgu_c195.util.TimeUtil.convertTimeZone;
+import static wgu_c195.util.TimeUtil.dateTimeFormatter;
 
 public class CalendarPage {
 
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-    private final ZoneId zoneId = ZoneId.systemDefault();
     private ObservableList<Appointment> appointments;
 
     @FXML private TableView<Appointment> appointmentTableView;
@@ -59,16 +57,10 @@ public class CalendarPage {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                ZonedDateTime zdtStart = rs.getTimestamp("appointment.start").toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime localStart = zdtStart.withZoneSameInstant(zoneId);
-
-                ZonedDateTime zdtEnd = rs.getTimestamp("appointment.end").toLocalDateTime().atZone(ZoneId.of("UTC"));
-                ZonedDateTime localEnd = zdtEnd.withZoneSameInstant(zoneId);
-
                 appointments.add(new Appointment(
                         rs.getString("appointment.appointmentId"),
-                        localStart.format(dateTimeFormatter),
-                        localEnd.format(dateTimeFormatter),
+                        convertTimeZone(rs.getTimestamp("appointment.start")),
+                        convertTimeZone(rs.getTimestamp("appointment.end")),
                         rs.getString("appointment.title"),
                         rs.getString("appointment.description"),
                         new Customer(rs.getString("appointment.customerId"), rs.getString("customer.customerName")),
@@ -96,10 +88,11 @@ public class CalendarPage {
     void onWeeklyClicked() {
         LocalDate now = LocalDate.now();
         LocalDate nowPlus7 = now.plusDays(7);
+
         FilteredList<Appointment> filteredData = new FilteredList<>(appointments);
         filteredData.setPredicate(row -> {
             LocalDate rowDate = LocalDate.parse(row.getStart(), dateTimeFormatter);
-            return rowDate.isEqual(now.minusDays(1)) && rowDate.isBefore(nowPlus7);
+            return rowDate.isAfter(now.minusDays(1)) && rowDate.isBefore(nowPlus7);
         });
         appointmentTableView.setItems(filteredData);
     }

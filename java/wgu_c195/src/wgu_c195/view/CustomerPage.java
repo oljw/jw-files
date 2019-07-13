@@ -27,7 +27,7 @@ public class CustomerPage {
     @FXML private TextField name;
     @FXML private TextField address;
     @FXML private TextField address2;
-    @FXML private ComboBox<City> comboBox;
+    @FXML private ComboBox<City> cityComboBox;
     @FXML private TextField postalCode;
     @FXML private TextField phone;
     @FXML private TextField country;
@@ -40,7 +40,7 @@ public class CustomerPage {
         enableCustomerFields(true);
         saveExitButtonBar.setDisable(false);
         customerTable.setDisable(true);
-        clearCustomerDetails();
+        clearDetails();
         customerId.setText("Auto-Generated");
         modifyButtonBar.setDisable(true);
     }
@@ -73,9 +73,23 @@ public class CustomerPage {
             alert.setTitle("Confirm Deletion");
             alert.setHeaderText("Are you sure you want to delete " + selectedCustomer.getCustomerName() + "?");
             alert.showAndWait()
-                    .filter(response -> response == ButtonType.OK)
+                    /*  Usage of lambda expression to simplify the source code complexity.
+                    Since the parameter of setPredicate function requires an anonymous class, using lambda expression is much
+                    easier to read and write. Check the below usage without lambda expression */
+                    .filter(response -> response == ButtonType.OK) // Retrieving data using lambda expression with just 'response' and can check right away in one line.
+                    // Below is a usage without lambda expression. It save 8 lines of code by just using lambda expression.
+                    /*
+                    .filter(new Predicate<ButtonType>() {
+                        @Override
+                        public boolean test(ButtonType buttonType) {
+                            if (buttonType == ButtonType.OK) {
+                                return true;
+                            }
+                            return false;
+                        }
+                    }) */
                     .ifPresent(response -> {
-                                deleteCustomer(selectedCustomer);
+                                delete(selectedCustomer);
                                 PageUtil.getInstance().launchCustomerPage();
                             }
                     );
@@ -90,13 +104,15 @@ public class CustomerPage {
 
     @FXML
     void onSaveClick() {
-        saveExitButtonBar.setDisable(true);
-        customerTable.setDisable(false);
+        if (validate()) {
+            saveExitButtonBar.setDisable(true);
+            customerTable.setDisable(false);
 
-        if (isEdit) updateCustomer();
-        else saveCustomer();
+            if (isEdit) update();
+            else save();
 
-        PageUtil.getInstance().launchCustomerPage();
+            PageUtil.getInstance().launchCustomerPage();
+        }
     }
 
     @FXML
@@ -109,7 +125,7 @@ public class CustomerPage {
                 .ifPresent(response -> {
                             saveExitButtonBar.setDisable(true);
                             customerTable.setDisable(false);
-                            clearCustomerDetails();
+                            clearDetails();
                             modifyButtonBar.setDisable(false);
                             isEdit = false;
                         }
@@ -122,7 +138,7 @@ public class CustomerPage {
 
         showCityList();
 
-        comboBox.setConverter(new StringConverter<City>() {
+        cityComboBox.setConverter(new StringConverter<City>() {
             @Override
             public String toString(City object) {
                 return object.getCity();
@@ -130,12 +146,12 @@ public class CustomerPage {
 
             @Override
             public City fromString(String string) {
-                return comboBox.getItems().stream().filter(ap ->
+                return cityComboBox.getItems().stream().filter(ap ->
                         ap.getCity().equals(string)).findFirst().orElse(null);
             }
         });
 
-        comboBox.valueProperty().addListener((obs, oldval, newval) -> {
+        cityComboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null)
                 selectCountry(newval.toString());
         });
@@ -143,7 +159,6 @@ public class CustomerPage {
         customerTable.getItems().setAll(populateCustomerList());
         customerTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showCustomerDetails(newValue));
-
     }
 
     @FXML
@@ -152,15 +167,14 @@ public class CustomerPage {
         name.setText(selectedCustomer.getCustomerName());
         address.setText(selectedCustomer.getAddress());
         address2.setText(selectedCustomer.getAddress2());
-        comboBox.setValue(selectedCustomer.getCity());
+        cityComboBox.setValue(selectedCustomer.getCity());
         country.setText(selectedCustomer.getCountry());
         postalCode.setText(selectedCustomer.getPostalCode());
         phone.setText(selectedCustomer.getPhone());
-
     }
 
     @FXML
-    private void clearCustomerDetails() {
+    private void clearDetails() {
         customerId.clear();
         name.clear();
         address.clear();
@@ -220,7 +234,7 @@ public class CustomerPage {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        comboBox.setItems(cities);
+        cityComboBox.setItems(cities);
     }
 
     @FXML
@@ -240,14 +254,14 @@ public class CustomerPage {
         }
     }
 
-    private void saveCustomer() {
+    private void save() {
         try {
             PreparedStatement ps = DBUtil.getConnection().prepareStatement("INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) "
                     + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, ?)", Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, address.getText());
             ps.setString(2, address2.getText());
-            ps.setInt(3, comboBox.getValue().getCityId());
+            ps.setInt(3, cityComboBox.getValue().getCityId());
             ps.setString(4, postalCode.getText());
             ps.setString(5, phone.getText());
             ps.setString(6, App.sInstance.getUser().getUsername());
@@ -273,7 +287,7 @@ public class CustomerPage {
         }
     }
 
-    private void deleteCustomer(Customer customer) {
+    private void delete(Customer customer) {
         try {
             PreparedStatement statement = DBUtil.getConnection().prepareStatement("DELETE customer.*, address.* from customer, address WHERE customer.customerId = ? AND customer.addressId = address.addressId");
             statement.setString(1, customer.getCustomerId());
@@ -283,14 +297,14 @@ public class CustomerPage {
         }
     }
 
-    private void updateCustomer() {
+    private void update() {
         try {
             PreparedStatement ps = DBUtil.getConnection().prepareStatement("UPDATE address, customer, city, country "
                     + "SET address = ?, address2 = ?, address.cityId = ?, postalCode = ?, phone = ?, address.lastUpdate = CURRENT_TIMESTAMP, address.lastUpdateBy = ? "
                     + "WHERE customer.customerId = ? AND customer.addressId = address.addressId AND address.cityId = city.cityId AND city.countryId = country.countryId");
             ps.setString(1, address.getText());
             ps.setString(2, address2.getText());
-            ps.setInt(3, comboBox.getValue().getCityId());
+            ps.setInt(3, cityComboBox.getValue().getCityId());
             ps.setString(4, postalCode.getText());
             ps.setString(5, phone.getText());
             ps.setString(6, App.sInstance.getUser().getUsername());
@@ -306,6 +320,32 @@ public class CustomerPage {
             psc.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private boolean validate() {
+        String msg = "";
+        if (name.getText().length() == 0) msg += "Enter name.\n";
+        if (address.getText().length() == 0) msg += "Enter an address.\n";
+
+        if (postalCode.getText().length() == 0) msg += "Enter the postal code.\n";
+        else if (postalCode.getText().length() > 5 || postalCode.getText().length() < 5)
+            msg += "Enter a valid postal code.\n";
+
+        if (phone.getText().length() == 0) msg += "Enter a phone number including the area code.\n";
+        else if (phone.getText().length() < 9 || phone.getText().length() > 12 )
+            msg += "Enter a valid phone number including the area code.\n";
+
+        if (msg.isEmpty())
+            return true;
+
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wrong Fields");
+            alert.setHeaderText("Fix wrong fields.");
+            alert.setContentText(msg);
+            alert.showAndWait();
+            return false;
         }
     }
 }
