@@ -7,6 +7,13 @@ import wgu_c195.util.DBUtil;
 import wgu_c195.util.LogUtil;
 import wgu_c195.util.PageUtil;
 
+/**
+ * Performance Assessment for WGU - C195
+ * Student Name : Jaewoo Lee
+ * Student id   : 000603567
+ * 
+ * @author Jaewoo Lee
+ */
 public class App extends Application {
 
     public static App sInstance;
